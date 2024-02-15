@@ -1,19 +1,8 @@
 ---
 title: "doc"
-
-jupyter: python3
 ---
 
 This is a Quarto website.
 
-```{python}
-#| echo: false
-
-import pandas as pd
-
-df = pd.read_csv("../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
-
-df
-```
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

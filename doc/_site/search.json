@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "doc",
     "section": "",
-    "text": "This is a Quarto website.\n\n\n\n\n\n\n\n\n\nlearner\nlevel\ncoverage\nci_length\n\n\n\n\n0\nLasso_Logistic\n0.90\n0.874\n0.466416\n\n\n1\nLasso_Logistic\n0.95\n0.934\n0.555768\n\n\n2\nRF_RF\n0.90\n0.683\n0.335110\n\n\n3\nRF_RF\n0.95\n0.763\n0.399309\n\n\n\n\n\n\n\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,19 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "irm.html",
+    "href": "irm.html",
+    "title": "IRM Models",
+    "section": "",
+    "text": "learner\ncoverage\nci_length\n\n\n\n\n1\nLasso_Logistic\n0.934\n0.555768\n\n\n3\nRF_RF\n0.950\n0.767221\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlearner\ncoverage\nci_length\n\n\n\n\n0\nLasso_Logistic\n0.874\n0.466416\n\n\n2\nRF_RF\n0.908\n0.643872"
+  },
+  {
+    "objectID": "irm.html#ate-coverage",
+    "href": "irm.html#ate-coverage",
+    "title": "IRM Models",
+    "section": "",
+    "text": "learner\ncoverage\nci_length\n\n\n\n\n1\nLasso_Logistic\n0.934\n0.555768\n\n\n3\nRF_RF\n0.950\n0.767221\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlearner\ncoverage\nci_length\n\n\n\n\n0\nLasso_Logistic\n0.874\n0.466416\n\n\n2\nRF_RF\n0.908\n0.643872"
   }
 ]
