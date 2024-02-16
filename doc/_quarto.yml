@@ -3,7 +3,7 @@ project:
 
 website:
   title: "DoubleML Coverage"
-  favicon: _static/logo.png
+  favicon: _static/favicon.ico
   search: 
     location: sidebar
   sidebar:
@@ -16,6 +16,8 @@ website:
       - text: "IRM"
         menu:
           - irm/irm.qmd
+          - irm/irm_gate.qmd
+          - irm/qte.qmd
       - text: "PLM"
         menu:      
           - plm/plr.qmd

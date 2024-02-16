@@ -9,6 +9,6 @@ You can find the code for the simulations in the [GitHub repository](https://git
 
 The corresponding coverage results are highlighted according to the following color scheme:
 
- * <span style="color:green;">Green</span> if the deviation to the nominal level is below $5\%$
- * <span style="color:yellow;">Yellow</span> if the deviation to the nominal level is above $5\%$ and below $10\%$
- * <span style="color:red;">Red</span> if the deviation to the nominal level is above $10\%$
+* <span style="background-color: #00FF00; color: black; padding: 2px 5px; border-radius: 3px;">Green</span> if the deviation to the nominal level is below $5\%$
+* <span style="background-color: #FFFF00; color: black; padding: 2px 5px; border-radius: 3px;">Yellow</span> if the deviation to the nominal level is above $5\%$ and below $10\%$
+* <span style="background-color: #FF0000; color: black; padding: 2px 5px; border-radius: 3px;">Red</span> if the deviation to the nominal level is above $10\%$
