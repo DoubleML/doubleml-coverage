@@ -2,7 +2,13 @@
 title: "DoubleML Coverage"
 ---
 
-This is a Quarto website.
+The website contains coverage simulations for the [DoubleML](https://docs.doubleml.org/stable/index.html)-package.
 
+Most simulations are based on the [dataset generators](https://docs.doubleml.org/stable/api/api.html#dataset-generators) provided by the package, but sometimes contain slight deviations.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Generally the simulations are based on the following setup:
+
+ * $1000$ observations
+ * `green` if the deviation to the nominal level is below $5\%$
+ * `yellow` if the deviation to the nominal level is above $5\%$ and below $10\%$
+ * `red` if the deviation to the nominal level is above $10\%$

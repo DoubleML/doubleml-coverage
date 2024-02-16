@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./_static/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -60,11 +61,14 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -91,8 +95,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-irm">    
         <li>
-    <a class="dropdown-item" href="./irm/irm_ate.html" rel="" target="">
- <span class="dropdown-text">IRM Models</span></a>
+    <a class="dropdown-item" href="./irm/irm.html" rel="" target="">
+ <span class="dropdown-text">Basic IRM Models</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-plm" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">PLM</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-plm">    
+        <li>
+    <a class="dropdown-item" href="./plm/plr.html" rel="" target="">
+ <span class="dropdown-text">Basic PLR Models</span></a>
   </li>  
     </ul>
   </li>
@@ -102,8 +117,14 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/mcanouil" rel="" target="">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://docs.doubleml.org/stable/index.html" rel="" target=""><i class="bi bi-book" role="img" aria-label="Documentation">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/DoubleML/doubleml-coverage" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
@@ -140,8 +161,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<p>The website contains coverage simulations for the <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a>-package.</p>
+<p>Most simulations are based on the <a href="https://docs.doubleml.org/stable/api/api.html#dataset-generators">dataset generators</a> provided by the package, but sometimes contain slight deviations.</p>
+<p>Generally the simulations are based on the following setup:</p>
+<ul>
+<li><span class="math inline">\(1000\)</span> observations</li>
+<li><code>green</code> if the deviation to the nominal level is below <span class="math inline">\(5\%\)</span></li>
+<li><code>yellow</code> if the deviation to the nominal level is above <span class="math inline">\(5\%\)</span> and below <span class="math inline">\(10\%\)</span></li>
+<li><code>red</code> if the deviation to the nominal level is above <span class="math inline">\(10\%\)</span></li>
+</ul>
 
 
 

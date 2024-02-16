@@ -1,5 +1,5 @@
 ---
-title: "Basic IRM Models"
+title: "Basic PLR Models"
 
 jupyter: python3
 ---
@@ -15,9 +15,8 @@ init_notebook_mode(all_interactive=True)
 
 def highlight_range(s, level=0.95, dist=0.05, props=''):
     color_grid = np.where((s >= level-dist) &
-                          (s <= level+dist), props, '')
+        (s <= level+dist), props, '')
     return color_grid
-
 
 def color_coverage(df, level):
     # color coverage column order is important
@@ -46,8 +45,7 @@ def color_coverage(df, level):
         subset=["Coverage"])
     return styled_df
 
-
-def make_pretty(df, level, n_rep):
+def make_pretty(df, level):
     styled_df = df.style.set_caption(f"Coverage at {level} confidence level with {n_rep} repetitions")
     styled_df = styled_df.set_table_styles(
         [{"selector": "caption",
@@ -62,70 +60,5 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
 
     return styled_df
-```
 
-## ATE Coverage
-
-```{python}
-#| echo: false
-
-# set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
-
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
-
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
-```
-
-
-## ATTE Coverage
-
-
-```{python}
-#| echo: false
-
-# set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_atte_coverage.csv", index_col=None)
-
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
-
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.95
-df_atte_95 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_95, level, n_rep)
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.9
-df_atte_9 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_9, level, n_rep)
 ```

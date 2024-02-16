@@ -11,6 +11,9 @@ website:
       - text: "IRM"
         menu:
           - irm/irm.qmd
+      - text: "PLM"
+        menu:      
+          - plm/plr.qmd
       - about.qmd
     right: 
       - icon: book
