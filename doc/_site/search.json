@@ -61,5 +61,54 @@
     "title": "IRM Models",
     "section": "GATE Coverage",
     "text": "GATE Coverage"
+  },
+  {
+    "objectID": "irm/irm_atte.html#ate-coverage",
+    "href": "irm/irm_atte.html#ate-coverage",
+    "title": "Basic IRM Models",
+    "section": "",
+    "text": "Coverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.552\n0.916\n\n\nLasso\nRandom Forest\n0.148\n0.725\n0.954\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.600\n0.890\n\n\nRandom Forest\nRandom Forest\n0.153\n0.763\n0.958\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.463\n0.851\n\n\nLasso\nRandom Forest\n0.148\n0.609\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.503\n0.807\n\n\nRandom Forest\nRandom Forest\n0.153\n0.640\n0.901"
+  },
+  {
+    "objectID": "irm/irm_atte.html#atte-coverage",
+    "href": "irm/irm_atte.html#atte-coverage",
+    "title": "IRM Models",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage"
+  },
+  {
+    "objectID": "irm/irm_atte.html#gate-coverage",
+    "href": "irm/irm_atte.html#gate-coverage",
+    "title": "IRM Models",
+    "section": "GATE Coverage",
+    "text": "GATE Coverage"
+  },
+  {
+    "objectID": "irm/irm_atte.html",
+    "href": "irm/irm_atte.html",
+    "title": "Basic IRM Models",
+    "section": "",
+    "text": "Coverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.552\n0.916\n\n\nLasso\nRandom Forest\n0.148\n0.725\n0.954\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.600\n0.890\n\n\nRandom Forest\nRandom Forest\n0.153\n0.763\n0.958\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.463\n0.851\n\n\nLasso\nRandom Forest\n0.148\n0.609\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.503\n0.807\n\n\nRandom Forest\nRandom Forest\n0.153\n0.640\n0.901"
+  },
+  {
+    "objectID": "irm/irm.html",
+    "href": "irm/irm.html",
+    "title": "Basic IRM Models",
+    "section": "",
+    "text": "Coverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.552\n0.916\n\n\nLasso\nRandom Forest\n0.148\n0.725\n0.954\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.600\n0.890\n\n\nRandom Forest\nRandom Forest\n0.153\n0.763\n0.958\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.463\n0.851\n\n\nLasso\nRandom Forest\n0.148\n0.609\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.503\n0.807\n\n\nRandom Forest\nRandom Forest\n0.153\n0.640\n0.901\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.137\n0.630\n0.950\n\n\nLasso\nRandom Forest\n0.188\n0.881\n0.968\n\n\nRandom Forest\nLogistic Regression\n0.148\n0.653\n0.924\n\n\nRandom Forest\nRandom Forest\n0.190\n0.905\n0.961\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.137\n0.529\n0.891\n\n\nLasso\nRandom Forest\n0.188\n0.740\n0.920\n\n\nRandom Forest\nLogistic Regression\n0.148\n0.548\n0.858\n\n\nRandom Forest\nRandom Forest\n0.190\n0.759\n0.906"
+  },
+  {
+    "objectID": "irm/irm.html#ate-coverage",
+    "href": "irm/irm.html#ate-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATE Coverage",
+    "text": "ATE Coverage\n\n\n\n\n\n\n\n\nCoverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.552\n0.916\n\n\nLasso\nRandom Forest\n0.148\n0.725\n0.954\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.600\n0.890\n\n\nRandom Forest\nRandom Forest\n0.153\n0.763\n0.958\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.463\n0.851\n\n\nLasso\nRandom Forest\n0.148\n0.609\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.503\n0.807\n\n\nRandom Forest\nRandom Forest\n0.153\n0.640\n0.901"
+  },
+  {
+    "objectID": "irm/irm.html#atte-coverage",
+    "href": "irm/irm.html#atte-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\n\n\n\n\n\n\n\n\nCoverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.137\n0.630\n0.950\n\n\nLasso\nRandom Forest\n0.188\n0.881\n0.968\n\n\nRandom Forest\nLogistic Regression\n0.148\n0.653\n0.924\n\n\nRandom Forest\nRandom Forest\n0.190\n0.905\n0.961\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.137\n0.529\n0.891\n\n\nLasso\nRandom Forest\n0.188\n0.740\n0.920\n\n\nRandom Forest\nLogistic Regression\n0.148\n0.548\n0.858\n\n\nRandom Forest\nRandom Forest\n0.190\n0.759\n0.906"
   }
 ]

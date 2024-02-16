@@ -1,9 +1,8 @@
 ---
-title: "IRM Models"
+title: "Basic IRM Models"
 
 jupyter: python3
 ---
-
 
 ```{python}
 #| echo: false
@@ -64,7 +63,6 @@ def make_pretty(df, level):
 
 ```
 
-
 ## ATE Coverage
 
 ```{python}
@@ -97,8 +95,36 @@ df_ate = df[df['level'] == level][display_columns]
 make_pretty(df_ate, level)
 ```
 
+
 ## ATTE Coverage
 
 
+```{python}
+#| echo: false
 
-## GATE Coverage
+# set up data and rename columns
+df = pd.read_csv("../../simulations/irm/results/irm_atte_coverage.csv", index_col=None)
+
+assert df["repetition"].nunique() == 1
+n_rep = df["repetition"].unique()[0]
+
+display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+```
+
+
+```{python}
+#| echo: false
+
+level = 0.95
+df_ate = df[df['level'] == level][display_columns]
+make_pretty(df_ate, level)
+```
+
+
+```{python}
+#| echo: false
+
+level = 0.9
+df_ate = df[df['level'] == level][display_columns]
+make_pretty(df_ate, level)
+```

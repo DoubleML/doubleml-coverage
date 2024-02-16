@@ -2,15 +2,15 @@ project:
   type: website
 
 website:
-  favicon: logo.png
   title: "DoubleML Coverage"
+  favicon: _static/logo.png
   navbar:
     left:
       - href: index.qmd
         text: Home
       - text: "IRM"
         menu:
-          - irm/irm_ate.qmd
+          - irm/irm.qmd
       - about.qmd
     right: 
       - icon: book
@@ -22,7 +22,6 @@ website:
 
 format:
   html:
-    theme:
-      light: zephyr 
+    theme: zephyr 
     css: styles.css
     toc: true
