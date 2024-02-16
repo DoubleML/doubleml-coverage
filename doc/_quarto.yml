@@ -19,6 +19,11 @@ website:
       - text: "PLM"
         menu:      
           - plm/plr.qmd
+      - text: "DID"
+        menu:      
+          - did/did_pa.qmd
+          - did/did_cs.qmd
+      
     right: 
       - icon: book
         href: https://docs.doubleml.org/stable/index.html

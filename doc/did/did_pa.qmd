@@ -1,0 +1,5 @@
+---
+title: "DiD for Panel Data"
+
+jupyter: python3
+---
