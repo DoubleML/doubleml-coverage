@@ -41,11 +41,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -67,7 +67,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -79,7 +79,6 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">DoubleML Coverage</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -111,10 +110,6 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -122,21 +117,59 @@ ul.task-list li input[type="checkbox"] {
 </i> 
  <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/DoubleML/doubleml-coverage" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-github" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
- <span class="menu-text"></span></a>
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-github">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/DoubleML/doubleml-for-py" rel="" target="">
+ <span class="dropdown-text">DoubleML</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/DoubleML/doubleml-coverage" rel="" target="">
+ <span class="dropdown-text">DoubleML Coverage</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">DoubleML Coverage</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./_static/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -162,13 +195,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>The website contains coverage simulations for the <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a>-package.</p>
-<p>Most simulations are based on the <a href="https://docs.doubleml.org/stable/api/api.html#dataset-generators">dataset generators</a> provided by the package, but sometimes contain slight deviations.</p>
-<p>Generally the simulations are based on the following setup:</p>
+<p>Most simulations are based on the <a href="https://docs.doubleml.org/stable/api/api.html#dataset-generators">dataset generators</a> provided by the package, but sometimes contain slight deviations. You can find the code for the simulations in the <a href="https://github.com/DoubleML/doubleml-coverage/tree/main">GitHub repository</a>.</p>
+<p>The corresponding coverage results are highlighted according to the following color scheme:</p>
 <ul>
-<li><span class="math inline">\(1000\)</span> observations</li>
-<li><code>green</code> if the deviation to the nominal level is below <span class="math inline">\(5\%\)</span></li>
-<li><code>yellow</code> if the deviation to the nominal level is above <span class="math inline">\(5\%\)</span> and below <span class="math inline">\(10\%\)</span></li>
-<li><code>red</code> if the deviation to the nominal level is above <span class="math inline">\(10\%\)</span></li>
+<li><span style="color:green;">Green</span> if the deviation to the nominal level is below <span class="math inline">\(5\%\)</span></li>
+<li><span style="color:yellow;">Yellow</span> if the deviation to the nominal level is above <span class="math inline">\(5\%\)</span> and below <span class="math inline">\(10\%\)</span></li>
+<li><span style="color:red;">Red</span> if the deviation to the nominal level is above <span class="math inline">\(10\%\)</span></li>
 </ul>
 
 
