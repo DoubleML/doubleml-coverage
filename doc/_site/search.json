@@ -40,5 +40,26 @@
     "title": "IRM Models",
     "section": "GATE Coverage",
     "text": "GATE Coverage"
+  },
+  {
+    "objectID": "irm/irm_ate.html#ate-coverage",
+    "href": "irm/irm_ate.html#ate-coverage",
+    "title": "IRM Models",
+    "section": "ATE Coverage",
+    "text": "ATE Coverage\n\n\n\n\n\n\n\n\nCoverage at 0.95 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.552\n0.916\n\n\nLasso\nRandom Forest\n0.148\n0.725\n0.954\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.600\n0.890\n\n\nRandom Forest\nRandom Forest\n0.153\n0.763\n0.958\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCoverage at 0.9 confidence level with 1000 repetitions\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.124\n0.463\n0.851\n\n\nLasso\nRandom Forest\n0.148\n0.609\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.144\n0.503\n0.807\n\n\nRandom Forest\nRandom Forest\n0.153\n0.640\n0.901"
+  },
+  {
+    "objectID": "irm/irm_ate.html#atte-coverage",
+    "href": "irm/irm_ate.html#atte-coverage",
+    "title": "IRM Models",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage"
+  },
+  {
+    "objectID": "irm/irm_ate.html#gate-coverage",
+    "href": "irm/irm_ate.html#gate-coverage",
+    "title": "IRM Models",
+    "section": "GATE Coverage",
+    "text": "GATE Coverage"
   }
 ]

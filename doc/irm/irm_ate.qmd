@@ -71,7 +71,7 @@ def make_pretty(df, level):
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
+df = pd.read_csv("../../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
