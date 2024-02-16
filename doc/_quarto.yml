@@ -2,19 +2,20 @@ project:
   type: website
 
 website:
-  title: "doc"
+  title: "DoubleML Coverage"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - irm.qmd
       - about.qmd
+    right: 
+      - text: "{{< iconify fa6-brands github >}}"
+        href: "https://github.com/mcanouil"
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: zephyr
     css: styles.css
     toc: true
-
-
-
