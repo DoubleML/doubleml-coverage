@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
-    <lastmod>2024-02-17T13:28:01.014Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_gate.html</loc>
-    <lastmod>2024-02-17T13:27:52.610Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
-    <lastmod>2024-02-17T13:27:44.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
-    <lastmod>2024-02-17T13:27:39.635Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/pliv.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/did/did_pa.html</loc>
-    <lastmod>2024-02-17T13:27:43.746Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm.html</loc>
-    <lastmod>2024-02-17T13:27:48.526Z</lastmod>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/irm/qte.html</loc>
-    <lastmod>2024-02-17T13:27:56.647Z</lastmod>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_gate.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
+    <lastmod>2024-02-17T15:47:32.507Z</lastmod>
   </url>
 </urlset>
