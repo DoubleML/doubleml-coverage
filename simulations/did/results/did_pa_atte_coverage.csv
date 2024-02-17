@@ -1,0 +1,33 @@
+Learner g,Learner m,score,in sample normalization,DGP,level,Coverage,CI Length,Bias,repetition
+Lasso,Logistic Regression,experimental,False,6,0.9,0.876,4.993962971518994,1.2477903575521494,1000
+Lasso,Logistic Regression,experimental,False,6,0.95,0.941,5.950673910385967,1.2477903575521494,1000
+Lasso,Logistic Regression,experimental,True,6,0.9,0.874,4.991769522015537,1.2474076875313702,1000
+Lasso,Logistic Regression,experimental,True,6,0.95,0.937,5.948060254095679,1.2474076875313702,1000
+Lasso,Logistic Regression,observational,False,6,0.9,0.891,5.240699721171164,1.2893088437431872,1000
+Lasso,Logistic Regression,observational,False,6,0.95,0.944,6.244678881440449,1.2893088437431872,1000
+Lasso,Logistic Regression,observational,True,6,0.9,0.874,5.198791483410242,1.2962754069527893,1000
+Lasso,Logistic Regression,observational,True,6,0.95,0.948,6.194742136114859,1.2962754069527893,1000
+Lasso,Random Forest,experimental,False,6,0.9,0.873,4.990093134945841,1.2518949573264635,1000
+Lasso,Random Forest,experimental,False,6,0.95,0.941,5.946062715696568,1.2518949573264635,1000
+Lasso,Random Forest,experimental,True,6,0.9,0.872,4.990832886298075,1.2456110863531953,1000
+Lasso,Random Forest,experimental,True,6,0.95,0.947,5.946944183800561,1.2456110863531953,1000
+Lasso,Random Forest,observational,False,6,0.9,0.986,5.968021798345593,0.9525739624158643,1000
+Lasso,Random Forest,observational,False,6,0.95,0.997,7.111336590713202,0.9525739624158643,1000
+Lasso,Random Forest,observational,True,6,0.9,0.981,5.673452585087854,0.9463964521621987,1000
+Lasso,Random Forest,observational,True,6,0.95,0.993,6.760335723840018,0.9463964521621987,1000
+Random Forest,Logistic Regression,experimental,False,6,0.9,0.872,3.7331463134503364,0.9965668779697388,1000
+Random Forest,Logistic Regression,experimental,False,6,0.95,0.932,4.448318198952425,0.9965668779697388,1000
+Random Forest,Logistic Regression,experimental,True,6,0.9,0.87,3.736910907870672,0.9943747482095151,1000
+Random Forest,Logistic Regression,experimental,True,6,0.95,0.932,4.452803989882,0.9943747482095151,1000
+Random Forest,Logistic Regression,observational,False,6,0.9,0.901,4.1118408908746105,1.0149031035626275,1000
+Random Forest,Logistic Regression,observational,False,6,0.95,0.955,4.899560619998616,1.0149031035626275,1000
+Random Forest,Logistic Regression,observational,True,6,0.9,0.892,4.098602368392804,1.021621557807809,1000
+Random Forest,Logistic Regression,observational,True,6,0.95,0.945,4.883785947500277,1.021621557807809,1000
+Random Forest,Random Forest,experimental,False,6,0.9,0.871,3.729820119873255,0.996110490010135,1000
+Random Forest,Random Forest,experimental,False,6,0.95,0.93,4.444354794847725,0.996110490010135,1000
+Random Forest,Random Forest,experimental,True,6,0.9,0.875,3.7328349096140037,0.9861349026552122,1000
+Random Forest,Random Forest,experimental,True,6,0.95,0.931,4.447947138394901,0.9861349026552122,1000
+Random Forest,Random Forest,observational,False,6,0.9,0.947,4.906951447398976,0.9976027985527933,1000
+Random Forest,Random Forest,observational,False,6,0.95,0.981,5.8469932845109165,0.9976027985527933,1000
+Random Forest,Random Forest,observational,True,6,0.9,0.946,4.529925832273215,0.9360968470927875,1000
+Random Forest,Random Forest,observational,True,6,0.95,0.984,5.39773955470329,0.9360968470927875,1000
