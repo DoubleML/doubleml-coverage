@@ -6,13 +6,14 @@ name: Quarto Publish
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+       working-directory: ./doc
     permissions:
       contents: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          path: 'doc'
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
