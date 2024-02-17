@@ -48,12 +48,8 @@ def color_coverage(df, level):
 
 
 def make_pretty(df, level, n_rep):
-    styled_df = df.style.set_caption(f"Coverage at {level} confidence level with {n_rep} repetitions")
-    styled_df = styled_df.set_table_styles(
-        [{"selector": "caption",
-          "props": "caption-side: bottom; font-size:1em;"}]
-    )
-    styled_df = styled_df.hide(axis="index")
+
+    styled_df = df.hide(axis="index")
     # Format only float columns
     float_cols = df.select_dtypes(include=['float']).columns
     styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
