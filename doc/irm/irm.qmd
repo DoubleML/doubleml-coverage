@@ -9,7 +9,7 @@ jupyter: python3
 
 import numpy as np
 import pandas as pd
-from itables import init_notebook_mode
+from itables import init_notebook_mode, show
 
 init_notebook_mode(all_interactive=True)
 
@@ -48,8 +48,12 @@ def color_coverage(df, level):
 
 
 def make_pretty(df, level, n_rep):
-
-    styled_df = df.style.hide(axis="index")
+    styled_df = df.style.set_caption(f"Coverage at {level} confidence level with {n_rep} repetitions")
+    styled_df = styled_df.set_table_styles(
+        [{"selector": "caption",
+          "props": "caption-side: bottom; font-size:1em;"}]
+    )
+    styled_df = styled_df.hide(axis="index")
     # Format only float columns
     float_cols = df.select_dtypes(include=['float']).columns
     styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
@@ -80,7 +84,7 @@ display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
 
 level = 0.95
 df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+show(make_pretty(df_ate_95, level, n_rep))
 ```
 
 
@@ -89,7 +93,7 @@ make_pretty(df_ate_95, level, n_rep)
 
 level = 0.9
 df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+show(make_pretty(df_ate_9, level, n_rep))
 ```
 
 
@@ -114,7 +118,7 @@ display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
 
 level = 0.95
 df_atte_95 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_95, level, n_rep)
+show(make_pretty(df_atte_95, level, n_rep))
 ```
 
 
@@ -123,5 +127,5 @@ make_pretty(df_atte_95, level, n_rep)
 
 level = 0.9
 df_atte_9 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_9, level, n_rep)
+show(make_pretty(df_atte_9, level, n_rep))
 ```
