@@ -1,33 +1,193 @@
 Learner g,Learner m,score,in sample normalization,DGP,level,Coverage,CI Length,Bias,repetition
-Lasso,Logistic Regression,experimental,False,6,0.9,1.0,21.19516964354579,4.844031530373986,2
-Lasso,Logistic Regression,experimental,False,6,0.95,1.0,25.255602362964545,4.844031530373986,2
-Lasso,Logistic Regression,experimental,True,6,0.9,1.0,21.211921683527315,5.830917022379996,2
-Lasso,Logistic Regression,experimental,True,6,0.95,1.0,25.275563649788722,5.830917022379996,2
-Lasso,Logistic Regression,observational,False,6,0.9,1.0,21.17050447177131,4.390589137263823,2
-Lasso,Logistic Regression,observational,False,6,0.95,1.0,25.2262119980358,4.390589137263823,2
-Lasso,Logistic Regression,observational,True,6,0.9,1.0,21.337664143777687,4.737708743850733,2
-Lasso,Logistic Regression,observational,True,6,0.95,1.0,25.425395032581704,4.737708743850733,2
-Lasso,Random Forest,experimental,False,6,0.9,1.0,21.454249628998575,6.554140866443156,2
-Lasso,Random Forest,experimental,False,6,0.95,1.0,25.5643152066379,6.554140866443156,2
-Lasso,Random Forest,experimental,True,6,0.9,1.0,21.49566712007613,5.54737372901702,2
-Lasso,Random Forest,experimental,True,6,0.95,1.0,25.613667191222977,5.54737372901702,2
-Lasso,Random Forest,observational,False,6,0.9,1.0,23.207231165634667,4.521364640630397,2
-Lasso,Random Forest,observational,False,6,0.95,1.0,27.653121542395695,4.521364640630397,2
-Lasso,Random Forest,observational,True,6,0.9,1.0,23.465743843532792,3.8218511397732557,2
-Lasso,Random Forest,observational,True,6,0.95,1.0,27.961158397423567,3.8218511397732557,2
-Random Forest,Logistic Regression,experimental,False,6,0.9,1.0,18.762606054580672,1.7569685194690008,2
-Random Forest,Logistic Regression,experimental,False,6,0.95,1.0,22.3570240661762,1.7569685194690008,2
-Random Forest,Logistic Regression,experimental,True,6,0.9,1.0,18.382503054685138,0.5951042206255024,2
-Random Forest,Logistic Regression,experimental,True,6,0.95,1.0,21.904103406243912,0.5951042206255024,2
-Random Forest,Logistic Regression,observational,False,6,0.9,1.0,20.690403959796427,2.510160199596231,2
-Random Forest,Logistic Regression,observational,False,6,0.95,1.0,24.654136953173605,2.510160199596231,2
-Random Forest,Logistic Regression,observational,True,6,0.9,1.0,18.63245648009098,1.0467843123755565,2
-Random Forest,Logistic Regression,observational,True,6,0.95,1.0,22.201941282867523,1.0467843123755565,2
-Random Forest,Random Forest,experimental,False,6,0.9,1.0,18.4456865185265,0.7988081786584302,2
-Random Forest,Random Forest,experimental,False,6,0.95,1.0,21.979391147060753,0.7988081786584302,2
-Random Forest,Random Forest,experimental,True,6,0.9,1.0,18.785174484302743,0.661194856913918,2
-Random Forest,Random Forest,experimental,True,6,0.95,1.0,22.383916008850072,0.661194856913918,2
-Random Forest,Random Forest,observational,False,6,0.9,1.0,21.458263224982495,2.2942697131277905,2
-Random Forest,Random Forest,observational,False,6,0.95,1.0,25.56909770123078,2.2942697131277905,2
-Random Forest,Random Forest,observational,True,6,0.9,1.0,20.14848496383467,0.4331975388631879,2
-Random Forest,Random Forest,observational,True,6,0.95,1.0,24.008400641309976,0.4331975388631879,2
+Lasso,Logistic Regression,experimental,False,1,0.9,0.3,0.8623216746404472,0.5188669974010045,10
+Lasso,Logistic Regression,experimental,False,1,0.95,0.6,1.0275196514087184,0.5188669974010045,10
+Lasso,Logistic Regression,experimental,False,2,0.9,0.2,0.84289481865061,0.5325907866791564,10
+Lasso,Logistic Regression,experimental,False,2,0.95,0.4,1.004371124725833,0.5325907866791564,10
+Lasso,Logistic Regression,experimental,False,3,0.9,0.7,19.560928276077824,6.532396921199451,10
+Lasso,Logistic Regression,experimental,False,3,0.95,0.7,23.308283665543936,6.532396921199451,10
+Lasso,Logistic Regression,experimental,False,4,0.9,0.6,19.7517703782201,9.582019910146254,10
+Lasso,Logistic Regression,experimental,False,4,0.95,0.6,23.53568605612991,9.582019910146254,10
+Lasso,Logistic Regression,experimental,False,5,0.9,0.6,0.8569895632240602,0.39191728147795185,10
+Lasso,Logistic Regression,experimental,False,5,0.95,0.8,1.0211660487741532,0.39191728147795185,10
+Lasso,Logistic Regression,experimental,False,6,0.9,0.8,21.363949678320832,5.75280345119741,10
+Lasso,Logistic Regression,experimental,False,6,0.95,0.9,25.456716178837393,5.75280345119741,10
+Lasso,Logistic Regression,experimental,True,1,0.9,0.3,0.857137015940204,0.5153839654245399,10
+Lasso,Logistic Regression,experimental,True,1,0.95,0.6,1.0213417495224317,0.5153839654245399,10
+Lasso,Logistic Regression,experimental,True,2,0.9,0.3,0.8485107732241536,0.531876363844701,10
+Lasso,Logistic Regression,experimental,True,2,0.95,0.5,1.011062947343119,0.531876363844701,10
+Lasso,Logistic Regression,experimental,True,3,0.9,0.8,19.484304359270574,6.567593166443798,10
+Lasso,Logistic Regression,experimental,True,3,0.95,0.8,23.216980637216157,6.567593166443798,10
+Lasso,Logistic Regression,experimental,True,4,0.9,0.6,19.946338077948315,9.493495625771507,10
+Lasso,Logistic Regression,experimental,True,4,0.95,0.6,23.767527770051213,9.493495625771507,10
+Lasso,Logistic Regression,experimental,True,5,0.9,0.6,0.8550117992246191,0.39219742229420407,10
+Lasso,Logistic Regression,experimental,True,5,0.95,0.8,1.018809397613643,0.39219742229420407,10
+Lasso,Logistic Regression,experimental,True,6,0.9,0.9,21.30413650996702,5.098264407997838,10
+Lasso,Logistic Regression,experimental,True,6,0.95,1.0,25.385444392792827,5.098264407997838,10
+Lasso,Logistic Regression,observational,False,1,0.9,0.5,0.9317743118036702,0.4934438530609582,10
+Lasso,Logistic Regression,observational,False,1,0.95,0.7,1.1102775729895797,0.4934438530609582,10
+Lasso,Logistic Regression,observational,False,2,0.9,0.2,0.9180496624123368,0.5749672307156029,10
+Lasso,Logistic Regression,observational,False,2,0.95,0.5,1.093923644550787,0.5749672307156029,10
+Lasso,Logistic Regression,observational,False,3,0.9,0.9,21.62612742716777,6.090480210044143,10
+Lasso,Logistic Regression,observational,False,3,0.95,0.9,25.76912023526408,6.090480210044143,10
+Lasso,Logistic Regression,observational,False,4,0.9,0.7,22.932464520472806,7.578364485143372,10
+Lasso,Logistic Regression,observational,False,4,0.95,0.8,27.32571689079259,7.578364485143372,10
+Lasso,Logistic Regression,observational,False,5,0.9,0.5,0.8640968556174871,0.3855902349089062,10
+Lasso,Logistic Regression,observational,False,5,0.95,0.7,1.0296349100092586,0.3855902349089062,10
+Lasso,Logistic Regression,observational,False,6,0.9,0.8,21.945471894989502,6.662503921504667,10
+Lasso,Logistic Regression,observational,False,6,0.95,0.9,26.149642638800213,6.662503921504667,10
+Lasso,Logistic Regression,observational,True,1,0.9,0.6,0.9726173173332644,0.5049851252152862,10
+Lasso,Logistic Regression,observational,True,1,0.95,0.7,1.1589450158226169,0.5049851252152862,10
+Lasso,Logistic Regression,observational,True,2,0.9,0.5,0.9507701765547392,0.5493557793234272,10
+Lasso,Logistic Regression,observational,True,2,0.95,0.5,1.1329125419359003,0.5493557793234272,10
+Lasso,Logistic Regression,observational,True,3,0.9,0.9,22.31676988051411,5.053317521651129,10
+Lasso,Logistic Regression,observational,True,3,0.95,1.0,26.592071476987634,5.053317521651129,10
+Lasso,Logistic Regression,observational,True,4,0.9,0.7,22.968192567892167,8.425127250980136,10
+Lasso,Logistic Regression,observational,True,4,0.95,0.8,27.368289485114964,8.425127250980136,10
+Lasso,Logistic Regression,observational,True,5,0.9,0.6,0.8616222558623466,0.3888428277257705,10
+Lasso,Logistic Regression,observational,True,5,0.95,0.7,1.0266862425310368,0.3888428277257705,10
+Lasso,Logistic Regression,observational,True,6,0.9,0.9,21.783675788425537,5.559841252633111,10
+Lasso,Logistic Regression,observational,True,6,0.95,0.9,25.95685068667259,5.559841252633111,10
+Lasso,Random Forest,experimental,False,1,0.9,0.3,0.858468874321699,0.5048485465298568,10
+Lasso,Random Forest,experimental,False,1,0.95,0.6,1.0229287566685181,0.5048485465298568,10
+Lasso,Random Forest,experimental,False,2,0.9,0.2,0.8448274205921029,0.5430567243629111,10
+Lasso,Random Forest,experimental,False,2,0.95,0.4,1.006673961975126,0.5430567243629111,10
+Lasso,Random Forest,experimental,False,3,0.9,0.8,19.390277746015233,7.087592377322075,10
+Lasso,Random Forest,experimental,False,3,0.95,0.8,23.104941017064483,7.087592377322075,10
+Lasso,Random Forest,experimental,False,4,0.9,0.6,19.709889891890324,9.607469782254283,10
+Lasso,Random Forest,experimental,False,4,0.95,0.6,23.48578237867412,9.607469782254283,10
+Lasso,Random Forest,experimental,False,5,0.9,0.6,0.8561810474573572,0.4005993508234916,10
+Lasso,Random Forest,experimental,False,5,0.95,0.8,1.020202642816501,0.4005993508234916,10
+Lasso,Random Forest,experimental,False,6,0.9,0.8,21.37208246179883,5.934217873049461,10
+Lasso,Random Forest,experimental,False,6,0.95,0.8,25.466406988067924,5.934217873049461,10
+Lasso,Random Forest,experimental,True,1,0.9,0.3,0.8610876180602492,0.5165474862794743,10
+Lasso,Random Forest,experimental,True,1,0.95,0.6,1.0260491822967919,0.5165474862794743,10
+Lasso,Random Forest,experimental,True,2,0.9,0.3,0.8452651709111514,0.5416749887749076,10
+Lasso,Random Forest,experimental,True,2,0.95,0.4,1.0071955736526015,0.5416749887749076,10
+Lasso,Random Forest,experimental,True,3,0.9,0.7,19.447924868087476,6.640388881856199,10
+Lasso,Random Forest,experimental,True,3,0.95,0.8,23.17363179977163,6.640388881856199,10
+Lasso,Random Forest,experimental,True,4,0.9,0.5,19.78429114653873,9.597188869674458,10
+Lasso,Random Forest,experimental,True,4,0.95,0.7,23.574436941685743,9.597188869674458,10
+Lasso,Random Forest,experimental,True,5,0.9,0.6,0.8601345581958887,0.3929966291544256,10
+Lasso,Random Forest,experimental,True,5,0.95,0.8,1.0249135414235553,0.3929966291544256,10
+Lasso,Random Forest,experimental,True,6,0.9,0.9,21.334609850573052,5.403432710706653,10
+Lasso,Random Forest,experimental,True,6,0.95,0.9,25.421755617754012,5.403432710706653,10
+Lasso,Random Forest,observational,False,1,0.9,0.6,1.4970521906140875,0.4630456855869741,10
+Lasso,Random Forest,observational,False,1,0.95,1.0,1.783847710521521,0.4630456855869741,10
+Lasso,Random Forest,observational,False,2,0.9,0.5,1.460052542815541,0.7195685877538522,10
+Lasso,Random Forest,observational,False,2,0.95,0.7,1.7397599108914588,0.7195685877538522,10
+Lasso,Random Forest,observational,False,3,0.9,1.0,31.88517070999482,7.024056351389876,10
+Lasso,Random Forest,observational,False,3,0.95,1.0,37.99352429208281,7.024056351389876,10
+Lasso,Random Forest,observational,False,4,0.9,0.9,57.094181982826626,15.057543080973858,10
+Lasso,Random Forest,observational,False,4,0.95,0.9,68.03191395243661,15.057543080973858,10
+Lasso,Random Forest,observational,False,5,0.9,0.7,0.9699232578869925,0.39154031122754196,10
+Lasso,Random Forest,observational,False,5,0.95,0.9,1.1557348459932875,0.39154031122754196,10
+Lasso,Random Forest,observational,False,6,0.9,0.9,23.29964164609989,5.5762589153499595,10
+Lasso,Random Forest,observational,False,6,0.95,0.9,27.763235421550746,5.5762589153499595,10
+Lasso,Random Forest,observational,True,1,0.9,0.6,1.1267124874803431,0.5101415387431923,10
+Lasso,Random Forest,observational,True,1,0.95,0.9,1.3425607362314926,0.5101415387431923,10
+Lasso,Random Forest,observational,True,2,0.9,0.5,1.1754522901224345,0.6280625238506341,10
+Lasso,Random Forest,observational,True,2,0.95,0.6,1.4006377931968217,0.6280625238506341,10
+Lasso,Random Forest,observational,True,3,0.9,0.9,25.787139133820943,6.586652602148649,10
+Lasso,Random Forest,observational,True,3,0.95,1.0,30.727271496057305,6.586652602148649,10
+Lasso,Random Forest,observational,True,4,0.9,0.9,42.16400052591012,9.21198593781421,10
+Lasso,Random Forest,observational,True,4,0.95,1.0,50.24150545728155,9.21198593781421,10
+Lasso,Random Forest,observational,True,5,0.9,0.6,0.9308288198803526,0.4199754326328625,10
+Lasso,Random Forest,observational,True,5,0.95,0.7,1.1091509498742995,0.4199754326328625,10
+Lasso,Random Forest,observational,True,6,0.9,0.8,22.948728973051594,7.270185506127099,10
+Lasso,Random Forest,observational,True,6,0.95,0.9,27.345097181391317,7.270185506127099,10
+Random Forest,Logistic Regression,experimental,False,1,0.9,0.6,19.473442793122633,9.303134601432678,10
+Random Forest,Logistic Regression,experimental,False,1,0.95,0.7,23.204038282883317,9.303134601432678,10
+Random Forest,Logistic Regression,experimental,False,2,0.9,0.7,19.090072767804223,7.990503506442222,10
+Random Forest,Logistic Regression,experimental,False,2,0.95,0.8,22.74722472205061,7.990503506442222,10
+Random Forest,Logistic Regression,experimental,False,3,0.9,0.8,18.011601233367323,5.645383825559781,10
+Random Forest,Logistic Regression,experimental,False,3,0.95,0.9,21.462146626824854,5.645383825559781,10
+Random Forest,Logistic Regression,experimental,False,4,0.9,0.9,18.434504815768612,5.807692072753524,10
+Random Forest,Logistic Regression,experimental,False,4,0.95,0.9,21.96606732642882,5.807692072753524,10
+Random Forest,Logistic Regression,experimental,False,5,0.9,0.8,21.63154917652397,5.830263781720261,10
+Random Forest,Logistic Regression,experimental,False,5,0.95,0.9,25.77558064809184,5.830263781720261,10
+Random Forest,Logistic Regression,experimental,False,6,0.9,0.9,18.07319283649266,5.237619921389631,10
+Random Forest,Logistic Regression,experimental,False,6,0.95,1.0,21.53553754860522,5.237619921389631,10
+Random Forest,Logistic Regression,experimental,True,1,0.9,0.6,19.174656272743636,8.641024399065293,10
+Random Forest,Logistic Regression,experimental,True,1,0.95,0.7,22.848012184625425,8.641024399065293,10
+Random Forest,Logistic Regression,experimental,True,2,0.9,0.9,18.787963859741463,6.671178690257646,10
+Random Forest,Logistic Regression,experimental,True,2,0.95,0.9,22.387239754689624,6.671178690257646,10
+Random Forest,Logistic Regression,experimental,True,3,0.9,0.7,18.140436165067477,5.811183960219209,10
+Random Forest,Logistic Regression,experimental,True,3,0.95,0.8,21.61566291663052,5.811183960219209,10
+Random Forest,Logistic Regression,experimental,True,4,0.9,0.9,18.316073000619202,4.492332848655306,10
+Random Forest,Logistic Regression,experimental,True,4,0.95,1.0,21.824947114567316,4.492332848655306,10
+Random Forest,Logistic Regression,experimental,True,5,0.9,0.8,21.48063105319516,6.4810042523958575,10
+Random Forest,Logistic Regression,experimental,True,5,0.95,0.8,25.595750612463043,6.4810042523958575,10
+Random Forest,Logistic Regression,experimental,True,6,0.9,0.8,18.191910856657667,5.760133193075617,10
+Random Forest,Logistic Regression,experimental,True,6,0.95,1.0,21.676998794777358,5.760133193075617,10
+Random Forest,Logistic Regression,observational,False,1,0.9,0.8,20.572522277305865,6.219460410679082,10
+Random Forest,Logistic Regression,observational,False,1,0.95,1.0,24.513672264806953,6.219460410679082,10
+Random Forest,Logistic Regression,observational,False,2,0.9,1.0,21.323015636601177,5.795416735826674,10
+Random Forest,Logistic Regression,observational,False,2,0.95,1.0,25.407940259693216,5.795416735826674,10
+Random Forest,Logistic Regression,observational,False,3,0.9,0.9,23.15611847685587,5.684932374704003,10
+Random Forest,Logistic Regression,observational,False,3,0.95,1.0,27.592217017203915,5.684932374704003,10
+Random Forest,Logistic Regression,observational,False,4,0.9,1.0,20.66743019335172,3.9278784998815675,10
+Random Forest,Logistic Regression,observational,False,4,0.95,1.0,24.62676202200461,3.9278784998815675,10
+Random Forest,Logistic Regression,observational,False,5,0.9,0.8,21.57329759800455,5.631686946280364,10
+Random Forest,Logistic Regression,observational,False,5,0.95,0.9,25.70616961110354,5.631686946280364,10
+Random Forest,Logistic Regression,observational,False,6,0.9,1.0,18.66933302153482,5.34246545563308,10
+Random Forest,Logistic Regression,observational,False,6,0.95,1.0,22.24588239222829,5.34246545563308,10
+Random Forest,Logistic Regression,observational,True,1,0.9,0.7,20.566298860965517,6.4706421013693,10
+Random Forest,Logistic Regression,observational,True,1,0.95,1.0,24.5062566068493,6.4706421013693,10
+Random Forest,Logistic Regression,observational,True,2,0.9,0.9,20.681762102634174,5.291714087930789,10
+Random Forest,Logistic Regression,observational,True,2,0.95,1.0,24.643839545234055,5.291714087930789,10
+Random Forest,Logistic Regression,observational,True,3,0.9,0.9,20.181042544040093,5.450959748431906,10
+Random Forest,Logistic Regression,observational,True,3,0.95,0.9,24.047195390934398,5.450959748431906,10
+Random Forest,Logistic Regression,observational,True,4,0.9,0.9,20.91416340373036,4.290221144897941,10
+Random Forest,Logistic Regression,observational,True,4,0.95,1.0,24.920762775754564,4.290221144897941,10
+Random Forest,Logistic Regression,observational,True,5,0.9,0.7,21.526383991007645,6.095760899228779,10
+Random Forest,Logistic Regression,observational,True,5,0.95,0.9,25.65026860046516,6.095760899228779,10
+Random Forest,Logistic Regression,observational,True,6,0.9,0.9,18.464027876366906,5.055290815639408,10
+Random Forest,Logistic Regression,observational,True,6,0.95,1.0,22.00124622292023,5.055290815639408,10
+Random Forest,Random Forest,experimental,False,1,0.9,0.5,19.751389762678606,9.397601550626124,10
+Random Forest,Random Forest,experimental,False,1,0.95,0.7,23.535232524738994,9.397601550626124,10
+Random Forest,Random Forest,experimental,False,2,0.9,0.7,18.980484560809835,6.878393096828809,10
+Random Forest,Random Forest,experimental,False,2,0.95,0.7,22.61664231926417,6.878393096828809,10
+Random Forest,Random Forest,experimental,False,3,0.9,0.9,18.151999062648233,5.4868855019548235,10
+Random Forest,Random Forest,experimental,False,3,0.95,1.0,21.629440958909704,5.4868855019548235,10
+Random Forest,Random Forest,experimental,False,4,0.9,0.9,18.517617098782136,5.077202318149155,10
+Random Forest,Random Forest,experimental,False,4,0.95,0.9,22.06510171995191,5.077202318149155,10
+Random Forest,Random Forest,experimental,False,5,0.9,0.9,21.863763289889214,6.109216726026597,10
+Random Forest,Random Forest,experimental,False,5,0.95,0.9,26.052280830673624,6.109216726026597,10
+Random Forest,Random Forest,experimental,False,6,0.9,0.9,18.211688353674713,6.083937248507067,10
+Random Forest,Random Forest,experimental,False,6,0.95,1.0,21.700565136014422,6.083937248507067,10
+Random Forest,Random Forest,experimental,True,1,0.9,0.6,19.616424310120767,9.70125951418982,10
+Random Forest,Random Forest,experimental,True,1,0.95,0.7,23.374411268770594,9.70125951418982,10
+Random Forest,Random Forest,experimental,True,2,0.9,0.7,19.09689197746203,7.087346959031619,10
+Random Forest,Random Forest,experimental,True,2,0.95,0.8,22.755350311533668,7.087346959031619,10
+Random Forest,Random Forest,experimental,True,3,0.9,0.9,18.09369135011256,6.071310827207433,10
+Random Forest,Random Forest,experimental,True,3,0.95,1.0,21.559963034115484,6.071310827207433,10
+Random Forest,Random Forest,experimental,True,4,0.9,0.9,18.340188901737775,5.995036314266655,10
+Random Forest,Random Forest,experimental,True,4,0.95,0.9,21.853682983141063,5.995036314266655,10
+Random Forest,Random Forest,experimental,True,5,0.9,0.8,21.40953058917627,6.128560409132646,10
+Random Forest,Random Forest,experimental,True,5,0.95,0.8,25.51102918407711,6.128560409132646,10
+Random Forest,Random Forest,experimental,True,6,0.9,0.9,18.180577097527028,5.887944336873865,10
+Random Forest,Random Forest,experimental,True,6,0.95,1.0,21.663493787801947,5.887944336873865,10
+Random Forest,Random Forest,observational,False,1,0.9,1.0,25.08059374408476,6.311376617993661,10
+Random Forest,Random Forest,observational,False,1,0.95,1.0,29.88537073684368,6.311376617993661,10
+Random Forest,Random Forest,observational,False,2,0.9,1.0,27.50113802565192,3.9789031248048126,10
+Random Forest,Random Forest,observational,False,2,0.95,1.0,32.76962714551194,3.9789031248048126,10
+Random Forest,Random Forest,observational,False,3,0.9,0.9,30.204240656347235,5.73142136956506,10
+Random Forest,Random Forest,observational,False,3,0.95,0.9,35.9905725937081,5.73142136956506,10
+Random Forest,Random Forest,observational,False,4,0.9,0.9,35.08279753432296,8.405335488849634,10
+Random Forest,Random Forest,observational,False,4,0.95,1.0,41.80373166190079,8.405335488849634,10
+Random Forest,Random Forest,observational,False,5,0.9,1.0,25.10708047717089,5.417983824178643,10
+Random Forest,Random Forest,observational,False,5,0.95,1.0,29.916931625950365,5.417983824178643,10
+Random Forest,Random Forest,observational,False,6,0.9,0.8,20.060684188719378,6.616418145990055,10
+Random Forest,Random Forest,observational,False,6,0.95,1.0,23.903779564868294,6.616418145990055,10
+Random Forest,Random Forest,observational,True,1,0.9,0.9,22.368396126925113,4.547342808925429,10
+Random Forest,Random Forest,observational,True,1,0.95,1.0,26.653587943841945,4.547342808925429,10
+Random Forest,Random Forest,observational,True,2,0.9,1.0,27.35553780291293,5.165126513079824,10
+Random Forest,Random Forest,observational,True,2,0.95,1.0,32.59613377927344,5.165126513079824,10
+Random Forest,Random Forest,observational,True,3,0.9,0.9,23.476396939653053,4.809221119472914,10
+Random Forest,Random Forest,observational,True,3,0.95,0.9,27.973852344396988,4.809221119472914,10
+Random Forest,Random Forest,observational,True,4,0.9,1.0,32.51911808137924,6.111892712875075,10
+Random Forest,Random Forest,observational,True,4,0.95,1.0,38.74891917686058,6.111892712875075,10
+Random Forest,Random Forest,observational,True,5,0.9,0.8,25.20682277756415,7.157745013469123,10
+Random Forest,Random Forest,observational,True,5,0.95,0.9,30.03578190739959,7.157745013469123,10
+Random Forest,Random Forest,observational,True,6,0.9,0.8,19.62266529155055,6.190691210102294,10
+Random Forest,Random Forest,observational,True,6,0.95,0.9,23.381847856823253,6.190691210102294,10

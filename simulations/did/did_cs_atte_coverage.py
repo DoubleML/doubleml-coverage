@@ -59,7 +59,7 @@ np.random.seed(42)
 for i_dgp, dgp_type in enumerate(dgp_types):
     print(f"\nDGP: {i_dgp}/{n_dgps}", end="\n")
     for i_rep in range(n_rep):
-        print(f"Repetition: {i_rep}/{n_rep}", end="\r")
+        print(f"Repetition: {i_rep + 1}/{n_rep}", end="\r")
 
         # define the DoubleML data object
         obj_dml_data = datasets[i_dgp][i_rep]
@@ -116,4 +116,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/did_pa_atte_coverage.csv", index=False)
+df_results.to_csv("results/did_cs_atte_coverage.csv", index=False)
