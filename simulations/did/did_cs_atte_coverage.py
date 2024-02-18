@@ -8,7 +8,7 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 10
 
 
 # DGP pars
@@ -25,7 +25,7 @@ datasets = []
 for dgp_type in dgp_types:
     datasets_dgp = []
     for i in range(n_rep):
-        data = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=False)
+        data = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=True)
         datasets_dgp.append(data)
     datasets.append(datasets_dgp)
 
@@ -50,6 +50,7 @@ df_results_detailed = pd.DataFrame(
              "Bias", "score", "in sample normalization", "DGP",
              "Learner g", "Learner m",
              "level", "repetition"])
+
 df_results_detailed["in sample normalization"] = df_results_detailed["in sample normalization"].astype(bool)
 
 # start simulation
@@ -68,7 +69,7 @@ for i_dgp, dgp_type in enumerate(dgp_types):
                 for score in hyperparam_dict["score"]:
                     for in_sample_normalization in hyperparam_dict["in sample normalization"]:
                         if score == "experimental":
-                            dml_DiD = dml.DoubleMLDID(
+                            dml_DiD = dml.DoubleMLDIDCS(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=None,
@@ -76,12 +77,13 @@ for i_dgp, dgp_type in enumerate(dgp_types):
                                 in_sample_normalization=in_sample_normalization)
                         else:
                             assert score == "observational"
-                            dml_DiD = dml.DoubleMLDID(
+                            dml_DiD = dml.DoubleMLDIDCS(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=ml_m,
                                 score=score,
                                 in_sample_normalization=in_sample_normalization)
+
                         dml_DiD.fit(n_jobs_cv=5)
 
                         for level_idx, level in enumerate(hyperparam_dict["level"]):
