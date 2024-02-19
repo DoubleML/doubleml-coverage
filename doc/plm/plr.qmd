@@ -62,7 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## ATE Coverage
 
-The simulations are based on the  the [make_plr_CCDDHNR2018](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_plr_CCDDHNR2018.html)-DGP with $500$ observations.
+The simulations are based on the  the [make_plr_CCDDHNR2018](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_plr_CCDDHNR2018.html)-DGP with $500$ observations.
 
 ```{python}
 #| echo: false

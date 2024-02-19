@@ -1,5 +1,5 @@
 ---
-title: "Basic IRM Models"
+title: "GATEs"
 
 jupyter: python3
 ---
@@ -26,24 +26,24 @@ def color_coverage(df, level):
         level=level,
         dist=1.0,
         props='color:black;background-color:red',
-        subset=["Coverage"])
+        subset=["Coverage", "Uniform Coverage"])
     styled_df = styled_df.apply(
         highlight_range,
         level=level,
         dist=0.1,
         props='color:black;background-color:yellow',
-        subset=["Coverage"])
+        subset=["Coverage", "Uniform Coverage"])
     styled_df = styled_df.apply(
         highlight_range,
         level=level,
         dist=0.05,
         props='color:white;background-color:darkgreen',
-        subset=["Coverage"])
+        subset=["Coverage", "Uniform Coverage"])
 
     # set all coverage values to bold
     styled_df = styled_df.set_properties(
         **{'font-weight': 'bold'},
-        subset=["Coverage"])
+        subset=["Coverage", "Uniform Coverage"])
     return styled_df
 
 
@@ -60,22 +60,23 @@ def make_pretty(df, level, n_rep):
     return show(styled_df, caption=caption)
 ```
 
-## ATE Coverage
+## GATE Coverage
 
-The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_heterogeneous_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_heterogeneous_data.html)-DGP with $500$ observations. The groups are defined based on the first covariate, analogously to the [GATE PLR Example](https://docs.doubleml.org/stable/examples/py_double_ml_gate_plr.html).
+
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals). 
 
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
+df = pd.read_csv("../../simulations/plr/results/plr_gate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
-
 
 ```{python}
 #| echo: false
@@ -85,46 +86,10 @@ df_ate_95 = df[df['level'] == level][display_columns]
 make_pretty(df_ate_95, level, n_rep)
 ```
 
-
 ```{python}
 #| echo: false
 
 level = 0.9
 df_ate_9 = df[df['level'] == level][display_columns]
 make_pretty(df_ate_9, level, n_rep)
-```
-
-
-## ATTE Coverage
-
-As for the ATE, zhe simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations.
-
-```{python}
-#| echo: false
-
-# set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_atte_coverage.csv", index_col=None)
-
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
-
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.95
-df_atte_95 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_95, level, n_rep)
-```
-
-
-```{python}
-#| echo: false
-
-level = 0.9
-df_atte_9 = df[df['level'] == level][display_columns]
-make_pretty(df_atte_9, level, n_rep)
 ```

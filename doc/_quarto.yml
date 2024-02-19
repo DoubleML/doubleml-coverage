@@ -21,6 +21,7 @@ website:
       - text: "PLM"
         menu:      
           - plm/plr.qmd
+          - plm/plr_gate.qmd
           - plm/pliv.qmd
       - text: "DID"
         menu:      

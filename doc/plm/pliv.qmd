@@ -62,7 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## LATE Coverage
 
-The simulations are based on the  the [make_pliv_CHS2015](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_pliv_CHS2015.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.
+The simulations are based on the  the [make_pliv_CHS2015](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_pliv_CHS2015.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.
 
 ```{python}
 #| echo: false

@@ -62,7 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## ATTE Coverage
 
-The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with $1000$ observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of the DGP).
+The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with $1000$ observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).
 
 ```{python}
 #| echo: false
@@ -76,6 +76,26 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage"]
 ```
 
+
+### Observational Score 
+
+```{python}
+#| echo: false
+score = "observational"
+level = 0.95
+
+df_ate_95 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
+make_pretty(df_ate_95, level, n_rep)
+```
+
+```{python}
+#| echo: false
+score = "observational"
+level = 0.9
+
+df_ate_9 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
+make_pretty(df_ate_9, level, n_rep)
+```
 
 ### Experimental Score 
 
@@ -99,22 +119,3 @@ df_ate_9 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
 make_pretty(df_ate_9, level, n_rep)
 ```
 
-### Observational Score 
-
-```{python}
-#| echo: false
-score = "observational"
-level = 0.95
-
-df_ate_95 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
-make_pretty(df_ate_95, level, n_rep)
-```
-
-```{python}
-#| echo: false
-score = "observational"
-level = 0.9
-
-df_ate_9 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
-make_pretty(df_ate_9, level, n_rep)
-```
