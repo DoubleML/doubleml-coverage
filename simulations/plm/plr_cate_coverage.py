@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import patsy
 
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.linear_model import LassoCV, LogisticRegressionCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LassoCV
 
 import doubleml as dml
 from doubleml.datasets import make_heterogeneous_data
@@ -21,7 +21,7 @@ n_x = 1
 np.random.seed(42)
 datasets = []
 for i in range(n_rep):
-    data = make_heterogeneous_data(n_obs=n_obs, p=p, support_size=support_size, n_x=n_x, binary_treatment=True)
+    data = make_heterogeneous_data(n_obs=n_obs, p=p, support_size=support_size, n_x=n_x, binary_treatment=False)
     datasets.append(data)
 
 # set up hyperparameters
@@ -29,9 +29,9 @@ hyperparam_dict = {
     "learner_g": [("Lasso", LassoCV()),
                   ("Random Forest",
                    RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
+    "learner_m": [("Lasso", LassoCV()),
                   ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
     "level": [0.95, 0.90]
 }
 
@@ -61,13 +61,13 @@ for i_rep in range(n_rep):
     for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
         for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
             # Set machine learning methods for g & m
-            dml_irm = dml.DoubleMLIRM(
+            dml_plr = dml.DoubleMLPLR(
                 obj_dml_data=obj_dml_data,
-                ml_g=ml_g,
+                ml_l=ml_g,
                 ml_m=ml_m,
             )
-            dml_irm.fit(n_jobs_cv=5)
-            cate = dml_irm.cate(spline_basis)
+            dml_plr.fit(n_jobs_cv=5)
+            cate = dml_plr.cate(spline_basis)
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
                 confint = cate.confint(basis=spline_basis, level=level)
@@ -104,4 +104,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/irm_cate_coverage.csv", index=False)
+df_results.to_csv("results/plr_cate_coverage.csv", index=False)
