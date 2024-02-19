@@ -2,14 +2,14 @@ import numpy as np
 import pandas as pd
 import patsy
 
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+from lightgbm import LGBMRegressor, LGBMClassifier
 from sklearn.linear_model import LassoCV, LogisticRegressionCV
 
 import doubleml as dml
 from doubleml.datasets import make_heterogeneous_data
 
 # Number of repetitions
-n_rep = 10
+n_rep = 1000
 
 # DGP pars
 n_obs = 2000
@@ -27,11 +27,9 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Lasso", LassoCV()),
-                  ("Random Forest",
-                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+                  ("LGBM", LGBMRegressor(n_estimators=200, learning_rate=0.05))],
     "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+                  ("LGBM", LGBMClassifier(n_estimators=200, learning_rate=0.05))],
     "level": [0.95, 0.90]
 }
 

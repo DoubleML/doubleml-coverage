@@ -60,7 +60,7 @@ def make_pretty(df, level, n_rep):
     return show(styled_df, caption=caption)
 ```
 
-## GATE Coverage
+## CATE Coverage
 
 The simulations are based on the  the [make_heterogeneous_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_heterogeneous_data.html)-DGP with $2000$ observations. The groups are defined based on the first covariate, analogously to the [CATE PLR Example](https://docs.doubleml.org/stable/examples/py_double_ml_cate_plr.html), but rely on [LightGBM](https://lightgbm.readthedocs.io/en/latest/index.html) to estimate nuisance elements (due to time constraints).
 
