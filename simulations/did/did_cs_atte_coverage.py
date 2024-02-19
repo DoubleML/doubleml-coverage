@@ -7,10 +7,10 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 20
+n_rep = 1000
 
 # DGP pars
-theta = 0.5  # true ATTE
+theta = 0.0  # true ATTE
 n_obs = 1000
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
@@ -50,7 +50,7 @@ df_results_detailed["In-sample-norm."] = df_results_detailed["In-sample-norm."].
 np.random.seed(42)
 
 for i_dgp, dgp_type in enumerate(dgp_types):
-    print(f"\nDGP: {i_dgp}/{n_dgps}", end="\n")
+    print(f"\nDGP: {i_dgp + 1}/{n_dgps}", end="\n")
     for i_rep in range(n_rep):
         print(f"Repetition: {i_rep + 1}/{n_rep}", end="\r")
 
