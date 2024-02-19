@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import patsy
 
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.linear_model import LassoCV, LogisticRegressionCV
@@ -50,14 +51,10 @@ for i_rep in range(n_rep):
 
     # define the DoubleML data object
     data = datasets[i_rep]['data']
-    ite = datasets[i_rep]['effects']
+    design_matrix = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": data["X_0"]})
+    spline_basis = pd.DataFrame(design_matrix)
 
-    groups = pd.DataFrame(
-        np.column_stack((data['X_0'] <= 0.3,
-                         (data['X_0'] > 0.3) & (data['X_0'] <= 0.7),
-                         data['X_0'] > 0.7)),
-        columns=['Group 1', 'Group 2', 'Group 3'])
-    true_effects = [ite[groups[group]].mean() for group in groups.columns]
+    true_effects = datasets[i_rep]['effects']
 
     obj_dml_data = dml.DoubleMLData(data, 'y', 'd')
 
@@ -70,14 +67,14 @@ for i_rep in range(n_rep):
                 ml_m=ml_m,
             )
             dml_irm.fit(n_jobs_cv=5)
-            gate = dml_irm.gate(groups=groups)
+            cate = dml_irm.cate(spline_basis)
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
-                confint = gate.confint(level=level)
+                confint = cate.confint(basis=spline_basis, level=level)
                 effects = confint["effect"]
                 coverage = (confint.iloc[:, 0] < true_effects) & (true_effects < confint.iloc[:, 2])
                 ci_length = confint.iloc[:, 2] - confint.iloc[:, 0]
-                confint_uniform = gate.confint(level=0.95, joint=True, n_rep_boot=2000)
+                confint_uniform = cate.confint(basis=spline_basis, level=0.95, joint=True, n_rep_boot=2000)
                 coverage_uniform = all((confint_uniform.iloc[:, 0] < true_effects) &
                                        (true_effects < confint_uniform.iloc[:, 2]))
                 ci_length_uniform = confint_uniform.iloc[:, 2] - confint_uniform.iloc[:, 0]
@@ -107,4 +104,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/irm_gate_coverage.csv", index=False)
+df_results.to_csv("results/irm_cate_coverage.csv", index=False)
