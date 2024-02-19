@@ -74,6 +74,7 @@ for i_rep in range(n_rep):
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
                 confint = gate.confint(level=level)
+                effects = confint["effect"]
                 coverage = (confint.iloc[:, 0] < true_effects) & (true_effects < confint.iloc[:, 2])
                 ci_length = confint.iloc[:, 2] - confint.iloc[:, 0]
                 confint_uniform = gate.confint(level=0.95, joint=True, n_rep_boot=2000)
@@ -85,7 +86,7 @@ for i_rep in range(n_rep):
                      pd.DataFrame({
                         "Coverage": coverage.mean(),
                         "CI Length": ci_length.mean(),
-                        "Bias": abs(dml_plr.coef - true_effects).mean(),
+                        "Bias": abs(effects - true_effects).mean(),
                         "Uniform Coverage": coverage_uniform,
                         "Uniform CI Length": ci_length_uniform.mean(),
                         "Learner g": learner_g_name,
