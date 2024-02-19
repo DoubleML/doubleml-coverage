@@ -1,14 +1,14 @@
 import numpy as np
 import pandas as pd
 
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.linear_model import LassoCV, LogisticRegressionCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LassoCV
 
 import doubleml as dml
 from doubleml.datasets import make_heterogeneous_data
 
 # Number of repetitions
-n_rep = 50
+n_rep = 1000
 
 # DGP pars
 n_obs = 500
@@ -28,9 +28,9 @@ hyperparam_dict = {
     "learner_g": [("Lasso", LassoCV()),
                   ("Random Forest",
                    RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
+    "learner_m": [("Lasso", LassoCV()),
                   ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
     "level": [0.95, 0.90]
 }
 
@@ -66,7 +66,7 @@ for i_rep in range(n_rep):
             # Set machine learning methods for g & m
             dml_plr = dml.DoubleMLPLR(
                 obj_dml_data=obj_dml_data,
-                ml_g=ml_g,
+                ml_l=ml_g,
                 ml_m=ml_m,
             )
             dml_plr.fit(n_jobs_cv=5)

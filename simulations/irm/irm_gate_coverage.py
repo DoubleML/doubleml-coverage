@@ -8,7 +8,7 @@ import doubleml as dml
 from doubleml.datasets import make_heterogeneous_data
 
 # Number of repetitions
-n_rep = 50
+n_rep = 1000
 
 # DGP pars
 n_obs = 500
