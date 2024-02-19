@@ -62,7 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## ATTE Coverage
 
-The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with 1000 observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of the DGP).
+The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with $1000$ observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of the DGP).
 
 ```{python}
 #| echo: false

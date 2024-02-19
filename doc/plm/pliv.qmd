@@ -62,6 +62,8 @@ def make_pretty(df, level, n_rep):
 
 ## LATE Coverage
 
+The simulations are based on the  the [make_pliv_CHS2015](https://docs.doubleml.org/dev/api/generated/doubleml.datasets.make_pliv_CHS2015.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.
+
 ```{python}
 #| echo: false
 
@@ -99,6 +101,7 @@ make_pretty(df_ate_9, level, n_rep)
 ### IV-type
 
 For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same type of learner (here **Learner g**).
+
 ```{python}
 #| echo: false
 score = "IV-type"
