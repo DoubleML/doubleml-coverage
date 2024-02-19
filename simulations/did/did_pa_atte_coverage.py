@@ -1,20 +1,17 @@
 import numpy as np
 import pandas as pd
 
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.linear_model import LassoCV, LogisticRegressionCV
+from lightgbm import LGBMRegressor, LGBMClassifier
 
 import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 1000
-
+n_rep = 20
 
 # DGP pars
 theta = 0.5  # true ATTE
-n_obs = 500
-dim_x = 20
+n_obs = 1000
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
@@ -35,22 +32,18 @@ hyperparam_dict = {
     "DGP": dgp_types,
     "score": ["experimental", "observational"],
     "in sample normalization": [True, False],
-    "learner_g": [("Lasso", LassoCV()),
-                  ("Random Forest",
-                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+    "learner_g": [("LGBM", LGBMRegressor()),],
+    "learner_m": [("LGBM", LGBMClassifier()),],
     "level": [0.95, 0.90]
 }
 
 # set up the results dataframe
 df_results_detailed = pd.DataFrame(
     columns=["Coverage", "CI Length",
-             "Bias", "score", "in sample normalization", "DGP",
+             "Bias", "Score", "In-sample-norm.", "DGP",
              "Learner g", "Learner m",
              "level", "repetition"])
-df_results_detailed["in sample normalization"] = df_results_detailed["in sample normalization"].astype(bool)
+df_results_detailed["In-sample-norm."] = df_results_detailed["In-sample-norm."].astype(bool)
 
 # start simulation
 np.random.seed(42)
@@ -97,15 +90,15 @@ for i_dgp, dgp_type in enumerate(dgp_types):
                                     "Bias": abs(dml_DiD.coef[0] - theta),
                                     "Learner g": learner_g_name,
                                     "Learner m": learner_m_name,
-                                    "score": score,
-                                    "in sample normalization": in_sample_normalization,
+                                    "Score": score,
+                                    "In-sample-norm.": in_sample_normalization,
                                     "DGP": dgp_type,
                                     "level": level,
                                     "repetition": i_rep}, index=[0])),
                                 ignore_index=True)
 
 df_results = df_results_detailed.groupby(
-    ["Learner g", "Learner m", "score", "in sample normalization", "DGP", "level"]).agg(
+    ["Learner g", "Learner m", "Score", "In-sample-norm.", "DGP", "level"]).agg(
         {"Coverage": "mean",
          "CI Length": "mean",
          "Bias": "mean",
