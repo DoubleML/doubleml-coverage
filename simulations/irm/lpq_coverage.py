@@ -17,52 +17,73 @@ n_rep = 100
 
 # DGP pars
 n_obs = 5000
-tau_vec = np.arange(0.2, 0.85, 0.05)
+tau_vec = np.arange(0.3, 0.75, 0.05)
 p = 5
 
 
 # define loc-scale model
-def f_loc(D, X):
-    loc = 0.5*D + 2*D*X[:, 4] + 2.0*(X[:, 1] > 0.1) - 1.7*(X[:, 0] * X[:, 2] > 0) - 3*X[:, 3]
+def f_loc(D, X, X_conf):
+    loc = 0.5*D + 2*D*X[:, 4] + 2.0*(X[:, 1] > 0.1) - 1.7*(X[:, 0] * X[:, 2] > 0) - 3*X[:, 3] - 2*X_conf[:, 0]
     return loc
 
 
-def f_scale(D, X):
-    scale = np.sqrt(0.5*D + 0.3*D*X[:, 1] + 2)
+def f_scale(D, X, X_conf):
+    scale = np.sqrt(0.5*D + 3*D*X[:, 0] + 0.4*X_conf[:, 0] + 2)
     return scale
 
 
+def generate_treatment(Z, X, X_conf):
+    eta = np.random.normal(size=len(Z))
+    d = ((0.5*Z - 0.3*X[:, 0] + 0.7*X_conf[:, 0] + eta) > 0)*1.0
+    return d
+
+
 def dgp(n=200, p=5):
-    X = np.random.uniform(-1, 1, size=[n, p])
-    D = ((X[:, 1] - X[:, 3] + 1.5*(X[:, 0] > 0) + np.random.normal(size=n)) > 0)*1.0
+    X = np.random.uniform(0, 1, size=[n, p])
+    X_conf = np.random.uniform(-1, 1, size=[n, 1])
+    Z = np.random.binomial(1, p=0.5, size=n)
+    D = generate_treatment(Z, X, X_conf)
     epsilon = np.random.normal(size=n)
 
-    Y = f_loc(D, X) + f_scale(D, X)*epsilon
-    return Y, X, D, epsilon
+    Y = f_loc(D, X, X_conf) + f_scale(D, X, X_conf)*epsilon
+
+    return Y, X, D, Z
 
 
-# Estimate true PQ and QTE with counterfactuals on large sample
+# Estimate true LPQ and LQTE with counterfactuals on large sample
+
 n_true = int(10e+6)
 
-_, X_true, _, epsilon_true = dgp(n=n_true, p=p)
-D1 = np.ones(n_true)
-D0 = np.zeros(n_true)
+X_true = np.random.uniform(0, 1, size=[n_true, p])
+X_conf_true = np.random.uniform(-1, 1, size=[n_true, 1])
+Z_true = np.random.binomial(1, p=0.5, size=n_true)
+eta_true = np.random.normal(size=n_true)
+D1_true = generate_treatment(np.ones_like(Z_true), X_true, X_conf_true)
+D0_true = generate_treatment(np.zeros_like(Z_true), X_true, X_conf_true)
+epsilon_true = np.random.normal(size=n_true)
 
-Y1 = f_loc(D1, X_true) + f_scale(D1, X_true)*epsilon_true
-Y0 = f_loc(D0, X_true) + f_scale(D0, X_true)*epsilon_true
+compliers = (D1_true == 1) * (D0_true == 0)
+print(f'Compliance probability: {str(compliers.mean())}')
+n_compliers = compliers.sum()
+Y1 = f_loc(np.ones(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]) +\
+    f_scale(np.ones(n_compliers), X_true[compliers, :], X_conf_true[compliers, :])*epsilon_true[compliers]
+Y0 = f_loc(np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]) +\
+    f_scale(np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :])*epsilon_true[compliers]
 
-Y1_quant = np.quantile(Y1, q=tau_vec)
 Y0_quant = np.quantile(Y0, q=tau_vec)
-QTE = Y1_quant - Y0_quant
+Y1_quant = np.quantile(Y1, q=tau_vec)
+print(f'Local Potential Quantile Y(0): {Y0_quant}')
+print(f'Local Potential Quantile Y(1): {Y1_quant}')
+LQTE = Y1_quant - Y0_quant
+print(f'Local Quantile Treatment Effect: {LQTE}')
 
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
 datasets = []
 for i in range(n_rep):
-    Y, X, D, _ = dgp(n=n_obs,
-                     p=p)
-    data = dml.DoubleMLData.from_arrays(X, Y, D)
+    Y, X, D, Z = dgp(n=n_obs, p=p)
+    data = dml.DoubleMLData.from_arrays(X, Y, D, Z)
     datasets.append(data)
 
 # set up hyperparameters
@@ -110,7 +131,7 @@ for i_rep in range(n_rep):
                 obj_dml_data=obj_dml_data,
                 ml_g=ml_g,
                 ml_m=ml_m,
-                score="PQ",
+                score='LPQ',
                 quantiles=tau_vec
             )
             dml_qte.fit(n_jobs_models=cores_used)
@@ -118,20 +139,20 @@ for i_rep in range(n_rep):
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
                 confint = dml_qte.confint(level=level)
-                coverage = np.mean((confint.iloc[:, 0] < QTE) & (QTE < confint.iloc[:, 1]))
+                coverage = np.mean((confint.iloc[:, 0] < LQTE) & (LQTE < confint.iloc[:, 1]))
                 ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
 
                 dml_qte.bootstrap(n_rep_boot=2000)
                 confint_uniform = dml_qte.confint(level=0.95, joint=True)
-                coverage_uniform = all((confint_uniform.iloc[:, 0] < QTE) &
-                                       (QTE < confint_uniform.iloc[:, 1]))
+                coverage_uniform = all((confint_uniform.iloc[:, 0] < LQTE) &
+                                       (LQTE < confint_uniform.iloc[:, 1]))
                 ci_length_uniform = np.mean(confint_uniform.iloc[:, 1] - confint_uniform.iloc[:, 0])
                 df_results_detailed_qte = pd.concat(
                     (df_results_detailed_qte,
                      pd.DataFrame({
                         "Coverage": coverage,
                         "CI Length": ci_length,
-                        "Bias": np.mean(abs(effects - QTE)),
+                        "Bias": np.mean(abs(effects - LQTE)),
                         "Uniform Coverage": coverage_uniform,
                         "Uniform CI Length": ci_length_uniform,
                         "Learner g": learner_g_name,
@@ -221,6 +242,6 @@ df_results_pq1 = df_results_detailed_pq1.groupby(
 print(df_results_pq1)
 
 # save results
-df_results_qte.to_csv("results/pq_qte_coverage.csv", index=False)
-df_results_pq0.to_csv("results/pq_pq0_coverage.csv", index=False)
-df_results_pq1.to_csv("results/pq_pq1_coverage.csv", index=False)
+df_results_qte.to_csv("results/pq_lqte_coverage.csv", index=False)
+df_results_pq0.to_csv("results/pq_lpq0_coverage.csv", index=False)
+df_results_pq1.to_csv("results/pq_lpq1_coverage.csv", index=False)
