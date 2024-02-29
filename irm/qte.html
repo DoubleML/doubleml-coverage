@@ -230,6 +230,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#local-y0---quantile" id="toc-local-y0---quantile" class="nav-link" data-scroll-target="#local-y0---quantile">Local Y(0) - Quantile</a></li>
   <li><a href="#local-y1---quantile" id="toc-local-y1---quantile" class="nav-link" data-scroll-target="#local-y1---quantile">Local Y(1) - Quantile</a></li>
   </ul></li>
+  <li><a href="#cvar-effects" id="toc-cvar-effects" class="nav-link" data-scroll-target="#cvar-effects">CVaR Effects</a></li>
+  <li><a href="#cvar-potential-quantiles" id="toc-cvar-potential-quantiles" class="nav-link" data-scroll-target="#cvar-potential-quantiles">CVaR Potential Quantiles</a>
+  <ul class="collapse">
+  <li><a href="#cvar-y0" id="toc-cvar-y0" class="nav-link" data-scroll-target="#cvar-y0">CVaR Y(0)</a></li>
+  <li><a href="#cvar-y1" id="toc-cvar-y1" class="nav-link" data-scroll-target="#cvar-y1">CVaR Y(1)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -297,7 +303,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_ca633_row0_col4, #T_ca633_row0_col6, #T_ca633_row1_col4, #T_ca633_row2_col4, #T_ca633_row2_col6, #T_ca633_row3_col4 {
+#T_31ba2_row0_col4, #T_31ba2_row0_col6, #T_31ba2_row1_col4, #T_31ba2_row2_col4, #T_31ba2_row2_col6, #T_31ba2_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -306,12 +312,12 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_ca633_row1_col6 {
+#T_31ba2_row1_col6 {
   color: black;
   background-color: red;
   font-weight: bold;
 }
-#T_ca633_row3_col6 {
+#T_31ba2_row3_col6 {
   color: black;
   background-color: red;
   color: black;
@@ -320,55 +326,55 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_ca633" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_31ba2" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_ca633_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_ca633_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_ca633_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_ca633_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_ca633_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
-<th id="T_ca633_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
-<th id="T_ca633_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+<th id="T_31ba2_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_31ba2_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_31ba2_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_31ba2_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_31ba2_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_31ba2_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_31ba2_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_ca633_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_ca633_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_ca633_row0_col2" class="data row0 col2">0.155</td>
-<td id="T_ca633_row0_col3" class="data row0 col3">0.736</td>
-<td id="T_ca633_row0_col4" class="data row0 col4">0.942</td>
-<td id="T_ca633_row0_col5" class="data row0 col5">1.031</td>
-<td id="T_ca633_row0_col6" class="data row0 col6">0.910</td>
+<td id="T_31ba2_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_31ba2_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_31ba2_row0_col2" class="data row0 col2">0.155</td>
+<td id="T_31ba2_row0_col3" class="data row0 col3">0.736</td>
+<td id="T_31ba2_row0_col4" class="data row0 col4">0.942</td>
+<td id="T_31ba2_row0_col5" class="data row0 col5">1.031</td>
+<td id="T_31ba2_row0_col6" class="data row0 col6">0.910</td>
 </tr>
 <tr class="even">
-<td id="T_ca633_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_ca633_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_ca633_row1_col2" class="data row1 col2">0.123</td>
-<td id="T_ca633_row1_col3" class="data row1 col3">0.508</td>
-<td id="T_ca633_row1_col4" class="data row1 col4">0.912</td>
-<td id="T_ca633_row1_col5" class="data row1 col5">0.715</td>
-<td id="T_ca633_row1_col6" class="data row1 col6">0.840</td>
+<td id="T_31ba2_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_31ba2_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_31ba2_row1_col2" class="data row1 col2">0.123</td>
+<td id="T_31ba2_row1_col3" class="data row1 col3">0.508</td>
+<td id="T_31ba2_row1_col4" class="data row1 col4">0.912</td>
+<td id="T_31ba2_row1_col5" class="data row1 col5">0.715</td>
+<td id="T_31ba2_row1_col6" class="data row1 col6">0.840</td>
 </tr>
 <tr class="odd">
-<td id="T_ca633_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_ca633_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_ca633_row2_col2" class="data row2 col2">0.159</td>
-<td id="T_ca633_row2_col3" class="data row2 col3">0.749</td>
-<td id="T_ca633_row2_col4" class="data row2 col4">0.947</td>
-<td id="T_ca633_row2_col5" class="data row2 col5">1.029</td>
-<td id="T_ca633_row2_col6" class="data row2 col6">0.920</td>
+<td id="T_31ba2_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_31ba2_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_31ba2_row2_col2" class="data row2 col2">0.159</td>
+<td id="T_31ba2_row2_col3" class="data row2 col3">0.749</td>
+<td id="T_31ba2_row2_col4" class="data row2 col4">0.947</td>
+<td id="T_31ba2_row2_col5" class="data row2 col5">1.029</td>
+<td id="T_31ba2_row2_col6" class="data row2 col6">0.920</td>
 </tr>
 <tr class="even">
-<td id="T_ca633_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_ca633_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_ca633_row3_col2" class="data row3 col2">0.123</td>
-<td id="T_ca633_row3_col3" class="data row3 col3">0.518</td>
-<td id="T_ca633_row3_col4" class="data row3 col4">0.915</td>
-<td id="T_ca633_row3_col5" class="data row3 col5">0.720</td>
-<td id="T_ca633_row3_col6" class="data row3 col6">0.860</td>
+<td id="T_31ba2_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_31ba2_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_31ba2_row3_col2" class="data row3 col2">0.123</td>
+<td id="T_31ba2_row3_col3" class="data row3 col3">0.518</td>
+<td id="T_31ba2_row3_col4" class="data row3 col4">0.915</td>
+<td id="T_31ba2_row3_col5" class="data row3 col5">0.720</td>
+<td id="T_31ba2_row3_col6" class="data row3 col6">0.860</td>
 </tr>
 </tbody>
 </table>
@@ -380,7 +386,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_ca633:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_31ba2:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -425,7 +431,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_2193e_row0_col4, #T_2193e_row0_col6, #T_2193e_row1_col6, #T_2193e_row2_col4, #T_2193e_row2_col6, #T_2193e_row3_col6 {
+#T_c2ee5_row0_col4, #T_c2ee5_row0_col6, #T_c2ee5_row1_col6, #T_c2ee5_row2_col4, #T_c2ee5_row2_col6, #T_c2ee5_row3_col6 {
   color: black;
   background-color: red;
   color: black;
@@ -434,7 +440,7 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_2193e_row1_col4, #T_2193e_row3_col4 {
+#T_c2ee5_row1_col4, #T_c2ee5_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -443,55 +449,55 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_2193e" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_c2ee5" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_2193e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_2193e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_2193e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_2193e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_2193e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
-<th id="T_2193e_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
-<th id="T_2193e_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+<th id="T_c2ee5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_c2ee5_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_c2ee5_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_c2ee5_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_c2ee5_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_c2ee5_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_c2ee5_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_2193e_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_2193e_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_2193e_row0_col2" class="data row0 col2">0.155</td>
-<td id="T_2193e_row0_col3" class="data row0 col3">0.618</td>
-<td id="T_2193e_row0_col4" class="data row0 col4">0.882</td>
-<td id="T_2193e_row0_col5" class="data row0 col5">1.031</td>
-<td id="T_2193e_row0_col6" class="data row0 col6">0.920</td>
+<td id="T_c2ee5_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_c2ee5_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_c2ee5_row0_col2" class="data row0 col2">0.155</td>
+<td id="T_c2ee5_row0_col3" class="data row0 col3">0.618</td>
+<td id="T_c2ee5_row0_col4" class="data row0 col4">0.882</td>
+<td id="T_c2ee5_row0_col5" class="data row0 col5">1.031</td>
+<td id="T_c2ee5_row0_col6" class="data row0 col6">0.920</td>
 </tr>
 <tr class="even">
-<td id="T_2193e_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_2193e_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_2193e_row1_col2" class="data row1 col2">0.123</td>
-<td id="T_2193e_row1_col3" class="data row1 col3">0.426</td>
-<td id="T_2193e_row1_col4" class="data row1 col4">0.835</td>
-<td id="T_2193e_row1_col5" class="data row1 col5">0.715</td>
-<td id="T_2193e_row1_col6" class="data row1 col6">0.850</td>
+<td id="T_c2ee5_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_c2ee5_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_c2ee5_row1_col2" class="data row1 col2">0.123</td>
+<td id="T_c2ee5_row1_col3" class="data row1 col3">0.426</td>
+<td id="T_c2ee5_row1_col4" class="data row1 col4">0.835</td>
+<td id="T_c2ee5_row1_col5" class="data row1 col5">0.715</td>
+<td id="T_c2ee5_row1_col6" class="data row1 col6">0.850</td>
 </tr>
 <tr class="odd">
-<td id="T_2193e_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_2193e_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_2193e_row2_col2" class="data row2 col2">0.159</td>
-<td id="T_2193e_row2_col3" class="data row2 col3">0.629</td>
-<td id="T_2193e_row2_col4" class="data row2 col4">0.894</td>
-<td id="T_2193e_row2_col5" class="data row2 col5">1.034</td>
-<td id="T_2193e_row2_col6" class="data row2 col6">0.920</td>
+<td id="T_c2ee5_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_c2ee5_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_c2ee5_row2_col2" class="data row2 col2">0.159</td>
+<td id="T_c2ee5_row2_col3" class="data row2 col3">0.629</td>
+<td id="T_c2ee5_row2_col4" class="data row2 col4">0.894</td>
+<td id="T_c2ee5_row2_col5" class="data row2 col5">1.034</td>
+<td id="T_c2ee5_row2_col6" class="data row2 col6">0.920</td>
 </tr>
 <tr class="even">
-<td id="T_2193e_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_2193e_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_2193e_row3_col2" class="data row3 col2">0.123</td>
-<td id="T_2193e_row3_col3" class="data row3 col3">0.434</td>
-<td id="T_2193e_row3_col4" class="data row3 col4">0.846</td>
-<td id="T_2193e_row3_col5" class="data row3 col5">0.719</td>
-<td id="T_2193e_row3_col6" class="data row3 col6">0.870</td>
+<td id="T_c2ee5_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_c2ee5_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_c2ee5_row3_col2" class="data row3 col2">0.123</td>
+<td id="T_c2ee5_row3_col3" class="data row3 col3">0.434</td>
+<td id="T_c2ee5_row3_col4" class="data row3 col4">0.846</td>
+<td id="T_c2ee5_row3_col5" class="data row3 col5">0.719</td>
+<td id="T_c2ee5_row3_col6" class="data row3 col6">0.870</td>
 </tr>
 </tbody>
 </table>
@@ -503,7 +509,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_2193e:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_c2ee5:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -553,7 +559,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_c02d7_row0_col4, #T_c02d7_row2_col4, #T_c02d7_row3_col4 {
+#T_632ad_row0_col4, #T_632ad_row2_col4, #T_632ad_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -562,7 +568,7 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_c02d7_row1_col4 {
+#T_632ad_row1_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -571,45 +577,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_c02d7" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_632ad" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_c02d7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_c02d7_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_c02d7_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_c02d7_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_c02d7_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_632ad_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_632ad_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_632ad_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_632ad_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_632ad_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_c02d7_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_c02d7_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_c02d7_row0_col2" class="data row0 col2">0.149</td>
-<td id="T_c02d7_row0_col3" class="data row0 col3">0.692</td>
-<td id="T_c02d7_row0_col4" class="data row0 col4">0.935</td>
+<td id="T_632ad_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_632ad_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_632ad_row0_col2" class="data row0 col2">0.149</td>
+<td id="T_632ad_row0_col3" class="data row0 col3">0.692</td>
+<td id="T_632ad_row0_col4" class="data row0 col4">0.935</td>
 </tr>
 <tr class="even">
-<td id="T_c02d7_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_c02d7_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_c02d7_row1_col2" class="data row1 col2">0.114</td>
-<td id="T_c02d7_row1_col3" class="data row1 col3">0.461</td>
-<td id="T_c02d7_row1_col4" class="data row1 col4">0.887</td>
+<td id="T_632ad_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_632ad_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_632ad_row1_col2" class="data row1 col2">0.114</td>
+<td id="T_632ad_row1_col3" class="data row1 col3">0.461</td>
+<td id="T_632ad_row1_col4" class="data row1 col4">0.887</td>
 </tr>
 <tr class="odd">
-<td id="T_c02d7_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_c02d7_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_c02d7_row2_col2" class="data row2 col2">0.151</td>
-<td id="T_c02d7_row2_col3" class="data row2 col3">0.701</td>
-<td id="T_c02d7_row2_col4" class="data row2 col4">0.942</td>
+<td id="T_632ad_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_632ad_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_632ad_row2_col2" class="data row2 col2">0.151</td>
+<td id="T_632ad_row2_col3" class="data row2 col3">0.701</td>
+<td id="T_632ad_row2_col4" class="data row2 col4">0.942</td>
 </tr>
 <tr class="even">
-<td id="T_c02d7_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_c02d7_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_c02d7_row3_col2" class="data row3 col2">0.112</td>
-<td id="T_c02d7_row3_col3" class="data row3 col3">0.464</td>
-<td id="T_c02d7_row3_col4" class="data row3 col4">0.908</td>
+<td id="T_632ad_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_632ad_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_632ad_row3_col2" class="data row3 col2">0.112</td>
+<td id="T_632ad_row3_col3" class="data row3 col3">0.464</td>
+<td id="T_632ad_row3_col4" class="data row3 col4">0.908</td>
 </tr>
 </tbody>
 </table>
@@ -621,7 +627,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_c02d7:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_632ad:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -666,7 +672,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_0de34_row0_col4, #T_0de34_row2_col4 {
+#T_4bcd4_row0_col4, #T_4bcd4_row2_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -675,7 +681,7 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_0de34_row1_col4, #T_0de34_row3_col4 {
+#T_4bcd4_row1_col4, #T_4bcd4_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -684,45 +690,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_0de34" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_4bcd4" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_0de34_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_0de34_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_0de34_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_0de34_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_0de34_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_4bcd4_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_4bcd4_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_4bcd4_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_4bcd4_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_4bcd4_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_0de34_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_0de34_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_0de34_row0_col2" class="data row0 col2">0.149</td>
-<td id="T_0de34_row0_col3" class="data row0 col3">0.580</td>
-<td id="T_0de34_row0_col4" class="data row0 col4">0.884</td>
+<td id="T_4bcd4_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_4bcd4_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_4bcd4_row0_col2" class="data row0 col2">0.149</td>
+<td id="T_4bcd4_row0_col3" class="data row0 col3">0.580</td>
+<td id="T_4bcd4_row0_col4" class="data row0 col4">0.884</td>
 </tr>
 <tr class="even">
-<td id="T_0de34_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_0de34_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_0de34_row1_col2" class="data row1 col2">0.114</td>
-<td id="T_0de34_row1_col3" class="data row1 col3">0.387</td>
-<td id="T_0de34_row1_col4" class="data row1 col4">0.818</td>
+<td id="T_4bcd4_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_4bcd4_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_4bcd4_row1_col2" class="data row1 col2">0.114</td>
+<td id="T_4bcd4_row1_col3" class="data row1 col3">0.387</td>
+<td id="T_4bcd4_row1_col4" class="data row1 col4">0.818</td>
 </tr>
 <tr class="odd">
-<td id="T_0de34_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_0de34_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_0de34_row2_col2" class="data row2 col2">0.151</td>
-<td id="T_0de34_row2_col3" class="data row2 col3">0.588</td>
-<td id="T_0de34_row2_col4" class="data row2 col4">0.886</td>
+<td id="T_4bcd4_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_4bcd4_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_4bcd4_row2_col2" class="data row2 col2">0.151</td>
+<td id="T_4bcd4_row2_col3" class="data row2 col3">0.588</td>
+<td id="T_4bcd4_row2_col4" class="data row2 col4">0.886</td>
 </tr>
 <tr class="even">
-<td id="T_0de34_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_0de34_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_0de34_row3_col2" class="data row3 col2">0.112</td>
-<td id="T_0de34_row3_col3" class="data row3 col3">0.389</td>
-<td id="T_0de34_row3_col4" class="data row3 col4">0.834</td>
+<td id="T_4bcd4_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_4bcd4_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_4bcd4_row3_col2" class="data row3 col2">0.112</td>
+<td id="T_4bcd4_row3_col3" class="data row3 col3">0.389</td>
+<td id="T_4bcd4_row3_col4" class="data row3 col4">0.834</td>
 </tr>
 </tbody>
 </table>
@@ -734,7 +740,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_0de34:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_4bcd4:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -782,7 +788,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_5fe64_row0_col4, #T_5fe64_row1_col4, #T_5fe64_row2_col4, #T_5fe64_row3_col4 {
+#T_ae79b_row0_col4, #T_ae79b_row1_col4, #T_ae79b_row2_col4, #T_ae79b_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -793,45 +799,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_5fe64" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_ae79b" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_5fe64_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_5fe64_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_5fe64_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_5fe64_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_5fe64_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_ae79b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_ae79b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_ae79b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_ae79b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_ae79b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_5fe64_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_5fe64_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_5fe64_row0_col2" class="data row0 col2">0.059</td>
-<td id="T_5fe64_row0_col3" class="data row0 col3">0.298</td>
-<td id="T_5fe64_row0_col4" class="data row0 col4">0.963</td>
+<td id="T_ae79b_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_ae79b_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_ae79b_row0_col2" class="data row0 col2">0.059</td>
+<td id="T_ae79b_row0_col3" class="data row0 col3">0.298</td>
+<td id="T_ae79b_row0_col4" class="data row0 col4">0.963</td>
 </tr>
 <tr class="even">
-<td id="T_5fe64_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_5fe64_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_5fe64_row1_col2" class="data row1 col2">0.054</td>
-<td id="T_5fe64_row1_col3" class="data row1 col3">0.274</td>
-<td id="T_5fe64_row1_col4" class="data row1 col4">0.964</td>
+<td id="T_ae79b_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_ae79b_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_ae79b_row1_col2" class="data row1 col2">0.054</td>
+<td id="T_ae79b_row1_col3" class="data row1 col3">0.274</td>
+<td id="T_ae79b_row1_col4" class="data row1 col4">0.964</td>
 </tr>
 <tr class="odd">
-<td id="T_5fe64_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_5fe64_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_5fe64_row2_col2" class="data row2 col2">0.059</td>
-<td id="T_5fe64_row2_col3" class="data row2 col3">0.303</td>
-<td id="T_5fe64_row2_col4" class="data row2 col4">0.958</td>
+<td id="T_ae79b_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_ae79b_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_ae79b_row2_col2" class="data row2 col2">0.059</td>
+<td id="T_ae79b_row2_col3" class="data row2 col3">0.303</td>
+<td id="T_ae79b_row2_col4" class="data row2 col4">0.958</td>
 </tr>
 <tr class="even">
-<td id="T_5fe64_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_5fe64_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_5fe64_row3_col2" class="data row3 col2">0.057</td>
-<td id="T_5fe64_row3_col3" class="data row3 col3">0.275</td>
-<td id="T_5fe64_row3_col4" class="data row3 col4">0.956</td>
+<td id="T_ae79b_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_ae79b_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_ae79b_row3_col2" class="data row3 col2">0.057</td>
+<td id="T_ae79b_row3_col3" class="data row3 col3">0.275</td>
+<td id="T_ae79b_row3_col4" class="data row3 col4">0.956</td>
 </tr>
 </tbody>
 </table>
@@ -843,7 +849,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_5fe64:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_ae79b:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -888,7 +894,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_c3524_row0_col4, #T_c3524_row1_col4, #T_c3524_row2_col4, #T_c3524_row3_col4 {
+#T_587c6_row0_col4, #T_587c6_row1_col4, #T_587c6_row2_col4, #T_587c6_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -899,45 +905,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_c3524" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_587c6" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_c3524_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_c3524_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_c3524_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_c3524_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_c3524_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_587c6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_587c6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_587c6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_587c6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_587c6_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_c3524_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_c3524_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_c3524_row0_col2" class="data row0 col2">0.059</td>
-<td id="T_c3524_row0_col3" class="data row0 col3">0.250</td>
-<td id="T_c3524_row0_col4" class="data row0 col4">0.915</td>
+<td id="T_587c6_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_587c6_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_587c6_row0_col2" class="data row0 col2">0.059</td>
+<td id="T_587c6_row0_col3" class="data row0 col3">0.250</td>
+<td id="T_587c6_row0_col4" class="data row0 col4">0.915</td>
 </tr>
 <tr class="even">
-<td id="T_c3524_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_c3524_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_c3524_row1_col2" class="data row1 col2">0.054</td>
-<td id="T_c3524_row1_col3" class="data row1 col3">0.230</td>
-<td id="T_c3524_row1_col4" class="data row1 col4">0.912</td>
+<td id="T_587c6_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_587c6_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_587c6_row1_col2" class="data row1 col2">0.054</td>
+<td id="T_587c6_row1_col3" class="data row1 col3">0.230</td>
+<td id="T_587c6_row1_col4" class="data row1 col4">0.912</td>
 </tr>
 <tr class="odd">
-<td id="T_c3524_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_c3524_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_c3524_row2_col2" class="data row2 col2">0.059</td>
-<td id="T_c3524_row2_col3" class="data row2 col3">0.254</td>
-<td id="T_c3524_row2_col4" class="data row2 col4">0.919</td>
+<td id="T_587c6_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_587c6_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_587c6_row2_col2" class="data row2 col2">0.059</td>
+<td id="T_587c6_row2_col3" class="data row2 col3">0.254</td>
+<td id="T_587c6_row2_col4" class="data row2 col4">0.919</td>
 </tr>
 <tr class="even">
-<td id="T_c3524_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_c3524_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_c3524_row3_col2" class="data row3 col2">0.057</td>
-<td id="T_c3524_row3_col3" class="data row3 col3">0.231</td>
-<td id="T_c3524_row3_col4" class="data row3 col4">0.899</td>
+<td id="T_587c6_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_587c6_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_587c6_row3_col2" class="data row3 col2">0.057</td>
+<td id="T_587c6_row3_col3" class="data row3 col3">0.231</td>
+<td id="T_587c6_row3_col4" class="data row3 col4">0.899</td>
 </tr>
 </tbody>
 </table>
@@ -949,7 +955,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_c3524:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_587c6:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1000,7 +1006,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_04410_row0_col4, #T_04410_row0_col6, #T_04410_row1_col4, #T_04410_row1_col6, #T_04410_row2_col4, #T_04410_row2_col6, #T_04410_row3_col4, #T_04410_row3_col6 {
+#T_5129b_row0_col4, #T_5129b_row0_col6, #T_5129b_row1_col4, #T_5129b_row1_col6, #T_5129b_row2_col4, #T_5129b_row2_col6, #T_5129b_row3_col4, #T_5129b_row3_col6 {
   color: black;
   background-color: red;
   color: black;
@@ -1011,55 +1017,55 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_04410" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_5129b" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_04410_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_04410_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_04410_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_04410_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_04410_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
-<th id="T_04410_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
-<th id="T_04410_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+<th id="T_5129b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_5129b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_5129b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_5129b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_5129b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_5129b_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_5129b_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_04410_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_04410_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_04410_row0_col2" class="data row0 col2">0.385</td>
-<td id="T_04410_row0_col3" class="data row0 col3">1.951</td>
-<td id="T_04410_row0_col4" class="data row0 col4">0.962</td>
-<td id="T_04410_row0_col5" class="data row0 col5">2.541</td>
-<td id="T_04410_row0_col6" class="data row0 col6">0.970</td>
+<td id="T_5129b_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_5129b_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_5129b_row0_col2" class="data row0 col2">0.385</td>
+<td id="T_5129b_row0_col3" class="data row0 col3">1.951</td>
+<td id="T_5129b_row0_col4" class="data row0 col4">0.962</td>
+<td id="T_5129b_row0_col5" class="data row0 col5">2.541</td>
+<td id="T_5129b_row0_col6" class="data row0 col6">0.970</td>
 </tr>
 <tr class="even">
-<td id="T_04410_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_04410_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_04410_row1_col2" class="data row1 col2">0.376</td>
-<td id="T_04410_row1_col3" class="data row1 col3">1.873</td>
-<td id="T_04410_row1_col4" class="data row1 col4">0.953</td>
-<td id="T_04410_row1_col5" class="data row1 col5">2.433</td>
-<td id="T_04410_row1_col6" class="data row1 col6">0.960</td>
+<td id="T_5129b_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_5129b_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_5129b_row1_col2" class="data row1 col2">0.376</td>
+<td id="T_5129b_row1_col3" class="data row1 col3">1.873</td>
+<td id="T_5129b_row1_col4" class="data row1 col4">0.953</td>
+<td id="T_5129b_row1_col5" class="data row1 col5">2.433</td>
+<td id="T_5129b_row1_col6" class="data row1 col6">0.960</td>
 </tr>
 <tr class="odd">
-<td id="T_04410_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_04410_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_04410_row2_col2" class="data row2 col2">0.372</td>
-<td id="T_04410_row2_col3" class="data row2 col3">1.927</td>
-<td id="T_04410_row2_col4" class="data row2 col4">0.963</td>
-<td id="T_04410_row2_col5" class="data row2 col5">2.486</td>
-<td id="T_04410_row2_col6" class="data row2 col6">0.980</td>
+<td id="T_5129b_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_5129b_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_5129b_row2_col2" class="data row2 col2">0.372</td>
+<td id="T_5129b_row2_col3" class="data row2 col3">1.927</td>
+<td id="T_5129b_row2_col4" class="data row2 col4">0.963</td>
+<td id="T_5129b_row2_col5" class="data row2 col5">2.486</td>
+<td id="T_5129b_row2_col6" class="data row2 col6">0.980</td>
 </tr>
 <tr class="even">
-<td id="T_04410_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_04410_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_04410_row3_col2" class="data row3 col2">0.373</td>
-<td id="T_04410_row3_col3" class="data row3 col3">1.866</td>
-<td id="T_04410_row3_col4" class="data row3 col4">0.951</td>
-<td id="T_04410_row3_col5" class="data row3 col5">2.408</td>
-<td id="T_04410_row3_col6" class="data row3 col6">0.940</td>
+<td id="T_5129b_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_5129b_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_5129b_row3_col2" class="data row3 col2">0.373</td>
+<td id="T_5129b_row3_col3" class="data row3 col3">1.866</td>
+<td id="T_5129b_row3_col4" class="data row3 col4">0.951</td>
+<td id="T_5129b_row3_col5" class="data row3 col5">2.408</td>
+<td id="T_5129b_row3_col6" class="data row3 col6">0.940</td>
 </tr>
 </tbody>
 </table>
@@ -1071,7 +1077,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_04410:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_5129b:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1116,7 +1122,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_2f4fe_row0_col4, #T_2f4fe_row1_col4, #T_2f4fe_row2_col4, #T_2f4fe_row3_col4, #T_2f4fe_row3_col6 {
+#T_efeae_row0_col4, #T_efeae_row1_col4, #T_efeae_row2_col4, #T_efeae_row3_col4, #T_efeae_row3_col6 {
   color: black;
   background-color: red;
   color: black;
@@ -1125,7 +1131,7 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_2f4fe_row0_col6, #T_2f4fe_row1_col6, #T_2f4fe_row2_col6 {
+#T_efeae_row0_col6, #T_efeae_row1_col6, #T_efeae_row2_col6 {
   color: black;
   background-color: red;
   color: black;
@@ -1134,55 +1140,55 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_2f4fe" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_efeae" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_2f4fe_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_2f4fe_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_2f4fe_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_2f4fe_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_2f4fe_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
-<th id="T_2f4fe_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
-<th id="T_2f4fe_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+<th id="T_efeae_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_efeae_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_efeae_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_efeae_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_efeae_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_efeae_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_efeae_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_2f4fe_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_2f4fe_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_2f4fe_row0_col2" class="data row0 col2">0.385</td>
-<td id="T_2f4fe_row0_col3" class="data row0 col3">1.637</td>
-<td id="T_2f4fe_row0_col4" class="data row0 col4">0.922</td>
-<td id="T_2f4fe_row0_col5" class="data row0 col5">2.537</td>
-<td id="T_2f4fe_row0_col6" class="data row0 col6">0.970</td>
+<td id="T_efeae_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_efeae_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_efeae_row0_col2" class="data row0 col2">0.385</td>
+<td id="T_efeae_row0_col3" class="data row0 col3">1.637</td>
+<td id="T_efeae_row0_col4" class="data row0 col4">0.922</td>
+<td id="T_efeae_row0_col5" class="data row0 col5">2.537</td>
+<td id="T_efeae_row0_col6" class="data row0 col6">0.970</td>
 </tr>
 <tr class="even">
-<td id="T_2f4fe_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_2f4fe_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_2f4fe_row1_col2" class="data row1 col2">0.376</td>
-<td id="T_2f4fe_row1_col3" class="data row1 col3">1.572</td>
-<td id="T_2f4fe_row1_col4" class="data row1 col4">0.906</td>
-<td id="T_2f4fe_row1_col5" class="data row1 col5">2.434</td>
-<td id="T_2f4fe_row1_col6" class="data row1 col6">0.970</td>
+<td id="T_efeae_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_efeae_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_efeae_row1_col2" class="data row1 col2">0.376</td>
+<td id="T_efeae_row1_col3" class="data row1 col3">1.572</td>
+<td id="T_efeae_row1_col4" class="data row1 col4">0.906</td>
+<td id="T_efeae_row1_col5" class="data row1 col5">2.434</td>
+<td id="T_efeae_row1_col6" class="data row1 col6">0.970</td>
 </tr>
 <tr class="odd">
-<td id="T_2f4fe_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_2f4fe_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_2f4fe_row2_col2" class="data row2 col2">0.372</td>
-<td id="T_2f4fe_row2_col3" class="data row2 col3">1.617</td>
-<td id="T_2f4fe_row2_col4" class="data row2 col4">0.920</td>
-<td id="T_2f4fe_row2_col5" class="data row2 col5">2.488</td>
-<td id="T_2f4fe_row2_col6" class="data row2 col6">0.970</td>
+<td id="T_efeae_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_efeae_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_efeae_row2_col2" class="data row2 col2">0.372</td>
+<td id="T_efeae_row2_col3" class="data row2 col3">1.617</td>
+<td id="T_efeae_row2_col4" class="data row2 col4">0.920</td>
+<td id="T_efeae_row2_col5" class="data row2 col5">2.488</td>
+<td id="T_efeae_row2_col6" class="data row2 col6">0.970</td>
 </tr>
 <tr class="even">
-<td id="T_2f4fe_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_2f4fe_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_2f4fe_row3_col2" class="data row3 col2">0.373</td>
-<td id="T_2f4fe_row3_col3" class="data row3 col3">1.566</td>
-<td id="T_2f4fe_row3_col4" class="data row3 col4">0.900</td>
-<td id="T_2f4fe_row3_col5" class="data row3 col5">2.410</td>
-<td id="T_2f4fe_row3_col6" class="data row3 col6">0.940</td>
+<td id="T_efeae_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_efeae_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_efeae_row3_col2" class="data row3 col2">0.373</td>
+<td id="T_efeae_row3_col3" class="data row3 col3">1.566</td>
+<td id="T_efeae_row3_col4" class="data row3 col4">0.900</td>
+<td id="T_efeae_row3_col5" class="data row3 col5">2.410</td>
+<td id="T_efeae_row3_col6" class="data row3 col6">0.940</td>
 </tr>
 </tbody>
 </table>
@@ -1194,7 +1200,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_2f4fe:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_efeae:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1244,7 +1250,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_dd7d5_row0_col4, #T_dd7d5_row1_col4, #T_dd7d5_row2_col4, #T_dd7d5_row3_col4 {
+#T_f1465_row0_col4, #T_f1465_row1_col4, #T_f1465_row2_col4, #T_f1465_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -1255,45 +1261,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_dd7d5" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_f1465" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_dd7d5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_dd7d5_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_dd7d5_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_dd7d5_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_dd7d5_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_f1465_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_f1465_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_f1465_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_f1465_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_f1465_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_dd7d5_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_dd7d5_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_dd7d5_row0_col2" class="data row0 col2">0.232</td>
-<td id="T_dd7d5_row0_col3" class="data row0 col3">1.396</td>
-<td id="T_dd7d5_row0_col4" class="data row0 col4">0.973</td>
+<td id="T_f1465_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_f1465_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_f1465_row0_col2" class="data row0 col2">0.232</td>
+<td id="T_f1465_row0_col3" class="data row0 col3">1.396</td>
+<td id="T_f1465_row0_col4" class="data row0 col4">0.973</td>
 </tr>
 <tr class="even">
-<td id="T_dd7d5_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_dd7d5_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_dd7d5_row1_col2" class="data row1 col2">0.226</td>
-<td id="T_dd7d5_row1_col3" class="data row1 col3">1.342</td>
-<td id="T_dd7d5_row1_col4" class="data row1 col4">0.979</td>
+<td id="T_f1465_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_f1465_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_f1465_row1_col2" class="data row1 col2">0.226</td>
+<td id="T_f1465_row1_col3" class="data row1 col3">1.342</td>
+<td id="T_f1465_row1_col4" class="data row1 col4">0.979</td>
 </tr>
 <tr class="odd">
-<td id="T_dd7d5_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_dd7d5_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_dd7d5_row2_col2" class="data row2 col2">0.222</td>
-<td id="T_dd7d5_row2_col3" class="data row2 col3">1.371</td>
-<td id="T_dd7d5_row2_col4" class="data row2 col4">0.981</td>
+<td id="T_f1465_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_f1465_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_f1465_row2_col2" class="data row2 col2">0.222</td>
+<td id="T_f1465_row2_col3" class="data row2 col3">1.371</td>
+<td id="T_f1465_row2_col4" class="data row2 col4">0.981</td>
 </tr>
 <tr class="even">
-<td id="T_dd7d5_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_dd7d5_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_dd7d5_row3_col2" class="data row3 col2">0.208</td>
-<td id="T_dd7d5_row3_col3" class="data row3 col3">1.323</td>
-<td id="T_dd7d5_row3_col4" class="data row3 col4">0.977</td>
+<td id="T_f1465_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_f1465_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_f1465_row3_col2" class="data row3 col2">0.208</td>
+<td id="T_f1465_row3_col3" class="data row3 col3">1.323</td>
+<td id="T_f1465_row3_col4" class="data row3 col4">0.977</td>
 </tr>
 </tbody>
 </table>
@@ -1305,7 +1311,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_dd7d5:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_f1465:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1350,7 +1356,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_cb93f_row0_col4 {
+#T_cea4c_row0_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -1359,7 +1365,7 @@ ul.task-list li input[type="checkbox"] {
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_cb93f_row1_col4, #T_cb93f_row2_col4, #T_cb93f_row3_col4 {
+#T_cea4c_row1_col4, #T_cea4c_row2_col4, #T_cea4c_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -1368,45 +1374,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_cb93f" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_cea4c" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_cb93f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_cb93f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_cb93f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_cb93f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_cb93f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_cea4c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_cea4c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_cea4c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_cea4c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_cea4c_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_cb93f_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_cb93f_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_cb93f_row0_col2" class="data row0 col2">0.232</td>
-<td id="T_cb93f_row0_col3" class="data row0 col3">1.172</td>
-<td id="T_cb93f_row0_col4" class="data row0 col4">0.940</td>
+<td id="T_cea4c_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_cea4c_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_cea4c_row0_col2" class="data row0 col2">0.232</td>
+<td id="T_cea4c_row0_col3" class="data row0 col3">1.172</td>
+<td id="T_cea4c_row0_col4" class="data row0 col4">0.940</td>
 </tr>
 <tr class="even">
-<td id="T_cb93f_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_cb93f_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_cb93f_row1_col2" class="data row1 col2">0.226</td>
-<td id="T_cb93f_row1_col3" class="data row1 col3">1.126</td>
-<td id="T_cb93f_row1_col4" class="data row1 col4">0.951</td>
+<td id="T_cea4c_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_cea4c_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_cea4c_row1_col2" class="data row1 col2">0.226</td>
+<td id="T_cea4c_row1_col3" class="data row1 col3">1.126</td>
+<td id="T_cea4c_row1_col4" class="data row1 col4">0.951</td>
 </tr>
 <tr class="odd">
-<td id="T_cb93f_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_cb93f_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_cb93f_row2_col2" class="data row2 col2">0.222</td>
-<td id="T_cb93f_row2_col3" class="data row2 col3">1.151</td>
-<td id="T_cb93f_row2_col4" class="data row2 col4">0.951</td>
+<td id="T_cea4c_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_cea4c_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_cea4c_row2_col2" class="data row2 col2">0.222</td>
+<td id="T_cea4c_row2_col3" class="data row2 col3">1.151</td>
+<td id="T_cea4c_row2_col4" class="data row2 col4">0.951</td>
 </tr>
 <tr class="even">
-<td id="T_cb93f_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_cb93f_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_cb93f_row3_col2" class="data row3 col2">0.208</td>
-<td id="T_cb93f_row3_col3" class="data row3 col3">1.110</td>
-<td id="T_cb93f_row3_col4" class="data row3 col4">0.951</td>
+<td id="T_cea4c_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_cea4c_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_cea4c_row3_col2" class="data row3 col2">0.208</td>
+<td id="T_cea4c_row3_col3" class="data row3 col3">1.110</td>
+<td id="T_cea4c_row3_col4" class="data row3 col4">0.951</td>
 </tr>
 </tbody>
 </table>
@@ -1418,7 +1424,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_cb93f:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_cea4c:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1466,7 +1472,7 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_5e3df_row0_col4, #T_5e3df_row1_col4, #T_5e3df_row2_col4, #T_5e3df_row3_col4 {
+#T_5db92_row0_col4, #T_5db92_row1_col4, #T_5db92_row2_col4, #T_5db92_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -1477,45 +1483,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_5e3df" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_5db92" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_5e3df_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_5e3df_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_5e3df_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_5e3df_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_5e3df_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_5db92_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_5db92_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_5db92_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_5db92_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_5db92_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_5e3df_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_5e3df_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_5e3df_row0_col2" class="data row0 col2">0.328</td>
-<td id="T_5e3df_row0_col3" class="data row0 col3">1.982</td>
-<td id="T_5e3df_row0_col4" class="data row0 col4">0.990</td>
+<td id="T_5db92_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_5db92_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_5db92_row0_col2" class="data row0 col2">0.328</td>
+<td id="T_5db92_row0_col3" class="data row0 col3">1.982</td>
+<td id="T_5db92_row0_col4" class="data row0 col4">0.990</td>
 </tr>
 <tr class="even">
-<td id="T_5e3df_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_5e3df_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_5e3df_row1_col2" class="data row1 col2">0.322</td>
-<td id="T_5e3df_row1_col3" class="data row1 col3">1.900</td>
-<td id="T_5e3df_row1_col4" class="data row1 col4">0.970</td>
+<td id="T_5db92_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_5db92_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_5db92_row1_col2" class="data row1 col2">0.322</td>
+<td id="T_5db92_row1_col3" class="data row1 col3">1.900</td>
+<td id="T_5db92_row1_col4" class="data row1 col4">0.970</td>
 </tr>
 <tr class="odd">
-<td id="T_5e3df_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_5e3df_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_5e3df_row2_col2" class="data row2 col2">0.301</td>
-<td id="T_5e3df_row2_col3" class="data row2 col3">1.914</td>
-<td id="T_5e3df_row2_col4" class="data row2 col4">0.982</td>
+<td id="T_5db92_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_5db92_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_5db92_row2_col2" class="data row2 col2">0.301</td>
+<td id="T_5db92_row2_col3" class="data row2 col3">1.914</td>
+<td id="T_5db92_row2_col4" class="data row2 col4">0.982</td>
 </tr>
 <tr class="even">
-<td id="T_5e3df_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_5e3df_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_5e3df_row3_col2" class="data row3 col2">0.305</td>
-<td id="T_5e3df_row3_col3" class="data row3 col3">1.856</td>
-<td id="T_5e3df_row3_col4" class="data row3 col4">0.984</td>
+<td id="T_5db92_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_5db92_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_5db92_row3_col2" class="data row3 col2">0.305</td>
+<td id="T_5db92_row3_col3" class="data row3 col3">1.856</td>
+<td id="T_5db92_row3_col4" class="data row3 col4">0.984</td>
 </tr>
 </tbody>
 </table>
@@ -1527,7 +1533,7 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_5e3df:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_5db92:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
@@ -1572,14 +1578,14 @@ ul.task-list li input[type="checkbox"] {
 .itables { font-size: medium; }
 </style>
 <style type="text/css">
-#T_c2b20_row0_col4, #T_c2b20_row2_col4 {
+#T_35d38_row0_col4, #T_35d38_row2_col4 {
   color: black;
   background-color: red;
   color: black;
   background-color: yellow;
   font-weight: bold;
 }
-#T_c2b20_row1_col4, #T_c2b20_row3_col4 {
+#T_35d38_row1_col4, #T_35d38_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -1590,45 +1596,45 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<table id="T_c2b20" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_35d38" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
 <thead>
 <tr class="header">
-<th id="T_c2b20_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_c2b20_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_c2b20_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_c2b20_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_c2b20_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_35d38_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_35d38_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_35d38_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_35d38_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_35d38_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_c2b20_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_c2b20_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_c2b20_row0_col2" class="data row0 col2">0.328</td>
-<td id="T_c2b20_row0_col3" class="data row0 col3">1.663</td>
-<td id="T_c2b20_row0_col4" class="data row0 col4">0.956</td>
+<td id="T_35d38_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_35d38_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_35d38_row0_col2" class="data row0 col2">0.328</td>
+<td id="T_35d38_row0_col3" class="data row0 col3">1.663</td>
+<td id="T_35d38_row0_col4" class="data row0 col4">0.956</td>
 </tr>
 <tr class="even">
-<td id="T_c2b20_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_c2b20_row1_col1" class="data row1 col1">Logistic Regression</td>
-<td id="T_c2b20_row1_col2" class="data row1 col2">0.322</td>
-<td id="T_c2b20_row1_col3" class="data row1 col3">1.595</td>
-<td id="T_c2b20_row1_col4" class="data row1 col4">0.938</td>
+<td id="T_35d38_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_35d38_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_35d38_row1_col2" class="data row1 col2">0.322</td>
+<td id="T_35d38_row1_col3" class="data row1 col3">1.595</td>
+<td id="T_35d38_row1_col4" class="data row1 col4">0.938</td>
 </tr>
 <tr class="odd">
-<td id="T_c2b20_row2_col0" class="data row2 col0">Logistic Regression</td>
-<td id="T_c2b20_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_c2b20_row2_col2" class="data row2 col2">0.301</td>
-<td id="T_c2b20_row2_col3" class="data row2 col3">1.607</td>
-<td id="T_c2b20_row2_col4" class="data row2 col4">0.961</td>
+<td id="T_35d38_row2_col0" class="data row2 col0">Logistic Regression</td>
+<td id="T_35d38_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_35d38_row2_col2" class="data row2 col2">0.301</td>
+<td id="T_35d38_row2_col3" class="data row2 col3">1.607</td>
+<td id="T_35d38_row2_col4" class="data row2 col4">0.961</td>
 </tr>
 <tr class="even">
-<td id="T_c2b20_row3_col0" class="data row3 col0">Logistic Regression</td>
-<td id="T_c2b20_row3_col1" class="data row3 col1">Logistic Regression</td>
-<td id="T_c2b20_row3_col2" class="data row3 col2">0.305</td>
-<td id="T_c2b20_row3_col3" class="data row3 col3">1.557</td>
-<td id="T_c2b20_row3_col4" class="data row3 col4">0.943</td>
+<td id="T_35d38_row3_col0" class="data row3 col0">Logistic Regression</td>
+<td id="T_35d38_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_35d38_row3_col2" class="data row3 col2">0.305</td>
+<td id="T_35d38_row3_col3" class="data row3 col3">1.557</td>
+<td id="T_35d38_row3_col4" class="data row3 col4">0.943</td>
 </tr>
 </tbody>
 </table>
@@ -1640,7 +1646,725 @@ ul.task-list li input[type="checkbox"] {
     dt($);
 
     $(document).ready(function () {
-        document.querySelectorAll("#T_c2b20:not(.dataTable)").forEach(table => {
+        document.querySelectorAll("#T_35d38:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cvar-effects" class="level2">
+<h2 class="anchored" data-anchor-id="cvar-effects">CVaR Effects</h2>
+<p>The results are based on a location-scale model as described the corresponding <a href="https://docs.doubleml.org/stable/examples/py_double_ml_cvar.html">Example</a> with <span class="math inline">\(5,000\)</span> observations. Remark that the process is not linear.</p>
+<p>The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).</p>
+<div class="cell" data-execution_count="25">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_4364b_row0_col4, #T_4364b_row0_col6 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+#T_4364b_row1_col4, #T_4364b_row1_col6, #T_4364b_row2_col4, #T_4364b_row2_col6 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  font-weight: bold;
+}
+#T_4364b_row3_col4, #T_4364b_row3_col6 {
+  color: black;
+  background-color: red;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_4364b" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_4364b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_4364b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_4364b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_4364b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_4364b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_4364b_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_4364b_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_4364b_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_4364b_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_4364b_row0_col2" class="data row0 col2">0.144</td>
+<td id="T_4364b_row0_col3" class="data row0 col3">0.693</td>
+<td id="T_4364b_row0_col4" class="data row0 col4">0.949</td>
+<td id="T_4364b_row0_col5" class="data row0 col5">0.811</td>
+<td id="T_4364b_row0_col6" class="data row0 col6">0.950</td>
+</tr>
+<tr class="even">
+<td id="T_4364b_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_4364b_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_4364b_row1_col2" class="data row1 col2">0.121</td>
+<td id="T_4364b_row1_col3" class="data row1 col3">0.494</td>
+<td id="T_4364b_row1_col4" class="data row1 col4">0.876</td>
+<td id="T_4364b_row1_col5" class="data row1 col5">0.580</td>
+<td id="T_4364b_row1_col6" class="data row1 col6">0.870</td>
+</tr>
+<tr class="odd">
+<td id="T_4364b_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_4364b_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_4364b_row2_col2" class="data row2 col2">0.180</td>
+<td id="T_4364b_row2_col3" class="data row2 col3">0.723</td>
+<td id="T_4364b_row2_col4" class="data row2 col4">0.864</td>
+<td id="T_4364b_row2_col5" class="data row2 col5">0.830</td>
+<td id="T_4364b_row2_col6" class="data row2 col6">0.850</td>
+</tr>
+<tr class="even">
+<td id="T_4364b_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_4364b_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_4364b_row3_col2" class="data row3 col2">0.153</td>
+<td id="T_4364b_row3_col3" class="data row3 col3">0.541</td>
+<td id="T_4364b_row3_col4" class="data row3 col4">0.815</td>
+<td id="T_4364b_row3_col5" class="data row3 col5">0.619</td>
+<td id="T_4364b_row3_col6" class="data row3 col6">0.790</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_4364b:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_c0a72_row0_col4, #T_c0a72_row1_col6, #T_c0a72_row2_col6 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+#T_c0a72_row0_col6, #T_c0a72_row1_col4, #T_c0a72_row2_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  font-weight: bold;
+}
+#T_c0a72_row3_col4, #T_c0a72_row3_col6 {
+  color: black;
+  background-color: red;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_c0a72" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_c0a72_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_c0a72_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_c0a72_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_c0a72_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_c0a72_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_c0a72_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Uniform CI Length</th>
+<th id="T_c0a72_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Uniform Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_c0a72_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_c0a72_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_c0a72_row0_col2" class="data row0 col2">0.144</td>
+<td id="T_c0a72_row0_col3" class="data row0 col3">0.582</td>
+<td id="T_c0a72_row0_col4" class="data row0 col4">0.902</td>
+<td id="T_c0a72_row0_col5" class="data row0 col5">0.814</td>
+<td id="T_c0a72_row0_col6" class="data row0 col6">0.970</td>
+</tr>
+<tr class="even">
+<td id="T_c0a72_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_c0a72_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_c0a72_row1_col2" class="data row1 col2">0.121</td>
+<td id="T_c0a72_row1_col3" class="data row1 col3">0.415</td>
+<td id="T_c0a72_row1_col4" class="data row1 col4">0.805</td>
+<td id="T_c0a72_row1_col5" class="data row1 col5">0.579</td>
+<td id="T_c0a72_row1_col6" class="data row1 col6">0.870</td>
+</tr>
+<tr class="odd">
+<td id="T_c0a72_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_c0a72_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_c0a72_row2_col2" class="data row2 col2">0.180</td>
+<td id="T_c0a72_row2_col3" class="data row2 col3">0.607</td>
+<td id="T_c0a72_row2_col4" class="data row2 col4">0.802</td>
+<td id="T_c0a72_row2_col5" class="data row2 col5">0.831</td>
+<td id="T_c0a72_row2_col6" class="data row2 col6">0.860</td>
+</tr>
+<tr class="even">
+<td id="T_c0a72_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_c0a72_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_c0a72_row3_col2" class="data row3 col2">0.153</td>
+<td id="T_c0a72_row3_col3" class="data row3 col3">0.454</td>
+<td id="T_c0a72_row3_col4" class="data row3 col4">0.711</td>
+<td id="T_c0a72_row3_col5" class="data row3 col5">0.617</td>
+<td id="T_c0a72_row3_col6" class="data row3 col6">0.780</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_c0a72:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+</section>
+<section id="cvar-potential-quantiles" class="level2">
+<h2 class="anchored" data-anchor-id="cvar-potential-quantiles">CVaR Potential Quantiles</h2>
+<section id="cvar-y0" class="level3">
+<h3 class="anchored" data-anchor-id="cvar-y0">CVaR Y(0)</h3>
+<div class="cell" data-execution_count="29">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_0fc18_row0_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+#T_0fc18_row1_col4, #T_0fc18_row2_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  font-weight: bold;
+}
+#T_0fc18_row3_col4 {
+  color: black;
+  background-color: red;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_0fc18" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_0fc18_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_0fc18_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_0fc18_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_0fc18_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_0fc18_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_0fc18_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_0fc18_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_0fc18_row0_col2" class="data row0 col2">0.139</td>
+<td id="T_0fc18_row0_col3" class="data row0 col3">0.679</td>
+<td id="T_0fc18_row0_col4" class="data row0 col4">0.946</td>
+</tr>
+<tr class="even">
+<td id="T_0fc18_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_0fc18_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_0fc18_row1_col2" class="data row1 col2">0.117</td>
+<td id="T_0fc18_row1_col3" class="data row1 col3">0.481</td>
+<td id="T_0fc18_row1_col4" class="data row1 col4">0.892</td>
+</tr>
+<tr class="odd">
+<td id="T_0fc18_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_0fc18_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_0fc18_row2_col2" class="data row2 col2">0.175</td>
+<td id="T_0fc18_row2_col3" class="data row2 col3">0.691</td>
+<td id="T_0fc18_row2_col4" class="data row2 col4">0.862</td>
+</tr>
+<tr class="even">
+<td id="T_0fc18_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_0fc18_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_0fc18_row3_col2" class="data row3 col2">0.154</td>
+<td id="T_0fc18_row3_col3" class="data row3 col3">0.512</td>
+<td id="T_0fc18_row3_col4" class="data row3 col4">0.777</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_0fc18:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="30">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_c15f6_row0_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+#T_c15f6_row1_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  font-weight: bold;
+}
+#T_c15f6_row2_col4, #T_c15f6_row3_col4 {
+  color: black;
+  background-color: red;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_c15f6" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_c15f6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_c15f6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_c15f6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_c15f6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_c15f6_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_c15f6_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_c15f6_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_c15f6_row0_col2" class="data row0 col2">0.139</td>
+<td id="T_c15f6_row0_col3" class="data row0 col3">0.570</td>
+<td id="T_c15f6_row0_col4" class="data row0 col4">0.889</td>
+</tr>
+<tr class="even">
+<td id="T_c15f6_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_c15f6_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_c15f6_row1_col2" class="data row1 col2">0.117</td>
+<td id="T_c15f6_row1_col3" class="data row1 col3">0.404</td>
+<td id="T_c15f6_row1_col4" class="data row1 col4">0.825</td>
+</tr>
+<tr class="odd">
+<td id="T_c15f6_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_c15f6_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_c15f6_row2_col2" class="data row2 col2">0.175</td>
+<td id="T_c15f6_row2_col3" class="data row2 col3">0.580</td>
+<td id="T_c15f6_row2_col4" class="data row2 col4">0.771</td>
+</tr>
+<tr class="even">
+<td id="T_c15f6_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_c15f6_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_c15f6_row3_col2" class="data row3 col2">0.154</td>
+<td id="T_c15f6_row3_col3" class="data row3 col3">0.429</td>
+<td id="T_c15f6_row3_col4" class="data row3 col4">0.688</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_c15f6:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+</section>
+<section id="cvar-y1" class="level3">
+<h3 class="anchored" data-anchor-id="cvar-y1">CVaR Y(1)</h3>
+<div class="cell" data-execution_count="32">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_a6c5e_row0_col4, #T_a6c5e_row1_col4, #T_a6c5e_row2_col4, #T_a6c5e_row3_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_a6c5e" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 95.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_a6c5e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_a6c5e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_a6c5e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_a6c5e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_a6c5e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_a6c5e_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_a6c5e_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_a6c5e_row0_col2" class="data row0 col2">0.043</td>
+<td id="T_a6c5e_row0_col3" class="data row0 col3">0.227</td>
+<td id="T_a6c5e_row0_col4" class="data row0 col4">0.978</td>
+</tr>
+<tr class="even">
+<td id="T_a6c5e_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_a6c5e_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_a6c5e_row1_col2" class="data row1 col2">0.044</td>
+<td id="T_a6c5e_row1_col3" class="data row1 col3">0.212</td>
+<td id="T_a6c5e_row1_col4" class="data row1 col4">0.964</td>
+</tr>
+<tr class="odd">
+<td id="T_a6c5e_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_a6c5e_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_a6c5e_row2_col2" class="data row2 col2">0.048</td>
+<td id="T_a6c5e_row2_col3" class="data row2 col3">0.257</td>
+<td id="T_a6c5e_row2_col4" class="data row2 col4">0.977</td>
+</tr>
+<tr class="even">
+<td id="T_a6c5e_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_a6c5e_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_a6c5e_row3_col2" class="data row3 col2">0.049</td>
+<td id="T_a6c5e_row3_col3" class="data row3 col3">0.231</td>
+<td id="T_a6c5e_row3_col4" class="data row3 col4">0.943</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_a6c5e:not(.dataTable)").forEach(table => {
+            // Define the table data
+            
+
+            // Define the dt_args
+            let dt_args = {"order": [], "dom": "t"};
+            
+
+            
+            new $.fn.dataTable(table, dt_args);
+        });
+    });
+</script>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="cell-output cell-output-display">
+
+<div class="itables">
+<style>.itables table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.itables thead input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.itables { font-size: medium; }
+</style>
+<style type="text/css">
+#T_ae307_row0_col4, #T_ae307_row1_col4, #T_ae307_row2_col4, #T_ae307_row3_col4 {
+  color: black;
+  background-color: red;
+  color: black;
+  background-color: yellow;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+}
+</style>
+
+<table id="T_ae307" class="display nowrap table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Coverage for 90.0%-Confidence Interval over 100 Repetitions</caption>
+<thead>
+<tr class="header">
+<th id="T_ae307_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_ae307_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_ae307_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_ae307_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_ae307_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_ae307_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_ae307_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_ae307_row0_col2" class="data row0 col2">0.043</td>
+<td id="T_ae307_row0_col3" class="data row0 col3">0.191</td>
+<td id="T_ae307_row0_col4" class="data row0 col4">0.932</td>
+</tr>
+<tr class="even">
+<td id="T_ae307_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_ae307_row1_col1" class="data row1 col1">Logistic Regression</td>
+<td id="T_ae307_row1_col2" class="data row1 col2">0.044</td>
+<td id="T_ae307_row1_col3" class="data row1 col3">0.178</td>
+<td id="T_ae307_row1_col4" class="data row1 col4">0.912</td>
+</tr>
+<tr class="odd">
+<td id="T_ae307_row2_col0" class="data row2 col0">Linear</td>
+<td id="T_ae307_row2_col1" class="data row2 col1">LGBM</td>
+<td id="T_ae307_row2_col2" class="data row2 col2">0.048</td>
+<td id="T_ae307_row2_col3" class="data row2 col3">0.216</td>
+<td id="T_ae307_row2_col4" class="data row2 col4">0.930</td>
+</tr>
+<tr class="even">
+<td id="T_ae307_row3_col0" class="data row3 col0">Linear</td>
+<td id="T_ae307_row3_col1" class="data row3 col1">Logistic Regression</td>
+<td id="T_ae307_row3_col2" class="data row3 col2">0.049</td>
+<td id="T_ae307_row3_col3" class="data row3 col3">0.194</td>
+<td id="T_ae307_row3_col4" class="data row3 col4">0.892</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<script type="module">
+    const dt = (await import(window._datatables_src_for_itables_1_7_0)).default;
+    dt($);
+
+    $(document).ready(function () {
+        document.querySelectorAll("#T_ae307:not(.dataTable)").forEach(table => {
             // Define the table data
             
 
