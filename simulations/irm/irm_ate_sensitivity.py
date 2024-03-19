@@ -5,40 +5,46 @@ from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from lightgbm import LGBMRegressor, LGBMClassifier
 
 import doubleml as dml
-from doubleml.datasets import make_confounded_irm_data
+from doubleml.datasets import make_confounded_irm_SZ2020
 
 # Number of repetitions
-n_rep = 100
+n_rep = 20
 
 # DGP pars
 n_obs = 10000
-cf_y = 0.1
-cf_d = 0.1
-theta = 5.0
+gamma_a = 0.11
+beta_a = 0.6
+theta = 0.0
 
 # test inputs
-dgp_dict = make_confounded_irm_data(n_obs=int(1e+6), theta=5.0, cf_y=cf_y, cf_d=cf_d)
+dgp_dict = make_confounded_irm_SZ2020(
+    n_obs=int(1e+6),
+    theta=theta,
+    gamma_a=gamma_a,
+    beta_a=beta_a,
+    dgp_type=1,
+    var_epsilon_y=1.0)
+
 oracle_dict = dgp_dict['oracle_values']
+rho = oracle_dict['rho']
+cf_y = oracle_dict['cf_y']
+cf_d = oracle_dict['cf_d']
 
-cf_y_test = np.mean(np.square(oracle_dict['g_long'] - oracle_dict['g_short'])) / \
-    np.mean(np.square(dgp_dict['y'] - oracle_dict['g_short']))
-print(f'Input cf_y:{cf_y} \nCalculated cf_y: {round(cf_y_test, 5)}')
-
-rr_long = (dgp_dict['d'] - oracle_dict['m_long']) / np.mean(np.square(dgp_dict['d'] - oracle_dict['m_long']))
-rr_short = (dgp_dict['d'] - oracle_dict['m_short']) / np.mean(np.square(dgp_dict['d'] - oracle_dict['m_short']))
-C2_D = (np.mean(np.square(rr_long)) - np.mean(np.square(rr_short))) / np.mean(np.square(rr_short))
-cf_d_test = C2_D / (1 + C2_D)
-print(f'Input cf_d:{cf_d}\nCalculated cf_d: {round(cf_d_test, 5)}')
-
-# compute the value for rho
-rho = np.corrcoef((oracle_dict['g_long'] - oracle_dict['g_short']), (rr_long - rr_short))[0, 1]
-print(f'Correlation rho: {round(rho, 5)}')
+print(f"Confounding factor for Y: {cf_y}")
+print(f"Confounding factor for D: {cf_d}")
+print(f"Rho: {rho}")
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
 datasets = []
 for i in range(n_rep):
-    data = make_confounded_irm_data(n_obs=n_obs, theta=5.0, cf_y=cf_y, cf_d=cf_d)
+    data = dgp_dict = make_confounded_irm_SZ2020(
+        n_obs=n_obs,
+        theta=theta,
+        gamma_a=gamma_a,
+        beta_a=beta_a,
+        dgp_type=1,
+        var_epsilon_y=1.0)
     datasets.append(data)
 
 # set up hyperparameters
