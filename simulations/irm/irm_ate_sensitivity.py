@@ -15,6 +15,7 @@ n_obs = 10000
 gamma_a = 0.11
 beta_a = 0.6
 theta = 0.0
+dgp_type = 4
 
 # test inputs
 dgp_dict = make_confounded_irm_SZ2020(
@@ -22,7 +23,7 @@ dgp_dict = make_confounded_irm_SZ2020(
     theta=theta,
     gamma_a=gamma_a,
     beta_a=beta_a,
-    dgp_type=1,
+    dgp_type=dgp_type,
     var_epsilon_y=1.0)
 
 oracle_dict = dgp_dict['oracle_values']
@@ -43,7 +44,7 @@ for i in range(n_rep):
         theta=theta,
         gamma_a=gamma_a,
         beta_a=beta_a,
-        dgp_type=1,
+        dgp_type=dgp_type,
         var_epsilon_y=1.0)
     datasets.append(data)
 
