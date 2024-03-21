@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from lightgbm import LGBMRegressor, LGBMClassifier
 
@@ -8,16 +9,17 @@ import doubleml as dml
 from doubleml.datasets import make_confounded_irm_SZ2020
 
 # Number of repetitions
-n_rep = 20
+n_rep = 10
 
 # DGP pars
 n_obs = 10000
 gamma_a = 0.11
 beta_a = 0.6
 theta = 0.0
-dgp_type = 4
+dgp_type = 1
 
 # test inputs
+np.random.seed(42)
 dgp_dict = make_confounded_irm_SZ2020(
     n_obs=int(1e+6),
     theta=theta,
@@ -50,10 +52,12 @@ for i in range(n_rep):
 
 # set up hyperparameters
 hyperparam_dict = {
-    "learner_g": [("LGBM", LGBMRegressor(n_estimators=1000, learning_rate=0.05, min_child_samples=5)),
+    "learner_g": [("Linear Reg.", LinearRegression()),
+                  ("LGBM", LGBMRegressor(n_estimators=1000, learning_rate=0.05, min_child_samples=5)),
                   ("Random Forest",
                    RandomForestRegressor(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("LGBM", LGBMClassifier(n_estimators=100, learning_rate=0.05, min_child_samples=20)),
+    "learner_m": [("Logistic Regr.", LogisticRegression()),
+                  ("LGBM", LGBMClassifier(n_estimators=100, learning_rate=0.05, min_child_samples=20)),
                   ("Random Forest",
                    RandomForestClassifier(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=20))],
     "level": [0.95, 0.90]
@@ -75,6 +79,7 @@ for i_rep in range(n_rep):
 
     # define the DoubleML data object
     dgp_dict = datasets[i_rep]
+
     x_cols = [f'X{i + 1}' for i in np.arange(dgp_dict['x'].shape[1])]
     df = pd.DataFrame(np.column_stack((dgp_dict['x'], dgp_dict['y'], dgp_dict['d'])), columns=x_cols + ['y', 'd'])
     obj_dml_data = dml.DoubleMLData(df, 'y', 'd')
