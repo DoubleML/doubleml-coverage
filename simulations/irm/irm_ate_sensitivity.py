@@ -9,14 +9,14 @@ import doubleml as dml
 from doubleml.datasets import make_confounded_irm_SZ2020
 
 # Number of repetitions
-n_rep = 10
+n_rep = 50
 
 # DGP pars
 n_obs = 10000
 gamma_a = 0.11
 beta_a = 0.6
 theta = 0.0
-dgp_type = 1
+dgp_type = 4
 
 # test inputs
 np.random.seed(42)
@@ -32,7 +32,7 @@ oracle_dict = dgp_dict['oracle_values']
 rho = oracle_dict['rho']
 cf_y = oracle_dict['cf_y']
 cf_d = oracle_dict['cf_d']
-
+d
 print(f"Confounding factor for Y: {cf_y}")
 print(f"Confounding factor for D: {cf_d}")
 print(f"Rho: {rho}")
@@ -53,7 +53,7 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Linear Reg.", LinearRegression()),
-                  ("LGBM", LGBMRegressor(n_estimators=1000, learning_rate=0.05, min_child_samples=5)),
+                  ("LGBM", LGBMRegressor(n_estimators=100, learning_rate=0.05, min_child_samples=5)),
                   ("Random Forest",
                    RandomForestRegressor(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=2))],
     "learner_m": [("Logistic Regr.", LogisticRegression()),
@@ -91,6 +91,7 @@ for i_rep in range(n_rep):
                 obj_dml_data=obj_dml_data,
                 ml_g=ml_g,
                 ml_m=ml_m,
+                trimming_threshold=0.05
             )
             dml_irm.fit(n_jobs_cv=5)
 
