@@ -2,17 +2,17 @@ import numpy as np
 import pandas as pd
 
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.linear_model import LassoCV, LogisticRegressionCV
+from lightgbm import LGBMRegressor, LGBMClassifier
 
 import doubleml as dml
 from doubleml.datasets import make_irm_data_discrete_treatments
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 100
 
 # DGP pars (APO for D=0 is 210)
 theta = 210
-n_obs = 500
+n_obs = 1500
 n_levels = 2
 treatment_level = 0
 
@@ -29,12 +29,12 @@ for i in range(n_rep):
 
 # set up hyperparameters
 hyperparam_dict = {
-    "learner_g": [("Lasso", LassoCV()),
+    "learner_g": [("Boosting", LGBMRegressor(n_estimators=500, learning_rate=0.01)),
                   ("Random Forest",
-                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
+                   RandomForestRegressor(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=10))],
+    "learner_m": [("Boosting", LGBMClassifier(n_estimators=500, learning_rate=0.01)),
                   ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+                   RandomForestClassifier(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=10))],
     "level": [0.95, 0.90]
 }
 
