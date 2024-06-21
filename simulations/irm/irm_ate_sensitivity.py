@@ -32,7 +32,7 @@ oracle_dict = dgp_dict['oracle_values']
 rho = oracle_dict['rho']
 cf_y = oracle_dict['cf_y']
 cf_d = oracle_dict['cf_d']
-d
+
 print(f"Confounding factor for Y: {cf_y}")
 print(f"Confounding factor for D: {cf_d}")
 print(f"Rho: {rho}")
