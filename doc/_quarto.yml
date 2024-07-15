@@ -18,6 +18,7 @@ website:
           - irm/irm.qmd
           - irm/irm_gate.qmd
           - irm/irm_cate.qmd
+          - irm/apo.qmd
           - irm/qte.qmd
       - text: "PLM"
         menu:      
