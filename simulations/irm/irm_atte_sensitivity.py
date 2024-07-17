@@ -16,8 +16,8 @@ theta = 5.0
 trimming_threshold = 0.01
 
 dgp_pars = {
-    "gamma_a": 0.115,
-    "beta_a": 0.58,
+    "gamma_a": 0.148,
+    "beta_a": 0.580,
     "theta": theta,
     "var_epsilon_y": 1.0,
     "trimming_threshold": trimming_threshold
@@ -28,9 +28,9 @@ np.random.seed(42)
 dgp_dict = make_confounded_irm_data(n_obs=int(1e+6), **dgp_pars)
 
 oracle_dict = dgp_dict['oracle_values']
-rho = oracle_dict['rho_ate']
+rho = oracle_dict['rho_atte']
 cf_y = oracle_dict['cf_y']
-cf_d = oracle_dict['cf_d_ate']
+cf_d = oracle_dict['cf_d_atte']
 
 print(f"Confounding factor for Y: {cf_y}")
 print(f"Confounding factor for D: {cf_d}")
@@ -78,6 +78,7 @@ for i_rep in range(n_rep):
             # Set machine learning methods for g & m
             dml_irm = dml.DoubleMLIRM(
                 obj_dml_data=obj_dml_data,
+                score='ATTE',
                 ml_g=ml_g,
                 ml_m=ml_m,
                 trimming_threshold=trimming_threshold
@@ -133,4 +134,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/irm_ate_sensitivity.csv", index=False)
+df_results.to_csv("results/irm_atte_sensitivity.csv", index=False)
