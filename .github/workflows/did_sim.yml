@@ -25,7 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install git+https://github.com/your-username/doubleml@${{ github.event.inputs.doubleml-py-branch }}
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch }}
 
 
     - name: Run scripts in did folder
