@@ -7,7 +7,7 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 500
+n_rep = 10
 
 # DGP pars
 theta = 0.0  # true ATTE
@@ -38,13 +38,7 @@ hyperparam_dict = {
 }
 
 # set up the results dataframe
-df_results_detailed = pd.DataFrame(
-    columns=["Coverage", "CI Length",
-             "Bias", "Score", "In-sample-norm.", "DGP",
-             "Learner g", "Learner m",
-             "level", "repetition"])
-
-df_results_detailed["In-sample-norm."] = df_results_detailed["In-sample-norm."].astype(bool)
+df_results_detailed = pd.DataFrame()
 
 # start simulation
 np.random.seed(42)
@@ -109,4 +103,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("simulations/did/results/did_cs_atte_coverage.csv", index=False)
+df_results.to_csv("results/did_cs_atte_coverage.csv", index=False)
