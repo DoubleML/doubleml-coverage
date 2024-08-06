@@ -64,11 +64,21 @@ def make_pretty(df, level, n_rep):
 
 The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with $1000$ observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).
 
+**Metadata:**
+
+```{python}
+#| echo: false
+# Load metadata from CSV file
+metadata_file = '../../results/did/did_pa_atte_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
 ```{python}
 #| echo: false
 
 # set up data
-df = pd.read_csv("../../simulations/did/results/did_pa_atte_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/did/did_pa_atte_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]

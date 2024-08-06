@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 from lightgbm import LGBMRegressor, LGBMClassifier
 
@@ -22,7 +23,7 @@ datasets = []
 for dgp_type in dgp_types:
     datasets_dgp = []
     for i in range(n_rep):
-        data = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=True)
+        data = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=False)
         datasets_dgp.append(data)
     datasets.append(datasets_dgp)
 
@@ -56,7 +57,7 @@ for i_dgp, dgp_type in enumerate(dgp_types):
                 for score in hyperparam_dict["score"]:
                     for in_sample_normalization in hyperparam_dict["in sample normalization"]:
                         if score == "experimental":
-                            dml_DiD = dml.DoubleMLDIDCS(
+                            dml_DiD = dml.DoubleMLDID(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=None,
@@ -64,13 +65,12 @@ for i_dgp, dgp_type in enumerate(dgp_types):
                                 in_sample_normalization=in_sample_normalization)
                         else:
                             assert score == "observational"
-                            dml_DiD = dml.DoubleMLDIDCS(
+                            dml_DiD = dml.DoubleMLDID(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=ml_m,
                                 score=score,
                                 in_sample_normalization=in_sample_normalization)
-
                         dml_DiD.fit(n_jobs_cv=5)
 
                         for level_idx, level in enumerate(hyperparam_dict["level"]):
@@ -103,4 +103,14 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/did_cs_atte_coverage.csv", index=False)
+script_name = "did_pa_atte_coverage.py"
+path = "results/did/did_pa_atte_coverage"
+
+metadata = pd.DataFrame({
+    'DoubleML Version': [dml.__version__],
+    'Script': [script_name],
+    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+})
+
+df_results.to_csv(f"../../{path}.csv", index=False)
+metadata.to_csv(f"../../{path}_metadata.csv", index=False)
