@@ -7,7 +7,7 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 10
 
 # DGP pars
 theta = 0.0  # true ATTE
@@ -109,4 +109,4 @@ df_results = df_results_detailed.groupby(
 print(df_results)
 
 # save results
-df_results.to_csv("results/did_cs_atte_coverage.csv", index=False)
+df_results.to_csv("simulations/did/results/did_cs_atte_coverage.csv", index=False)
