@@ -8,7 +8,7 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 10
+n_rep = 1000
 
 # DGP pars
 theta = 0.0  # true ATTE
