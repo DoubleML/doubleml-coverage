@@ -32,8 +32,8 @@ hyperparam_dict = {
     "DGP": dgp_types,
     "score": ["experimental", "observational"],
     "in sample normalization": [True, False],
-    "learner_g": [("LGBM", LGBMRegressor()),],
-    "learner_m": [("LGBM", LGBMClassifier()),],
+    "learner_g": [("LGBM", LGBMRegressor(verbose=-1)),],
+    "learner_m": [("LGBM", LGBMClassifier(verbose=-1)),],
     "level": [0.95, 0.90]
 }
 
