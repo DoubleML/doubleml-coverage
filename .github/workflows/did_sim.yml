@@ -11,6 +11,12 @@ on:
 jobs:
   run-did-scripts:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        script: [
+          'simulations/did/did_pa_atte_coverage.py',
+          'simulations/did/did_cs_atte_coverage.py',
+        ]
 
     steps:
     - name: Checkout repository
@@ -29,12 +35,10 @@ jobs:
 
 
     - name: Run scripts in did folder
-      run: |
-        for script in simulations/did/*.py; do
-          python "$script"
-        done
+      run: python ${{ matrix.script }}
 
     - name: Commit and push results
+      if: ${{ success()}}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
