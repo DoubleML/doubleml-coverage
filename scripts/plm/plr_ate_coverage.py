@@ -101,7 +101,7 @@ print(df_results)
 
 # save results
 script_name = "plr_ate_coverage.py"
-path = "results/plm/plr_ate_coverage.csv"
+path = "results/plm/plr_ate_coverage"
 
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],

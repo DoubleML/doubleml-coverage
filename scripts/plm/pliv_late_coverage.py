@@ -108,7 +108,7 @@ print(df_results)
 
 # save results
 script_name = "pliv_late_coverage.py"
-path = "results/plm/pliv_late_coverage.csv"
+path = "results/plm/pliv_late_coverage"
 
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
