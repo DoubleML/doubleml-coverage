@@ -68,7 +68,7 @@ The simulations are based on the  the [make_plr_CCDDHNR2018](https://docs.double
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/plm/results/plr_ate_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/plm/plr_ate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
