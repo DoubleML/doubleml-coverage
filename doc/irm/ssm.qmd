@@ -62,15 +62,16 @@ def make_pretty(df, level, n_rep):
 
 ## ATE Coverage
 
-The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. Two different simulations based on the ``score`` parameter are conducted. The first simulation considers data under [missingness at random](https://docs.doubleml.org/stable/guide/models.html#missingness-at-random), while the second simulation considers with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
+The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. Two different simulations based on the selection mechanism are conducted. The first simulation considers data under [missingness at random](https://docs.doubleml.org/stable/guide/models.html#missingness-at-random), while the second simulation considers with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
 
 
-### Missing-at-Random
+### Missingness at Random
 
 **Metadata:**
 
 ```{python}
 #| echo: false
+#| collapse: true
 metadata_file = '../../results/irm/ssm_mar_ate_coverage_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
@@ -105,14 +106,13 @@ df_ate_9 = df[(df['level'] == level)][display_columns]
 make_pretty(df_ate_9, level, n_rep)
 ```
 
-### Nonignorable
-
-### Missing-at-Random
+### Nonignorable Nonresponse
 
 **Metadata:**
 
 ```{python}
 #| echo: false
+#| collapse: true
 metadata_file = '../../results/irm/ssm_nonignorable_ate_coverage_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
