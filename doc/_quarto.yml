@@ -20,6 +20,7 @@ website:
           - irm/irm_cate.qmd
           - irm/apo.qmd
           - irm/qte.qmd
+          - irm/ssm.qmd
       - text: "PLM"
         menu:      
           - plm/plr.qmd
