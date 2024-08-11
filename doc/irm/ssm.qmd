@@ -69,8 +69,6 @@ The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
-## Metadata
-
 ```{python}
 #| echo: false
 metadata_file = '../../results/irm/ssm_mar_ate_coverage_metadata.csv'
@@ -80,14 +78,6 @@ print(metadata_df.T.to_string(header=False))
 
 :::
 
-**Metadata:**
-
-```{python}
-#| echo: false
-metadata_file = '../../results/irm/ssm_mar_ate_coverage_metadata.csv'
-metadata_df = pd.read_csv(metadata_file)
-print(metadata_df.T.to_string(header=False))
-```
 
 ```{python}
 #| echo: false
@@ -120,7 +110,7 @@ make_pretty(df_ate_9, level, n_rep)
 
 ### Nonignorable Nonresponse
 
-**Metadata:**
+::: {.callout-note title="Metadata"  collapse="true"}
 
 ```{python}
 #| echo: false
@@ -129,6 +119,8 @@ metadata_file = '../../results/irm/ssm_nonignorable_ate_coverage_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
+
+:::
 
 ```{python}
 #| echo: false
