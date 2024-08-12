@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
+import time
+import sys
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LassoCV
@@ -46,6 +48,7 @@ df_results_detailed = pd.DataFrame()
 
 # start simulation
 np.random.seed(42)
+start_time = time.time()
 
 for i_rep in range(n_rep):
     print(f"Repetition: {i_rep}/{n_rep}", end="\r")
@@ -106,6 +109,9 @@ df_results = df_results_detailed.groupby(
     ).reset_index()
 print(df_results)
 
+end_time = time.time()
+total_runtime = end_time - start_time
+
 # save results
 script_name = "pliv_late_coverage.py"
 path = "results/plm/pliv_late_coverage"
@@ -113,8 +119,11 @@ path = "results/plm/pliv_late_coverage"
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
     'Script': [script_name],
-    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+    'Total Runtime (seconds)': [total_runtime],
+    'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
 })
+print(metadata)
 
 df_results.to_csv(f"../../{path}.csv", index=False)
 metadata.to_csv(f"../../{path}_metadata.csv", index=False)

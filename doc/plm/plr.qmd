@@ -73,6 +73,8 @@ metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
 
+:::
+
 ```{python}
 #| echo: false
 

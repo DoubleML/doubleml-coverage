@@ -1,2 +1,2 @@
-DoubleML Version,Script,Date
-0.9.dev0,pliv_late_coverage.py,2024-08-09 16:40:18
+DoubleML Version,Script,Date,Total Runtime (seconds),Python Version
+0.8.2,pliv_late_coverage.py,2024-08-12 19:43:22,6774.665200471878,3.12.4
