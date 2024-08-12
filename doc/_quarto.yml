@@ -20,7 +20,6 @@ website:
           - irm/irm_cate.qmd
           - irm/apo.qmd
           - irm/qte.qmd
-          - irm/ssm.qmd
       - text: "PLM"
         menu:      
           - plm/plr.qmd
@@ -31,7 +30,9 @@ website:
         menu:      
           - did/did_pa.qmd
           - did/did_cs.qmd
-      
+      - text: "SSM"
+        menu:      
+          - ssm/ssm.qmd
     right: 
       - icon: book
         href: https://docs.doubleml.org/stable/index.html

@@ -1,5 +1,5 @@
 ---
-title: "SSM Models"
+title: "Sample Selection Models"
 
 jupyter: python3
 ---
