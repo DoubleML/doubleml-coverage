@@ -1,5 +1,5 @@
 ---
-title: "Sample Selection Models"
+title: "SSM with Missingness at Random"
 
 jupyter: python3
 ---
@@ -62,10 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## ATE Coverage
 
-The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. Two different simulations based on the selection mechanism are conducted. The first simulation considers data under [missingness at random](https://docs.doubleml.org/stable/guide/models.html#missingness-at-random), while the second simulation considers with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
-
-
-### Missingness at Random
+The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. The simulation considers data under [missingness at random](https://docs.doubleml.org/stable/guide/models.html#missingness-at-random).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -102,48 +99,6 @@ make_pretty(df_ate_95, level, n_rep)
 ```{python}
 #| echo: false
 score = "partialling out"
-level = 0.9
-
-df_ate_9 = df[(df['level'] == level)][display_columns]
-make_pretty(df_ate_9, level, n_rep)
-```
-
-### Nonignorable Nonresponse
-
-::: {.callout-note title="Metadata"  collapse="true"}
-
-```{python}
-#| echo: false
-#| collapse: true
-metadata_file = '../../results/irm/ssm_nonignorable_ate_coverage_metadata.csv'
-metadata_df = pd.read_csv(metadata_file)
-print(metadata_df.T.to_string(header=False))
-```
-
-:::
-
-```{python}
-#| echo: false
-
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/ssm_nonignorable_ate_coverage.csv", index_col=None)
-
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
-
-display_columns = ["Learner g", "Learner m", "Learner pi", "Bias", "CI Length", "Coverage"]
-```
-
-```{python}
-#| echo: false
-level = 0.95
-
-df_ate_95 = df[(df['level'] == level)][display_columns]
-make_pretty(df_ate_95, level, n_rep)
-```
-
-```{python}
-#| echo: false
 level = 0.9
 
 df_ate_9 = df[(df['level'] == level)][display_columns]
