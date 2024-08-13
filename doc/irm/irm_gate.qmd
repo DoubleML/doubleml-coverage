@@ -57,7 +57,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, buttons=["columnsToggle"])
 ```
 
 ## GATE Coverage
@@ -66,11 +66,22 @@ The simulations are based on the  the [make_heterogeneous_data](https://docs.dou
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals). 
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_gate_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_gate_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/irm_gate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
