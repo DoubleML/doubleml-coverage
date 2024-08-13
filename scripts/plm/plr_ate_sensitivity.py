@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from datetime import datetime
+import time
+import sys
 
 from sklearn.ensemble import RandomForestRegressor
 from lightgbm import LGBMRegressor
@@ -10,7 +12,7 @@ from doubleml.datasets import make_confounded_plr_data
 
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 500
 
 # DGP pars
 n_obs = 1000
@@ -61,6 +63,7 @@ df_results_detailed = pd.DataFrame()
 
 # start simulation
 np.random.seed(42)
+start_time = time.time()
 
 for i_rep in range(n_rep):
     print(f"Repetition: {i_rep + 1}/{n_rep}", end="\r")
@@ -143,6 +146,9 @@ df_results = df_results_detailed.groupby(
     ).reset_index()
 print(df_results)
 
+end_time = time.time()
+total_runtime = end_time - start_time
+
 # save results
 script_name = "plr_ate_sensitivity.py"
 path = "results/plm/plr_ate_sensitivity"
@@ -150,8 +156,11 @@ path = "results/plm/plr_ate_sensitivity"
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
     'Script': [script_name],
-    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+    'Total Runtime (seconds)': [total_runtime],
+    'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
 })
+print(metadata)
 
 df_results.to_csv(f"../../{path}.csv", index=False)
 metadata.to_csv(f"../../{path}_metadata.csv", index=False)
