@@ -49,12 +49,12 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "score": ["partialling out", "IV-type"],
-    "learner_g": [("LGBM", LGBMRegressor(n_estimators=1000, learning_rate=0.05, min_child_samples=5, verbose=-1)),
+    "learner_g": [("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.05, min_child_samples=5, verbose=-1)),
                   ("Random Forest",
-                   RandomForestRegressor(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("LGBM", LGBMRegressor(n_estimators=1000, learning_rate=0.05, min_child_samples=2, verbose=-1)),
+                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
+    "learner_m": [("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.05, min_child_samples=2, verbose=-1)),
                   ("Random Forest",
-                   RandomForestRegressor(n_estimators=200, max_features=20, max_depth=5, min_samples_leaf=2))],
+                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
     "level": [0.95, 0.90]
 }
 
