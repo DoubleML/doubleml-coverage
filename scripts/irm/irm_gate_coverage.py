@@ -29,9 +29,9 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Lasso", LassoCV()),
-                  ("LGBM", LGBMRegressor(n_estimators=200, learning_rate=0.05))],
+                  ("LGBM", LGBMRegressor(n_estimators=200, learning_rate=0.05, verbose=-1))],
     "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("LGBM", LGBMClassifier(n_estimators=200, learning_rate=0.05))],
+                  ("LGBM", LGBMClassifier(n_estimators=200, learning_rate=0.05, verbose=-1))],
     "level": [0.95, 0.90]
 }
 
