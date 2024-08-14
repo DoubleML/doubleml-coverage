@@ -11,10 +11,10 @@ import doubleml as dml
 from doubleml.datasets import make_irm_data_discrete_treatments
 
 # Number of repetitions
-n_rep = 100
+n_rep = 1000
 
 # DGP pars
-n_obs = 300
+n_obs = 500
 n_levels = 2
 
 # generate the APOs true values
