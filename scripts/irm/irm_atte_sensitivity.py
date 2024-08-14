@@ -19,8 +19,8 @@ theta = 5.0
 trimming_threshold = 0.01
 
 dgp_pars = {
-    "gamma_a": 0.115,
-    "beta_a": 0.58,
+    "gamma_a": 0.148,
+    "beta_a": 0.580,
     "theta": theta,
     "var_epsilon_y": 1.0,
     "trimming_threshold": trimming_threshold
@@ -31,9 +31,9 @@ np.random.seed(42)
 dgp_dict = make_confounded_irm_data(n_obs=int(1e+6), **dgp_pars)
 
 oracle_dict = dgp_dict['oracle_values']
-rho = oracle_dict['rho_ate']
+rho = oracle_dict['rho_atte']
 cf_y = oracle_dict['cf_y']
-cf_d = oracle_dict['cf_d_ate']
+cf_d = oracle_dict['cf_d_atte']
 
 print(f"Confounding factor for Y: {cf_y}")
 print(f"Confounding factor for D: {cf_d}")
@@ -49,9 +49,9 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Linear Reg.", LinearRegression()),
-                  ("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1))],
+                  ("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.01, min_child_samples=10))],
     "learner_m": [("Logistic Regr.", LogisticRegression()),
-                  ("LGBM", LGBMClassifier(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1)),],
+                  ("LGBM", LGBMClassifier(n_estimators=500, learning_rate=0.01, min_child_samples=10)),],
     "level": [0.95, 0.90]
 }
 
@@ -77,6 +77,7 @@ for i_rep in range(n_rep):
             # Set machine learning methods for g & m
             dml_irm = dml.DoubleMLIRM(
                 obj_dml_data=obj_dml_data,
+                score='ATTE',
                 ml_g=ml_g,
                 ml_m=ml_m,
                 trimming_threshold=trimming_threshold
@@ -130,13 +131,12 @@ df_results = df_results_detailed.groupby(
          "repetition": "count"}
     ).reset_index()
 print(df_results)
-
 end_time = time.time()
 total_runtime = end_time - start_time
 
 # save results
-script_name = "irm_ate_sensitivity.py"
-path = "results/irm/irm_ate_sensitivity"
+script_name = "irm_atte_sensitivity.py"
+path = "results/irm/irm_atte_sensitivity"
 
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
