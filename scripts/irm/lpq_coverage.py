@@ -92,9 +92,9 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Logistic Regression", LogisticRegressionCV()),
-                  ("LGBM", LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=10))],
+                  ("LGBM", LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=10, verbose=-1))],
     "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("LGBM", LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=10))],
+                  ("LGBM", LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=10, verbose=-1))],
     "level": [0.95, 0.90]
 }
 
