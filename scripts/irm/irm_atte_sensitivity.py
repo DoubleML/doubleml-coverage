@@ -49,9 +49,9 @@ for i in range(n_rep):
 # set up hyperparameters
 hyperparam_dict = {
     "learner_g": [("Linear Reg.", LinearRegression()),
-                  ("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.01, min_child_samples=10))],
+                  ("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1))],
     "learner_m": [("Logistic Regr.", LogisticRegression()),
-                  ("LGBM", LGBMClassifier(n_estimators=500, learning_rate=0.01, min_child_samples=10)),],
+                  ("LGBM", LGBMClassifier(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1)),],
     "level": [0.95, 0.90]
 }
 
