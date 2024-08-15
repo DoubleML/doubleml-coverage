@@ -14,16 +14,17 @@ from doubleml.datasets import make_confounded_irm_data
 n_rep = 500
 
 # DGP pars
-n_obs = 50000
+n_obs = 5000
 theta = 5.0
-trimming_threshold = 0.01
+trimming_threshold = 0.05
 
 dgp_pars = {
-    "gamma_a": 0.115,
-    "beta_a": 0.58,
+    "gamma_a": 0.198,
+    "beta_a": 0.582,
     "theta": theta,
     "var_epsilon_y": 1.0,
-    "trimming_threshold": trimming_threshold
+    "trimming_threshold": trimming_threshold,
+    "linear": False,
 }
 
 # test inputs
