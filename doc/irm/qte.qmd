@@ -65,11 +65,22 @@ The results are based on a location-scale model as described the corresponding [
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/pq_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_qte_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/pq_coverage_qte.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -145,7 +156,7 @@ def make_pretty(df, level, n_rep):
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_pq0_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/pq_coverage_pq0.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -175,7 +186,7 @@ make_pretty(df_ate_9, level, n_rep)
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_pq1_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/pq_coverage_pq1.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -255,11 +266,22 @@ The results are based on a location-scale model as described the corresponding [
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/lpq_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_lqte_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/lpq_coverage_lqte.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -335,7 +357,7 @@ def make_pretty(df, level, n_rep):
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_lpq0_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/lpq_coverage_lpq0.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -365,7 +387,7 @@ make_pretty(df_ate_9, level, n_rep)
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/pq_lpq1_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/lpq_coverage_lpq1.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -445,11 +467,22 @@ The results are based on a location-scale model as described the corresponding [
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/cvar_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/cvar_qte_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/cvar_coverage_qte.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -525,7 +558,7 @@ def make_pretty(df, level, n_rep):
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/cvar_pq0_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/cvar_coverage_pq0.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -555,7 +588,7 @@ make_pretty(df_ate_9, level, n_rep)
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/cvar_pq1_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/cvar_coverage_pq1.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]

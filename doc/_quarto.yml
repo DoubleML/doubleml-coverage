@@ -30,7 +30,10 @@ website:
         menu:      
           - did/did_pa.qmd
           - did/did_cs.qmd
-      
+      - text: "SSM"
+        menu:      
+          - ssm/ssm_mar.qmd
+          - ssm/ssm_nonignorable.qmd
     right: 
       - icon: book
         href: https://docs.doubleml.org/stable/index.html

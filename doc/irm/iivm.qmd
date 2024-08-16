@@ -60,15 +60,26 @@ def make_pretty(df, level, n_rep):
     return show(styled_df, caption=caption)
 ```
 
-## ATE Coverage
+## LATE Coverage
 
 The simulations are based on the  the [make_iivm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_iivm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/iivm_late_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
 
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/iivm_late_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/iivm_late_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]

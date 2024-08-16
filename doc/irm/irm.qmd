@@ -64,11 +64,22 @@ def make_pretty(df, level, n_rep):
 
 The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_ate_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_ate_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/irm_ate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -97,13 +108,24 @@ make_pretty(df_ate_9, level, n_rep)
 
 ## ATTE Coverage
 
-As for the ATE, zhe simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations.
+As for the ATE, the simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_atte_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
 
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_atte_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/irm/irm_atte_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -129,25 +151,12 @@ df_atte_9 = df[df['level'] == level][display_columns]
 make_pretty(df_atte_9, level, n_rep)
 ```
 
-## ATE Sensitivity
+## Sensitivity
 
 The simulations are based on the  the ADD-DGP with $10,000$ observations. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.
 
 The confounding is set such that both sensitivity parameters are approximately $cf_y=cf_d=0.1$, such that the robustness value $RV$ should be approximately $10\%$.
-Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the upper coverage is relevant since the bias is positive). Remark that for the coverage level the value of $\rho$ has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of $|\rho|=1$.
-
-```{python}
-#| echo: false
-
-# set up data and rename columns
-df = pd.read_csv("../../simulations/irm/results/irm_ate_sensitivity.csv", index_col=None)
-
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
-
-display_columns = [
-    "Learner g", "Learner m", "Bias", "Bias (Lower)", "Bias (Upper)", "Coverage", "Coverage (Lower)", "Coverage (Upper)", "RV", "RVa"]
-```
+Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of $\rho$ has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of $|\rho|=1$.
 
 ```{python}
 #| echo: false
@@ -171,24 +180,24 @@ def color_coverage(df, level):
         level=level,
         dist=1.0,
         props='color:black;background-color:red',
-        subset=["Coverage", "Coverage (Upper)"])
+        subset=["Coverage", "Coverage (Lower)"])
     styled_df = styled_df.apply(
         highlight_range,
         level=level,
         dist=0.1,
         props='color:black;background-color:yellow',
-        subset=["Coverage", "Coverage (Upper)"])
+        subset=["Coverage", "Coverage (Lower)"])
     styled_df = styled_df.apply(
         highlight_range,
         level=level,
         dist=0.05,
         props='color:white;background-color:darkgreen',
-        subset=["Coverage", "Coverage (Upper)"])
+        subset=["Coverage", "Coverage (Lower)"])
 
     # set all coverage values to bold
     styled_df = styled_df.set_properties(
         **{'font-weight': 'bold'},
-        subset=["Coverage", "Coverage (Upper)"])
+        subset=["Coverage", "Coverage (Lower)"])
     return styled_df
 
 
@@ -205,6 +214,77 @@ def make_pretty(df, level, n_rep):
     return show(styled_df, caption=caption)
 ```
 
+### ATE
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_ate_sensitivity_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df = pd.read_csv("../../results/irm/irm_ate_sensitivity.csv", index_col=None)
+
+assert df["repetition"].nunique() == 1
+n_rep = df["repetition"].unique()[0]
+
+display_columns = [
+    "Learner g", "Learner m", "Bias", "Bias (Lower)", "Bias (Upper)", "Coverage", "Coverage (Lower)", "Coverage (Upper)", "RV", "RVa"]
+```
+
+```{python}
+#| echo: false
+score = "partialling out"
+level = 0.95
+
+df_ate_95 = df[(df['level'] == level)][display_columns]
+df_ate_95.rename(columns={"Learner g": "Learner l"}, inplace=True)
+make_pretty(df_ate_95, level, n_rep)
+```
+
+```{python}
+#| echo: false
+score = "partialling out"
+level = 0.9
+
+df_ate_9 = df[(df['level'] == level)][display_columns]
+df_ate_9.rename(columns={"Learner g": "Learner l"}, inplace=True)
+make_pretty(df_ate_9, level, n_rep)
+```
+
+### ATTE
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_atte_sensitivity_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df = pd.read_csv("../../results/irm/irm_atte_sensitivity.csv", index_col=None)
+
+assert df["repetition"].nunique() == 1
+n_rep = df["repetition"].unique()[0]
+
+display_columns = [
+    "Learner g", "Learner m", "Bias", "Bias (Lower)", "Bias (Upper)", "Coverage", "Coverage (Lower)", "Coverage (Upper)", "RV", "RVa"]
+```
 
 ```{python}
 #| echo: false

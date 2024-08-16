@@ -66,11 +66,22 @@ The simulations are based on the  the [make_heterogeneous_data](https://docs.dou
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals). 
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/plr_cate_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../simulations/plm/results/plr_cate_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/plm/plr_cate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
