@@ -132,7 +132,7 @@ for i_rep in range(n_rep):
                 ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
 
                 dml_qte.bootstrap(n_rep_boot=2000)
-                confint_uniform = dml_qte.confint(level=0.95, joint=True)
+                confint_uniform = dml_qte.confint(level=level, joint=True)
                 coverage_uniform = all((confint_uniform.iloc[:, 0] < LQTE) &
                                        (LQTE < confint_uniform.iloc[:, 1]))
                 ci_length_uniform = np.mean(confint_uniform.iloc[:, 1] - confint_uniform.iloc[:, 0])

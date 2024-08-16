@@ -57,7 +57,8 @@ hyperparam_dict = {
 }
 
 # set up the results dataframe
-df_results_detailed = pd.DataFrame()
+df_results_detailed_apo = pd.DataFrame()
+df_results_detailed_apos = pd.DataFrame()
 
 # start simulation
 np.random.seed(42)
@@ -72,27 +73,26 @@ for i_rep in range(n_rep):
     for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
         for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
             for treatment_idx, treatment_level in enumerate(hyperparam_dict["treatment_levels"]):
-                # Set machine learning methods for g & m
-                dml_obj = dml.DoubleMLAPO(
+                dml_apo = dml.DoubleMLAPO(
                     obj_dml_data=obj_dml_data,
                     ml_g=ml_g,
                     ml_m=ml_m,
                     treatment_level=treatment_level,
                     trimming_threshold=hyperparam_dict["trimming_threshold"]
                 )
-                dml_obj.fit(n_jobs_cv=5)
+                dml_apo.fit(n_jobs_cv=5)
 
                 for level_idx, level in enumerate(hyperparam_dict["level"]):
-                    confint = dml_obj.confint(level=level)
+                    confint = dml_apo.confint(level=level)
                     coverage = (confint.iloc[0, 0] < apos[treatment_idx]) & (apos[treatment_idx] < confint.iloc[0, 1])
                     ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
 
-                    df_results_detailed = pd.concat(
-                        (df_results_detailed,
+                    df_results_detailed_apo = pd.concat(
+                        (df_results_detailed_apo,
                             pd.DataFrame({
                                 "Coverage": coverage.astype(int),
                                 "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
-                                "Bias": abs(dml_obj.coef[0] - apos[treatment_idx]),
+                                "Bias": abs(dml_apo.coef[0] - apos[treatment_idx]),
                                 "Treatment Level": treatment_level,
                                 "Learner g": learner_g_name,
                                 "Learner m": learner_m_name,
@@ -100,14 +100,39 @@ for i_rep in range(n_rep):
                                 "repetition": i_rep}, index=[0])),
                         ignore_index=True)
 
-df_results = df_results_detailed.groupby(
+            # calculate the APOs
+            dml_apos = dml.DoublMLAPOS(
+                obj_dml_data=obj_dml_data,
+                ml_g=ml_g,
+                ml_m=ml_m,
+                treatment_levels=hyperparam_dict["treatment_levels"],
+                trimming_threshold=hyperparam_dict["trimming_threshold"]
+            )
+            dml_apos.fit(n_jobs_cv=5)
+            effects = dml_apos.coef
+
+            for level_idx, level in enumerate(hyperparam_dict["level"]):
+                confint = dml_apos.confint(level=level)
+                coverage = np.mean((confint.iloc[:, 0] < apos) & (apos < confint.iloc[:, 1]))
+                ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
+
+                dml_apos.bootstrap(n_rep_boot=2000)
+                confint_uniform = dml_apos.confint(level=0.95, joint=True)
+                
+
+
+
+
+
+
+df_results_apo = df_results_detailed_apo.groupby(
     ["Learner g", "Learner m", "Treatment Level", "level"]).agg(
         {"Coverage": "mean",
          "CI Length": "mean",
          "Bias": "mean",
          "repetition": "count"}
     ).reset_index()
-print(df_results)
+print(df_results_apo)
 
 end_time = time.time()
 total_runtime = end_time - start_time
