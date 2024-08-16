@@ -11,7 +11,7 @@ import doubleml as dml
 from doubleml.datasets import make_irm_data_discrete_treatments
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 100
 
 # DGP pars
 n_obs = 500
@@ -26,11 +26,16 @@ d = data_apo_large['d']
 average_ites = np.full(n_levels + 1, np.nan)
 apos = np.full(n_levels + 1, np.nan)
 for i in range(n_levels + 1):
-    average_ites[i] = np.mean(ite[d == i])
+    average_ites[i] = np.mean(ite[d == i]) * (i > 0)
     apos[i] = np.mean(y0) + average_ites[i]
+
+ates = np.full(n_levels, np.nan)
+for i in range(n_levels):
+    ates[i] = apos[i + 1] - apos[0]
 
 print(f"Levels and their counts:\n{np.unique(d, return_counts=True)}")
 print(f"True APOs: {apos}")
+print(f"True ATEs: {ates}")
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
@@ -51,14 +56,15 @@ hyperparam_dict = {
     "learner_m":
         [("Logistic", LogisticRegression()),
          ("LGBM", LGBMClassifier(verbose=-1))],
-    "treatment_levels": [0, 1, 2],
+    "treatment_levels": [0.0, 1.0, 2.0],
     "level": [0.95, 0.90],
-    "trimming_threshold": 0.05
+    "trimming_threshold": 0.01
 }
 
 # set up the results dataframe
 df_results_detailed_apo = pd.DataFrame()
 df_results_detailed_apos = pd.DataFrame()
+df_results_detailed_apos_constrast = pd.DataFrame()
 
 # start simulation
 np.random.seed(42)
@@ -101,7 +107,7 @@ for i_rep in range(n_rep):
                         ignore_index=True)
 
             # calculate the APOs
-            dml_apos = dml.DoublMLAPOS(
+            dml_apos = dml.DoubleMLAPOS(
                 obj_dml_data=obj_dml_data,
                 ml_g=ml_g,
                 ml_m=ml_m,
@@ -111,19 +117,55 @@ for i_rep in range(n_rep):
             dml_apos.fit(n_jobs_cv=5)
             effects = dml_apos.coef
 
+            causal_contrast_model = dml_apos.causal_contrast(reference_levels=0)
+            est_ates = causal_contrast_model.thetas
+
             for level_idx, level in enumerate(hyperparam_dict["level"]):
                 confint = dml_apos.confint(level=level)
                 coverage = np.mean((confint.iloc[:, 0] < apos) & (apos < confint.iloc[:, 1]))
                 ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
 
                 dml_apos.bootstrap(n_rep_boot=2000)
-                confint_uniform = dml_apos.confint(level=0.95, joint=True)
-                
+                confint_uniform = dml_apos.confint(level=level, joint=True)
+                coverage_uniform = all((confint_uniform.iloc[:, 0] < apos) & (apos < confint_uniform.iloc[:, 1]))
+                ci_length_uniform = np.mean(confint_uniform.iloc[:, 1] - confint_uniform.iloc[:, 0])
+                df_results_detailed_apos = pd.concat(
+                    (df_results_detailed_apos,
+                        pd.DataFrame({
+                            "Coverage": coverage,
+                            "CI Length": ci_length,
+                            "Bias": np.mean(abs(effects - apos)),
+                            "Uniform Coverage": coverage_uniform,
+                            "Uniform CI Length": ci_length_uniform,
+                            "Learner g": learner_g_name,
+                            "Learner m": learner_m_name,
+                            "level": level,
+                            "repetition": i_rep}, index=[0])),
+                    ignore_index=True)
 
+                # calculate the ATEs
+                confint_contrast = causal_contrast_model.confint(level=level)
+                coverage_contrast = np.mean((confint_contrast.iloc[:, 0] < ates) & (ates < confint_contrast.iloc[:, 1]))
+                ci_length_contrast = np.mean(confint_contrast.iloc[:, 1] - confint_contrast.iloc[:, 0])
 
-
-
-
+                causal_contrast_model.bootstrap(n_rep_boot=2000)
+                confint_contrast_uniform = causal_contrast_model.confint(level=level, joint=True)
+                coverage_contrast_uniform = all(
+                    (confint_contrast_uniform.iloc[:, 0] < ates) & (ates < confint_contrast_uniform.iloc[:, 1]))
+                ci_length_contrast_uniform = np.mean(confint_contrast_uniform.iloc[:, 1] - confint_contrast_uniform.iloc[:, 0])
+                df_results_detailed_apos_constrast = pd.concat(
+                    (df_results_detailed_apos_constrast,
+                        pd.DataFrame({
+                            "Coverage": coverage_contrast,
+                            "CI Length": ci_length_contrast,
+                            "Bias": np.mean(abs(est_ates - ates)),
+                            "Uniform Coverage": coverage_contrast_uniform,
+                            "Uniform CI Length": ci_length_contrast_uniform,
+                            "Learner g": learner_g_name,
+                            "Learner m": learner_m_name,
+                            "level": level,
+                            "repetition": i_rep}, index=[0])),
+                    ignore_index=True)
 
 df_results_apo = df_results_detailed_apo.groupby(
     ["Learner g", "Learner m", "Treatment Level", "level"]).agg(
@@ -133,6 +175,28 @@ df_results_apo = df_results_detailed_apo.groupby(
          "repetition": "count"}
     ).reset_index()
 print(df_results_apo)
+
+df_results_apos = df_results_detailed_apos.groupby(
+    ["Learner g", "Learner m", "level"]).agg(
+        {"Coverage": "mean",
+         "CI Length": "mean",
+         "Bias": "mean",
+         "Uniform Coverage": "mean",
+         "Uniform CI Length": "mean",
+         "repetition": "count"}
+    ).reset_index()
+print(df_results_apos)
+
+df_results_apos_contrast = df_results_detailed_apos_constrast.groupby(
+    ["Learner g", "Learner m", "level"]).agg(
+        {"Coverage": "mean",
+         "CI Length": "mean",
+         "Bias": "mean",
+         "Uniform Coverage": "mean",
+         "Uniform CI Length": "mean",
+         "repetition": "count"}
+    ).reset_index()
+print(df_results_apos_contrast)
 
 end_time = time.time()
 total_runtime = end_time - start_time
@@ -150,5 +214,7 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results.to_csv(f"../../{path}.csv", index=False)
+df_results_apo.to_csv(f"../../{path}_apo.csv", index=False)
+df_results_apos.to_csv(f"../../{path}_apos.csv", index=False)
+df_results_apos_contrast.to_csv(f"../../{path}_apos_contrast.csv", index=False)
 metadata.to_csv(f"../../{path}_metadata.csv", index=False)
