@@ -52,7 +52,8 @@ hyperparam_dict = {
         [("Logistic", LogisticRegression()),
          ("LGBM", LGBMClassifier(verbose=-1))],
     "treatment_levels": [0, 1, 2],
-    "level": [0.95, 0.90]
+    "level": [0.95, 0.90],
+    "trimming_threshold": 0.05
 }
 
 # set up the results dataframe
@@ -77,7 +78,7 @@ for i_rep in range(n_rep):
                     ml_g=ml_g,
                     ml_m=ml_m,
                     treatment_level=treatment_level,
-                    score='APO',
+                    trimming_threshold=hyperparam_dict["trimming_threshold"]
                 )
                 dml_obj.fit(n_jobs_cv=5)
 
