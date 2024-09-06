@@ -1,0 +1,16 @@
+name: Run all Scripts
+
+on:
+    workflow_dispatch:
+      inputs:
+          doubleml-py-branch:
+            description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
+            required: true
+            default: 'main'
+
+jobs:
+  empty-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder step
+        run: echo "This is a placeholder."
