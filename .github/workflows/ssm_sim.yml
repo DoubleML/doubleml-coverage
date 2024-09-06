@@ -1,0 +1,55 @@
+name: Run SSM Scripts
+
+on:
+  workflow_dispatch:
+    inputs:
+        doubleml-py-branch:
+          description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
+          required: true
+          default: 'main'
+
+jobs:
+  run-did-scripts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        script: [
+          'scripts/irm/ssm_mar_ate_coverage.py',
+          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+        ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch }}
+
+
+    - name: Run scripts
+      run: python ${{ matrix.script }}
+
+    - name: Commit any existing changes before pull
+      run: |
+        git add results/irm
+        git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
+      
+    - name: Pull the latest changes from the remote repository
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git pull --rebase origin ${{ github.ref_name }}
+
+    - name: Push results
+      run: |
+        git push origin ${{ github.ref_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
