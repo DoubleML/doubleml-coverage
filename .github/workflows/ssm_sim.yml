@@ -33,6 +33,10 @@ jobs:
         pip install -r requirements.txt
         pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch }}
 
+    - name: Set up Git configuration
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
 
     - name: Run scripts
       run: python ${{ matrix.script }}
@@ -49,15 +53,10 @@ jobs:
         git diff --cached
         git diff --name-only
         git diff --stat
-  
-    - name: Pull the latest changes from the remote repository
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git pull --rebase origin ${{ github.ref_name }}
 
-    - name: Push results
+    - name: Pull the latest changes and push results
       run: |
+        git pull --rebase origin ${{ github.ref_name }}
         git push origin ${{ github.ref_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
