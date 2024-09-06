@@ -34,20 +34,22 @@ jobs:
         pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch }}
 
 
-    - name: Run scripts in did folder
+    - name: Run scripts
       run: python ${{ matrix.script }}
 
-
+    - name: Commit any existing changes before pull
+      run: |
+        git add results/did
+        git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
+      
     - name: Pull the latest changes from the remote repository
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git pull --rebase origin ${{ github.ref_name }}
-  
-    - name: Commit and push results
+
+    - name: Push results
       run: |
-        git add results/did
-        git commit -m 'Update results from DID scripts'
         git push origin ${{ github.ref_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
