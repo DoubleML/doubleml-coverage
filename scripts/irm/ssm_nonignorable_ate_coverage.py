@@ -12,7 +12,7 @@ from doubleml.datasets import make_ssm_data
 
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 10
 
 # DGP pars
 theta = 1.0
@@ -113,5 +113,5 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results.to_csv(f"../../{path}.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results.to_csv(f"{path}.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)
