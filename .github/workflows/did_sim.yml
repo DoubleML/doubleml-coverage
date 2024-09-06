@@ -37,17 +37,11 @@ jobs:
     - name: Run scripts in did folder
       run: python ${{ matrix.script }}
 
-    - name: Check for changes in results/did
-      id: check_changes
-      run: |
-        git diff --exit-code -- results/did || echo "Changes detected"
-
     - name: Commit and push results
-      if: steps.check_changes.outputs.status == 'Changes detected'
       run: |
+        git add results/did
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add results/did
         git commit -m 'Update results from DID scripts'
         git push
       env:
