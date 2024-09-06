@@ -7,6 +7,10 @@ on:
           description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
           required: true
           default: 'main'
+  workflow_run:
+    workflows: ["Trigger Other Workflows"]
+    types:
+      - completed
 
 jobs:
   run-did-scripts:
@@ -41,7 +45,15 @@ jobs:
       run: |
         git add results/did
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
-      
+
+    - name: Print uncommitted changes
+      run: |
+        git status
+        git diff
+        git diff --cached
+        git diff --name-only
+        git diff --stat
+
     - name: Pull the latest changes from the remote repository
       run: |
         git config --global user.name 'github-actions[bot]'
