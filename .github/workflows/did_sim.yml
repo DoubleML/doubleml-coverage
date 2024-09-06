@@ -7,10 +7,6 @@ on:
           description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
           required: true
           default: 'main'
-  workflow_run:
-    workflows: ["Trigger Other Workflows"]
-    types:
-      - completed
 
 jobs:
   run-did-scripts:
