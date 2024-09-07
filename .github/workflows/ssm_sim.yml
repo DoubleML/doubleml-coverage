@@ -41,18 +41,10 @@ jobs:
     - name: Run scripts
       run: python ${{ matrix.script }}
 
-    - name: Commit any existing changes before pull
+    - name: Commit any existing changes
       run: |
         git add results/irm
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
-
-    - name: Print uncommitted changes
-      run: |
-        git status
-        git diff
-        git diff --cached
-        git diff --name-only
-        git diff --stat
 
     - name: Pull the latest changes and push results
       run: |
