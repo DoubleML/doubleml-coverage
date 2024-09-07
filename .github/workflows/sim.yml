@@ -1,16 +1,22 @@
 name: Run Scripts
 
 on:
-    workflow_dispatch:
-      inputs:
-          doubleml-py-branch:
-            description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
-            required: true
-            default: 'main'
+  workflow_dispatch:
+    inputs:
+      doubleml-py-branch:
+        description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
+        required: true
+        default: 'main'
 
 jobs:
-  empty-job:
+  trigger-did-scripts:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Placeholder step
-        run: echo "This is a placeholder."
+      - name: Trigger Run DID Scripts Workflow
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          https://api.github.com/repos/${{ github.repository }}/dispatches \
+          -d '{"event_type": "run-did-scripts", "client_payload": {"doubleml_py_branch": "${{ github.event.inputs.doubleml-py-branch }}"}}'
