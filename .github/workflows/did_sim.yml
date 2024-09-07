@@ -33,8 +33,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        # Check if triggered by workflow_dispatch or repository_dispatch and access the correct input
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch || github.event.client_payload.doubleml_py_branch }}
+        # Determine if triggered by workflow_dispatch or repository_dispatch and access the correct input
+        BRANCH_NAME=${{ github.event.inputs.doubleml-py-branch || github.event.client_payload.doubleml_py_branch }}
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${BRANCH_NAME}
 
     - name: Set up Git configuration
       run: |
