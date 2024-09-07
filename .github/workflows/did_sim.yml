@@ -8,7 +8,7 @@ on:
           required: true
           default: 'main'
   repository_dispatch:
-    types: [sim]
+    types: [run-did-scripts]
 
 jobs:
   run-did-scripts:
