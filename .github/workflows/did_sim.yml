@@ -8,14 +8,17 @@ on:
           required: true
           default: 'main'
 
+  repository_dispatch:
+    types: [run-did-scripts]
+
 jobs:
   run-did-scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         script: [
-          'simulations/did/did_pa_atte_coverage.py',
-          'simulations/did/did_cs_atte_coverage.py',
+          'scripts/did/did_pa_atte_coverage.py',
+          'scripts/did/did_cs_atte_coverage.py',
         ]
 
     steps:
@@ -31,19 +34,38 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ github.event.inputs.doubleml-py-branch }}
+        
+    - name: Determine branch name
+      id: get-branch
+      run: |
+        if [ -n "${{ github.event.inputs.doubleml-py-branch }}" ]; then
+          echo "BRANCH_NAME=${{ github.event.inputs.doubleml-py-branch }}" >> $GITHUB_ENV
+        elif [ -n "${{ github.event.client_payload.doubleml_py_branch }}" ]; then
+          echo "BRANCH_NAME=${{ github.event.client_payload.doubleml_py_branch }}" >> $GITHUB_ENV
+        else
+          echo "BRANCH_NAME=main" >> $GITHUB_ENV
+        fi
 
+    - name: Install DoubleML from correct branch
+      run: |
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.BRANCH_NAME }}
 
-    - name: Run scripts in did folder
+    - name: Set up Git configuration
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+
+    - name: Run scripts
       run: python ${{ matrix.script }}
 
-    - name: Commit and push results
-      if: ${{ success()}}
+    - name: Commit any existing changes
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add simulations/did/results/
-        git commit -m 'Update results from DID scripts'
-        git push
+        git add results/did
+        git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
+
+    - name: Pull the latest changes and push results
+      run: |
+        git pull --rebase origin ${{ github.ref_name }}
+        git push origin ${{ github.ref_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
