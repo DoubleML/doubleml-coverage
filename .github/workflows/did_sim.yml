@@ -22,8 +22,31 @@ jobs:
         ]
 
     steps:
+    - name: Determine branch names
+      id: get-branches
+      run: |
+        # Determine the DoubleML branch name
+        if [ -n "${{ github.event.inputs.doubleml-py-branch }}" ]; then
+          echo "DML_BRANCH=${{ github.event.inputs.doubleml-py-branch }}" >> $GITHUB_ENV
+        elif [ -n "${{ github.event.client_payload.doubleml_py_branch }}" ]; then
+          echo "DML_BRANCH=${{ github.event.client_payload.doubleml_py_branch }}" >> $GITHUB_ENV
+        else
+          echo "DML_BRANCH=main" >> $GITHUB_ENV
+        fi
+
+        # Determine the target branch
+        if [ -n "${{ github.event.client_payload.target_branch }}" ]; then
+          echo "TARGET_BRANCH=${{ github.event.client_payload.target_branch }}" >> $GITHUB_ENV
+        elif [ -n "${{ github.ref_name }}" ]; then
+          echo "TARGET_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+        else
+          echo "TARGET_BRANCH=main" >> $GITHUB_ENV
+        fi
+
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        ref: ${{ env.TARGET_BRANCH }}
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -34,21 +57,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        
-    - name: Determine branch name
-      id: get-branch
-      run: |
-        if [ -n "${{ github.event.inputs.doubleml-py-branch }}" ]; then
-          echo "BRANCH_NAME=${{ github.event.inputs.doubleml-py-branch }}" >> $GITHUB_ENV
-        elif [ -n "${{ github.event.client_payload.doubleml_py_branch }}" ]; then
-          echo "BRANCH_NAME=${{ github.event.client_payload.doubleml_py_branch }}" >> $GITHUB_ENV
-        else
-          echo "BRANCH_NAME=main" >> $GITHUB_ENV
-        fi
 
     - name: Install DoubleML from correct branch
       run: |
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.BRANCH_NAME }}
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
 
     - name: Set up Git configuration
       run: |
@@ -65,7 +77,7 @@ jobs:
 
     - name: Pull the latest changes and push results
       run: |
-        git pull --rebase origin ${{ github.ref_name }}
-        git push origin ${{ github.ref_name }}
+        git pull --rebase origin ${{ env.TARGET_BRANCH }}
+        git push origin ${{ env.TARGET_BRANCH }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
