@@ -17,6 +17,7 @@ cores_used = n_cores-1
 
 # Number of repetitions
 n_rep = 100
+max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 n_obs = 5000
@@ -109,6 +110,12 @@ start_time = time.time()
 
 for i_rep in range(n_rep):
     print(f"Repetition: {i_rep}/{n_rep}", end="\r")
+
+    # Check the elapsed time
+    elapsed_time = time.time() - start_time
+    if elapsed_time > max_runtime:
+        print("Maximum runtime exceeded. Stopping the simulation.")
+        break
 
     # define the DoubleML data object
     obj_dml_data = datasets[i_rep]
@@ -246,7 +253,7 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results_qte.to_csv(f"../../{path}_lqte.csv", index=False)
-df_results_pq0.to_csv(f"../../{path}_lpq0.csv", index=False)
-df_results_pq1.to_csv(f"../../{path}_lpq1.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results_qte.to_csv(f"{path}_lqte.csv", index=False)
+df_results_pq0.to_csv(f"{path}_lpq0.csv", index=False)
+df_results_pq1.to_csv(f"{path}_lpq1.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)

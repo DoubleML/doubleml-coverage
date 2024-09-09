@@ -13,6 +13,7 @@ from doubleml.datasets import make_ssm_data
 
 # Number of repetitions
 n_rep = 1000
+max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 theta = 1.0
@@ -51,6 +52,12 @@ start_time = time.time()
 
 for i_rep in range(n_rep):
     print(f"Repetition: {i_rep}/{n_rep}", end="\r")
+
+    # Check the elapsed time
+    elapsed_time = time.time() - start_time
+    if elapsed_time > max_runtime:
+        print("Maximum runtime exceeded. Stopping the simulation.")
+        break
 
     # define the DoubleML data object
     obj_dml_data = dml.DoubleMLData(datasets[i_rep], 'y', 'd', z_cols='z', s_col='s')
@@ -113,5 +120,5 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results.to_csv(f"../../{path}.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results.to_csv(f"{path}.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)
