@@ -23,3 +23,14 @@ jobs:
 
           echo "HTTP Status: $RESPONSE"
           cat response.txt
+
+      - name: Trigger Run IRM Scripts Workflow
+        run: |
+          RESPONSE=$(curl -s -o response.txt -w "%{http_code}" -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            https://api.github.com/repos/${{ github.repository }}/dispatches \
+            -d '{"event_type": "run-irm-scripts", "client_payload": { "doubleml_py_branch": "${{ github.event.inputs.doubleml-py-branch }}", "target_branch": "${{ github.ref_name }}"}}')
+
+          echo "HTTP Status: $RESPONSE"
+          cat response.txt
