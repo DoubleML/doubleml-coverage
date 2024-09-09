@@ -1,0 +1,82 @@
+name: Run IIVM Scripts
+
+on:
+  workflow_dispatch:
+    inputs:
+        doubleml-py-branch:
+          description: 'Branch in https://github.com/DoubleML/doubleml-for-py'
+          required: true
+          default: 'main'
+
+  repository_dispatch:
+    types: [run-irm-scripts]
+
+jobs:
+  run-did-scripts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        script: [
+          'scripts/irm/iivm_late_coverage.py',
+        ]
+
+    steps:
+    - name: Determine branch names
+      id: get-branches
+      run: |
+        # Determine the DoubleML branch name
+        if [ -n "${{ github.event.inputs.doubleml-py-branch }}" ]; then
+          echo "DML_BRANCH=${{ github.event.inputs.doubleml-py-branch }}" >> $GITHUB_ENV
+        elif [ -n "${{ github.event.client_payload.doubleml_py_branch }}" ]; then
+          echo "DML_BRANCH=${{ github.event.client_payload.doubleml_py_branch }}" >> $GITHUB_ENV
+        else
+          echo "DML_BRANCH=main" >> $GITHUB_ENV
+        fi
+
+        # Determine the target branch
+        if [ -n "${{ github.event.client_payload.target_branch }}" ]; then
+          echo "TARGET_BRANCH=${{ github.event.client_payload.target_branch }}" >> $GITHUB_ENV
+        elif [ -n "${{ github.ref_name }}" ]; then
+          echo "TARGET_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+        else
+          echo "TARGET_BRANCH=main" >> $GITHUB_ENV
+        fi
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ env.TARGET_BRANCH }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install DoubleML from correct branch
+      run: |
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
+
+    - name: Set up Git configuration
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+
+    - name: Run scripts
+      run: python ${{ matrix.script }}
+
+    - name: Commit any existing changes
+      run: |
+        git add results/irm
+        git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
+
+    - name: Pull the latest changes and push results
+      run: |
+        git pull --rebase origin ${{ env.TARGET_BRANCH }}
+        git push origin ${{ env.TARGET_BRANCH }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
