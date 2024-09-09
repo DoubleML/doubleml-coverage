@@ -1,4 +1,4 @@
-name: Run SSM Scripts
+name: Run Quantile Scripts
 
 on:
   workflow_dispatch:
@@ -17,8 +17,9 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/ssm_mar_ate_coverage.py',
-          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+          'scripts/irm/cvar_coverage.py',
+          'scripts/irm/pq_coverage.py',
+          'scripts/irm/lpq_coverage.py',
         ]
 
     steps:

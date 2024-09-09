@@ -1,4 +1,4 @@
-name: Run SSM Scripts
+name: Run PLIV Scripts
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
           default: 'main'
 
   repository_dispatch:
-    types: [run-irm-scripts]
+    types: [run-plm-scripts]
 
 jobs:
   run-did-scripts:
@@ -17,8 +17,7 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/ssm_mar_ate_coverage.py',
-          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+          'scripts/plm/pliv_late_coverage.py',
         ]
 
     steps:
@@ -72,7 +71,7 @@ jobs:
 
     - name: Commit any existing changes
       run: |
-        git add results/irm
+        git add results/plm
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
 
     - name: Pull the latest changes and push results

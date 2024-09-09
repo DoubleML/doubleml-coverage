@@ -1,4 +1,4 @@
-name: Run SSM Scripts
+name: Run IRM Scripts
 
 on:
   workflow_dispatch:
@@ -17,8 +17,12 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/ssm_mar_ate_coverage.py',
-          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+          'scripts/irm/irm_ate_coverage.py',
+          'scripts/irm/irm_atte_coverage.py',
+          'scripts/irm/irm_cate_coverage.py',
+          'scripts/irm/irm_gate_coverage.py',
+          'scripts/irm/irm_ate_sensitivity.py',
+          'scripts/irm/irm_atte_sensitivity.py',
         ]
 
     steps:

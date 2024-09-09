@@ -1,4 +1,4 @@
-name: Run SSM Scripts
+name: Run IIVM Scripts
 
 on:
   workflow_dispatch:
@@ -17,8 +17,7 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/ssm_mar_ate_coverage.py',
-          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+          'scripts/irm/iivm_late_coverage.py',
         ]
 
     steps:
