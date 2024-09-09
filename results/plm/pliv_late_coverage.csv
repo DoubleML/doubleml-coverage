@@ -3,31 +3,31 @@ Lasso,Lasso,Lasso,IV-type,0.9,1.0,0.23284491001088584,0.03521798297121834,2
 Lasso,Lasso,Lasso,IV-type,0.95,1.0,0.2774518231452762,0.03521798297121834,2
 Lasso,Lasso,Lasso,partialling out,0.9,1.0,0.2794944613548053,0.03502191253270945,2
 Lasso,Lasso,Lasso,partialling out,0.95,1.0,0.3330381920664372,0.03502191253270945,2
-Lasso,Lasso,Random Forest,IV-type,0.9,1.0,0.22607902325259022,0.02991907337126265,2
-Lasso,Lasso,Random Forest,IV-type,0.95,1.0,0.26938977181593504,0.02991907337126265,2
-Lasso,Lasso,Random Forest,partialling out,0.9,1.0,0.2762781867032867,0.02848122444475329,2
-Lasso,Lasso,Random Forest,partialling out,0.95,1.0,0.3292057644400053,0.02848122444475329,2
-Lasso,Random Forest,Lasso,IV-type,0.9,1.0,0.2564538335796428,0.04242372371789585,2
-Lasso,Random Forest,Lasso,IV-type,0.95,1.0,0.30558359070825564,0.04242372371789585,2
-Lasso,Random Forest,Lasso,partialling out,0.9,1.0,0.28588335545886623,0.00895011594137865,2
-Lasso,Random Forest,Lasso,partialling out,0.95,1.0,0.340651028941295,0.00895011594137865,2
-Lasso,Random Forest,Random Forest,IV-type,0.9,1.0,0.2559993982265605,0.04138240559790088,2
-Lasso,Random Forest,Random Forest,IV-type,0.95,1.0,0.3050420975864673,0.04138240559790088,2
-Lasso,Random Forest,Random Forest,partialling out,0.9,1.0,0.27567864296941835,0.04358328769170566,2
-Lasso,Random Forest,Random Forest,partialling out,0.95,1.0,0.3284913640178131,0.04358328769170566,2
-Random Forest,Lasso,Lasso,IV-type,0.9,1.0,0.2420085904671286,0.03326110833052853,2
-Random Forest,Lasso,Lasso,IV-type,0.95,1.0,0.2883710218908552,0.03326110833052853,2
-Random Forest,Lasso,Lasso,partialling out,0.9,1.0,0.32342133568350556,0.03355274331990779,2
-Random Forest,Lasso,Lasso,partialling out,0.95,1.0,0.38538029122162837,0.03355274331990779,2
-Random Forest,Lasso,Random Forest,IV-type,0.9,1.0,0.24934351080233785,0.025342641467910654,2
-Random Forest,Lasso,Random Forest,IV-type,0.95,1.0,0.2971111185480423,0.025342641467910654,2
-Random Forest,Lasso,Random Forest,partialling out,0.9,1.0,0.2929430819135219,0.024763788207170456,2
-Random Forest,Lasso,Random Forest,partialling out,0.95,1.0,0.3490632118645103,0.024763788207170456,2
-Random Forest,Random Forest,Lasso,IV-type,0.9,1.0,0.26351611508346745,0.05650758602340125,2
-Random Forest,Random Forest,Lasso,IV-type,0.95,1.0,0.31399881816033837,0.05650758602340125,2
-Random Forest,Random Forest,Lasso,partialling out,0.9,1.0,0.3297886808266285,0.0663313384433975,2
-Random Forest,Random Forest,Lasso,partialling out,0.95,1.0,0.392967450925794,0.0663313384433975,2
-Random Forest,Random Forest,Random Forest,IV-type,0.9,1.0,0.26569961157849026,0.005593853848349123,2
-Random Forest,Random Forest,Random Forest,IV-type,0.95,1.0,0.31660061470958245,0.005593853848349123,2
-Random Forest,Random Forest,Random Forest,partialling out,0.9,1.0,0.2750447765051365,0.011743600926905629,2
-Random Forest,Random Forest,Random Forest,partialling out,0.95,1.0,0.3277360655397943,0.011743600926905629,2
+Lasso,Lasso,Random Forest,IV-type,0.9,1.0,0.22609968724639226,0.030199448721053818,2
+Lasso,Lasso,Random Forest,IV-type,0.95,1.0,0.26941439448324417,0.030199448721053818,2
+Lasso,Lasso,Random Forest,partialling out,0.9,1.0,0.27710496523050765,0.02797607720731976,2
+Lasso,Lasso,Random Forest,partialling out,0.95,1.0,0.33019093181903064,0.02797607720731976,2
+Lasso,Random Forest,Lasso,IV-type,0.9,1.0,0.2659190455653757,0.040379046247169426,2
+Lasso,Random Forest,Lasso,IV-type,0.95,1.0,0.31686208643219194,0.040379046247169426,2
+Lasso,Random Forest,Lasso,partialling out,0.9,1.0,0.2902737693236845,0.009275820677362961,2
+Lasso,Random Forest,Lasso,partialling out,0.95,1.0,0.34588252973338524,0.009275820677362961,2
+Lasso,Random Forest,Random Forest,IV-type,0.9,1.0,0.25148898963454064,0.042734021815424766,2
+Lasso,Random Forest,Random Forest,IV-type,0.95,1.0,0.2996676142579396,0.042734021815424766,2
+Lasso,Random Forest,Random Forest,partialling out,0.9,1.0,0.27629545419330914,0.057826116944811046,2
+Lasso,Random Forest,Random Forest,partialling out,0.95,1.0,0.3292263399234361,0.057826116944811046,2
+Random Forest,Lasso,Lasso,IV-type,0.9,1.0,0.24180258727410595,0.028565414147846996,2
+Random Forest,Lasso,Lasso,IV-type,0.95,1.0,0.28812555394622547,0.028565414147846996,2
+Random Forest,Lasso,Lasso,partialling out,0.9,1.0,0.3220868400438527,0.03280100314184209,2
+Random Forest,Lasso,Lasso,partialling out,0.95,1.0,0.38379014158862235,0.03280100314184209,2
+Random Forest,Lasso,Random Forest,IV-type,0.9,1.0,0.2482578898608945,0.01403758315847245,2
+Random Forest,Lasso,Random Forest,IV-type,0.95,1.0,0.29581752140892476,0.01403758315847245,2
+Random Forest,Lasso,Random Forest,partialling out,0.9,1.0,0.2914655369713258,0.021024814798106473,2
+Random Forest,Lasso,Random Forest,partialling out,0.95,1.0,0.34730260847415817,0.021024814798106473,2
+Random Forest,Random Forest,Lasso,IV-type,0.9,1.0,0.27173584559248654,0.06420460447005946,2
+Random Forest,Random Forest,Lasso,IV-type,0.95,1.0,0.32379323116848,0.06420460447005946,2
+Random Forest,Random Forest,Lasso,partialling out,0.9,1.0,0.32432539653055104,0.0703074399840864,2
+Random Forest,Random Forest,Lasso,partialling out,0.95,1.0,0.3864575461645656,0.0703074399840864,2
+Random Forest,Random Forest,Random Forest,IV-type,0.9,1.0,0.26645854712580286,0.01228476084129193,2
+Random Forest,Random Forest,Random Forest,IV-type,0.95,1.0,0.3175049421919476,0.01228476084129193,2
+Random Forest,Random Forest,Random Forest,partialling out,0.9,1.0,0.270325205427146,0.013493146433649517,2
+Random Forest,Random Forest,Random Forest,partialling out,0.95,1.0,0.32211234973689784,0.013493146433649517,2
