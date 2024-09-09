@@ -10,7 +10,9 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 10
+n_rep = 1000
+max_runtime = 30  # 5.5 * 3600  # 5.5 hours in seconds
+
 
 # DGP pars
 theta = 0.0  # true ATTE
@@ -47,11 +49,16 @@ df_results_detailed = pd.DataFrame()
 np.random.seed(42)
 start_time = time.time()
 
-for i_dgp, dgp_type in enumerate(dgp_types):
-    print(f"\nDGP: {i_dgp + 1}/{n_dgps}", end="\n")
-    for i_rep in range(n_rep):
-        print(f"Repetition: {i_rep + 1}/{n_rep}", end="\r")
+for i_rep in range(n_rep):
+    print(f"Repetition: {i_rep + 1}/{n_rep}", end="\r")
 
+    # Check the elapsed time
+    elapsed_time = time.time() - start_time
+    if elapsed_time > max_runtime:
+        print("Maximum runtime exceeded. Stopping the simulation.")
+        break
+
+    for i_dgp, dgp_type in enumerate(dgp_types):
         # define the DoubleML data object
         obj_dml_data = datasets[i_dgp][i_rep]
 
