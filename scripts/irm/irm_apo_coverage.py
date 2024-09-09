@@ -221,7 +221,7 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results_apo.to_csv(f"../../{path}_apo.csv", index=False)
-df_results_apos.to_csv(f"../../{path}_apos.csv", index=False)
-df_results_apos_contrast.to_csv(f"../../{path}_apos_contrast.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results_apo.to_csv(f"{path}_apo.csv", index=False)
+df_results_apos.to_csv(f"/{path}_apos.csv", index=False)
+df_results_apos_contrast.to_csv(f"{path}_apos_contrast.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)

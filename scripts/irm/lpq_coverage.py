@@ -253,7 +253,7 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results_qte.to_csv(f"../../{path}_lqte.csv", index=False)
-df_results_pq0.to_csv(f"../../{path}_lpq0.csv", index=False)
-df_results_pq1.to_csv(f"../../{path}_lpq1.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results_qte.to_csv(f"{path}_lqte.csv", index=False)
+df_results_pq0.to_csv(f"{path}_lpq0.csv", index=False)
+df_results_pq1.to_csv(f"{path}_lpq1.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)

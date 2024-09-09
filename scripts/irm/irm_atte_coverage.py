@@ -137,5 +137,5 @@ metadata = pd.DataFrame({
 })
 print(metadata)
 
-df_results.to_csv(f"../../{path}.csv", index=False)
-metadata.to_csv(f"../../{path}_metadata.csv", index=False)
+df_results.to_csv(f"{path}.csv", index=False)
+metadata.to_csv(f"{path}_metadata.csv", index=False)
