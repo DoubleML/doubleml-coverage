@@ -17,7 +17,7 @@ cores_used = n_cores-1
 
 # Number of repetitions
 n_rep = 100
-max_runtime = 300  # 5.5 * 3600  # 5.5 hours in seconds
+max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 n_obs = 5000

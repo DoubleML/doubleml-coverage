@@ -12,7 +12,7 @@ from doubleml.datasets import make_iivm_data
 
 # Number of repetitions
 n_rep = 1000
-max_runtime = 30  # 5.5 * 3600  # 5.5 hours in seconds
+max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 theta = 0.5
