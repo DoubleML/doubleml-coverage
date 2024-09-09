@@ -60,8 +60,8 @@ jobs:
 
     - name: Install DoubleML from correct branch
       run: |
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.BRANCH_NAME }}
-  
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
+
     - name: Set up Git configuration
       run: |
         git config --global user.name 'github-actions'
@@ -77,7 +77,7 @@ jobs:
 
     - name: Pull the latest changes and push results
       run: |
-        git pull --rebase origin ${{ github.ref_name }}
-        git push origin ${{ github.ref_name }}
+        git pull --rebase origin ${{ env.TARGET_BRANCH }}
+        git push origin ${{ env.TARGET_BRANCH }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
