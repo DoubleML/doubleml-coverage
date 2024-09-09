@@ -12,7 +12,7 @@ on:
     types: [run-irm-scripts]
 
 jobs:
-  run-did-scripts:
+  run-ssm-scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:

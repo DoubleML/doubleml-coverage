@@ -12,7 +12,7 @@ on:
     types: [run-plm-scripts]
 
 jobs:
-  run-did-scripts:
+  run-plr-scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:
