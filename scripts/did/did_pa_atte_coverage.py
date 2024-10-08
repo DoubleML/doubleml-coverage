@@ -10,12 +10,12 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 1000
+n_rep = 100
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 theta = 0.0  # true ATTE
-n_obs = 100
+n_obs = 1000
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
