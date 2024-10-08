@@ -10,7 +10,7 @@ import doubleml as dml
 from doubleml.datasets import make_did_SZ2020
 
 # Number of repetitions
-n_rep = 100
+n_rep = 1000
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
