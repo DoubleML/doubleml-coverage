@@ -26,7 +26,20 @@ datasets = []
 for dgp_type in dgp_types:
     datasets_dgp = []
     for i in range(n_rep):
-        data = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=False)
+        df = make_did_SZ2020(n_obs=n_obs, dgp_type=dgp_type, cross_sectional_data=False, return_type='DataFrame', return_diff = False)
+        # Add id variable 
+        df['id'] = np.arange(n_obs)
+        # Reorganize the data in long format (one row per time period per individual)
+        df = pd.wide_to_long(df, stubnames='y', i='id', j='t').reset_index().sort_values(['id', 't'])
+        # add value of one to column t (periods 1 and 2)
+        df['t'] = df['t'] + 1
+        # Create a new column called G which is based on d:  G = 2*d
+        # G: 0 if (not/never) treated and 2 if treated in period 2
+        df['G'] = df['d']*2
+        # drop d
+        df.drop(columns = ['d'], inplace = True)
+
+        data = dml.DoubleMLPanelData(df, y_col='y', d_cols='G' , t_col = "t", id_col = "id", x_cols=['Z1', 'Z2', 'Z3', 'Z4'])
         datasets_dgp.append(data)
     datasets.append(datasets_dgp)
 
@@ -66,7 +79,7 @@ for i_rep in range(n_rep):
                 for score in hyperparam_dict["score"]:
                     for in_sample_normalization in hyperparam_dict["in sample normalization"]:
                         if score == "experimental":
-                            dml_DiD = dml.DoubleMLDID(
+                            dml_DiD = dml.DoubleMLDIDBINARY(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=None,
@@ -74,10 +87,12 @@ for i_rep in range(n_rep):
                                 in_sample_normalization=in_sample_normalization)
                         else:
                             assert score == "observational"
-                            dml_DiD = dml.DoubleMLDID(
+                            dml_DiD = dml.DoubleMLDIDBINARY(
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=ml_m,
+                                g_value = 2,
+                                t_value = 1,
                                 score=score,
                                 in_sample_normalization=in_sample_normalization)
                         dml_DiD.fit(n_jobs_cv=5)
