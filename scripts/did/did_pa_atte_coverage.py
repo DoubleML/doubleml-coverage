@@ -83,6 +83,8 @@ for i_rep in range(n_rep):
                                 obj_dml_data=obj_dml_data,
                                 ml_g=ml_g,
                                 ml_m=None,
+                                g_value = 2,
+                                t_value = 1,
                                 score=score,
                                 in_sample_normalization=in_sample_normalization)
                         else:
