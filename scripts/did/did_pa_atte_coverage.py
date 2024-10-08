@@ -15,7 +15,7 @@ max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 theta = 0.0  # true ATTE
-n_obs = 1000
+n_obs = 100
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
