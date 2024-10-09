@@ -3,3 +3,4 @@ pandas
 itables
 nbformat
 nbclient
+plotly
