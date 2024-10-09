@@ -34,6 +34,10 @@ website:
         menu:      
           - ssm/ssm_mar.qmd
           - ssm/ssm_nonignorable.qmd
+      - text: "RDD"
+        menu: 
+          - rdd/rdd.qmd
+          
     right: 
       - icon: book
         href: https://docs.doubleml.org/stable/index.html

@@ -1,0 +1,145 @@
+---
+title: "Flexible covariate adjustments in RDD"
+
+jupyter: python3
+---
+
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+from itables import init_notebook_mode, show, options
+
+init_notebook_mode(all_interactive=True)
+
+def highlight_range(s, level=0.95, dist=0.05, props=''):
+    color_grid = np.where((s >= level-dist) &
+                          (s <= level+dist), props, '')
+    return color_grid
+
+
+def color_coverage(df, level):
+    # color coverage column order is important
+    styled_df = df.apply(
+        highlight_range,
+        level=level,
+        dist=1.0,
+        props='color:black;background-color:red',
+        subset=["Coverage"])
+    styled_df = styled_df.apply(
+        highlight_range,
+        level=level,
+        dist=0.1,
+        props='color:black;background-color:yellow',
+        subset=["Coverage"])
+    styled_df = styled_df.apply(
+        highlight_range,
+        level=level,
+        dist=0.05,
+        props='color:white;background-color:darkgreen',
+        subset=["Coverage"])
+
+    # set all coverage values to bold
+    styled_df = styled_df.set_properties(
+        **{'font-weight': 'bold'},
+        subset=["Coverage"])
+    return styled_df
+
+
+def make_pretty(df, level, n_rep):
+    styled_df = df.style.hide(axis="index")
+    # Format only float columns
+    float_cols = df.select_dtypes(include=['float']).columns
+    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
+
+    # color coverage column order is important
+    styled_df = color_coverage(styled_df, level)
+    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
+
+    return show(styled_df, caption=caption)
+```
+
+## Sharp Design
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/rdd/rdd_sharp_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+# | echo: false
+
+# set up data and rename columns
+df = pd.read_csv("../../results/rdd/rdd_sharp_coverage.csv", index_col=None)
+
+assert df["repetition"].nunique() == 1
+n_rep = df["repetition"].unique()[0]
+
+display_columns = ["Method", "Learner g", "fs specification", "Bias", "CI Length", "Coverage"]
+```
+
+```{python}
+#| echo: false
+level = 0.95
+
+df_ate_95 = df[(df['level'] == level)][display_columns]
+make_pretty(df_ate_95, level, n_rep)
+```
+
+```{python}
+#| echo: false
+level = 0.9
+
+df_ate_9 = df[(df['level'] == level)][display_columns]
+make_pretty(df_ate_9, level, n_rep)
+```
+
+
+## Fuzzy Design
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/rdd/rdd_fuzzy_coverage_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+# | echo: false
+
+# set up data and rename columns
+df = pd.read_csv("../../results/rdd/rdd_fuzzy_coverage.csv", index_col=None)
+
+assert df["repetition"].nunique() == 1
+n_rep = df["repetition"].unique()[0]
+
+display_columns = ["Method", "Learner g", "Learner m", "fs specification", "Bias", "CI Length", "Coverage"]
+```
+
+```{python}
+#| echo: false
+level = 0.95
+
+df_ate_95 = df[(df['level'] == level)][display_columns]
+make_pretty(df_ate_95, level, n_rep)
+```
+
+```{python}
+#| echo: false
+level = 0.9
+
+df_ate_9 = df[(df['level'] == level)][display_columns]
+make_pretty(df_ate_9, level, n_rep)
+```
