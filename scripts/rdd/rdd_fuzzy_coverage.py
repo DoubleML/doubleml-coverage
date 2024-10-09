@@ -4,15 +4,15 @@ from datetime import datetime
 import time
 import sys
 
-from lightgbm import LGBMRegressor
-from sklearn.ensemble import StackingRegressor
-from sklearn.linear_model import LinearRegression, Ridge
+from lightgbm import LGBMRegressor, LGBMClassifier
+from sklearn.ensemble import StackingRegressor, StackingClassifier
+from sklearn.linear_model import LinearRegression, Ridge, LogisticRegression
 from rdrobust import rdrobust
 
 import doubleml as dml
 from doubleml.rdd import RDFlex
 from doubleml.rdd.datasets import make_simple_rdd_data
-from doubleml.utils import GlobalRegressor
+from doubleml.utils import GlobalRegressor, GlobalClassifier
 
 from statsmodels.nonparametric.kernel_regression import KernelReg
 
@@ -23,7 +23,7 @@ max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 n_obs = 500
-fuzzy = False
+fuzzy = True
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
@@ -46,6 +46,16 @@ hyperparam_dict = {
                 ('lgbm', LGBMRegressor(n_estimators=100, max_depth=5, learning_rate=0.1, verbose=-1)),
                 ('glr', GlobalRegressor(LinearRegression()))],
             final_estimator=Ridge()))],
+    "learner_m": [
+        ("Linear", LogisticRegression()),
+        ("LGBM", LGBMClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, verbose=-1)),
+        ("Global linear", GlobalClassifier(LogisticRegression())),
+        ("Stacked", StackingClassifier(
+            estimators=[
+                ('lr', LogisticRegression()),
+                ('lgbm', LGBMClassifier(n_estimators=100, max_depth=5, learning_rate=0.1, verbose=-1)),
+                ('glr', GlobalClassifier(LogisticRegression()))],
+            final_estimator=LogisticRegression()))],
     "level": [0.95, 0.90]}
 
 # set up the results dataframe
@@ -65,11 +75,12 @@ for i_rep in range(n_rep):
         break
 
     # get oracle value
-    score = data["score"]
-    ite = data["oracle_values"]['Y1'] - data["oracle_values"]['Y0']
-
-    kernel_reg = KernelReg(endog=ite, exog=score, var_type='c', reg_type='ll')
     cutoff = 0
+    score = data["score"]
+    complier_mask = (((data["D"] == 0) & (data["score"] < cutoff)) | ((data["D"] == 1) & (data["score"] > cutoff)))
+
+    ite = data["oracle_values"]['Y1'] - data["oracle_values"]['Y0']
+    kernel_reg = KernelReg(endog=ite[complier_mask], exog=score[complier_mask], var_type='c', reg_type='ll')
 
     effect_at_cutoff, _ = kernel_reg.fit(np.array([cutoff]))
     oracle_effect = effect_at_cutoff[0]
@@ -80,7 +91,7 @@ for i_rep in range(n_rep):
 
     # baseline
     for level_idx, level in enumerate(hyperparam_dict["level"]):
-        res = rdrobust(y=Y, x=score, covs=Z, c=cutoff, level=level*100)
+        res = rdrobust(y=Y, x=score, fuzzy=D, covs=Z, c=cutoff, level=level*100)
         coef = res.coef.loc["Conventional", "Coeff"]
         ci_lower = res.ci.loc["Robust", "CI Lower"]
         ci_upper = res.ci.loc["Robust", "CI Upper"]
@@ -95,6 +106,7 @@ for i_rep in range(n_rep):
                     "CI Length": ci_length,
                     "Bias": abs(coef - oracle_effect),
                     "Learner g": "linear",
+                    "Learner m": "linear",
                     "Method": "rdrobust",
                     "fs specification": "interacted cutoff and score",
                     "level": level,
@@ -105,37 +117,40 @@ for i_rep in range(n_rep):
     obj_dml_data = dml.DoubleMLData.from_arrays(y=Y, d=D, x=Z, s=score)
 
     for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
-        for fs_specification_idx, fs_specification in enumerate(hyperparam_dict["fs_specification"]):
-            rdflex_model = RDFlex(
-                obj_dml_data,
-                ml_g=ml_g,
-                n_folds=5,
-                n_rep=1,
-                cutoff=cutoff,
-                fuzzy=False,
-                fs_specification=fs_specification)
-            rdflex_model.fit(n_iterations=2)
+        for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
+            for fs_specification_idx, fs_specification in enumerate(hyperparam_dict["fs_specification"]):
+                rdflex_model = RDFlex(
+                    obj_dml_data,
+                    ml_g=ml_g,
+                    ml_m=ml_m,
+                    n_folds=5,
+                    n_rep=1,
+                    cutoff=cutoff,
+                    fuzzy=True,
+                    fs_specification=fs_specification)
+                rdflex_model.fit(n_iterations=2)
 
-            for level_idx, level in enumerate(hyperparam_dict["level"]):
-                confint = rdflex_model.confint(level=level)
-                coverage = (confint.iloc[0, 0] < oracle_effect) & (oracle_effect < confint.iloc[0, 1])
-                ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
+                for level_idx, level in enumerate(hyperparam_dict["level"]):
+                    confint = rdflex_model.confint(level=level)
+                    coverage = (confint.iloc[0, 0] < oracle_effect) & (oracle_effect < confint.iloc[0, 1])
+                    ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
 
-                df_results_detailed = pd.concat(
-                    (df_results_detailed,
-                        pd.DataFrame({
-                            "Coverage": coverage.astype(int),
-                            "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
-                            "Bias": abs(rdflex_model.coef[0] - oracle_effect),
-                            "Learner g": learner_g_name,
-                            "Method": "rdflex",
-                            "fs specification": fs_specification,
-                            "level": level,
-                            "repetition": i_rep}, index=[0])),
-                    ignore_index=True)
+                    df_results_detailed = pd.concat(
+                        (df_results_detailed,
+                            pd.DataFrame({
+                                "Coverage": coverage.astype(int),
+                                "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
+                                "Bias": abs(rdflex_model.coef[0] - oracle_effect),
+                                "Learner g": learner_g_name,
+                                "Learner m": learner_m_name,
+                                "Method": "rdflex",
+                                "fs specification": fs_specification,
+                                "level": level,
+                                "repetition": i_rep}, index=[0])),
+                        ignore_index=True)
 
 df_results = df_results_detailed.groupby(
-    ["Method", "fs specification", "Learner g", "level"]).agg(
+    ["Method", "fs specification", "Learner g", "Learner m", "level"]).agg(
         {"Coverage": "mean",
          "CI Length": "mean",
          "Bias": "mean",
@@ -147,8 +162,8 @@ end_time = time.time()
 total_runtime = end_time - start_time
 
 # save results
-script_name = "rdd_sharp_coverage.py"
-path = "results/rdd/rdd_sharp_coverage"
+script_name = "rdd_fuzzy_coverage.py"
+path = "results/rdd/rdd_fuzzy_coverage"
 
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
