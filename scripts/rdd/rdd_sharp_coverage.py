@@ -64,6 +64,7 @@ for i_rep in range(n_rep):
         print("Maximum runtime exceeded. Stopping the simulation.")
         break
 
+    data = datasets[i_rep]
     # get oracle value
     score = data["score"]
     ite = data["oracle_values"]['Y1'] - data["oracle_values"]['Y0']

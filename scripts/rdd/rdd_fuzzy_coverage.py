@@ -74,6 +74,7 @@ for i_rep in range(n_rep):
         print("Maximum runtime exceeded. Stopping the simulation.")
         break
 
+    data = datasets[i_rep]
     # get oracle value
     cutoff = 0
     score = data["score"]
