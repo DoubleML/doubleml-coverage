@@ -23,14 +23,14 @@ max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
 n_obs = 500
-fuzzy = False
+cutoff = 0
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
 
 datasets = []
 for i in range(n_rep):
-    data = make_simple_rdd_data(n_obs=n_obs, fuzzy=fuzzy)
+    data = make_simple_rdd_data(n_obs=n_obs, fuzzy=False, cutoff=cutoff)
     datasets.append(data)
 
 # set up hyperparameters
@@ -70,8 +70,6 @@ for i_rep in range(n_rep):
     ite = data["oracle_values"]['Y1'] - data["oracle_values"]['Y0']
 
     kernel_reg = KernelReg(endog=ite, exog=score, var_type='c', reg_type='ll')
-    cutoff = 0
-
     effect_at_cutoff, _ = kernel_reg.fit(np.array([cutoff]))
     oracle_effect = effect_at_cutoff[0]
 
@@ -97,7 +95,7 @@ for i_rep in range(n_rep):
                     "Bias": abs(coef - oracle_effect),
                     "Learner g": "linear",
                     "Method": "rdrobust",
-                    "fs specification": "interacted cutoff and score",
+                    "fs specification": "cutoff",
                     "level": level,
                     "repetition": i_rep}, index=[0])),
             ignore_index=True)

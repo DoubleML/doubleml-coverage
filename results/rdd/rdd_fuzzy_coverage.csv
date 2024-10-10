@@ -95,5 +95,5 @@ rdflex,interacted cutoff and score,Stacked,Linear,0.9,0.99,85.29228313835699,3.1
 rdflex,interacted cutoff and score,Stacked,Linear,0.95,1.0,101.63202389029637,3.155082488308933,100
 rdflex,interacted cutoff and score,Stacked,Stacked,0.9,0.98,23.815976412169956,2.214781308607141,100
 rdflex,interacted cutoff and score,Stacked,Stacked,0.95,0.99,28.378486243193066,2.214781308607141,100
-rdrobust,interacted cutoff and score,linear,linear,0.9,0.99,188.44638549344222,8.674372870881726,100
-rdrobust,interacted cutoff and score,linear,linear,0.95,1.0,224.54771812640732,8.674372870881726,100
+rdrobust,cutoff,linear,linear,0.9,0.99,188.44638549344222,8.674372870881726,100
+rdrobust,cutoff,linear,linear,0.95,1.0,224.54771812640732,8.674372870881726,100
