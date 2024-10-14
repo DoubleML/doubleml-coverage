@@ -60,7 +60,7 @@ jobs:
 
     - name: Install RDFlex from main branch
       run: |
-        pip uninstall doubleml
+        pip uninstall -y doubleml
         pip install git+https://github.com/DoubleML/doubleml-rdflex.git@main
 
     - name: Install DoubleML from correct branch
