@@ -18,11 +18,11 @@ from statsmodels.nonparametric.kernel_regression import KernelReg
 
 
 # Number of repetitions
-n_rep = 100
+n_rep = 5
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
-n_obs = 500
+n_obs = 2000
 cutoff = 0
 
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
