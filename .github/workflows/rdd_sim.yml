@@ -62,6 +62,7 @@ jobs:
       run: |
         pip uninstall -y doubleml
         pip install git+https://github.com/DoubleML/doubleml-rdflex.git@main
+        pip install rdrobust
 
     - name: Install DoubleML from correct branch
       run: |
