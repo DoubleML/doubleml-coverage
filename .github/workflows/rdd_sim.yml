@@ -78,7 +78,7 @@ jobs:
 
     - name: Commit any existing changes
       run: |
-        git add results/irm
+        git add results/rdd
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
 
     - name: Wait random time
