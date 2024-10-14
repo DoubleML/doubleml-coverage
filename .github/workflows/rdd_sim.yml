@@ -58,15 +58,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install DoubleML from correct branch
+      run: |
+        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
+
     - name: Install RDFlex from main branch
       run: |
         pip uninstall -y doubleml
         pip install git+https://github.com/DoubleML/doubleml-rdflex.git@main
         pip install rdrobust
-
-    - name: Install DoubleML from correct branch
-      run: |
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
 
     - name: Set up Git configuration
       run: |
