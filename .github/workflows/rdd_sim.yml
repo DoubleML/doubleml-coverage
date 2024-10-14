@@ -12,7 +12,7 @@ on:
     types: [run-rdd-scripts]
 
 jobs:
-  run-apo-scripts:
+  run-rdd-scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:
