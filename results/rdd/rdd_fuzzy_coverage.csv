@@ -1,99 +1,99 @@
 Method,fs specification,Learner g,Learner m,level,Coverage,CI Length,Bias,repetition
-rdflex,cutoff,Global linear,Global linear,0.9,0.8,14.423037908091597,3.2637402601909544,5
-rdflex,cutoff,Global linear,Global linear,0.95,1.0,17.186109684366134,3.2637402601909544,5
-rdflex,cutoff,Global linear,LGBM,0.9,1.0,9.60760402812852,2.610897383935538,5
-rdflex,cutoff,Global linear,LGBM,0.95,1.0,11.448166307511448,2.610897383935538,5
-rdflex,cutoff,Global linear,Linear,0.9,1.0,14.226538661834956,3.3206952967859835,5
-rdflex,cutoff,Global linear,Linear,0.95,1.0,16.95196639079777,3.3206952967859835,5
-rdflex,cutoff,Global linear,Stacked,0.9,1.0,11.479292659550719,2.892434062670725,5
-rdflex,cutoff,Global linear,Stacked,0.95,1.0,13.678420871049463,2.892434062670725,5
-rdflex,cutoff,LGBM,Global linear,0.9,1.0,2.291086593513875,0.3217115365585489,5
-rdflex,cutoff,LGBM,Global linear,0.95,1.0,2.729998058898547,0.3217115365585489,5
-rdflex,cutoff,LGBM,LGBM,0.9,1.0,1.8232352455660876,0.471335656388427,5
-rdflex,cutoff,LGBM,LGBM,0.95,1.0,2.172518793223295,0.471335656388427,5
-rdflex,cutoff,LGBM,Linear,0.9,1.0,2.5036910885538886,0.46592543647375206,5
-rdflex,cutoff,LGBM,Linear,0.95,1.0,2.983331940042759,0.46592543647375206,5
-rdflex,cutoff,LGBM,Stacked,0.9,1.0,1.983251590128728,0.3648095017291908,5
-rdflex,cutoff,LGBM,Stacked,0.95,1.0,2.3631900281232623,0.3648095017291908,5
-rdflex,cutoff,Linear,Global linear,0.9,0.8,13.898849040803778,3.2754800847865724,5
-rdflex,cutoff,Linear,Global linear,0.95,1.0,16.56150012388803,3.2754800847865724,5
-rdflex,cutoff,Linear,LGBM,0.9,1.0,8.788094435735177,2.454463244345884,5
-rdflex,cutoff,Linear,LGBM,0.95,1.0,10.471660398561387,2.454463244345884,5
-rdflex,cutoff,Linear,Linear,0.9,0.8,14.47344689140013,3.3491813910739134,5
-rdflex,cutoff,Linear,Linear,0.95,1.0,17.246175692771462,3.3491813910739134,5
-rdflex,cutoff,Linear,Stacked,0.9,1.0,10.558846700439386,2.764041856725428,5
-rdflex,cutoff,Linear,Stacked,0.95,1.0,12.581641862866709,2.764041856725428,5
-rdflex,cutoff,Stacked,Global linear,0.9,0.8,2.4355448606892423,0.3881680057707292,5
-rdflex,cutoff,Stacked,Global linear,0.95,1.0,2.9021307011553152,0.3881680057707292,5
-rdflex,cutoff,Stacked,LGBM,0.9,1.0,1.7612830354582933,0.43067758587432187,5
-rdflex,cutoff,Stacked,LGBM,0.95,1.0,2.09869818172063,0.43067758587432187,5
-rdflex,cutoff,Stacked,Linear,0.9,1.0,2.0422134023298866,0.21267147182739804,5
-rdflex,cutoff,Stacked,Linear,0.95,1.0,2.433447360741768,0.21267147182739804,5
-rdflex,cutoff,Stacked,Stacked,0.9,0.8,2.0563286274932917,0.5572667177929984,5
-rdflex,cutoff,Stacked,Stacked,0.95,0.8,2.4502666889182345,0.5572667177929984,5
-rdflex,cutoff and score,Global linear,Global linear,0.9,1.0,14.259416097319534,3.29291711658142,5
-rdflex,cutoff and score,Global linear,Global linear,0.95,1.0,16.991142271494972,3.29291711658142,5
-rdflex,cutoff and score,Global linear,LGBM,0.9,1.0,11.497486915431436,2.866354293380936,5
-rdflex,cutoff and score,Global linear,LGBM,0.95,1.0,13.70010066411275,2.866354293380936,5
-rdflex,cutoff and score,Global linear,Linear,0.9,1.0,14.322347851500998,3.297628178611928,5
-rdflex,cutoff and score,Global linear,Linear,0.95,1.0,17.066130081752714,3.297628178611928,5
-rdflex,cutoff and score,Global linear,Stacked,0.9,1.0,11.187221250336403,2.8665327874888407,5
-rdflex,cutoff and score,Global linear,Stacked,0.95,1.0,13.33039632126938,2.8665327874888407,5
-rdflex,cutoff and score,LGBM,Global linear,0.9,1.0,2.132646705302484,0.35115271453669183,5
-rdflex,cutoff and score,LGBM,Global linear,0.95,1.0,2.5412052876022835,0.35115271453669183,5
-rdflex,cutoff and score,LGBM,LGBM,0.9,1.0,1.651573825829961,0.49015621894821504,5
-rdflex,cutoff and score,LGBM,LGBM,0.95,1.0,1.9679715954027883,0.49015621894821504,5
-rdflex,cutoff and score,LGBM,Linear,0.9,1.0,2.0653982476186394,0.33633981978688077,5
-rdflex,cutoff and score,LGBM,Linear,0.95,1.0,2.4610738078666157,0.33633981978688077,5
-rdflex,cutoff and score,LGBM,Stacked,0.9,1.0,2.070887518085169,0.48315068117208615,5
-rdflex,cutoff and score,LGBM,Stacked,0.95,1.0,2.4676146770597835,0.48315068117208615,5
-rdflex,cutoff and score,Linear,Global linear,0.9,0.8,13.834500877512358,3.252602683579687,5
-rdflex,cutoff and score,Linear,Global linear,0.95,1.0,16.484824558077207,3.252602683579687,5
-rdflex,cutoff and score,Linear,LGBM,0.9,1.0,11.021494973340559,2.957462426090728,5
-rdflex,cutoff and score,Linear,LGBM,0.95,1.0,13.132921282225468,2.957462426090728,5
-rdflex,cutoff and score,Linear,Linear,0.9,0.8,13.565400587199502,3.273961937011743,5
-rdflex,cutoff and score,Linear,Linear,0.95,1.0,16.16417178472376,3.273961937011743,5
-rdflex,cutoff and score,Linear,Stacked,0.9,1.0,9.781507067833797,2.5759545181110926,5
-rdflex,cutoff and score,Linear,Stacked,0.95,1.0,11.655384560272386,2.5759545181110926,5
-rdflex,cutoff and score,Stacked,Global linear,0.9,0.8,1.9443850931574904,0.35287630976386913,5
-rdflex,cutoff and score,Stacked,Global linear,0.95,1.0,2.3168777405004146,0.35287630976386913,5
-rdflex,cutoff and score,Stacked,LGBM,0.9,1.0,1.5606416431884977,0.27407774182095623,5
-rdflex,cutoff and score,Stacked,LGBM,0.95,1.0,1.8596192167518069,0.27407774182095623,5
-rdflex,cutoff and score,Stacked,Linear,0.9,1.0,2.193836968365324,0.3692120996481659,5
-rdflex,cutoff and score,Stacked,Linear,0.95,1.0,2.614117983201815,0.3692120996481659,5
-rdflex,cutoff and score,Stacked,Stacked,0.9,1.0,1.8666724118484936,0.5368999174526484,5
-rdflex,cutoff and score,Stacked,Stacked,0.95,1.0,2.2242773692503803,0.5368999174526484,5
-rdflex,interacted cutoff and score,Global linear,Global linear,0.9,0.8,11.50038602288641,2.8517535553634956,5
-rdflex,interacted cutoff and score,Global linear,Global linear,0.95,1.0,13.703555163714393,2.8517535553634956,5
-rdflex,interacted cutoff and score,Global linear,LGBM,0.9,1.0,10.315801252711834,2.7007313341878936,5
-rdflex,interacted cutoff and score,Global linear,LGBM,0.95,1.0,12.292035349346543,2.7007313341878936,5
-rdflex,interacted cutoff and score,Global linear,Linear,0.9,0.8,11.729502101422899,2.9285377690970025,5
-rdflex,interacted cutoff and score,Global linear,Linear,0.95,1.0,13.976563810108567,2.9285377690970025,5
-rdflex,interacted cutoff and score,Global linear,Stacked,0.9,1.0,10.084512037249876,2.6635463803766095,5
-rdflex,interacted cutoff and score,Global linear,Stacked,0.95,1.0,12.016437250591622,2.6635463803766095,5
-rdflex,interacted cutoff and score,LGBM,Global linear,0.9,0.8,2.4613080577042163,0.6177915730998491,5
-rdflex,interacted cutoff and score,LGBM,Global linear,0.95,0.8,2.932829443857146,0.6177915730998491,5
-rdflex,interacted cutoff and score,LGBM,LGBM,0.9,1.0,1.9380473017675328,0.3240944835816227,5
-rdflex,interacted cutoff and score,LGBM,LGBM,0.95,1.0,2.3093257962651896,0.3240944835816227,5
-rdflex,interacted cutoff and score,LGBM,Linear,0.9,0.8,2.3048779458142628,0.3381467569608999,5
-rdflex,interacted cutoff and score,LGBM,Linear,0.95,1.0,2.7464314687557887,0.3381467569608999,5
-rdflex,interacted cutoff and score,LGBM,Stacked,0.9,1.0,1.9806236593394437,0.34797999285711156,5
-rdflex,interacted cutoff and score,LGBM,Stacked,0.95,1.0,2.36005865544884,0.34797999285711156,5
-rdflex,interacted cutoff and score,Linear,Global linear,0.9,0.8,14.980877656814286,3.4800582831380575,5
-rdflex,interacted cutoff and score,Linear,Global linear,0.95,1.0,17.85081674323539,3.4800582831380575,5
-rdflex,interacted cutoff and score,Linear,LGBM,0.9,1.0,9.140955749697142,2.5395424847293753,5
-rdflex,interacted cutoff and score,Linear,LGBM,0.95,1.0,10.892120587584234,2.5395424847293753,5
-rdflex,interacted cutoff and score,Linear,Linear,0.9,0.8,15.4138192982352,3.6678662653096916,5
-rdflex,interacted cutoff and score,Linear,Linear,0.95,1.0,18.366698527905392,3.6678662653096916,5
-rdflex,interacted cutoff and score,Linear,Stacked,0.9,1.0,10.864595627804398,2.894493634370918,5
-rdflex,interacted cutoff and score,Linear,Stacked,0.95,1.0,12.945964180748467,2.894493634370918,5
-rdflex,interacted cutoff and score,Stacked,Global linear,0.9,1.0,2.421350027458176,0.2543821651969947,5
-rdflex,interacted cutoff and score,Stacked,Global linear,0.95,1.0,2.885216514115459,0.2543821651969947,5
-rdflex,interacted cutoff and score,Stacked,LGBM,0.9,1.0,1.9090916620591405,0.5916268970924577,5
-rdflex,interacted cutoff and score,Stacked,LGBM,0.95,1.0,2.274823023466525,0.5916268970924577,5
-rdflex,interacted cutoff and score,Stacked,Linear,0.9,1.0,2.4287704707086424,0.42238035779134736,5
-rdflex,interacted cutoff and score,Stacked,Linear,0.95,1.0,2.8940585176116564,0.42238035779134736,5
-rdflex,interacted cutoff and score,Stacked,Stacked,0.9,0.8,2.3752766407951578,0.5905486473170087,5
-rdflex,interacted cutoff and score,Stacked,Stacked,0.95,1.0,2.830316687756643,0.5905486473170087,5
-rdrobust,cutoff,linear,linear,0.9,1.0,13.247577083256981,2.876321200969484,5
-rdrobust,cutoff,linear,linear,0.95,1.0,15.785461721432487,2.876321200969484,5
+rdflex,cutoff,Global linear,Global linear,0.9,0.93,9.081392906274068,2.1933385393109197,200
+rdflex,cutoff,Global linear,Global linear,0.95,0.975,10.821147082092207,2.1933385393109197,200
+rdflex,cutoff,Global linear,LGBM,0.9,0.945,9.071374045045866,2.261373434009399,200
+rdflex,cutoff,Global linear,LGBM,0.95,0.985,10.809208872605582,2.261373434009399,200
+rdflex,cutoff,Global linear,Linear,0.9,0.94,9.18803129264423,2.2181198604056123,200
+rdflex,cutoff,Global linear,Linear,0.95,0.97,10.948214556808693,2.2181198604056123,200
+rdflex,cutoff,Global linear,Stacked,0.9,0.935,8.990034820220394,2.2441214304905195,200
+rdflex,cutoff,Global linear,Stacked,0.95,0.975,10.712287208223932,2.2441214304905195,200
+rdflex,cutoff,LGBM,Global linear,0.9,0.92,1.6916778730210564,0.3944842423890586,200
+rdflex,cutoff,LGBM,Global linear,0.95,0.985,2.0157585150659814,0.3944842423890586,200
+rdflex,cutoff,LGBM,LGBM,0.9,0.95,1.615800542441541,0.3719114314569723,200
+rdflex,cutoff,LGBM,LGBM,0.95,0.98,1.925345099098679,0.3719114314569723,200
+rdflex,cutoff,LGBM,Linear,0.9,0.94,1.6965648079234554,0.38597937057745973,200
+rdflex,cutoff,LGBM,Linear,0.95,0.99,2.021581657166015,0.38597937057745973,200
+rdflex,cutoff,LGBM,Stacked,0.9,0.935,1.593452293167818,0.33657448062658235,200
+rdflex,cutoff,LGBM,Stacked,0.95,0.985,1.898715517611114,0.33657448062658235,200
+rdflex,cutoff,Linear,Global linear,0.9,0.93,9.075817172665094,2.199047016932969,200
+rdflex,cutoff,Linear,Global linear,0.95,0.975,10.814503185710231,2.199047016932969,200
+rdflex,cutoff,Linear,LGBM,0.9,0.945,9.006421996493895,2.2499576335207867,200
+rdflex,cutoff,Linear,LGBM,0.95,0.975,10.731813733124445,2.2499576335207867,200
+rdflex,cutoff,Linear,Linear,0.9,0.93,9.19023631539689,2.2324898070695376,200
+rdflex,cutoff,Linear,Linear,0.95,0.975,10.95084200347598,2.2324898070695376,200
+rdflex,cutoff,Linear,Stacked,0.9,0.93,8.868858682952633,2.170604197519602,200
+rdflex,cutoff,Linear,Stacked,0.95,0.98,10.567896934865278,2.170604197519602,200
+rdflex,cutoff,Stacked,Global linear,0.9,0.94,1.7082355652914638,0.3858776284107599,200
+rdflex,cutoff,Stacked,Global linear,0.95,0.99,2.0354882223088335,0.3858776284107599,200
+rdflex,cutoff,Stacked,LGBM,0.9,0.95,1.6152877419864777,0.38023115554419357,200
+rdflex,cutoff,Stacked,LGBM,0.95,0.97,1.9247340596683542,0.38023115554419357,200
+rdflex,cutoff,Stacked,Linear,0.9,0.9,1.7085892928386948,0.38715972085633743,200
+rdflex,cutoff,Stacked,Linear,0.95,0.96,2.0359097146784597,0.38715972085633743,200
+rdflex,cutoff,Stacked,Stacked,0.9,0.955,1.6143624078750711,0.3399797304777219,200
+rdflex,cutoff,Stacked,Stacked,0.95,0.975,1.9236314560674583,0.3399797304777219,200
+rdflex,cutoff and score,Global linear,Global linear,0.9,0.945,9.080075892369969,2.1932099043718005,200
+rdflex,cutoff and score,Global linear,Global linear,0.95,0.97,10.819577763231928,2.1932099043718005,200
+rdflex,cutoff and score,Global linear,LGBM,0.9,0.955,9.123861848035432,2.26628855189193,200
+rdflex,cutoff and score,Global linear,LGBM,0.95,0.98,10.871751947443094,2.26628855189193,200
+rdflex,cutoff and score,Global linear,Linear,0.9,0.94,9.161670882012661,2.2100071846242657,200
+rdflex,cutoff and score,Global linear,Linear,0.95,0.97,10.916804190190655,2.2100071846242657,200
+rdflex,cutoff and score,Global linear,Stacked,0.9,0.945,9.12900517734864,2.234311195114868,200
+rdflex,cutoff and score,Global linear,Stacked,0.95,0.975,10.877880602327238,2.234311195114868,200
+rdflex,cutoff and score,LGBM,Global linear,0.9,0.975,1.7677213444582995,0.3895705364821883,200
+rdflex,cutoff and score,LGBM,Global linear,0.95,0.99,2.1063699000757397,0.3895705364821883,200
+rdflex,cutoff and score,LGBM,LGBM,0.9,0.955,1.7097986739938167,0.3989682200244538,200
+rdflex,cutoff and score,LGBM,LGBM,0.95,0.975,2.0373507812078957,0.3989682200244538,200
+rdflex,cutoff and score,LGBM,Linear,0.9,0.95,1.7436698369090557,0.3896899920948269,200
+rdflex,cutoff and score,LGBM,Linear,0.95,0.98,2.0777107611724324,0.3896899920948269,200
+rdflex,cutoff and score,LGBM,Stacked,0.9,0.945,1.6921819422814257,0.3976386225783639,200
+rdflex,cutoff and score,LGBM,Stacked,0.95,0.985,2.0163591506361316,0.3976386225783639,200
+rdflex,cutoff and score,Linear,Global linear,0.9,0.935,9.140994535035215,2.2292520538999314,200
+rdflex,cutoff and score,Linear,Global linear,0.95,0.975,10.892166803165066,2.2292520538999314,200
+rdflex,cutoff and score,Linear,LGBM,0.9,0.945,9.230547983693715,2.2907915601909408,200
+rdflex,cutoff and score,Linear,LGBM,0.95,0.98,10.9988763189457,2.2907915601909408,200
+rdflex,cutoff and score,Linear,Linear,0.9,0.925,9.159848674913668,2.2075015174066497,200
+rdflex,cutoff and score,Linear,Linear,0.95,0.975,10.914632896509636,2.2075015174066497,200
+rdflex,cutoff and score,Linear,Stacked,0.9,0.935,8.986928535062534,2.2429319842794295,200
+rdflex,cutoff and score,Linear,Stacked,0.95,0.975,10.708585841162837,2.2429319842794295,200
+rdflex,cutoff and score,Stacked,Global linear,0.9,0.91,1.776522112039948,0.39332706585160665,200
+rdflex,cutoff and score,Stacked,Global linear,0.95,0.97,2.1168566614590656,0.39332706585160665,200
+rdflex,cutoff and score,Stacked,LGBM,0.9,0.925,1.709515895023752,0.4026131018857037,200
+rdflex,cutoff and score,Stacked,LGBM,0.95,0.975,2.037013829282307,0.4026131018857037,200
+rdflex,cutoff and score,Stacked,Linear,0.9,0.945,1.7808563057254776,0.4007040458728064,200
+rdflex,cutoff and score,Stacked,Linear,0.95,0.995,2.122021171775648,0.4007040458728064,200
+rdflex,cutoff and score,Stacked,Stacked,0.9,0.925,1.74556578243726,0.39512341857753314,200
+rdflex,cutoff and score,Stacked,Stacked,0.95,0.98,2.0799699196112393,0.39512341857753314,200
+rdflex,interacted cutoff and score,Global linear,Global linear,0.9,0.93,9.061017454676579,2.180506418406957,200
+rdflex,interacted cutoff and score,Global linear,Global linear,0.95,0.975,10.796868234026052,2.180506418406957,200
+rdflex,interacted cutoff and score,Global linear,LGBM,0.9,0.945,9.191021529436847,2.2563449662547352,200
+rdflex,interacted cutoff and score,Global linear,LGBM,0.95,0.97,10.951777643713662,2.2563449662547352,200
+rdflex,interacted cutoff and score,Global linear,Linear,0.9,0.935,9.167705084002202,2.2186339606032286,200
+rdflex,interacted cutoff and score,Global linear,Linear,0.95,0.975,10.923994385343072,2.2186339606032286,200
+rdflex,interacted cutoff and score,Global linear,Stacked,0.9,0.955,8.984109518341889,2.215893099200206,200
+rdflex,interacted cutoff and score,Global linear,Stacked,0.95,0.975,10.705226775557394,2.215893099200206,200
+rdflex,interacted cutoff and score,LGBM,Global linear,0.9,0.95,1.78003628124215,0.40021895592964696,200
+rdflex,interacted cutoff and score,LGBM,Global linear,0.95,0.985,2.121044052336308,0.40021895592964696,200
+rdflex,interacted cutoff and score,LGBM,LGBM,0.9,0.945,1.7352078615081552,0.3682890431886914,200
+rdflex,interacted cutoff and score,LGBM,LGBM,0.95,0.98,2.0676276955718977,0.3682890431886914,200
+rdflex,interacted cutoff and score,LGBM,Linear,0.9,0.94,1.7626227479121315,0.38482868938106907,200
+rdflex,interacted cutoff and score,LGBM,Linear,0.95,0.985,2.1002945475711456,0.38482868938106907,200
+rdflex,interacted cutoff and score,LGBM,Stacked,0.9,0.93,1.7237010890318276,0.4070129098798606,200
+rdflex,interacted cutoff and score,LGBM,Stacked,0.95,0.99,2.0539165304795377,0.4070129098798606,200
+rdflex,interacted cutoff and score,Linear,Global linear,0.9,0.93,9.196222925824271,2.2332568020997727,200
+rdflex,interacted cutoff and score,Linear,Global linear,0.95,0.975,10.957975489784355,2.2332568020997727,200
+rdflex,interacted cutoff and score,Linear,LGBM,0.9,0.945,9.261389340916475,2.2694537643554695,200
+rdflex,interacted cutoff and score,Linear,LGBM,0.95,0.97,11.035626062752984,2.2694537643554695,200
+rdflex,interacted cutoff and score,Linear,Linear,0.9,0.93,9.263515375167458,2.2377624722965814,200
+rdflex,interacted cutoff and score,Linear,Linear,0.95,0.975,11.038159388815284,2.2377624722965814,200
+rdflex,interacted cutoff and score,Linear,Stacked,0.9,0.95,9.123427141504681,2.266717454845839,200
+rdflex,interacted cutoff and score,Linear,Stacked,0.95,0.975,10.87123396266308,2.266717454845839,200
+rdflex,interacted cutoff and score,Stacked,Global linear,0.9,0.955,1.81336839938933,0.38591136894636113,200
+rdflex,interacted cutoff and score,Stacked,Global linear,0.95,0.97,2.1607617208427676,0.38591136894636113,200
+rdflex,interacted cutoff and score,Stacked,LGBM,0.9,0.935,1.7411337194500436,0.3926129635572617,200
+rdflex,interacted cutoff and score,Stacked,LGBM,0.95,0.97,2.0746887908288216,0.3926129635572617,200
+rdflex,interacted cutoff and score,Stacked,Linear,0.9,0.935,1.8383865669851245,0.39956163215234425,200
+rdflex,interacted cutoff and score,Stacked,Linear,0.95,0.965,2.190572706235933,0.39956163215234425,200
+rdflex,interacted cutoff and score,Stacked,Stacked,0.9,0.935,1.772193337511724,0.38945684216992094,200
+rdflex,interacted cutoff and score,Stacked,Stacked,0.95,0.985,2.1116986084666918,0.38945684216992094,200
+rdrobust,cutoff,linear,linear,0.9,0.935,10.477786198433689,2.22067665589711,200
+rdrobust,cutoff,linear,linear,0.95,0.97,12.485052317209465,2.22067665589711,200
