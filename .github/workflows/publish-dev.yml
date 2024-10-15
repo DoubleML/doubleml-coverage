@@ -3,11 +3,6 @@ name: Quarto Publish Development Version
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to build from'
-        required: true
-        default: 'main'
 
 jobs:
   build-deploy:
@@ -20,8 +15,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
