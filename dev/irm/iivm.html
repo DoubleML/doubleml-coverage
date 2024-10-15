@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DiD for Repeated Cross-Sections – DoubleML Coverage</title>
+<title>IIVM Models – DoubleML Coverage</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,6 +101,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -238,7 +239,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">DiD for Repeated Cross-Sections</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">IIVM Models</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -269,11 +270,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#atte-coverage" id="toc-atte-coverage" class="nav-link active" data-scroll-target="#atte-coverage">ATTE Coverage</a>
-  <ul class="collapse">
-  <li><a href="#observational-score" id="toc-observational-score" class="nav-link" data-scroll-target="#observational-score">Observational Score</a></li>
-  <li><a href="#experimental-score" id="toc-experimental-score" class="nav-link" data-scroll-target="#experimental-score">Experimental Score</a></li>
-  </ul></li>
+  <li><a href="#late-coverage" id="toc-late-coverage" class="nav-link active" data-scroll-target="#late-coverage">LATE Coverage</a></li>
   </ul>
 </nav>
     </div>
@@ -282,7 +279,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DiD for Repeated Cross-Sections</h1>
+<h1 class="title">IIVM Models</h1>
 </div>
 
 
@@ -299,7 +296,7 @@ window.Quarto = {
 </header>
 
 
-<div id="7dc03aa3" class="cell" data-execution_count="1">
+<div id="8d22efb7" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <script>
     let is_dark_theme = function () {
@@ -401,9 +398,9 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.2.2<br>
 </div>
 </div>
 </div>
-<section id="atte-coverage" class="level2">
-<h2 class="anchored" data-anchor-id="atte-coverage">ATTE Coverage</h2>
-<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_did_SZ2020.html">make_did_SZ2020</a>-DGP with <span class="math inline">\(1000\)</span> observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).</p>
+<section id="late-coverage" class="level2">
+<h2 class="anchored" data-anchor-id="late-coverage">LATE Coverage</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_iivm_data.html">make_iivm_data</a>-DGP with <span class="math inline">\(500\)</span> observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Metadata">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -416,24 +413,22 @@ Metadata
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="da094dc6" class="cell" data-execution_count="2">
+<div id="27c96856" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                           0.9.0
-Script                   did_cs_atte_coverage.py
-Date                         2024-09-09 12:16:59
-Total Runtime (seconds)             17588.891701
-Python Version                            3.12.5</code></pre>
+<pre><code>DoubleML Version                         0.9.0
+Script                   iivm_late_coverage.py
+Date                       2024-09-09 09:00:39
+Total Runtime (seconds)            5819.892728
+Python Version                          3.12.5</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section id="observational-score" class="level3">
-<h3 class="anchored" data-anchor-id="observational-score">Observational Score</h3>
-<div id="bedcfd24" class="cell" data-execution_count="4">
+<div id="8ce60946" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <style type="text/css">
-#T_2eabc_row0_col6, #T_2eabc_row1_col6, #T_2eabc_row2_col6, #T_2eabc_row3_col6, #T_2eabc_row4_col6, #T_2eabc_row5_col6, #T_2eabc_row6_col6, #T_2eabc_row7_col6, #T_2eabc_row8_col6, #T_2eabc_row9_col6, #T_2eabc_row10_col6, #T_2eabc_row11_col6 {
+#T_dea56_row0_col4, #T_dea56_row1_col4, #T_dea56_row2_col4, #T_dea56_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -444,132 +439,50 @@ Python Version                            3.12.5</code></pre>
 }
 </style>
 
-<div id="T_2eabc" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<div id="T_dea56" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_2eabc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_dea56-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 </figcaption>
-<div aria-describedby="T_2eabc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_2eabc" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_dea56-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_dea56" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_2eabc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_2eabc_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_2eabc_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">DGP</th>
-<th id="T_2eabc_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">In-sample-norm.</th>
-<th id="T_2eabc_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_2eabc_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_2eabc_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_dea56_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_dea56_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_dea56_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_dea56_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_dea56_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_2eabc_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_2eabc_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_2eabc_row0_col2" class="data row0 col2">1</td>
-<td id="T_2eabc_row0_col3" class="data row0 col3">False</td>
-<td id="T_2eabc_row0_col4" class="data row0 col4">11.671</td>
-<td id="T_2eabc_row0_col5" class="data row0 col5">59.601</td>
-<td id="T_2eabc_row0_col6" class="data row0 col6">0.973</td>
+<td id="T_dea56_row0_col0" class="data row0 col0">Lasso</td>
+<td id="T_dea56_row0_col1" class="data row0 col1">Logistic Regression</td>
+<td id="T_dea56_row0_col2" class="data row0 col2">0.224</td>
+<td id="T_dea56_row0_col3" class="data row0 col3">1.107</td>
+<td id="T_dea56_row0_col4" class="data row0 col4">0.956</td>
 </tr>
 <tr class="even">
-<td id="T_2eabc_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_2eabc_row1_col1" class="data row1 col1">LGBM</td>
-<td id="T_2eabc_row1_col2" class="data row1 col2">2</td>
-<td id="T_2eabc_row1_col3" class="data row1 col3">False</td>
-<td id="T_2eabc_row1_col4" class="data row1 col4">13.470</td>
-<td id="T_2eabc_row1_col5" class="data row1 col5">70.532</td>
-<td id="T_2eabc_row1_col6" class="data row1 col6">0.977</td>
+<td id="T_dea56_row1_col0" class="data row1 col0">Lasso</td>
+<td id="T_dea56_row1_col1" class="data row1 col1">Random Forest</td>
+<td id="T_dea56_row1_col2" class="data row1 col2">0.230</td>
+<td id="T_dea56_row1_col3" class="data row1 col3">1.138</td>
+<td id="T_dea56_row1_col4" class="data row1 col4">0.965</td>
 </tr>
 <tr class="odd">
-<td id="T_2eabc_row2_col0" class="data row2 col0">LGBM</td>
-<td id="T_2eabc_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_2eabc_row2_col2" class="data row2 col2">3</td>
-<td id="T_2eabc_row2_col3" class="data row2 col3">False</td>
-<td id="T_2eabc_row2_col4" class="data row2 col4">12.635</td>
-<td id="T_2eabc_row2_col5" class="data row2 col5">67.470</td>
-<td id="T_2eabc_row2_col6" class="data row2 col6">0.989</td>
+<td id="T_dea56_row2_col0" class="data row2 col0">Random Forest</td>
+<td id="T_dea56_row2_col1" class="data row2 col1">Logistic Regression</td>
+<td id="T_dea56_row2_col2" class="data row2 col2">0.233</td>
+<td id="T_dea56_row2_col3" class="data row2 col3">1.147</td>
+<td id="T_dea56_row2_col4" class="data row2 col4">0.949</td>
 </tr>
 <tr class="even">
-<td id="T_2eabc_row3_col0" class="data row3 col0">LGBM</td>
-<td id="T_2eabc_row3_col1" class="data row3 col1">LGBM</td>
-<td id="T_2eabc_row3_col2" class="data row3 col2">4</td>
-<td id="T_2eabc_row3_col3" class="data row3 col3">False</td>
-<td id="T_2eabc_row3_col4" class="data row3 col4">16.709</td>
-<td id="T_2eabc_row3_col5" class="data row3 col5">83.443</td>
-<td id="T_2eabc_row3_col6" class="data row3 col6">0.982</td>
-</tr>
-<tr class="odd">
-<td id="T_2eabc_row4_col0" class="data row4 col0">LGBM</td>
-<td id="T_2eabc_row4_col1" class="data row4 col1">LGBM</td>
-<td id="T_2eabc_row4_col2" class="data row4 col2">5</td>
-<td id="T_2eabc_row4_col3" class="data row4 col3">False</td>
-<td id="T_2eabc_row4_col4" class="data row4 col4">7.536</td>
-<td id="T_2eabc_row4_col5" class="data row4 col5">38.945</td>
-<td id="T_2eabc_row4_col6" class="data row4 col6">0.973</td>
-</tr>
-<tr class="even">
-<td id="T_2eabc_row5_col0" class="data row5 col0">LGBM</td>
-<td id="T_2eabc_row5_col1" class="data row5 col1">LGBM</td>
-<td id="T_2eabc_row5_col2" class="data row5 col2">6</td>
-<td id="T_2eabc_row5_col3" class="data row5 col3">False</td>
-<td id="T_2eabc_row5_col4" class="data row5 col4">7.328</td>
-<td id="T_2eabc_row5_col5" class="data row5 col5">37.242</td>
-<td id="T_2eabc_row5_col6" class="data row5 col6">0.960</td>
-</tr>
-<tr class="odd">
-<td id="T_2eabc_row6_col0" class="data row6 col0">LGBM</td>
-<td id="T_2eabc_row6_col1" class="data row6 col1">LGBM</td>
-<td id="T_2eabc_row6_col2" class="data row6 col2">1</td>
-<td id="T_2eabc_row6_col3" class="data row6 col3">True</td>
-<td id="T_2eabc_row6_col4" class="data row6 col4">4.470</td>
-<td id="T_2eabc_row6_col5" class="data row6 col5">21.342</td>
-<td id="T_2eabc_row6_col6" class="data row6 col6">0.954</td>
-</tr>
-<tr class="even">
-<td id="T_2eabc_row7_col0" class="data row7 col0">LGBM</td>
-<td id="T_2eabc_row7_col1" class="data row7 col1">LGBM</td>
-<td id="T_2eabc_row7_col2" class="data row7 col2">2</td>
-<td id="T_2eabc_row7_col3" class="data row7 col3">True</td>
-<td id="T_2eabc_row7_col4" class="data row7 col4">4.861</td>
-<td id="T_2eabc_row7_col5" class="data row7 col5">24.388</td>
-<td id="T_2eabc_row7_col6" class="data row7 col6">0.965</td>
-</tr>
-<tr class="odd">
-<td id="T_2eabc_row8_col0" class="data row8 col0">LGBM</td>
-<td id="T_2eabc_row8_col1" class="data row8 col1">LGBM</td>
-<td id="T_2eabc_row8_col2" class="data row8 col2">3</td>
-<td id="T_2eabc_row8_col3" class="data row8 col3">True</td>
-<td id="T_2eabc_row8_col4" class="data row8 col4">4.795</td>
-<td id="T_2eabc_row8_col5" class="data row8 col5">23.936</td>
-<td id="T_2eabc_row8_col6" class="data row8 col6">0.958</td>
-</tr>
-<tr class="even">
-<td id="T_2eabc_row9_col0" class="data row9 col0">LGBM</td>
-<td id="T_2eabc_row9_col1" class="data row9 col1">LGBM</td>
-<td id="T_2eabc_row9_col2" class="data row9 col2">4</td>
-<td id="T_2eabc_row9_col3" class="data row9 col3">True</td>
-<td id="T_2eabc_row9_col4" class="data row9 col4">5.634</td>
-<td id="T_2eabc_row9_col5" class="data row9 col5">28.391</td>
-<td id="T_2eabc_row9_col6" class="data row9 col6">0.956</td>
-</tr>
-<tr class="odd">
-<td id="T_2eabc_row10_col0" class="data row10 col0">LGBM</td>
-<td id="T_2eabc_row10_col1" class="data row10 col1">LGBM</td>
-<td id="T_2eabc_row10_col2" class="data row10 col2">5</td>
-<td id="T_2eabc_row10_col3" class="data row10 col3">True</td>
-<td id="T_2eabc_row10_col4" class="data row10 col4">4.118</td>
-<td id="T_2eabc_row10_col5" class="data row10 col5">19.511</td>
-<td id="T_2eabc_row10_col6" class="data row10 col6">0.943</td>
-</tr>
-<tr class="even">
-<td id="T_2eabc_row11_col0" class="data row11 col0">LGBM</td>
-<td id="T_2eabc_row11_col1" class="data row11 col1">LGBM</td>
-<td id="T_2eabc_row11_col2" class="data row11 col2">6</td>
-<td id="T_2eabc_row11_col3" class="data row11 col3">True</td>
-<td id="T_2eabc_row11_col4" class="data row11 col4">3.734</td>
-<td id="T_2eabc_row11_col5" class="data row11 col5">17.859</td>
-<td id="T_2eabc_row11_col6" class="data row11 col6">0.957</td>
+<td id="T_dea56_row3_col0" class="data row3 col0">Random Forest</td>
+<td id="T_dea56_row3_col1" class="data row3 col1">Random Forest</td>
+<td id="T_dea56_row3_col2" class="data row3 col2">0.235</td>
+<td id="T_dea56_row3_col3" class="data row3 col3">1.182</td>
+<td id="T_dea56_row3_col4" class="data row3 col4">0.960</td>
 </tr>
 </tbody>
 </table>
@@ -581,7 +494,7 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#T_2eabc:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#T_dea56:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -589,7 +502,7 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
         
 
         // Define the dt_args
-        let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
+        let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
         
 
         
@@ -598,10 +511,10 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 </script>
 </div>
 </div>
-<div id="cba256a3" class="cell" data-execution_count="5">
+<div id="6b9b9077" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <style type="text/css">
-#T_d0052_row0_col6, #T_d0052_row1_col6, #T_d0052_row2_col6, #T_d0052_row3_col6, #T_d0052_row4_col6, #T_d0052_row5_col6, #T_d0052_row6_col6, #T_d0052_row7_col6, #T_d0052_row8_col6, #T_d0052_row9_col6, #T_d0052_row10_col6, #T_d0052_row11_col6 {
+#T_a352f_row0_col4, #T_a352f_row1_col4, #T_a352f_row2_col4, #T_a352f_row3_col4 {
   color: black;
   background-color: red;
   color: black;
@@ -612,132 +525,50 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 }
 </style>
 
-<div id="T_d0052" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<div id="T_a352f" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_d0052-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a352f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 </figcaption>
-<div aria-describedby="T_d0052-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_d0052" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_a352f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_a352f" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_d0052_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_d0052_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_d0052_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">DGP</th>
-<th id="T_d0052_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">In-sample-norm.</th>
-<th id="T_d0052_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_d0052_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_d0052_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_a352f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_a352f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_a352f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_a352f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_a352f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_d0052_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_d0052_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_d0052_row0_col2" class="data row0 col2">1</td>
-<td id="T_d0052_row0_col3" class="data row0 col3">False</td>
-<td id="T_d0052_row0_col4" class="data row0 col4">11.671</td>
-<td id="T_d0052_row0_col5" class="data row0 col5">50.018</td>
-<td id="T_d0052_row0_col6" class="data row0 col6">0.940</td>
+<td id="T_a352f_row0_col0" class="data row0 col0">Lasso</td>
+<td id="T_a352f_row0_col1" class="data row0 col1">Logistic Regression</td>
+<td id="T_a352f_row0_col2" class="data row0 col2">0.224</td>
+<td id="T_a352f_row0_col3" class="data row0 col3">0.929</td>
+<td id="T_a352f_row0_col4" class="data row0 col4">0.902</td>
 </tr>
 <tr class="even">
-<td id="T_d0052_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_d0052_row1_col1" class="data row1 col1">LGBM</td>
-<td id="T_d0052_row1_col2" class="data row1 col2">2</td>
-<td id="T_d0052_row1_col3" class="data row1 col3">False</td>
-<td id="T_d0052_row1_col4" class="data row1 col4">13.470</td>
-<td id="T_d0052_row1_col5" class="data row1 col5">59.192</td>
-<td id="T_d0052_row1_col6" class="data row1 col6">0.929</td>
+<td id="T_a352f_row1_col0" class="data row1 col0">Lasso</td>
+<td id="T_a352f_row1_col1" class="data row1 col1">Random Forest</td>
+<td id="T_a352f_row1_col2" class="data row1 col2">0.230</td>
+<td id="T_a352f_row1_col3" class="data row1 col3">0.955</td>
+<td id="T_a352f_row1_col4" class="data row1 col4">0.907</td>
 </tr>
 <tr class="odd">
-<td id="T_d0052_row2_col0" class="data row2 col0">LGBM</td>
-<td id="T_d0052_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_d0052_row2_col2" class="data row2 col2">3</td>
-<td id="T_d0052_row2_col3" class="data row2 col3">False</td>
-<td id="T_d0052_row2_col4" class="data row2 col4">12.635</td>
-<td id="T_d0052_row2_col5" class="data row2 col5">56.623</td>
-<td id="T_d0052_row2_col6" class="data row2 col6">0.945</td>
+<td id="T_a352f_row2_col0" class="data row2 col0">Random Forest</td>
+<td id="T_a352f_row2_col1" class="data row2 col1">Logistic Regression</td>
+<td id="T_a352f_row2_col2" class="data row2 col2">0.233</td>
+<td id="T_a352f_row2_col3" class="data row2 col3">0.963</td>
+<td id="T_a352f_row2_col4" class="data row2 col4">0.901</td>
 </tr>
 <tr class="even">
-<td id="T_d0052_row3_col0" class="data row3 col0">LGBM</td>
-<td id="T_d0052_row3_col1" class="data row3 col1">LGBM</td>
-<td id="T_d0052_row3_col2" class="data row3 col2">4</td>
-<td id="T_d0052_row3_col3" class="data row3 col3">False</td>
-<td id="T_d0052_row3_col4" class="data row3 col4">16.709</td>
-<td id="T_d0052_row3_col5" class="data row3 col5">70.028</td>
-<td id="T_d0052_row3_col6" class="data row3 col6">0.945</td>
-</tr>
-<tr class="odd">
-<td id="T_d0052_row4_col0" class="data row4 col0">LGBM</td>
-<td id="T_d0052_row4_col1" class="data row4 col1">LGBM</td>
-<td id="T_d0052_row4_col2" class="data row4 col2">5</td>
-<td id="T_d0052_row4_col3" class="data row4 col3">False</td>
-<td id="T_d0052_row4_col4" class="data row4 col4">7.536</td>
-<td id="T_d0052_row4_col5" class="data row4 col5">32.684</td>
-<td id="T_d0052_row4_col6" class="data row4 col6">0.932</td>
-</tr>
-<tr class="even">
-<td id="T_d0052_row5_col0" class="data row5 col0">LGBM</td>
-<td id="T_d0052_row5_col1" class="data row5 col1">LGBM</td>
-<td id="T_d0052_row5_col2" class="data row5 col2">6</td>
-<td id="T_d0052_row5_col3" class="data row5 col3">False</td>
-<td id="T_d0052_row5_col4" class="data row5 col4">7.328</td>
-<td id="T_d0052_row5_col5" class="data row5 col5">31.255</td>
-<td id="T_d0052_row5_col6" class="data row5 col6">0.922</td>
-</tr>
-<tr class="odd">
-<td id="T_d0052_row6_col0" class="data row6 col0">LGBM</td>
-<td id="T_d0052_row6_col1" class="data row6 col1">LGBM</td>
-<td id="T_d0052_row6_col2" class="data row6 col2">1</td>
-<td id="T_d0052_row6_col3" class="data row6 col3">True</td>
-<td id="T_d0052_row6_col4" class="data row6 col4">4.470</td>
-<td id="T_d0052_row6_col5" class="data row6 col5">17.911</td>
-<td id="T_d0052_row6_col6" class="data row6 col6">0.903</td>
-</tr>
-<tr class="even">
-<td id="T_d0052_row7_col0" class="data row7 col0">LGBM</td>
-<td id="T_d0052_row7_col1" class="data row7 col1">LGBM</td>
-<td id="T_d0052_row7_col2" class="data row7 col2">2</td>
-<td id="T_d0052_row7_col3" class="data row7 col3">True</td>
-<td id="T_d0052_row7_col4" class="data row7 col4">4.861</td>
-<td id="T_d0052_row7_col5" class="data row7 col5">20.467</td>
-<td id="T_d0052_row7_col6" class="data row7 col6">0.928</td>
-</tr>
-<tr class="odd">
-<td id="T_d0052_row8_col0" class="data row8 col0">LGBM</td>
-<td id="T_d0052_row8_col1" class="data row8 col1">LGBM</td>
-<td id="T_d0052_row8_col2" class="data row8 col2">3</td>
-<td id="T_d0052_row8_col3" class="data row8 col3">True</td>
-<td id="T_d0052_row8_col4" class="data row8 col4">4.795</td>
-<td id="T_d0052_row8_col5" class="data row8 col5">20.088</td>
-<td id="T_d0052_row8_col6" class="data row8 col6">0.916</td>
-</tr>
-<tr class="even">
-<td id="T_d0052_row9_col0" class="data row9 col0">LGBM</td>
-<td id="T_d0052_row9_col1" class="data row9 col1">LGBM</td>
-<td id="T_d0052_row9_col2" class="data row9 col2">4</td>
-<td id="T_d0052_row9_col3" class="data row9 col3">True</td>
-<td id="T_d0052_row9_col4" class="data row9 col4">5.634</td>
-<td id="T_d0052_row9_col5" class="data row9 col5">23.827</td>
-<td id="T_d0052_row9_col6" class="data row9 col6">0.913</td>
-</tr>
-<tr class="odd">
-<td id="T_d0052_row10_col0" class="data row10 col0">LGBM</td>
-<td id="T_d0052_row10_col1" class="data row10 col1">LGBM</td>
-<td id="T_d0052_row10_col2" class="data row10 col2">5</td>
-<td id="T_d0052_row10_col3" class="data row10 col3">True</td>
-<td id="T_d0052_row10_col4" class="data row10 col4">4.118</td>
-<td id="T_d0052_row10_col5" class="data row10 col5">16.374</td>
-<td id="T_d0052_row10_col6" class="data row10 col6">0.890</td>
-</tr>
-<tr class="even">
-<td id="T_d0052_row11_col0" class="data row11 col0">LGBM</td>
-<td id="T_d0052_row11_col1" class="data row11 col1">LGBM</td>
-<td id="T_d0052_row11_col2" class="data row11 col2">6</td>
-<td id="T_d0052_row11_col3" class="data row11 col3">True</td>
-<td id="T_d0052_row11_col4" class="data row11 col4">3.734</td>
-<td id="T_d0052_row11_col5" class="data row11 col5">14.988</td>
-<td id="T_d0052_row11_col6" class="data row11 col6">0.891</td>
+<td id="T_a352f_row3_col0" class="data row3 col0">Random Forest</td>
+<td id="T_a352f_row3_col1" class="data row3 col1">Random Forest</td>
+<td id="T_a352f_row3_col2" class="data row3 col2">0.235</td>
+<td id="T_a352f_row3_col3" class="data row3 col3">0.992</td>
+<td id="T_a352f_row3_col4" class="data row3 col4">0.906</td>
 </tr>
 </tbody>
 </table>
@@ -749,7 +580,7 @@ Table&nbsp;2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#T_d0052:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#T_a352f:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -757,371 +588,7 @@ Table&nbsp;2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
         
 
         // Define the dt_args
-        let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
-        
-
-        
-        new DataTable(table, dt_args);
-    });
-</script>
-</div>
-</div>
-</section>
-<section id="experimental-score" class="level3">
-<h3 class="anchored" data-anchor-id="experimental-score">Experimental Score</h3>
-<p>Remark that the only two valid DGPs are DGP <span class="math inline">\(5\)</span> and DGP <span class="math inline">\(6\)</span>. All other DGPs are invalid due to non-experimental treatment assignment.</p>
-<div id="dd6d52ef" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_7a4d0_row0_col6, #T_7a4d0_row1_col6, #T_7a4d0_row3_col6, #T_7a4d0_row6_col6, #T_7a4d0_row7_col6, #T_7a4d0_row9_col6 {
-  color: black;
-  background-color: red;
-  font-weight: bold;
-}
-#T_7a4d0_row2_col6, #T_7a4d0_row4_col6, #T_7a4d0_row5_col6, #T_7a4d0_row10_col6, #T_7a4d0_row11_col6 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  color: white;
-  background-color: darkgreen;
-  font-weight: bold;
-}
-#T_7a4d0_row8_col6 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  font-weight: bold;
-}
-</style>
-
-<div id="T_7a4d0" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_7a4d0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
-</figcaption>
-<div aria-describedby="T_7a4d0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_7a4d0" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th id="T_7a4d0_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_7a4d0_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_7a4d0_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">DGP</th>
-<th id="T_7a4d0_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">In-sample-norm.</th>
-<th id="T_7a4d0_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_7a4d0_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_7a4d0_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_7a4d0_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_7a4d0_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_7a4d0_row0_col2" class="data row0 col2">1</td>
-<td id="T_7a4d0_row0_col3" class="data row0 col3">False</td>
-<td id="T_7a4d0_row0_col4" class="data row0 col4">3.906</td>
-<td id="T_7a4d0_row0_col5" class="data row0 col5">12.418</td>
-<td id="T_7a4d0_row0_col6" class="data row0 col6">0.796</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_7a4d0_row1_col1" class="data row1 col1">LGBM</td>
-<td id="T_7a4d0_row1_col2" class="data row1 col2">2</td>
-<td id="T_7a4d0_row1_col3" class="data row1 col3">False</td>
-<td id="T_7a4d0_row1_col4" class="data row1 col4">3.717</td>
-<td id="T_7a4d0_row1_col5" class="data row1 col5">13.290</td>
-<td id="T_7a4d0_row1_col6" class="data row1 col6">0.830</td>
-</tr>
-<tr class="odd">
-<td id="T_7a4d0_row2_col0" class="data row2 col0">LGBM</td>
-<td id="T_7a4d0_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_7a4d0_row2_col2" class="data row2 col2">3</td>
-<td id="T_7a4d0_row2_col3" class="data row2 col3">False</td>
-<td id="T_7a4d0_row2_col4" class="data row2 col4">2.981</td>
-<td id="T_7a4d0_row2_col5" class="data row2 col5">12.070</td>
-<td id="T_7a4d0_row2_col6" class="data row2 col6">0.900</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row3_col0" class="data row3 col0">LGBM</td>
-<td id="T_7a4d0_row3_col1" class="data row3 col1">LGBM</td>
-<td id="T_7a4d0_row3_col2" class="data row3 col2">4</td>
-<td id="T_7a4d0_row3_col3" class="data row3 col3">False</td>
-<td id="T_7a4d0_row3_col4" class="data row3 col4">3.911</td>
-<td id="T_7a4d0_row3_col5" class="data row3 col5">12.212</td>
-<td id="T_7a4d0_row3_col6" class="data row3 col6">0.788</td>
-</tr>
-<tr class="odd">
-<td id="T_7a4d0_row4_col0" class="data row4 col0">LGBM</td>
-<td id="T_7a4d0_row4_col1" class="data row4 col1">LGBM</td>
-<td id="T_7a4d0_row4_col2" class="data row4 col2">5</td>
-<td id="T_7a4d0_row4_col3" class="data row4 col3">False</td>
-<td id="T_7a4d0_row4_col4" class="data row4 col4">2.905</td>
-<td id="T_7a4d0_row4_col5" class="data row4 col5">14.243</td>
-<td id="T_7a4d0_row4_col6" class="data row4 col6">0.950</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row5_col0" class="data row5 col0">LGBM</td>
-<td id="T_7a4d0_row5_col1" class="data row5 col1">LGBM</td>
-<td id="T_7a4d0_row5_col2" class="data row5 col2">6</td>
-<td id="T_7a4d0_row5_col3" class="data row5 col3">False</td>
-<td id="T_7a4d0_row5_col4" class="data row5 col4">2.476</td>
-<td id="T_7a4d0_row5_col5" class="data row5 col5">12.404</td>
-<td id="T_7a4d0_row5_col6" class="data row5 col6">0.951</td>
-</tr>
-<tr class="odd">
-<td id="T_7a4d0_row6_col0" class="data row6 col0">LGBM</td>
-<td id="T_7a4d0_row6_col1" class="data row6 col1">LGBM</td>
-<td id="T_7a4d0_row6_col2" class="data row6 col2">1</td>
-<td id="T_7a4d0_row6_col3" class="data row6 col3">True</td>
-<td id="T_7a4d0_row6_col4" class="data row6 col4">3.985</td>
-<td id="T_7a4d0_row6_col5" class="data row6 col5">12.442</td>
-<td id="T_7a4d0_row6_col6" class="data row6 col6">0.774</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row7_col0" class="data row7 col0">LGBM</td>
-<td id="T_7a4d0_row7_col1" class="data row7 col1">LGBM</td>
-<td id="T_7a4d0_row7_col2" class="data row7 col2">2</td>
-<td id="T_7a4d0_row7_col3" class="data row7 col3">True</td>
-<td id="T_7a4d0_row7_col4" class="data row7 col4">3.723</td>
-<td id="T_7a4d0_row7_col5" class="data row7 col5">13.283</td>
-<td id="T_7a4d0_row7_col6" class="data row7 col6">0.832</td>
-</tr>
-<tr class="odd">
-<td id="T_7a4d0_row8_col0" class="data row8 col0">LGBM</td>
-<td id="T_7a4d0_row8_col1" class="data row8 col1">LGBM</td>
-<td id="T_7a4d0_row8_col2" class="data row8 col2">3</td>
-<td id="T_7a4d0_row8_col3" class="data row8 col3">True</td>
-<td id="T_7a4d0_row8_col4" class="data row8 col4">2.994</td>
-<td id="T_7a4d0_row8_col5" class="data row8 col5">12.082</td>
-<td id="T_7a4d0_row8_col6" class="data row8 col6">0.896</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row9_col0" class="data row9 col0">LGBM</td>
-<td id="T_7a4d0_row9_col1" class="data row9 col1">LGBM</td>
-<td id="T_7a4d0_row9_col2" class="data row9 col2">4</td>
-<td id="T_7a4d0_row9_col3" class="data row9 col3">True</td>
-<td id="T_7a4d0_row9_col4" class="data row9 col4">3.951</td>
-<td id="T_7a4d0_row9_col5" class="data row9 col5">12.223</td>
-<td id="T_7a4d0_row9_col6" class="data row9 col6">0.782</td>
-</tr>
-<tr class="odd">
-<td id="T_7a4d0_row10_col0" class="data row10 col0">LGBM</td>
-<td id="T_7a4d0_row10_col1" class="data row10 col1">LGBM</td>
-<td id="T_7a4d0_row10_col2" class="data row10 col2">5</td>
-<td id="T_7a4d0_row10_col3" class="data row10 col3">True</td>
-<td id="T_7a4d0_row10_col4" class="data row10 col4">2.944</td>
-<td id="T_7a4d0_row10_col5" class="data row10 col5">14.277</td>
-<td id="T_7a4d0_row10_col6" class="data row10 col6">0.949</td>
-</tr>
-<tr class="even">
-<td id="T_7a4d0_row11_col0" class="data row11 col0">LGBM</td>
-<td id="T_7a4d0_row11_col1" class="data row11 col1">LGBM</td>
-<td id="T_7a4d0_row11_col2" class="data row11 col2">6</td>
-<td id="T_7a4d0_row11_col3" class="data row11 col3">True</td>
-<td id="T_7a4d0_row11_col4" class="data row11 col4">2.562</td>
-<td id="T_7a4d0_row11_col5" class="data row11 col5">12.421</td>
-<td id="T_7a4d0_row11_col6" class="data row11 col6">0.955</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-
-
-<script type="module">
-    const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
-
-    document.querySelectorAll("#T_7a4d0:not(.dataTable)").forEach(table => {
-        if (!(table instanceof HTMLTableElement))
-            return;
-
-        // Define the table data
-        
-
-        // Define the dt_args
-        let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
-        
-
-        
-        new DataTable(table, dt_args);
-    });
-</script>
-</div>
-</div>
-<div id="8f8aec93" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_71d64_row0_col6, #T_71d64_row1_col6, #T_71d64_row3_col6, #T_71d64_row6_col6, #T_71d64_row7_col6, #T_71d64_row9_col6 {
-  color: black;
-  background-color: red;
-  font-weight: bold;
-}
-#T_71d64_row2_col6, #T_71d64_row8_col6 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  font-weight: bold;
-}
-#T_71d64_row4_col6, #T_71d64_row5_col6, #T_71d64_row10_col6, #T_71d64_row11_col6 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  color: white;
-  background-color: darkgreen;
-  font-weight: bold;
-}
-</style>
-
-<div id="T_71d64" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_71d64-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
-</figcaption>
-<div aria-describedby="T_71d64-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_71d64" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th id="T_71d64_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_71d64_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_71d64_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">DGP</th>
-<th id="T_71d64_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">In-sample-norm.</th>
-<th id="T_71d64_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_71d64_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_71d64_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_71d64_row0_col0" class="data row0 col0">LGBM</td>
-<td id="T_71d64_row0_col1" class="data row0 col1">LGBM</td>
-<td id="T_71d64_row0_col2" class="data row0 col2">1</td>
-<td id="T_71d64_row0_col3" class="data row0 col3">False</td>
-<td id="T_71d64_row0_col4" class="data row0 col4">3.906</td>
-<td id="T_71d64_row0_col5" class="data row0 col5">10.421</td>
-<td id="T_71d64_row0_col6" class="data row0 col6">0.714</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row1_col0" class="data row1 col0">LGBM</td>
-<td id="T_71d64_row1_col1" class="data row1 col1">LGBM</td>
-<td id="T_71d64_row1_col2" class="data row1 col2">2</td>
-<td id="T_71d64_row1_col3" class="data row1 col3">False</td>
-<td id="T_71d64_row1_col4" class="data row1 col4">3.717</td>
-<td id="T_71d64_row1_col5" class="data row1 col5">11.154</td>
-<td id="T_71d64_row1_col6" class="data row1 col6">0.747</td>
-</tr>
-<tr class="odd">
-<td id="T_71d64_row2_col0" class="data row2 col0">LGBM</td>
-<td id="T_71d64_row2_col1" class="data row2 col1">LGBM</td>
-<td id="T_71d64_row2_col2" class="data row2 col2">3</td>
-<td id="T_71d64_row2_col3" class="data row2 col3">False</td>
-<td id="T_71d64_row2_col4" class="data row2 col4">2.981</td>
-<td id="T_71d64_row2_col5" class="data row2 col5">10.130</td>
-<td id="T_71d64_row2_col6" class="data row2 col6">0.826</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row3_col0" class="data row3 col0">LGBM</td>
-<td id="T_71d64_row3_col1" class="data row3 col1">LGBM</td>
-<td id="T_71d64_row3_col2" class="data row3 col2">4</td>
-<td id="T_71d64_row3_col3" class="data row3 col3">False</td>
-<td id="T_71d64_row3_col4" class="data row3 col4">3.911</td>
-<td id="T_71d64_row3_col5" class="data row3 col5">10.248</td>
-<td id="T_71d64_row3_col6" class="data row3 col6">0.709</td>
-</tr>
-<tr class="odd">
-<td id="T_71d64_row4_col0" class="data row4 col0">LGBM</td>
-<td id="T_71d64_row4_col1" class="data row4 col1">LGBM</td>
-<td id="T_71d64_row4_col2" class="data row4 col2">5</td>
-<td id="T_71d64_row4_col3" class="data row4 col3">False</td>
-<td id="T_71d64_row4_col4" class="data row4 col4">2.905</td>
-<td id="T_71d64_row4_col5" class="data row4 col5">11.953</td>
-<td id="T_71d64_row4_col6" class="data row4 col6">0.897</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row5_col0" class="data row5 col0">LGBM</td>
-<td id="T_71d64_row5_col1" class="data row5 col1">LGBM</td>
-<td id="T_71d64_row5_col2" class="data row5 col2">6</td>
-<td id="T_71d64_row5_col3" class="data row5 col3">False</td>
-<td id="T_71d64_row5_col4" class="data row5 col4">2.476</td>
-<td id="T_71d64_row5_col5" class="data row5 col5">10.410</td>
-<td id="T_71d64_row5_col6" class="data row5 col6">0.901</td>
-</tr>
-<tr class="odd">
-<td id="T_71d64_row6_col0" class="data row6 col0">LGBM</td>
-<td id="T_71d64_row6_col1" class="data row6 col1">LGBM</td>
-<td id="T_71d64_row6_col2" class="data row6 col2">1</td>
-<td id="T_71d64_row6_col3" class="data row6 col3">True</td>
-<td id="T_71d64_row6_col4" class="data row6 col4">3.985</td>
-<td id="T_71d64_row6_col5" class="data row6 col5">10.442</td>
-<td id="T_71d64_row6_col6" class="data row6 col6">0.695</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row7_col0" class="data row7 col0">LGBM</td>
-<td id="T_71d64_row7_col1" class="data row7 col1">LGBM</td>
-<td id="T_71d64_row7_col2" class="data row7 col2">2</td>
-<td id="T_71d64_row7_col3" class="data row7 col3">True</td>
-<td id="T_71d64_row7_col4" class="data row7 col4">3.723</td>
-<td id="T_71d64_row7_col5" class="data row7 col5">11.147</td>
-<td id="T_71d64_row7_col6" class="data row7 col6">0.769</td>
-</tr>
-<tr class="odd">
-<td id="T_71d64_row8_col0" class="data row8 col0">LGBM</td>
-<td id="T_71d64_row8_col1" class="data row8 col1">LGBM</td>
-<td id="T_71d64_row8_col2" class="data row8 col2">3</td>
-<td id="T_71d64_row8_col3" class="data row8 col3">True</td>
-<td id="T_71d64_row8_col4" class="data row8 col4">2.994</td>
-<td id="T_71d64_row8_col5" class="data row8 col5">10.140</td>
-<td id="T_71d64_row8_col6" class="data row8 col6">0.822</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row9_col0" class="data row9 col0">LGBM</td>
-<td id="T_71d64_row9_col1" class="data row9 col1">LGBM</td>
-<td id="T_71d64_row9_col2" class="data row9 col2">4</td>
-<td id="T_71d64_row9_col3" class="data row9 col3">True</td>
-<td id="T_71d64_row9_col4" class="data row9 col4">3.951</td>
-<td id="T_71d64_row9_col5" class="data row9 col5">10.258</td>
-<td id="T_71d64_row9_col6" class="data row9 col6">0.707</td>
-</tr>
-<tr class="odd">
-<td id="T_71d64_row10_col0" class="data row10 col0">LGBM</td>
-<td id="T_71d64_row10_col1" class="data row10 col1">LGBM</td>
-<td id="T_71d64_row10_col2" class="data row10 col2">5</td>
-<td id="T_71d64_row10_col3" class="data row10 col3">True</td>
-<td id="T_71d64_row10_col4" class="data row10 col4">2.944</td>
-<td id="T_71d64_row10_col5" class="data row10 col5">11.982</td>
-<td id="T_71d64_row10_col6" class="data row10 col6">0.894</td>
-</tr>
-<tr class="even">
-<td id="T_71d64_row11_col0" class="data row11 col0">LGBM</td>
-<td id="T_71d64_row11_col1" class="data row11 col1">LGBM</td>
-<td id="T_71d64_row11_col2" class="data row11 col2">6</td>
-<td id="T_71d64_row11_col3" class="data row11 col3">True</td>
-<td id="T_71d64_row11_col4" class="data row11 col4">2.562</td>
-<td id="T_71d64_row11_col5" class="data row11 col5">10.424</td>
-<td id="T_71d64_row11_col6" class="data row11 col6">0.894</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-
-
-<script type="module">
-    const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
-
-    document.querySelectorAll("#T_71d64:not(.dataTable)").forEach(table => {
-        if (!(table instanceof HTMLTableElement))
-            return;
-
-        // Define the table data
-        
-
-        // Define the dt_args
-        let dt_args = {"layout": {"topStart": "pageLength", "topEnd": "search", "bottomStart": "info", "bottomEnd": "paging"}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
+        let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
         
 
         
@@ -1132,7 +599,6 @@ Table&nbsp;4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1228,7 +694,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/DoubleML\.github\.io\/doubleml-coverage\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

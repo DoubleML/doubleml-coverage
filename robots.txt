@@ -1,1 +1,0 @@
-Sitemap: https://DoubleML.github.io/doubleml-coverage/sitemap.xml
