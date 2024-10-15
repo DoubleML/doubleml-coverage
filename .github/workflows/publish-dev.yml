@@ -27,12 +27,18 @@ jobs:
       - run: pip install jupyter
       - run: pip install -r requirements-doc.txt
 
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
+        env:
+          QUARTO_PROFILE: dev
+        with:
+          to: html
+
       - name: Render and Publish Development Version
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           path: ./doc
           target: gh-pages
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          QUARTO_PROFILE: dev
-          QUARTO_PROJECT_OUTPUT_DIR: dev
