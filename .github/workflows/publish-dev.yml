@@ -31,6 +31,12 @@ jobs:
         env:
           QUARTO_PROFILE: dev
 
+      - name: Print QUARTO_PROFILE and QUARTO_OUTPUT
+        run: |
+          echo "QUARTO_PROFILE is $QUARTO_PROFILE"
+          echo "QUARTO_OUTPUT is $QUARTO_OUTPUT"
+        
+
       - name: Move rendered files to a temporary location
         run: mv ./_site /tmp/quarto-site
 
