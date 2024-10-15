@@ -6,9 +6,6 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-       working-directory: ./doc
     permissions:
       contents: write
     steps:
