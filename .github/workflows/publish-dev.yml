@@ -21,7 +21,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
       - run: pip install jupyter
-      - run: pip install -r docs/requirements-doc.txt
+      - run: pip install -r doc/requirements-doc.txt
 
       - name: Render Quarto Project with Development Profile
         uses: quarto-dev/quarto-actions/render@v2
