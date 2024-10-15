@@ -23,6 +23,10 @@ jobs:
       - run: pip install jupyter
       - run: pip install -r doc/requirements-doc.txt
 
+      # List directories after checking out gh-pages
+      - name: List all directories and files after gh-pages checkout
+        run: ls -la
+
       - name: Render Quarto Project with Development Profile
         uses: quarto-dev/quarto-actions/render@v2
         with:
@@ -31,10 +35,9 @@ jobs:
         env:
           QUARTO_PROFILE: dev
 
-      - name: Print QUARTO_PROFILE and QUARTO_OUTPUT
-        run: |
-          echo "QUARTO_PROFILE is $QUARTO_PROFILE"
-          echo "QUARTO_OUTPUT is $QUARTO_OUTPUT"
+      # List directories after checking out gh-pages
+      - name: List all directories and files after gh-pages checkout
+        run: ls -la
         
 
       - name: Move rendered files to a temporary location
