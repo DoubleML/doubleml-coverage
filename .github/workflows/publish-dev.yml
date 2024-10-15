@@ -29,6 +29,7 @@ jobs:
       - name: Render Quarto Project with Development Profile
         uses: quarto-dev/quarto-actions/render@v2
         with:
+          path: ./doc
           to: html
         env:
           QUARTO_PROFILE: dev
