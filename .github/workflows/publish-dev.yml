@@ -34,11 +34,27 @@ jobs:
         env:
           QUARTO_PROFILE: dev
 
-      - name: Publish Development Version
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Check out gh-pages branch
+        uses: actions/checkout@v4
         with:
-          path: ./doc
-          target: gh-pages
-          render: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ref: gh-pages
+          fetch-depth: 0
+
+      - name: Remove existing dev folder if present
+        run: |
+          if [ -d "dev" ]; then
+            rm -rf dev
+          fi
+
+      - name: Copy rendered site to dev folder
+        run: |
+          mkdir -p dev
+          cp -r ./_site/* dev/
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add dev/
+          git commit -m "Deploy updated development version to gh-pages"
+          git push origin gh-pages
