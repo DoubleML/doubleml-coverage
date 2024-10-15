@@ -31,6 +31,9 @@ jobs:
         env:
           QUARTO_PROFILE: dev
 
+      - name: Move rendered files to a temporary location
+        run: mv ./_site /tmp/quarto-site
+
       - name: Check out gh-pages branch
         uses: actions/checkout@v4
         with:
@@ -43,10 +46,10 @@ jobs:
             rm -rf dev
           fi
 
-      - name: Copy rendered site to dev folder
+      - name: Copy rendered files to dev folder
         run: |
           mkdir -p dev
-          cp -r ./_site/* dev/
+          cp -r /tmp/quarto-site/* dev/
 
       - name: Commit and push changes
         run: |
