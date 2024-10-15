@@ -6,9 +6,6 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-       working-directory: ./doc
     permissions:
       contents: write
     steps:
@@ -24,7 +21,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
       - run: pip install jupyter
-      - run: pip install -r requirements-doc.txt
+      - run: pip install -r doc/requirements-doc.txt
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
