@@ -34,9 +34,6 @@ jobs:
       - name: Move rendered files to a temporary location
         run: mv ./doc/_site/dev /tmp/quarto-site
 
-      - name: List contents of temporary site directory
-        run: ls -la /tmp/quarto-site
-      
       - name: Check out gh-pages branch
         uses: actions/checkout@v4
         with:
