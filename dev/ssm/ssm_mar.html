@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>PLIV Models – DoubleML Coverage</title>
+<title>SSM with Missingness at Random – DoubleML Coverage</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -240,7 +240,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">PLIV Models</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">SSM with Missingness at Random</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -271,11 +271,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#late-coverage" id="toc-late-coverage" class="nav-link active" data-scroll-target="#late-coverage">LATE Coverage</a>
-  <ul class="collapse">
-  <li><a href="#partialling-out" id="toc-partialling-out" class="nav-link" data-scroll-target="#partialling-out">Partialling out</a></li>
-  <li><a href="#iv-type" id="toc-iv-type" class="nav-link" data-scroll-target="#iv-type">IV-type</a></li>
-  </ul></li>
+  <li><a href="#ate-coverage" id="toc-ate-coverage" class="nav-link active" data-scroll-target="#ate-coverage">ATE Coverage</a></li>
   </ul>
 </nav>
     </div>
@@ -284,7 +280,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">PLIV Models</h1>
+<h1 class="title">SSM with Missingness at Random</h1>
 </div>
 
 
@@ -301,7 +297,7 @@ window.Quarto = {
 </header>
 
 
-<div id="3ebfaccb" class="cell" data-execution_count="1">
+<div id="1a4aec57" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <script>
     let is_dark_theme = function () {
@@ -403,9 +399,9 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.2.2<br>
 </div>
 </div>
 </div>
-<section id="late-coverage" class="level2">
-<h2 class="anchored" data-anchor-id="late-coverage">LATE Coverage</h2>
-<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_pliv_CHS2015.html">make_pliv_CHS2015</a>-DGP with <span class="math inline">\(500\)</span> observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.</p>
+<section id="ate-coverage" class="level2">
+<h2 class="anchored" data-anchor-id="ate-coverage">ATE Coverage</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html">make_ssm_data</a>-DGP with <span class="math inline">\(500\)</span> observations. The simulation considers data under <a href="https://docs.doubleml.org/stable/guide/models.html#missingness-at-random">missingness at random</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Metadata">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -418,24 +414,22 @@ Metadata
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="fc1f3462" class="cell" data-execution_count="2">
+<div id="ebe5c6c5" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                         0.9.0
-Script                   pliv_late_coverage.py
-Date                       2024-09-09 12:44:11
-Total Runtime (seconds)             19234.7785
-Python Version                          3.12.5</code></pre>
+<pre><code>DoubleML Version                           0.9.0
+Script                   ssm_mar_ate_coverage.py
+Date                         2024-09-09 09:44:28
+Total Runtime (seconds)              8451.345644
+Python Version                            3.12.5</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section id="partialling-out" class="level3">
-<h3 class="anchored" data-anchor-id="partialling-out">Partialling out</h3>
-<div id="0f3e2935" class="cell" data-execution_count="4">
+<div id="92aab02c" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <style type="text/css">
-#T_fb5c6_row0_col5, #T_fb5c6_row1_col5, #T_fb5c6_row2_col5, #T_fb5c6_row3_col5, #T_fb5c6_row4_col5, #T_fb5c6_row5_col5, #T_fb5c6_row7_col5 {
+#T_a0543_row0_col5, #T_a0543_row1_col5, #T_a0543_row2_col5, #T_a0543_row3_col5, #T_a0543_row4_col5, #T_a0543_row5_col5, #T_a0543_row6_col5, #T_a0543_row7_col5 {
   color: black;
   background-color: red;
   color: black;
@@ -444,96 +438,89 @@ Python Version                          3.12.5</code></pre>
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_fb5c6_row6_col5 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  font-weight: bold;
-}
 </style>
 
-<div id="T_fb5c6" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
+<div id="T_a0543" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_fb5c6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a0543-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 </figcaption>
-<div aria-describedby="T_fb5c6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_fb5c6" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_a0543-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_a0543" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_fb5c6_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner l</th>
-<th id="T_fb5c6_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_fb5c6_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner r</th>
-<th id="T_fb5c6_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_fb5c6_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_fb5c6_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_a0543_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_a0543_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_a0543_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner pi</th>
+<th id="T_a0543_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_a0543_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_a0543_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_fb5c6_row0_col0" class="data row0 col0">Lasso</td>
-<td id="T_fb5c6_row0_col1" class="data row0 col1">Lasso</td>
-<td id="T_fb5c6_row0_col2" class="data row0 col2">Lasso</td>
-<td id="T_fb5c6_row0_col3" class="data row0 col3">0.072</td>
-<td id="T_fb5c6_row0_col4" class="data row0 col4">0.357</td>
-<td id="T_fb5c6_row0_col5" class="data row0 col5">0.947</td>
+<td id="T_a0543_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_a0543_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_a0543_row0_col2" class="data row0 col2">LGBM</td>
+<td id="T_a0543_row0_col3" class="data row0 col3">1.525</td>
+<td id="T_a0543_row0_col4" class="data row0 col4">7.024</td>
+<td id="T_a0543_row0_col5" class="data row0 col5">0.981</td>
 </tr>
 <tr class="even">
-<td id="T_fb5c6_row1_col0" class="data row1 col0">Lasso</td>
-<td id="T_fb5c6_row1_col1" class="data row1 col1">Lasso</td>
-<td id="T_fb5c6_row1_col2" class="data row1 col2">Random Forest</td>
-<td id="T_fb5c6_row1_col3" class="data row1 col3">0.074</td>
-<td id="T_fb5c6_row1_col4" class="data row1 col4">0.366</td>
-<td id="T_fb5c6_row1_col5" class="data row1 col5">0.947</td>
+<td id="T_a0543_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_a0543_row1_col1" class="data row1 col1">LGBM</td>
+<td id="T_a0543_row1_col2" class="data row1 col2">Logistic</td>
+<td id="T_a0543_row1_col3" class="data row1 col3">0.615</td>
+<td id="T_a0543_row1_col4" class="data row1 col4">3.076</td>
+<td id="T_a0543_row1_col5" class="data row1 col5">0.973</td>
 </tr>
 <tr class="odd">
-<td id="T_fb5c6_row2_col0" class="data row2 col0">Lasso</td>
-<td id="T_fb5c6_row2_col1" class="data row2 col1">Random Forest</td>
-<td id="T_fb5c6_row2_col2" class="data row2 col2">Lasso</td>
-<td id="T_fb5c6_row2_col3" class="data row2 col3">0.077</td>
-<td id="T_fb5c6_row2_col4" class="data row2 col4">0.378</td>
-<td id="T_fb5c6_row2_col5" class="data row2 col5">0.956</td>
+<td id="T_a0543_row2_col0" class="data row2 col0">LGBM</td>
+<td id="T_a0543_row2_col1" class="data row2 col1">Logistic</td>
+<td id="T_a0543_row2_col2" class="data row2 col2">LGBM</td>
+<td id="T_a0543_row2_col3" class="data row2 col3">0.654</td>
+<td id="T_a0543_row2_col4" class="data row2 col4">3.069</td>
+<td id="T_a0543_row2_col5" class="data row2 col5">0.985</td>
 </tr>
 <tr class="even">
-<td id="T_fb5c6_row3_col0" class="data row3 col0">Lasso</td>
-<td id="T_fb5c6_row3_col1" class="data row3 col1">Random Forest</td>
-<td id="T_fb5c6_row3_col2" class="data row3 col2">Random Forest</td>
-<td id="T_fb5c6_row3_col3" class="data row3 col3">0.082</td>
-<td id="T_fb5c6_row3_col4" class="data row3 col4">0.359</td>
-<td id="T_fb5c6_row3_col5" class="data row3 col5">0.943</td>
+<td id="T_a0543_row3_col0" class="data row3 col0">LGBM</td>
+<td id="T_a0543_row3_col1" class="data row3 col1">Logistic</td>
+<td id="T_a0543_row3_col2" class="data row3 col2">Logistic</td>
+<td id="T_a0543_row3_col3" class="data row3 col3">0.127</td>
+<td id="T_a0543_row3_col4" class="data row3 col4">0.643</td>
+<td id="T_a0543_row3_col5" class="data row3 col5">0.958</td>
 </tr>
 <tr class="odd">
-<td id="T_fb5c6_row4_col0" class="data row4 col0">Random Forest</td>
-<td id="T_fb5c6_row4_col1" class="data row4 col1">Lasso</td>
-<td id="T_fb5c6_row4_col2" class="data row4 col2">Lasso</td>
-<td id="T_fb5c6_row4_col3" class="data row4 col3">0.081</td>
-<td id="T_fb5c6_row4_col4" class="data row4 col4">0.394</td>
-<td id="T_fb5c6_row4_col5" class="data row4 col5">0.952</td>
+<td id="T_a0543_row4_col0" class="data row4 col0">Lasso</td>
+<td id="T_a0543_row4_col1" class="data row4 col1">LGBM</td>
+<td id="T_a0543_row4_col2" class="data row4 col2">LGBM</td>
+<td id="T_a0543_row4_col3" class="data row4 col3">1.270</td>
+<td id="T_a0543_row4_col4" class="data row4 col4">5.995</td>
+<td id="T_a0543_row4_col5" class="data row4 col5">0.981</td>
 </tr>
 <tr class="even">
-<td id="T_fb5c6_row5_col0" class="data row5 col0">Random Forest</td>
-<td id="T_fb5c6_row5_col1" class="data row5 col1">Lasso</td>
-<td id="T_fb5c6_row5_col2" class="data row5 col2">Random Forest</td>
-<td id="T_fb5c6_row5_col3" class="data row5 col3">0.076</td>
-<td id="T_fb5c6_row5_col4" class="data row5 col4">0.380</td>
-<td id="T_fb5c6_row5_col5" class="data row5 col5">0.958</td>
+<td id="T_a0543_row5_col0" class="data row5 col0">Lasso</td>
+<td id="T_a0543_row5_col1" class="data row5 col1">LGBM</td>
+<td id="T_a0543_row5_col2" class="data row5 col2">Logistic</td>
+<td id="T_a0543_row5_col3" class="data row5 col3">0.622</td>
+<td id="T_a0543_row5_col4" class="data row5 col4">2.790</td>
+<td id="T_a0543_row5_col5" class="data row5 col5">0.955</td>
 </tr>
 <tr class="odd">
-<td id="T_fb5c6_row6_col0" class="data row6 col0">Random Forest</td>
-<td id="T_fb5c6_row6_col1" class="data row6 col1">Random Forest</td>
-<td id="T_fb5c6_row6_col2" class="data row6 col2">Lasso</td>
-<td id="T_fb5c6_row6_col3" class="data row6 col3">0.108</td>
-<td id="T_fb5c6_row6_col4" class="data row6 col4">0.418</td>
-<td id="T_fb5c6_row6_col5" class="data row6 col5">0.865</td>
+<td id="T_a0543_row6_col0" class="data row6 col0">Lasso</td>
+<td id="T_a0543_row6_col1" class="data row6 col1">Logistic</td>
+<td id="T_a0543_row6_col2" class="data row6 col2">LGBM</td>
+<td id="T_a0543_row6_col3" class="data row6 col3">0.613</td>
+<td id="T_a0543_row6_col4" class="data row6 col4">2.740</td>
+<td id="T_a0543_row6_col5" class="data row6 col5">0.970</td>
 </tr>
 <tr class="even">
-<td id="T_fb5c6_row7_col0" class="data row7 col0">Random Forest</td>
-<td id="T_fb5c6_row7_col1" class="data row7 col1">Random Forest</td>
-<td id="T_fb5c6_row7_col2" class="data row7 col2">Random Forest</td>
-<td id="T_fb5c6_row7_col3" class="data row7 col3">0.078</td>
-<td id="T_fb5c6_row7_col4" class="data row7 col4">0.362</td>
-<td id="T_fb5c6_row7_col5" class="data row7 col5">0.930</td>
+<td id="T_a0543_row7_col0" class="data row7 col0">Lasso</td>
+<td id="T_a0543_row7_col1" class="data row7 col1">Logistic</td>
+<td id="T_a0543_row7_col2" class="data row7 col2">Logistic</td>
+<td id="T_a0543_row7_col3" class="data row7 col3">0.123</td>
+<td id="T_a0543_row7_col4" class="data row7 col4">0.610</td>
+<td id="T_a0543_row7_col5" class="data row7 col5">0.961</td>
 </tr>
 </tbody>
 </table>
@@ -545,7 +532,7 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#T_fb5c6:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#T_a0543:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -562,10 +549,10 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
 </script>
 </div>
 </div>
-<div id="cd2ab16b" class="cell" data-execution_count="5">
+<div id="4ed6f2f0" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <style type="text/css">
-#T_6f43a_row0_col5, #T_6f43a_row1_col5, #T_6f43a_row2_col5, #T_6f43a_row3_col5, #T_6f43a_row4_col5, #T_6f43a_row5_col5, #T_6f43a_row7_col5 {
+#T_b352c_row0_col5, #T_b352c_row1_col5, #T_b352c_row2_col5, #T_b352c_row3_col5, #T_b352c_row4_col5, #T_b352c_row5_col5, #T_b352c_row6_col5, #T_b352c_row7_col5 {
   color: black;
   background-color: red;
   color: black;
@@ -574,94 +561,89 @@ Table&nbsp;1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
   background-color: darkgreen;
   font-weight: bold;
 }
-#T_6f43a_row6_col5 {
-  color: black;
-  background-color: red;
-  font-weight: bold;
-}
 </style>
 
-<div id="T_6f43a" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
+<div id="T_b352c" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_6f43a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_b352c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 </figcaption>
-<div aria-describedby="T_6f43a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_6f43a" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_b352c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_b352c" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_6f43a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner l</th>
-<th id="T_6f43a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_6f43a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner r</th>
-<th id="T_6f43a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_6f43a_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_6f43a_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
+<th id="T_b352c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
+<th id="T_b352c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
+<th id="T_b352c_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner pi</th>
+<th id="T_b352c_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
+<th id="T_b352c_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
+<th id="T_b352c_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_6f43a_row0_col0" class="data row0 col0">Lasso</td>
-<td id="T_6f43a_row0_col1" class="data row0 col1">Lasso</td>
-<td id="T_6f43a_row0_col2" class="data row0 col2">Lasso</td>
-<td id="T_6f43a_row0_col3" class="data row0 col3">0.072</td>
-<td id="T_6f43a_row0_col4" class="data row0 col4">0.299</td>
-<td id="T_6f43a_row0_col5" class="data row0 col5">0.899</td>
+<td id="T_b352c_row0_col0" class="data row0 col0">LGBM</td>
+<td id="T_b352c_row0_col1" class="data row0 col1">LGBM</td>
+<td id="T_b352c_row0_col2" class="data row0 col2">LGBM</td>
+<td id="T_b352c_row0_col3" class="data row0 col3">1.525</td>
+<td id="T_b352c_row0_col4" class="data row0 col4">5.895</td>
+<td id="T_b352c_row0_col5" class="data row0 col5">0.934</td>
 </tr>
 <tr class="even">
-<td id="T_6f43a_row1_col0" class="data row1 col0">Lasso</td>
-<td id="T_6f43a_row1_col1" class="data row1 col1">Lasso</td>
-<td id="T_6f43a_row1_col2" class="data row1 col2">Random Forest</td>
-<td id="T_6f43a_row1_col3" class="data row1 col3">0.074</td>
-<td id="T_6f43a_row1_col4" class="data row1 col4">0.307</td>
-<td id="T_6f43a_row1_col5" class="data row1 col5">0.896</td>
+<td id="T_b352c_row1_col0" class="data row1 col0">LGBM</td>
+<td id="T_b352c_row1_col1" class="data row1 col1">LGBM</td>
+<td id="T_b352c_row1_col2" class="data row1 col2">Logistic</td>
+<td id="T_b352c_row1_col3" class="data row1 col3">0.615</td>
+<td id="T_b352c_row1_col4" class="data row1 col4">2.582</td>
+<td id="T_b352c_row1_col5" class="data row1 col5">0.927</td>
 </tr>
 <tr class="odd">
-<td id="T_6f43a_row2_col0" class="data row2 col0">Lasso</td>
-<td id="T_6f43a_row2_col1" class="data row2 col1">Random Forest</td>
-<td id="T_6f43a_row2_col2" class="data row2 col2">Lasso</td>
-<td id="T_6f43a_row2_col3" class="data row2 col3">0.077</td>
-<td id="T_6f43a_row2_col4" class="data row2 col4">0.317</td>
-<td id="T_6f43a_row2_col5" class="data row2 col5">0.904</td>
+<td id="T_b352c_row2_col0" class="data row2 col0">LGBM</td>
+<td id="T_b352c_row2_col1" class="data row2 col1">Logistic</td>
+<td id="T_b352c_row2_col2" class="data row2 col2">LGBM</td>
+<td id="T_b352c_row2_col3" class="data row2 col3">0.654</td>
+<td id="T_b352c_row2_col4" class="data row2 col4">2.576</td>
+<td id="T_b352c_row2_col5" class="data row2 col5">0.945</td>
 </tr>
 <tr class="even">
-<td id="T_6f43a_row3_col0" class="data row3 col0">Lasso</td>
-<td id="T_6f43a_row3_col1" class="data row3 col1">Random Forest</td>
-<td id="T_6f43a_row3_col2" class="data row3 col2">Random Forest</td>
-<td id="T_6f43a_row3_col3" class="data row3 col3">0.082</td>
-<td id="T_6f43a_row3_col4" class="data row3 col4">0.301</td>
-<td id="T_6f43a_row3_col5" class="data row3 col5">0.876</td>
+<td id="T_b352c_row3_col0" class="data row3 col0">LGBM</td>
+<td id="T_b352c_row3_col1" class="data row3 col1">Logistic</td>
+<td id="T_b352c_row3_col2" class="data row3 col2">Logistic</td>
+<td id="T_b352c_row3_col3" class="data row3 col3">0.127</td>
+<td id="T_b352c_row3_col4" class="data row3 col4">0.540</td>
+<td id="T_b352c_row3_col5" class="data row3 col5">0.914</td>
 </tr>
 <tr class="odd">
-<td id="T_6f43a_row4_col0" class="data row4 col0">Random Forest</td>
-<td id="T_6f43a_row4_col1" class="data row4 col1">Lasso</td>
-<td id="T_6f43a_row4_col2" class="data row4 col2">Lasso</td>
-<td id="T_6f43a_row4_col3" class="data row4 col3">0.081</td>
-<td id="T_6f43a_row4_col4" class="data row4 col4">0.331</td>
-<td id="T_6f43a_row4_col5" class="data row4 col5">0.908</td>
+<td id="T_b352c_row4_col0" class="data row4 col0">Lasso</td>
+<td id="T_b352c_row4_col1" class="data row4 col1">LGBM</td>
+<td id="T_b352c_row4_col2" class="data row4 col2">LGBM</td>
+<td id="T_b352c_row4_col3" class="data row4 col3">1.270</td>
+<td id="T_b352c_row4_col4" class="data row4 col4">5.031</td>
+<td id="T_b352c_row4_col5" class="data row4 col5">0.939</td>
 </tr>
 <tr class="even">
-<td id="T_6f43a_row5_col0" class="data row5 col0">Random Forest</td>
-<td id="T_6f43a_row5_col1" class="data row5 col1">Lasso</td>
-<td id="T_6f43a_row5_col2" class="data row5 col2">Random Forest</td>
-<td id="T_6f43a_row5_col3" class="data row5 col3">0.076</td>
-<td id="T_6f43a_row5_col4" class="data row5 col4">0.319</td>
-<td id="T_6f43a_row5_col5" class="data row5 col5">0.912</td>
+<td id="T_b352c_row5_col0" class="data row5 col0">Lasso</td>
+<td id="T_b352c_row5_col1" class="data row5 col1">LGBM</td>
+<td id="T_b352c_row5_col2" class="data row5 col2">Logistic</td>
+<td id="T_b352c_row5_col3" class="data row5 col3">0.622</td>
+<td id="T_b352c_row5_col4" class="data row5 col4">2.341</td>
+<td id="T_b352c_row5_col5" class="data row5 col5">0.887</td>
 </tr>
 <tr class="odd">
-<td id="T_6f43a_row6_col0" class="data row6 col0">Random Forest</td>
-<td id="T_6f43a_row6_col1" class="data row6 col1">Random Forest</td>
-<td id="T_6f43a_row6_col2" class="data row6 col2">Lasso</td>
-<td id="T_6f43a_row6_col3" class="data row6 col3">0.108</td>
-<td id="T_6f43a_row6_col4" class="data row6 col4">0.351</td>
-<td id="T_6f43a_row6_col5" class="data row6 col5">0.790</td>
+<td id="T_b352c_row6_col0" class="data row6 col0">Lasso</td>
+<td id="T_b352c_row6_col1" class="data row6 col1">Logistic</td>
+<td id="T_b352c_row6_col2" class="data row6 col2">LGBM</td>
+<td id="T_b352c_row6_col3" class="data row6 col3">0.613</td>
+<td id="T_b352c_row6_col4" class="data row6 col4">2.300</td>
+<td id="T_b352c_row6_col5" class="data row6 col5">0.919</td>
 </tr>
 <tr class="even">
-<td id="T_6f43a_row7_col0" class="data row7 col0">Random Forest</td>
-<td id="T_6f43a_row7_col1" class="data row7 col1">Random Forest</td>
-<td id="T_6f43a_row7_col2" class="data row7 col2">Random Forest</td>
-<td id="T_6f43a_row7_col3" class="data row7 col3">0.078</td>
-<td id="T_6f43a_row7_col4" class="data row7 col4">0.304</td>
-<td id="T_6f43a_row7_col5" class="data row7 col5">0.874</td>
+<td id="T_b352c_row7_col0" class="data row7 col0">Lasso</td>
+<td id="T_b352c_row7_col1" class="data row7 col1">Logistic</td>
+<td id="T_b352c_row7_col2" class="data row7 col2">Logistic</td>
+<td id="T_b352c_row7_col3" class="data row7 col3">0.123</td>
+<td id="T_b352c_row7_col4" class="data row7 col4">0.512</td>
+<td id="T_b352c_row7_col5" class="data row7 col5">0.897</td>
 </tr>
 </tbody>
 </table>
@@ -673,267 +655,7 @@ Table&nbsp;2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 <script type="module">
     const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
 
-    document.querySelectorAll("#T_6f43a:not(.dataTable)").forEach(table => {
-        if (!(table instanceof HTMLTableElement))
-            return;
-
-        // Define the table data
-        
-
-        // Define the dt_args
-        let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
-        
-
-        
-        new DataTable(table, dt_args);
-    });
-</script>
-</div>
-</div>
-</section>
-<section id="iv-type" class="level3">
-<h3 class="anchored" data-anchor-id="iv-type">IV-type</h3>
-<p>For the IV-type score, the learners <code>ml_l</code> and <code>ml_g</code> are both set to the same type of learner (here <strong>Learner g</strong>).</p>
-<div id="585f6582" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_24f57_row0_col5, #T_24f57_row1_col5, #T_24f57_row4_col5, #T_24f57_row5_col5, #T_24f57_row6_col5, #T_24f57_row7_col5 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  font-weight: bold;
-}
-#T_24f57_row2_col5, #T_24f57_row3_col5 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  color: white;
-  background-color: darkgreen;
-  font-weight: bold;
-}
-</style>
-
-<div id="T_24f57" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_24f57-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions
-</figcaption>
-<div aria-describedby="T_24f57-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_24f57" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th id="T_24f57_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_24f57_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_24f57_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner r</th>
-<th id="T_24f57_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_24f57_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_24f57_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_24f57_row0_col0" class="data row0 col0">Lasso</td>
-<td id="T_24f57_row0_col1" class="data row0 col1">Lasso</td>
-<td id="T_24f57_row0_col2" class="data row0 col2">Lasso</td>
-<td id="T_24f57_row0_col3" class="data row0 col3">0.072</td>
-<td id="T_24f57_row0_col4" class="data row0 col4">0.276</td>
-<td id="T_24f57_row0_col5" class="data row0 col5">0.873</td>
-</tr>
-<tr class="even">
-<td id="T_24f57_row1_col0" class="data row1 col0">Lasso</td>
-<td id="T_24f57_row1_col1" class="data row1 col1">Lasso</td>
-<td id="T_24f57_row1_col2" class="data row1 col2">Random Forest</td>
-<td id="T_24f57_row1_col3" class="data row1 col3">0.072</td>
-<td id="T_24f57_row1_col4" class="data row1 col4">0.276</td>
-<td id="T_24f57_row1_col5" class="data row1 col5">0.865</td>
-</tr>
-<tr class="odd">
-<td id="T_24f57_row2_col0" class="data row2 col0">Lasso</td>
-<td id="T_24f57_row2_col1" class="data row2 col1">Random Forest</td>
-<td id="T_24f57_row2_col2" class="data row2 col2">Lasso</td>
-<td id="T_24f57_row2_col3" class="data row2 col3">0.078</td>
-<td id="T_24f57_row2_col4" class="data row2 col4">0.315</td>
-<td id="T_24f57_row2_col5" class="data row2 col5">0.901</td>
-</tr>
-<tr class="even">
-<td id="T_24f57_row3_col0" class="data row3 col0">Lasso</td>
-<td id="T_24f57_row3_col1" class="data row3 col1">Random Forest</td>
-<td id="T_24f57_row3_col2" class="data row3 col2">Random Forest</td>
-<td id="T_24f57_row3_col3" class="data row3 col3">0.077</td>
-<td id="T_24f57_row3_col4" class="data row3 col4">0.316</td>
-<td id="T_24f57_row3_col5" class="data row3 col5">0.909</td>
-</tr>
-<tr class="odd">
-<td id="T_24f57_row4_col0" class="data row4 col0">Random Forest</td>
-<td id="T_24f57_row4_col1" class="data row4 col1">Lasso</td>
-<td id="T_24f57_row4_col2" class="data row4 col2">Lasso</td>
-<td id="T_24f57_row4_col3" class="data row4 col3">0.076</td>
-<td id="T_24f57_row4_col4" class="data row4 col4">0.289</td>
-<td id="T_24f57_row4_col5" class="data row4 col5">0.867</td>
-</tr>
-<tr class="even">
-<td id="T_24f57_row5_col0" class="data row5 col0">Random Forest</td>
-<td id="T_24f57_row5_col1" class="data row5 col1">Lasso</td>
-<td id="T_24f57_row5_col2" class="data row5 col2">Random Forest</td>
-<td id="T_24f57_row5_col3" class="data row5 col3">0.075</td>
-<td id="T_24f57_row5_col4" class="data row5 col4">0.288</td>
-<td id="T_24f57_row5_col5" class="data row5 col5">0.875</td>
-</tr>
-<tr class="odd">
-<td id="T_24f57_row6_col0" class="data row6 col0">Random Forest</td>
-<td id="T_24f57_row6_col1" class="data row6 col1">Random Forest</td>
-<td id="T_24f57_row6_col2" class="data row6 col2">Lasso</td>
-<td id="T_24f57_row6_col3" class="data row6 col3">0.080</td>
-<td id="T_24f57_row6_col4" class="data row6 col4">0.332</td>
-<td id="T_24f57_row6_col5" class="data row6 col5">0.888</td>
-</tr>
-<tr class="even">
-<td id="T_24f57_row7_col0" class="data row7 col0">Random Forest</td>
-<td id="T_24f57_row7_col1" class="data row7 col1">Random Forest</td>
-<td id="T_24f57_row7_col2" class="data row7 col2">Random Forest</td>
-<td id="T_24f57_row7_col3" class="data row7 col3">0.079</td>
-<td id="T_24f57_row7_col4" class="data row7 col4">0.327</td>
-<td id="T_24f57_row7_col5" class="data row7 col5">0.893</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-
-
-<script type="module">
-    const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
-
-    document.querySelectorAll("#T_24f57:not(.dataTable)").forEach(table => {
-        if (!(table instanceof HTMLTableElement))
-            return;
-
-        // Define the table data
-        
-
-        // Define the dt_args
-        let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "display_logo_when_loading": true, "order": [], "warn_on_selected_rows_not_rendered": true};
-        
-
-        
-        new DataTable(table, dt_args);
-    });
-</script>
-</div>
-</div>
-<div id="c84863e9" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_5b592_row0_col5, #T_5b592_row1_col5, #T_5b592_row2_col5, #T_5b592_row3_col5, #T_5b592_row5_col5, #T_5b592_row6_col5, #T_5b592_row7_col5 {
-  color: black;
-  background-color: red;
-  color: black;
-  background-color: yellow;
-  font-weight: bold;
-}
-#T_5b592_row4_col5 {
-  color: black;
-  background-color: red;
-  font-weight: bold;
-}
-</style>
-
-<div id="T_5b592" class="display nowrap quarto-float quarto-figure quarto-figure-center anchored" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_5b592-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
-</figcaption>
-<div aria-describedby="T_5b592-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_5b592" class="display nowrap caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th id="T_5b592_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Learner g</th>
-<th id="T_5b592_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Learner m</th>
-<th id="T_5b592_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Learner r</th>
-<th id="T_5b592_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Bias</th>
-<th id="T_5b592_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">CI Length</th>
-<th id="T_5b592_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_5b592_row0_col0" class="data row0 col0">Lasso</td>
-<td id="T_5b592_row0_col1" class="data row0 col1">Lasso</td>
-<td id="T_5b592_row0_col2" class="data row0 col2">Lasso</td>
-<td id="T_5b592_row0_col3" class="data row0 col3">0.072</td>
-<td id="T_5b592_row0_col4" class="data row0 col4">0.232</td>
-<td id="T_5b592_row0_col5" class="data row0 col5">0.806</td>
-</tr>
-<tr class="even">
-<td id="T_5b592_row1_col0" class="data row1 col0">Lasso</td>
-<td id="T_5b592_row1_col1" class="data row1 col1">Lasso</td>
-<td id="T_5b592_row1_col2" class="data row1 col2">Random Forest</td>
-<td id="T_5b592_row1_col3" class="data row1 col3">0.072</td>
-<td id="T_5b592_row1_col4" class="data row1 col4">0.232</td>
-<td id="T_5b592_row1_col5" class="data row1 col5">0.806</td>
-</tr>
-<tr class="odd">
-<td id="T_5b592_row2_col0" class="data row2 col0">Lasso</td>
-<td id="T_5b592_row2_col1" class="data row2 col1">Random Forest</td>
-<td id="T_5b592_row2_col2" class="data row2 col2">Lasso</td>
-<td id="T_5b592_row2_col3" class="data row2 col3">0.078</td>
-<td id="T_5b592_row2_col4" class="data row2 col4">0.264</td>
-<td id="T_5b592_row2_col5" class="data row2 col5">0.830</td>
-</tr>
-<tr class="even">
-<td id="T_5b592_row3_col0" class="data row3 col0">Lasso</td>
-<td id="T_5b592_row3_col1" class="data row3 col1">Random Forest</td>
-<td id="T_5b592_row3_col2" class="data row3 col2">Random Forest</td>
-<td id="T_5b592_row3_col3" class="data row3 col3">0.077</td>
-<td id="T_5b592_row3_col4" class="data row3 col4">0.265</td>
-<td id="T_5b592_row3_col5" class="data row3 col5">0.838</td>
-</tr>
-<tr class="odd">
-<td id="T_5b592_row4_col0" class="data row4 col0">Random Forest</td>
-<td id="T_5b592_row4_col1" class="data row4 col1">Lasso</td>
-<td id="T_5b592_row4_col2" class="data row4 col2">Lasso</td>
-<td id="T_5b592_row4_col3" class="data row4 col3">0.076</td>
-<td id="T_5b592_row4_col4" class="data row4 col4">0.242</td>
-<td id="T_5b592_row4_col5" class="data row4 col5">0.792</td>
-</tr>
-<tr class="even">
-<td id="T_5b592_row5_col0" class="data row5 col0">Random Forest</td>
-<td id="T_5b592_row5_col1" class="data row5 col1">Lasso</td>
-<td id="T_5b592_row5_col2" class="data row5 col2">Random Forest</td>
-<td id="T_5b592_row5_col3" class="data row5 col3">0.075</td>
-<td id="T_5b592_row5_col4" class="data row5 col4">0.242</td>
-<td id="T_5b592_row5_col5" class="data row5 col5">0.802</td>
-</tr>
-<tr class="odd">
-<td id="T_5b592_row6_col0" class="data row6 col0">Random Forest</td>
-<td id="T_5b592_row6_col1" class="data row6 col1">Random Forest</td>
-<td id="T_5b592_row6_col2" class="data row6 col2">Lasso</td>
-<td id="T_5b592_row6_col3" class="data row6 col3">0.080</td>
-<td id="T_5b592_row6_col4" class="data row6 col4">0.278</td>
-<td id="T_5b592_row6_col5" class="data row6 col5">0.826</td>
-</tr>
-<tr class="even">
-<td id="T_5b592_row7_col0" class="data row7 col0">Random Forest</td>
-<td id="T_5b592_row7_col1" class="data row7 col1">Random Forest</td>
-<td id="T_5b592_row7_col2" class="data row7 col2">Random Forest</td>
-<td id="T_5b592_row7_col3" class="data row7 col3">0.079</td>
-<td id="T_5b592_row7_col4" class="data row7 col4">0.274</td>
-<td id="T_5b592_row7_col5" class="data row7 col5">0.822</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-
-
-<script type="module">
-    const { DataTable, jQuery: $ } = await import(window._datatables_src_for_itables_2_2_2);
-
-    document.querySelectorAll("#T_5b592:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#T_b352c:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -952,7 +674,6 @@ Table&nbsp;4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
