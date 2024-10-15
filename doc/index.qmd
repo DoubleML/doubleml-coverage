@@ -14,7 +14,7 @@ You can find the code for the simulations in the [GitHub repository](https://git
 Generally, the [DoubleML package](https://docs.doubleml.org/stable/index.html) solves a moment equation 
 
 $$
-E[\psi(W,\theta_0,\eta_0)] = 0
+\mathbb{E}[\psi(W,\theta_0,\eta_0)] = 0
 $$
 
 where $W$ denotes the observed data, $\theta_0$ the parameter of interest, and $\eta_0$ a vector of nuisance functions/elements. Using the `confint()` method, the package provides confidence intervals $[\hat{\theta}_{\text{lower}}, \hat{\theta}_{\text{upper}}]$ for the parameter of interest $\theta_0$.
