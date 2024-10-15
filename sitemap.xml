@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_nonignorable.html</loc>
+    <lastmod>2024-09-09T15:37:37.956Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_cate.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/qte.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_mar.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/pliv.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/rdd/rdd.html</loc>
+    <lastmod>2024-10-15T11:32:19.694Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_cate.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <lastmod>2024-09-09T15:37:37.954Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_pa.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_gate.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_nonignorable.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/pliv.html</loc>
+    <lastmod>2024-09-09T15:37:37.953Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_gate.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <lastmod>2024-09-09T15:37:37.951Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm.html</loc>
+    <lastmod>2024-09-09T15:37:37.951Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/irm/apo.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <lastmod>2024-10-15T10:27:44.216Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_pa.html</loc>
+    <lastmod>2024-09-09T17:11:14.066Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
+    <lastmod>2024-09-10T17:34:25.431Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
+    <lastmod>2024-09-09T15:37:37.949Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/irm/iivm.html</loc>
-    <lastmod>2024-10-09T06:26:15.128Z</lastmod>
+    <lastmod>2024-09-09T15:37:37.950Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_cate.html</loc>
+    <lastmod>2024-09-09T15:37:37.951Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/qte.html</loc>
+    <lastmod>2024-09-09T15:37:37.952Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
+    <lastmod>2024-09-09T15:37:37.953Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_gate.html</loc>
+    <lastmod>2024-09-09T15:37:37.954Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_mar.html</loc>
+    <lastmod>2024-09-09T15:37:37.955Z</lastmod>
   </url>
 </urlset>
