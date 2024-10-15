@@ -35,3 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           QUARTO_PROFILE: dev
+          QUARTO_PROJECT_OUTPUT_DIR: dev
