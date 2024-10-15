@@ -80,7 +80,7 @@ for i_rep in range(n_rep):
     # baseline
     for level_idx, level in enumerate(hyperparam_dict["level"]):
         res = rdrobust(y=Y, x=score, covs=Z, c=cutoff, level=level*100)
-        coef = res.coef.loc["Conventional", "Coeff"]
+        coef = res.coef.loc["Robust", "Coeff"]
         ci_lower = res.ci.loc["Robust", "CI Lower"]
         ci_upper = res.ci.loc["Robust", "CI Upper"]
 
@@ -117,15 +117,15 @@ for i_rep in range(n_rep):
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
                 confint = rdflex_model.confint(level=level)
-                coverage = (confint.iloc[0, 0] < oracle_effect) & (oracle_effect < confint.iloc[0, 1])
-                ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
+                coverage = (confint.iloc[2, 0] < oracle_effect) & (oracle_effect < confint.iloc[2, 1])
+                ci_length = confint.iloc[2, 1] - confint.iloc[2, 0]
 
                 df_results_detailed = pd.concat(
                     (df_results_detailed,
                         pd.DataFrame({
                             "Coverage": coverage.astype(int),
-                            "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
-                            "Bias": abs(rdflex_model.coef[0] - oracle_effect),
+                            "CI Length": ci_length,
+                            "Bias": abs(rdflex_model.coef[2] - oracle_effect),
                             "Learner g": learner_g_name,
                             "Method": "rdflex",
                             "fs specification": fs_specification,
