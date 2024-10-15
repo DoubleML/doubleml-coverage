@@ -1,4 +1,3 @@
-
 name: Quarto Publish Development Version
 
 on:
@@ -31,7 +30,6 @@ jobs:
         uses: quarto-dev/quarto-actions/render@v2
         env:
           path: ./doc
-          QUARTO_PROFILE: dev
         with:
           to: html
 
