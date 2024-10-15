@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: _site/dev
+
+metadata-files:
+  - _website.yml
+
+website: 
+  drafts:
+    - index.qmd
+    # IRM
+    - irm/irm.qmd
+    - irm/irm_gate.qmd
+    - irm/irm_cate.qmd
+    - irm/apo.qmd
+    - irm/qte.qmd
+    # PLM
+    - plm/plr.qmd
+    - plm/plr_gate.qmd
+    - plm/plr_cate.qmd
+    - plm/pliv.qmd
+    # DID
+    - did/did_pa.qmd
+    - did/did_cs.qmd
+    # SSM
+    - ssm/ssm_mar.qmd
+    - ssm/ssm_nonignorable.qmd
+    # RDD
+    - rdd/rdd.qmd
+  draft-mode: visible

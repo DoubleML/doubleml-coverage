@@ -1,0 +1,51 @@
+website:
+  title: "DoubleML Coverage"
+  favicon: _static/favicon.ico
+  search: 
+    location: sidebar
+  sidebar:
+    style: "docked"
+    logo: _static/logo.png
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: "IRM"
+        menu:
+          - irm/irm.qmd
+          - irm/irm_gate.qmd
+          - irm/irm_cate.qmd
+          - irm/apo.qmd
+          - irm/qte.qmd
+      - text: "PLM"
+        menu:      
+          - plm/plr.qmd
+          - plm/plr_gate.qmd
+          - plm/plr_cate.qmd
+          - plm/pliv.qmd
+      - text: "DID"
+        menu:      
+          - did/did_pa.qmd
+          - did/did_cs.qmd
+      - text: "SSM"
+        menu:      
+          - ssm/ssm_mar.qmd
+          - ssm/ssm_nonignorable.qmd
+    right: 
+      - icon: book
+        href: https://docs.doubleml.org/stable/index.html
+        aria-label: Documentation
+      - icon: github
+        menu:
+          - text: "DoubleML"
+            href: https://github.com/DoubleML/doubleml-for-py
+          - text: "DoubleML Coverage"
+            href: https://github.com/DoubleML/doubleml-coverage
+        aria-label: GitHub
+
+
+format:
+  html:
+    theme: cosmo 
+    css: styles.css
+    toc: true
