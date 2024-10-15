@@ -29,8 +29,9 @@ jobs:
       - name: Render Quarto Project with Development Profile
         uses: quarto-dev/quarto-actions/render@v2
         env:
-          path: ./doc
           QUARTO_PROFILE: dev
+        with:
+          to: html
 
       - name: Publish Development Version
         uses: quarto-dev/quarto-actions/publish@v2
