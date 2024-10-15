@@ -32,7 +32,6 @@ jobs:
         with:
           path: ./doc
           target: gh-pages
-          render: "false"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           QUARTO_PROFILE: dev
