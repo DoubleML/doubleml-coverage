@@ -25,7 +25,7 @@ jobs:
 
       # List directories after checking out gh-pages
       - name: List all directories and files after gh-pages checkout
-        run: ls -la
+        run: ls -la ./doc
 
       - name: Render Quarto Project with Development Profile
         uses: quarto-dev/quarto-actions/render@v2
@@ -37,11 +37,10 @@ jobs:
 
       # List directories after checking out gh-pages
       - name: List all directories and files after gh-pages checkout
-        run: ls -la
+        run: ls -la ./doc
         
-
       - name: Move rendered files to a temporary location
-        run: mv ./_site /tmp/quarto-site
+        run: mv ./doc/_site /tmp/quarto-site
 
       - name: Check out gh-pages branch
         uses: actions/checkout@v4
