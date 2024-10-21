@@ -18,7 +18,7 @@ from statsmodels.nonparametric.kernel_regression import KernelReg
 
 
 # Number of repetitions
-n_rep = 200
+n_rep = 500
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
