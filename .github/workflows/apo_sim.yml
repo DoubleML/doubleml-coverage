@@ -18,6 +18,7 @@ jobs:
       matrix:
         script: [
           'scripts/irm/irm_apo_coverage.py',
+          'scripts/irm/irm_apo_sensitivity.py',
         ]
 
     steps:
