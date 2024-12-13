@@ -242,7 +242,6 @@ display_columns = [
 
 ```{python}
 #| echo: false
-score = "partialling out"
 level = 0.95
 
 df_ate_95 = df[(df['level'] == level)][display_columns]
@@ -252,7 +251,6 @@ make_pretty(df_ate_95, level, n_rep)
 
 ```{python}
 #| echo: false
-score = "partialling out"
 level = 0.9
 
 df_ate_9 = df[(df['level'] == level)][display_columns]
