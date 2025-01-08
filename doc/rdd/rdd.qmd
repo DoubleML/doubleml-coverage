@@ -63,6 +63,8 @@ def make_pretty(df, level, n_rep):
 
 ## Sharp Design
 
+The simulations are based on the [make_simple_rdd_data](https://docs.doubleml.org/stable/api/generated/doubleml.rdd.datasets.make_simple_rdd_data.html#doubleml.rdd.datasets.make_simple_rdd_data)-DGP with $1000$ observations. The simulation considers data under a [sharp regression discontinuity design](https://docs.doubleml.org/stable/guide/models.html#sharp-regression-discontinuity-design).
+
 ::: {.callout-note title="Metadata"  collapse="true"}
 
 ```{python}
@@ -104,6 +106,8 @@ make_pretty(df_ate_9, level, n_rep)
 
 
 ## Fuzzy Design
+
+The simulations are based on the [make_simple_rdd_data](https://docs.doubleml.org/stable/api/generated/doubleml.rdd.datasets.make_simple_rdd_data.html#doubleml.rdd.datasets.make_simple_rdd_data)-DGP with $2000$ observations. The simulation considers data under a [fuzzy regression discontinuity design](https://docs.doubleml.org/stable/guide/models.html#fuzzy-regression-discontinuity-design).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
