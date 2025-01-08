@@ -62,7 +62,7 @@ def make_pretty(df, level, n_rep):
 
 ## ATE Coverage
 
-The simulations are based on the  the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. The simulation considers data with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
+The simulations are based on the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. The simulation considers data with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
