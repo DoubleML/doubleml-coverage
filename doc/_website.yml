@@ -1,7 +1,7 @@
 website:
   title: "DoubleML Coverage"
   favicon: _static/favicon.ico
-  search: 
+  search:
     location: sidebar
   sidebar:
     style: "docked"
@@ -18,20 +18,23 @@ website:
           - irm/apo.qmd
           - irm/qte.qmd
       - text: "PLM"
-        menu:      
+        menu:
           - plm/plr.qmd
           - plm/plr_gate.qmd
           - plm/plr_cate.qmd
           - plm/pliv.qmd
       - text: "DID"
-        menu:      
+        menu:
           - did/did_pa.qmd
           - did/did_cs.qmd
       - text: "SSM"
-        menu:      
+        menu:
           - ssm/ssm_mar.qmd
           - ssm/ssm_nonignorable.qmd
-    right: 
+      - text: "RDD"
+        menu:
+          - rdd/rdd.qmd
+    right:
       - icon: book
         href: https://docs.doubleml.org/stable/index.html
         aria-label: Documentation
@@ -43,9 +46,8 @@ website:
             href: https://github.com/DoubleML/doubleml-coverage
         aria-label: GitHub
 
-
 format:
   html:
-    theme: cosmo 
+    theme: cosmo
     css: styles.css
     toc: true

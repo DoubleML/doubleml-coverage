@@ -1,4 +1,4 @@
-doubleml
+doubleml[rdd]
 joblib
 numpy
 pandas

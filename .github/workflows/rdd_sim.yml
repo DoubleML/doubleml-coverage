@@ -12,7 +12,7 @@ on:
     types: [run-rdd-scripts]
 
 jobs:
-  run-apo-scripts:
+  run-rdd-scripts:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -60,7 +60,14 @@ jobs:
 
     - name: Install DoubleML from correct branch
       run: |
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
+        pip uninstall -y doubleml
+        pip install "doubleml[rdd] @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
+
+    - name: Install RDFlex from main branch
+      run: |
+        pip uninstall -y doubleml
+        pip install git+https://github.com/DoubleML/doubleml-rdflex.git@main
+        pip install rdrobust
 
     - name: Set up Git configuration
       run: |
@@ -72,7 +79,7 @@ jobs:
 
     - name: Commit any existing changes
       run: |
-        git add results/irm
+        git add results/rdd
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
 
     - name: Wait random time

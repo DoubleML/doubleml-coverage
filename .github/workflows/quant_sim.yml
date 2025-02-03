@@ -61,7 +61,8 @@ jobs:
 
     - name: Install DoubleML from correct branch
       run: |
-        pip install git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}
+        pip uninstall -y doubleml
+        pip install "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
 
     - name: Set up Git configuration
       run: |
