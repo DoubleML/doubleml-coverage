@@ -101,6 +101,7 @@ for i_rep in range(n_rep):
                 dml_irm.sensitivity_analysis(cf_y=cf_y, cf_d=cf_d, rho=rho, level=level, null_hypothesis=theta)
                 cover_lower = theta >= dml_irm.sensitivity_params['ci']['lower']
                 cover_upper = theta <= dml_irm.sensitivity_params['ci']['upper']
+                ci_bound_width = dml_irm.sensitivity_params['ci']['upper'][0]- dml_irm.sensitivity_params['ci']['lower'][0]
                 rv = dml_irm.sensitivity_params['rv']
                 rva = dml_irm.sensitivity_params['rva']
                 bias_lower = abs(theta - dml_irm.sensitivity_params['theta']['lower'])
@@ -118,6 +119,7 @@ for i_rep in range(n_rep):
                         "RVa": rva,
                         "Bias (Lower)": bias_lower,
                         "Bias (Upper)": bias_upper,
+                        "CI Bound Length": ci_bound_width,
                         "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
                         "level": level,
@@ -135,6 +137,7 @@ df_results = df_results_detailed.groupby(
          "RVa": "mean",
          "Bias (Lower)": "mean",
          "Bias (Upper)": "mean",
+         "CI Bound Length": "mean",
          "repetition": "count"}
     ).reset_index()
 print(df_results)
