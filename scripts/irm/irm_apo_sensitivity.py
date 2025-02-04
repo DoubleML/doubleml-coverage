@@ -11,7 +11,7 @@ import doubleml as dml
 from doubleml.datasets import make_confounded_irm_data
 
 # Number of repetitions
-n_rep = 500
+n_rep = 250
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
