@@ -15,7 +15,7 @@ n_rep = 100
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
-n_obs = 5000
+n_obs = 20000
 theta = 5.0
 trimming_threshold = 0.05
 
