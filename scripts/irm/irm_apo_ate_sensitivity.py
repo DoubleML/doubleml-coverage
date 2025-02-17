@@ -15,7 +15,7 @@ n_rep = 100
 max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 
 # DGP pars
-n_obs = 20000
+n_obs = 10000
 theta = 5.0
 trimming_threshold = 0.05
 
@@ -177,6 +177,8 @@ metadata = pd.DataFrame({
     'Total Runtime (seconds)': [total_runtime],
     'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
     'Sensitivity Errors': [sensitivity_err_count],
+    'Number of observations': [n_obs],
+    'Number of repetitions': [n_rep],
 })
 print(metadata)
 
