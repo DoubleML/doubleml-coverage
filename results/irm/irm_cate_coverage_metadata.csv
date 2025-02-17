@@ -1,2 +1,2 @@
-DoubleML Version,Script,Date,Total Runtime (seconds),Python Version
-0.10.dev0,irm_cate_coverage.py,2025-01-08 14:19:05,7429.032528162003,3.12.8
+DoubleML Version,Script,Date,Total Runtime (seconds),Python Version,Number of observations,Number of repetitions
+0.10.dev0,irm_cate_coverage.py,2025-02-17 14:09:01,5386.899612903595,3.12.9,2000,1000

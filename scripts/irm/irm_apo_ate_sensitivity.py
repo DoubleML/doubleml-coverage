@@ -20,8 +20,8 @@ theta = 5.0
 trimming_threshold = 0.05
 
 dgp_pars = {
-    "gamma_a": 0.151,
-    "beta_a": 0.580,
+    "gamma_a": 0.198,
+    "beta_a": 0.582,
     "theta": theta,
     "var_epsilon_y": 1.0,
     "trimming_threshold": trimming_threshold,
@@ -33,9 +33,9 @@ np.random.seed(42)
 dgp_dict = make_confounded_irm_data(n_obs=int(1e+6), **dgp_pars)
 
 oracle_dict = dgp_dict['oracle_values']
-rho = oracle_dict['rho_atte']
+rho = oracle_dict['rho_ate']
 cf_y = oracle_dict['cf_y']
-cf_d = oracle_dict['cf_d_atte']
+cf_d = oracle_dict['cf_d_ate']
 
 print(f"Confounding factor for Y: {cf_y}")
 print(f"Confounding factor for D: {cf_d}")
@@ -54,11 +54,13 @@ hyperparam_dict = {
                   ("LGBM", LGBMRegressor(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1))],
     "learner_m": [("Logistic Regr.", LogisticRegression()),
                   ("LGBM", LGBMClassifier(n_estimators=500, learning_rate=0.01, min_child_samples=10, verbose=-1)),],
-    "level": [0.95, 0.90]
+    "level": [0.95, 0.90],
+    "treatment_levels": [0.0, 1.0],
 }
 
 # set up the results dataframe
 df_results_detailed = pd.DataFrame()
+sensitivity_err_count = 0
 
 # start simulation
 np.random.seed(42)
@@ -83,29 +85,44 @@ for i_rep in range(n_rep):
     for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
         for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
             # Set machine learning methods for g & m
-            dml_irm = dml.DoubleMLIRM(
+            # calculate the APOs
+            dml_apos = dml.DoubleMLAPOS(
                 obj_dml_data=obj_dml_data,
-                score='ATTE',
                 ml_g=ml_g,
                 ml_m=ml_m,
-                trimming_threshold=trimming_threshold
+                treatment_levels=hyperparam_dict["treatment_levels"],
             )
-            dml_irm.fit(n_jobs_cv=5)
 
             for level_idx, level in enumerate(hyperparam_dict["level"]):
-                estimate = dml_irm.coef[0]
-                confint = dml_irm.confint(level=level)
+                dml_apos.fit(n_jobs_cv=5)
+            effects = dml_apos.coef
+            dml_apos.fit(n_jobs_cv=5)
+            effects = dml_apos.coef
+
+            causal_contrast_model = dml_apos.causal_contrast(reference_levels=0)
+            estimate = causal_contrast_model.thetas
+
+            for level_idx, level in enumerate(hyperparam_dict["level"]):
+                # estimate = causal_contrast_model.coef[0]
+                confint = causal_contrast_model.confint(level=level)
                 coverage = (confint.iloc[0, 0] < theta) & (theta < confint.iloc[0, 1])
                 ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
 
                 # test sensitivity parameters
-                dml_irm.sensitivity_analysis(cf_y=cf_y, cf_d=cf_d, rho=rho, level=level, null_hypothesis=theta)
-                cover_lower = theta >= dml_irm.sensitivity_params['ci']['lower']
-                cover_upper = theta <= dml_irm.sensitivity_params['ci']['upper']
-                rv = dml_irm.sensitivity_params['rv']
-                rva = dml_irm.sensitivity_params['rva']
-                bias_lower = abs(theta - dml_irm.sensitivity_params['theta']['lower'])
-                bias_upper = abs(theta - dml_irm.sensitivity_params['theta']['upper'])
+                # try to run sensitivity analysis
+                try:
+                    causal_contrast_model.sensitivity_analysis(cf_y=cf_y, cf_d=cf_d, rho=rho, level=level ,null_hypothesis=theta)
+                    cover_lower = theta >= causal_contrast_model.sensitivity_params['ci']['lower']
+                    cover_upper = theta <= causal_contrast_model.sensitivity_params['ci']['upper']
+                    ci_bound_width = causal_contrast_model.sensitivity_params['ci']['upper'][0]- causal_contrast_model.sensitivity_params['ci']['lower'][0]
+                    rv = causal_contrast_model.sensitivity_params['rv']
+                    rva = causal_contrast_model.sensitivity_params['rva']
+                    bias_lower = abs(theta - causal_contrast_model.sensitivity_params['theta']['lower'])
+                    bias_upper = abs(theta - causal_contrast_model.sensitivity_params['theta']['upper'])
+                    success_eval = 1
+                except Exception as e:
+                    sensitivity_err_count += 1
+                    continue
 
                 df_results_detailed = pd.concat(
                     (df_results_detailed,
@@ -119,11 +136,16 @@ for i_rep in range(n_rep):
                         "RVa": rva,
                         "Bias (Lower)": bias_lower,
                         "Bias (Upper)": bias_upper,
+                        "CI Bound Length": ci_bound_width,
                         "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
                         "level": level,
-                        "repetition": i_rep}, index=[0])),
+                        "repetition": i_rep,
+                        "success_eval": success_eval}, index=[0])),
                     ignore_index=True)
+
+# aggregate results only if success_eval == 1
+df_results_detailed = df_results_detailed[df_results_detailed["success_eval"] == 1]
 
 df_results = df_results_detailed.groupby(
     ["Learner g", "Learner m", "level"]).agg(
@@ -136,15 +158,17 @@ df_results = df_results_detailed.groupby(
          "RVa": "mean",
          "Bias (Lower)": "mean",
          "Bias (Upper)": "mean",
+         "CI Bound Length": "mean",
          "repetition": "count"}
     ).reset_index()
 print(df_results)
+
 end_time = time.time()
 total_runtime = end_time - start_time
 
 # save results
-script_name = "irm_atte_sensitivity.py"
-path = "results/irm/irm_atte_sensitivity"
+script_name = "irm_apo_sensitivity.py"
+path = "results/irm/irm_apo_sensitivity"
 
 metadata = pd.DataFrame({
     'DoubleML Version': [dml.__version__],
@@ -152,6 +176,7 @@ metadata = pd.DataFrame({
     'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
     'Total Runtime (seconds)': [total_runtime],
     'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
+    'Sensitivity Errors': [sensitivity_err_count],
     'Number of observations': [n_obs],
     'Number of repetitions': [n_rep],
 })

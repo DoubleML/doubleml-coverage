@@ -229,6 +229,8 @@ metadata = pd.DataFrame({
     'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
     'Total Runtime (seconds)': [total_runtime],
     'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
+    'Number of observations': [n_obs],
+    'Number of repetitions': [n_rep],
 })
 print(metadata)
 

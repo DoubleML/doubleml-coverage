@@ -1,0 +1,2 @@
+DoubleML Version,Script,Date,Total Runtime (seconds),Python Version,Sensitivity Errors,Number of observations,Number of repetitions
+0.10.dev0,irm_apo_sensitivity.py,2025-02-17 15:18:22,9570.017815113068,3.12.9,0,10000,100
