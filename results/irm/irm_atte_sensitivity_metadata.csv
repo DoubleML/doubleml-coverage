@@ -1,2 +1,2 @@
-DoubleML Version,Script,Date,Total Runtime (seconds),Python Version
-0.10.dev0,irm_atte_sensitivity.py,2025-02-17 10:32:47,6933.687040805817,3.12.9
+DoubleML Version,Script,Date,Total Runtime (seconds),Python Version,Number of observations,Number of repetitions
+0.10.dev0,irm_atte_sensitivity.py,2025-02-17 13:05:01,1552.7866415977478,3.12.9,10000,100
