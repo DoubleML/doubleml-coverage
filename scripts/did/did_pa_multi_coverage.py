@@ -5,6 +5,7 @@ import time
 import sys
 
 from sklearn.linear_model import LinearRegression, LogisticRegression
+from lightgbm import LGBMRegressor, LGBMClassifier
 
 import doubleml as dml
 from doubleml.did.datasets import make_did_CS2021
@@ -16,10 +17,10 @@ max_runtime = 5.5 * 3600  # 5.5 hours in seconds
 # DGP pars
 dgp_dict = {}
 
-df_oracle = make_did_CS2021(n_obs=int(1e+6), dgp_type=1)
+df_oracle = make_did_CS2021(n_obs=int(1e+6), dgp_type=1)  # does not depend on the DGP type
 df_oracle["ite"] = df_oracle["y1"] - df_oracle["y0"]
 df_oracle_thetas = df_oracle.groupby(["d", "t"])["ite"].mean().reset_index()
-# drop 
+# drop
 print(df_oracle_thetas)
 
 n_obs = 2000
@@ -27,7 +28,7 @@ n_obs = 2000
 # to get the best possible comparison between different learners (and settings) we first simulate all datasets
 np.random.seed(42)
 
-dgp_types = [1]
+dgp_types = [1, 2, 3, 4, 5, 6]
 n_dgps = len(dgp_types)
 datasets = []
 for dgp_type in dgp_types:
@@ -41,10 +42,12 @@ for dgp_type in dgp_types:
 # set up hyperparameters
 hyperparam_dict = {
     "DGP": dgp_types,
-    "score": ["observational"],
+    "score": ["observational", "experimental"],
     "in sample normalization": [True, False],
-    "learner_g": [("Linear", LinearRegression()),],
-    "learner_m": [("Linear", LogisticRegression()),],
+    "learner_g": [("Linear", LinearRegression()),
+                  ("LGBM", LGBMRegressor(n_estimators=300, learning_rate=0.05, verbose=-1)),],
+    "learner_m": [("Linear", LogisticRegression()),
+                  ("LGBM", LGBMClassifier(n_estimators=300, learning_rate=0.05, verbose=-1))],
     "level": [0.95, 0.90]
 }
 
