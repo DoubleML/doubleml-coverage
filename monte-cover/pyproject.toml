@@ -1,0 +1,48 @@
+[project]
+name = "montecover"
+version = "0.1.0"
+description = "A Monte Carlo coverage simulation package"
+readme = "README.md"
+authors = [
+    { name = "SvenKlaassen", email = "sven.klaassen@uni-hamburg.de" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "black>=25.1.0",
+    "doubleml[rdd]>=0.9.3",
+    "ipykernel>=6.29.5",
+    "itables>=2.2.5",
+    "joblib>=1.4.2",
+    "lightgbm>=4.6.0",
+    "numpy>=2.2.4",
+    "pandas>=2.2.3",
+    "ruff>=0.11.0",
+    "scikit-learn>=1.5.2",
+]
+
+[project.scripts]
+monte-cover = "montecover:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 127
+target-version = ['py311', 'py312']
+preview = true
+
+[tool.ruff]
+# max line length for black
+line-length = 127
+target-version = "py312"
+
+
+[tool.ruff.lint]
+# all rules can be found here: https://beta.ruff.rs/docs/rules/
+select = ["E", "F", "W", "I"]
+ignore = [
+    # Use `is` and `is not` for type comparisons, or `isinstance()` for
+    # isinstance checks
+    "E721",
+]
