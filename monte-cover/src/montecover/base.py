@@ -6,7 +6,7 @@ import warnings
 from abc import ABC, abstractmethod
 from datetime import datetime
 from itertools import product
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 import doubleml as dml
 import numpy as np
@@ -29,9 +29,10 @@ class BaseSimulation(ABC):
         self.config = self._load_config(config_file)
 
         # Apply parameters from config
-        self.repetitions = self.config.get("repetitions", 20)
-        self.max_runtime = self.config.get("max_runtime", 5.5 * 3600)
-        self.random_seed = self.config.get("random_seed", 42)
+        self.simulation_parameters = self.config.get("simulation_parameters", {})
+        self.repetitions = self.simulation_parameters.get("repetitions", 20)
+        self.max_runtime = self.simulation_parameters.get("max_runtime", 5.5 * 3600)
+        self.random_seed = self.simulation_parameters.get("random_seed", 42)
         self.suppress_warnings = suppress_warnings
 
         # Set up logging
@@ -55,7 +56,15 @@ class BaseSimulation(ABC):
         self.logger.info(f"Initialized simulation with random seed {self.random_seed}")
 
         # Let child classes process any specific parameters
+        self.dgp_parameters = self.config.get("dgp_parameters", {})
+        self.dml_parameters = self.config.get("dml_parameters", {})
+        self.confidence_parameters = self.config.get("confidence_parameters", {})
         self._process_config_parameters()
+
+    @abstractmethod
+    def _generate_dml_data(self, dgp_params: Dict[str, Any]) -> dml.DoubleMLData:
+        """Generate data for the DoubleML simulation."""
+        pass
 
     @abstractmethod
     def run_single_rep(self, params: Dict[str, Any]) -> Dict[str, Any]:
@@ -67,23 +76,19 @@ class BaseSimulation(ABC):
         """Summarize the simulation results."""
         pass
 
-    def get_parameters(self) -> Dict[str, List[Any]]:
-        """Get parameter grid from config."""
-        param_grid = self.config.get("parameters", {})
-        if not param_grid:
-            self.logger.warning("No parameter grid found in config. Using empty parameter set.")
-        return param_grid
-
     def run_simulation(self):
         """Run the full simulation."""
         self.start_time = time.time()
         self.logger.info("Starting simulation")
 
-        param_grid = self.get_parameters()
-        self.logger.info(f"Parameter grid: {param_grid}")
+        self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
+        self.logger.info(f"DML Parameters: {self.dml_parameters}")
+        self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
 
         # Calculate total number of parameter combinations
-        total_combinations = np.prod([len(values) for values in param_grid.values()])
+        dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
+        dml_combinations = [len(v) for v in self.dml_parameters.values()]
+        total_combinations = np.prod(dgp_combinations + dml_combinations)
         self.logger.info(f"Total parameter combinations: {total_combinations}")
 
         # Calculate expected total iterations
@@ -102,36 +107,46 @@ class BaseSimulation(ABC):
                 break
 
             param_combo = 0
-            keys = param_grid.keys()
-            for values in product(*param_grid.values()):
-                param_combo += 1
-                params = dict(zip(keys, values))
-                param_start_time = time.time()
+            # loop through all
+            for dgp_param_values in product(*self.dgp_parameters.values()):
+                dgp_params = dict(zip(self.dgp_parameters.keys(), dgp_param_values))
+                dml_data = self._generate_dml_data(dgp_params)
 
-                # Log parameter combination
-                self.logger.debug(f"Rep {i_rep+1}, Combo {param_combo}/{total_combinations}: {params}")
+                for dml_param_values in product(*self.dml_parameters.values()):
+                    dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
 
-                try:
-                    repetition_results = self.run_single_rep(params)
-                    param_end_time = time.time()
-                    param_duration = param_end_time - param_start_time
+                    param_combo += 1
+                    # Log parameter combination
+                    self.logger.debug(
+                        f"Rep {i_rep+1}, Combo {param_combo}/{total_combinations}: DGPs {dgp_params}, DML {dml_params}"
+                    )
+                    param_start_time = time.time()
 
-                    if repetition_results is not None:
-                        assert isinstance(repetition_results, dict), "The result must be a dictionary."
-                        # Process each dataframe in the result dictionary
-                        for result_name, repetition_result in repetition_results.items():
-                            assert isinstance(repetition_result, dict), "Each result must be a dictionary."
-                            repetition_result["repetition"] = i_rep
+                    try:
+                        repetition_results = self.run_single_rep(dml_data, dml_params)
+                        param_end_time = time.time()
+                        param_duration = param_end_time - param_start_time
 
-                            # Initialize key in results dict if not exists
-                            if result_name not in self.results:
-                                self.results[result_name] = []
-                            self.results[result_name].append(repetition_result)
+                        if repetition_results is not None:
+                            assert isinstance(repetition_results, dict), "The result must be a dictionary."
+                            # Process each dataframe in the result dictionary
+                            for result_name, repetition_result in repetition_results.items():
+                                assert isinstance(repetition_result, dict), "Each result must be a dictionary."
+                                repetition_result["repetition"] = i_rep
+                                # add dgp parameters to the result
+                                repetition_result.update(dgp_params)
 
-                        self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
-                except Exception as e:
-                    self.logger.error(f"Error in repetition {i_rep+1}, parameters {params}: {str(e)}")
-                    self.logger.exception("Exception details:")
+                                # Initialize key in results dict if not exists
+                                if result_name not in self.results:
+                                    self.results[result_name] = []
+                                self.results[result_name].append(repetition_result)
+
+                            self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
+                    except Exception as e:
+                        self.logger.error(
+                            f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, DML parameters {dml_params}: {str(e)}"
+                        )
+                        self.logger.exception("Exception details:")
 
             rep_end_time = time.time()
             rep_duration = rep_end_time - rep_start_time
