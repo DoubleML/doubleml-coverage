@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, Optional
 
 import doubleml as dml
 import numpy as np
@@ -14,28 +14,56 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
     def __init__(
         self,
-        repetitions: int = 20,
-        n_obs: int = 500,
-        max_runtime: float = 5.5 * 3600,
-        random_seed: int = 42,
+        config_file: str,
         suppress_warnings: bool = True,
+        log_level: str = "INFO",
+        log_file: Optional[str] = None,
     ):
         super().__init__(
-            repetitions=repetitions,
-            max_runtime=max_runtime,
-            random_seed=random_seed,
+            config_file=config_file,
             suppress_warnings=suppress_warnings,
+            log_level=log_level,
+            log_file=log_file,
         )
-        self.n_obs = n_obs
-
-        # Calculate oracle values
-        self._calculate_oracle_values()
 
         # Additional results storage for aggregated results
         self.results_aggregated = []
 
+        # Calculate oracle values
+        self._calculate_oracle_values()
+
+    def _process_config_parameters(self):
+        """Process simulation-specific parameters from config"""
+        # Extract n_obs from config or use default
+        self.n_obs = self.config.get("n_obs", 500)
+
+        # Process ML models in parameter grid
+        if "parameters" in self.config:
+            param_grid = self.config["parameters"]
+
+            # Convert learner_g strings to actual objects
+            if "learner_g" in param_grid:
+                processed_learners_g = []
+                for learner in param_grid["learner_g"]:
+                    if isinstance(learner, list) and len(learner) == 2:
+                        if learner[0] == "Linear":
+                            processed_learners_g.append(("Linear", LinearRegression()))
+                        # Add more model types as needed
+                param_grid["learner_g"] = processed_learners_g
+
+            # Convert learner_m strings to actual objects
+            if "learner_m" in param_grid:
+                processed_learners_m = []
+                for learner in param_grid["learner_m"]:
+                    if isinstance(learner, list) and len(learner) == 2:
+                        if learner[0] == "Linear":
+                            processed_learners_m.append(("Linear", LogisticRegression()))
+                        # Add more model types as needed
+                param_grid["learner_m"] = processed_learners_m
+
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
+        self.logger.info("Calculating oracle values")
 
         self.oracle_values = dict()
         # Oracle values
@@ -56,17 +84,6 @@ class DIDMultiCoverageSimulation(BaseSimulation):
         ).values.astype("datetime64[M]")
         self.oracle_values["eventstudy"] = df_oracle.groupby("e")["ite"].mean()[1:]
 
-    def setup_parameters(self) -> Dict[str, List[Any]]:
-        """Define simulation parameters."""
-        return {
-            "DGP": [1, 4, 6],
-            "score": ["observational", "experimental"],
-            "in_sample_normalization": [True, False],
-            "learner_g": [("Linear", LinearRegression())],
-            "learner_m": [("Linear", LogisticRegression())],
-            "level": [0.95, 0.90],
-        }
-
     def run_single_rep(self, params: Dict[str, Any]) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
@@ -76,6 +93,8 @@ class DIDMultiCoverageSimulation(BaseSimulation):
         learner_g_name, ml_g = params["learner_g"]
         learner_m_name, ml_m = params["learner_m"]
         level = params["level"]
+
+        self.logger.debug(f"Running with DGP={dgp_type}, score={score}, level={level}")
 
         dml_data = self._generate_data(dgp_type=dgp_type)
 
@@ -104,7 +123,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             oracle_thetas=oracle_thetas,
             confint=dml_model.confint(level=level),
             joint_confint=dml_model.confint(level=level, joint=True),
-            )
+        )
 
         for aggregation_method in ["group", "time", "eventstudy"]:
             agg_obj = dml_model.aggregate(aggregation=aggregation_method)
@@ -119,19 +138,22 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
         # add parameters to the result
         for result_dict in result.values():
-            result_dict.update({
-                "Learner g": learner_g_name,
-                "Learner m": learner_m_name,
-                "Score": score,
-                "In-sample-norm.": in_sample_normalization,
-                "DGP": dgp_type,
-                "level": level,
-            })
+            result_dict.update(
+                {
+                    "Learner g": learner_g_name,
+                    "Learner m": learner_m_name,
+                    "Score": score,
+                    "In-sample-norm.": in_sample_normalization,
+                    "DGP": dgp_type,
+                    "level": level,
+                }
+            )
 
         return result
 
     def summarize_results(self):
         """Summarize the simulation results."""
+        self.logger.info("Summarizing simulation results")
 
         groupby_cols = ["Learner g", "Learner m", "Score", "In-sample-norm.", "DGP", "level"]
         aggregation_dict = {
@@ -145,11 +167,8 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = (
-                result_df.groupby(groupby_cols)
-                .agg(aggregation_dict)
-                .reset_index()
-            )
+            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
 

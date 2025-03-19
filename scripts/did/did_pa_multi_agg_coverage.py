@@ -1,8 +1,14 @@
-from montecover.did import DIDMultiCoverageSimulation
 
-simulation = DIDMultiCoverageSimulation(
-    repetitions=5,
-    n_obs=500,
+from montecover.did.did_multi import DIDMultiCoverageSimulation
+
+# Create and run simulation with config file
+sim = DIDMultiCoverageSimulation(
+    config_file="scripts/did/multi_config.yml",
+    log_level="INFO",
+    log_file="logs/current_sim.log"
 )
-simulation.run_simulation()
-simulation.save_results(output_path="results/did/", file_prefix="did_pa_multi_coverage")
+sim.run_simulation()
+sim.save_results(output_path="results/did/", file_prefix="did_multi_run")
+
+# Save config file for reproducibility
+sim.save_config("results/did/multi_config.yml")
