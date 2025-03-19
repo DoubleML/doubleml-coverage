@@ -108,9 +108,15 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             time_index = self.oracle_values["detailed"]["t"] == t
             oracle_thetas[i] = self.oracle_values["detailed"][group_index & time_index]["ite"].iloc[0]
 
-        result = dict()
+        result = {
+            "detailed": [],
+            "group": [],
+            "time": [],
+            "eventstudy": [],
+        }
         for level in self.confidence_parameters["level"]:
-            result["detailed"] = self._compute_coverage(
+            level_result = dict()
+            level_result["detailed"] = self._compute_coverage(
                 thetas=dml_model.coef,
                 oracle_thetas=oracle_thetas,
                 confint=dml_model.confint(level=level),
@@ -121,7 +127,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
                 agg_obj = dml_model.aggregate(aggregation=aggregation_method)
                 agg_obj.aggregated_frameworks.bootstrap(n_rep_boot=2000)
 
-                result[aggregation_method] = self._compute_coverage(
+                level_result[aggregation_method] = self._compute_coverage(
                     thetas=agg_obj.aggregated_frameworks.thetas,
                     oracle_thetas=self.oracle_values[aggregation_method].values,
                     confint=agg_obj.aggregated_frameworks.confint(level=level),
@@ -129,8 +135,8 @@ class DIDMultiCoverageSimulation(BaseSimulation):
                 )
 
             # add parameters to the result
-            for result_dict in result.values():
-                result_dict.update(
+            for res in level_result.values():
+                res.update(
                     {
                         "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
@@ -139,6 +145,8 @@ class DIDMultiCoverageSimulation(BaseSimulation):
                         "level": level,
                     }
                 )
+            for key, res in level_result.items():
+                result[key].append(res)
 
         return result
 

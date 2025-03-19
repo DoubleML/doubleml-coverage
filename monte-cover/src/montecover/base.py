@@ -131,15 +131,17 @@ class BaseSimulation(ABC):
                             assert isinstance(repetition_results, dict), "The result must be a dictionary."
                             # Process each dataframe in the result dictionary
                             for result_name, repetition_result in repetition_results.items():
-                                assert isinstance(repetition_result, dict), "Each result must be a dictionary."
-                                repetition_result["repetition"] = i_rep
-                                # add dgp parameters to the result
-                                repetition_result.update(dgp_params)
+                                assert isinstance(repetition_result, list), "Each repetition_result must be a list."
+                                for res in repetition_result:
+                                    assert isinstance(res, dict), "Each res must be a dictionary."
+                                    res["repetition"] = i_rep
+                                    # add dgp parameters to the result
+                                    res.update(dgp_params)
 
                                 # Initialize key in results dict if not exists
                                 if result_name not in self.results:
                                     self.results[result_name] = []
-                                self.results[result_name].append(repetition_result)
+                                self.results[result_name].extend(repetition_result)
 
                             self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
                     except Exception as e:
