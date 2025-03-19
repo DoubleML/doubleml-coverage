@@ -78,48 +78,36 @@ class DIDMultiCoverageSimulation(BaseSimulation):
         level = params["level"]
 
         dml_data = self._generate_data(dgp_type=dgp_type)
-        
-        # Fit model
-        if score == "experimental":
-            dml_DiD = dml.did.DoubleMLDIDMulti(
-                obj_dml_data=dml_data,
-                ml_g=ml_g,
-                ml_m=None,
-                gt_combinations="standard",
-                score=score,
-                in_sample_normalization=in_sample_normalization,
-            )
-        else:
-            dml_DiD = dml.did.DoubleMLDIDMulti(
-                obj_dml_data=dml_data,
-                ml_g=ml_g,
-                ml_m=ml_m,
-                gt_combinations="standard",
-                score=score,
-                in_sample_normalization=in_sample_normalization,
-            )
 
-        # Fit the model
-        dml_DiD.fit(n_jobs_cv=5)
-        dml_DiD.bootstrap(n_rep_boot=2000)
+        # Model
+        dml_model = dml.did.DoubleMLDIDMulti(
+            obj_dml_data=dml_data,
+            ml_g=ml_g,
+            ml_m=None if score == "experimental" else ml_m,
+            gt_combinations="standard",
+            score=score,
+            in_sample_normalization=in_sample_normalization,
+        )
+        dml_model.fit(n_jobs_cv=5)
+        dml_model.bootstrap(n_rep_boot=2000)
 
         # Oracle values for this model
-        oracle_thetas = np.full_like(dml_DiD.coef, np.nan)
-        for i, (g, _, t) in enumerate(dml_DiD.gt_combinations):
+        oracle_thetas = np.full_like(dml_model.coef, np.nan)
+        for i, (g, _, t) in enumerate(dml_model.gt_combinations):
             group_index = self.oracle_values["detailed"]["d"] == g
             time_index = self.oracle_values["detailed"]["t"] == t
             oracle_thetas[i] = self.oracle_values["detailed"][group_index & time_index]["ite"].iloc[0]
 
         result = dict()
         result["detailed"] = self._compute_coverage(
-            thetas=dml_DiD.coef,
+            thetas=dml_model.coef,
             oracle_thetas=oracle_thetas,
-            confint=dml_DiD.confint(level=level),
-            joint_confint=dml_DiD.confint(level=level, joint=True),
+            confint=dml_model.confint(level=level),
+            joint_confint=dml_model.confint(level=level, joint=True),
             )
 
         for aggregation_method in ["group", "time", "eventstudy"]:
-            agg_obj = dml_DiD.aggregate(aggregation=aggregation_method)
+            agg_obj = dml_model.aggregate(aggregation=aggregation_method)
             agg_obj.aggregated_frameworks.bootstrap(n_rep_boot=2000)
 
             result[aggregation_method] = self._compute_coverage(
