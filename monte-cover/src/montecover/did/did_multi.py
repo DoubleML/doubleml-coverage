@@ -14,7 +14,6 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
     def __init__(
         self,
-        output_path: str,
         repetitions: int = 20,
         n_obs: int = 500,
         max_runtime: float = 5.5 * 3600,
@@ -25,7 +24,6 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             repetitions=repetitions,
             max_runtime=max_runtime,
             random_seed=random_seed,
-            output_path=output_path,
             suppress_warnings=suppress_warnings,
         )
         self.n_obs = n_obs
@@ -79,21 +77,12 @@ class DIDMultiCoverageSimulation(BaseSimulation):
         learner_m_name, ml_m = params["learner_m"]
         level = params["level"]
 
-        # Generate data
-        data = make_did_CS2021(n_obs=self.n_obs, dgp_type=dgp_type)
-        obj_dml_data = dml.data.DoubleMLPanelData(
-            data,
-            y_col="y",
-            d_cols="d",
-            id_col="id",
-            t_col="t",
-            x_cols=["Z1", "Z2", "Z3", "Z4"],
-        )
-
+        dml_data = self._generate_data(dgp_type=dgp_type)
+        
         # Fit model
         if score == "experimental":
             dml_DiD = dml.did.DoubleMLDIDMulti(
-                obj_dml_data=obj_dml_data,
+                obj_dml_data=dml_data,
                 ml_g=ml_g,
                 ml_m=None,
                 gt_combinations="standard",
@@ -102,7 +91,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             )
         else:
             dml_DiD = dml.did.DoubleMLDIDMulti(
-                obj_dml_data=obj_dml_data,
+                obj_dml_data=dml_data,
                 ml_g=ml_g,
                 ml_m=ml_m,
                 gt_combinations="standard",
@@ -176,5 +165,15 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
         return result_summary
 
-
-
+    def _generate_data(self, dgp_type: int) -> dml.data.DoubleMLPanelData:
+        """Generate data for the simulation."""
+        data = make_did_CS2021(n_obs=self.n_obs, dgp_type=dgp_type)
+        dml_data = dml.data.DoubleMLPanelData(
+            data,
+            y_col="y",
+            d_cols="d",
+            id_col="id",
+            t_col="t",
+            x_cols=["Z1", "Z2", "Z3", "Z4"],
+        )
+        return dml_data

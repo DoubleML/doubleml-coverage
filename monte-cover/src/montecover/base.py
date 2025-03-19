@@ -19,13 +19,11 @@ class BaseSimulation(ABC):
         repetitions: int = 20,
         max_runtime: float = 5.5 * 3600,
         random_seed: int = 42,
-        output_path: str = "results",
         suppress_warnings: bool = True,
     ):
         self.repetitions = repetitions
         self.max_runtime = max_runtime
         self.random_seed = random_seed
-        self.output_path = output_path
         self.suppress_warnings = suppress_warnings
 
         # Results storage
@@ -100,7 +98,7 @@ class BaseSimulation(ABC):
         self.result_summary = self.summarize_results()
         print("Simulation finished.")
 
-    def save_results(self):
+    def save_results(self, output_path: str = "results", file_prefix: str = ""):
         """Save the simulation results."""
         metadata = pd.DataFrame(
             {
@@ -113,8 +111,8 @@ class BaseSimulation(ABC):
         )
 
         for df_name, df in self.result_summary.items():
-            df.to_csv(f"{self.output_path}_{df_name}.csv", index=False)
-        metadata.to_csv(f"{self.output_path}_metadata.csv", index=False)
+            df.to_csv(f"{output_path}{file_prefix}_{df_name}.csv", index=False)
+        metadata.to_csv(f"{output_path}{file_prefix}_metadata.csv", index=False)
 
     @staticmethod
     def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
