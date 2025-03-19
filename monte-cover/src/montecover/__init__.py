@@ -10,4 +10,4 @@ __all__ = ["BaseSimulation"]
 
 
 def main() -> None:
-    print("Hello from monte-cover!")
+    print("Hello from monte-cover! Run your simulations here.")
