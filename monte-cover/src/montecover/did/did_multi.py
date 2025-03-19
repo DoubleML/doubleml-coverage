@@ -38,31 +38,25 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
+
+        self.oracle_values = dict()
         # Oracle values
         df_oracle = make_did_CS2021(n_obs=int(1e6), dgp_type=1)  # does not depend on the DGP type
         df_oracle["ite"] = df_oracle["y1"] - df_oracle["y0"]
-        self.oracle_thetas = df_oracle.groupby(["d", "t"])["ite"].mean().reset_index()
-        print("ATTs:")
-        print(self.oracle_thetas)
+        self.oracle_values["detailed"] = df_oracle.groupby(["d", "t"])["ite"].mean().reset_index()
 
         # Oracle group aggregation
         df_oracle_post_treatment = df_oracle[df_oracle["t"] >= df_oracle["d"]]
-        self.oracle_agg_group = df_oracle_post_treatment.groupby("d")["ite"].mean()
-        print("Group aggregated ATTs:")
-        print(self.oracle_agg_group)
+        self.oracle_values["group"] = df_oracle_post_treatment.groupby("d")["ite"].mean()
 
         # Oracle time aggregation
-        self.oracle_agg_time = df_oracle_post_treatment.groupby("t")["ite"].mean()
-        print("Time aggregated ATTs:")
-        print(self.oracle_agg_time)
+        self.oracle_values["time"] = df_oracle_post_treatment.groupby("t")["ite"].mean()
 
         # Oracle eventstudy aggregation
         df_oracle["e"] = pd.to_datetime(df_oracle["t"]).values.astype("datetime64[M]") - pd.to_datetime(
             df_oracle["d"]
         ).values.astype("datetime64[M]")
-        self.oracle_agg_eventstudy = df_oracle.groupby("e")["ite"].mean()
-        print("Event Study aggregated ATTs:")
-        print(self.oracle_agg_eventstudy)
+        self.oracle_values["eventstudy"] = df_oracle.groupby("e")["ite"].mean()[1:]
 
     def setup_parameters(self) -> Dict[str, List[Any]]:
         """Define simulation parameters."""
@@ -118,79 +112,44 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
         # Fit the model
         dml_DiD.fit(n_jobs_cv=5)
+        dml_DiD.bootstrap(n_rep_boot=2000)
 
         # Oracle values for this model
-        theta = np.full_like(dml_DiD.coef, np.nan)
+        oracle_thetas = np.full_like(dml_DiD.coef, np.nan)
         for i, (g, _, t) in enumerate(dml_DiD.gt_combinations):
-            group_index = self.oracle_thetas["d"] == g
-            time_index = self.oracle_thetas["t"] == t
-            theta[i] = self.oracle_thetas[group_index & time_index]["ite"].iloc[0]
+            group_index = self.oracle_values["detailed"]["d"] == g
+            time_index = self.oracle_values["detailed"]["t"] == t
+            oracle_thetas[i] = self.oracle_values["detailed"][group_index & time_index]["ite"].iloc[0]
 
-        # Confidence intervals and metrics
-        confint = dml_DiD.confint(level=level)
-        coverage = np.mean((confint.iloc[:, 0] < theta) & (theta < confint.iloc[:, 1]))
-        ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
-        bias = np.mean(abs(dml_DiD.coef - theta))
+        result = dict()
+        result["detailed"] = self._compute_coverage(
+            thetas=dml_DiD.coef,
+            oracle_thetas=oracle_thetas,
+            confint=dml_DiD.confint(level=level),
+            joint_confint=dml_DiD.confint(level=level, joint=True),
+            )
 
-        # Bootstrap for uniform confidence intervals
-        dml_DiD.bootstrap(n_rep_boot=2000)
-        confint_uniform = dml_DiD.confint(level=level, joint=True)
+        for aggregation_method in ["group", "time", "eventstudy"]:
+            agg_obj = dml_DiD.aggregate(aggregation=aggregation_method)
+            agg_obj.aggregated_frameworks.bootstrap(n_rep_boot=2000)
 
-        coverage_uniform = all((confint_uniform.iloc[:, 0] < theta) & (theta < confint_uniform.iloc[:, 1]))
-        ci_length_uniform = np.mean(confint_uniform.iloc[:, 1] - confint_uniform.iloc[:, 0])
+            result[aggregation_method] = self._compute_coverage(
+                thetas=agg_obj.aggregated_frameworks.thetas,
+                oracle_thetas=self.oracle_values[aggregation_method].values,
+                confint=agg_obj.aggregated_frameworks.confint(level=level),
+                joint_confint=agg_obj.aggregated_frameworks.confint(level=level, joint=True),
+            )
 
-        # Detailed results
-        result_detailed = {
-            "Coverage": coverage,
-            "CI Length": ci_length,
-            "Bias": bias,
-            "Uniform Coverage": coverage_uniform,
-            "Uniform CI Length": ci_length_uniform,
-            "Learner g": learner_g_name,
-            "Learner m": learner_m_name,
-            "Score": score,
-            "In-sample-norm.": in_sample_normalization,
-            "DGP": dgp_type,
-            "level": level,
-        }
-
-        # Group aggregation
-        group_agg = dml_DiD.aggregate(aggregation="group")
-        group_confint = group_agg.aggregated_frameworks.confint(level=level)
-        group_coverage = np.mean(
-            (group_confint.iloc[:, 0] < self.oracle_agg_group.values)
-            & (self.oracle_agg_group.values < group_confint.iloc[:, 1])
-        )
-        group_ci_length = np.mean(group_confint.iloc[:, 1] - group_confint.iloc[:, 0])
-        group_bias = np.mean(abs(group_agg.aggregated_frameworks.thetas - self.oracle_agg_group.values))
-
-        group_agg.aggregated_frameworks.bootstrap(n_rep_boot=2000)
-        group_confint_uniform = group_agg.aggregated_frameworks.confint(level=level, joint=True)
-        group_coverage_uniform = all(
-            (group_confint_uniform.iloc[:, 0] < self.oracle_agg_group.values)
-            & (self.oracle_agg_group.values < group_confint_uniform.iloc[:, 1])
-        )
-        group_ci_length_uniform = np.mean(group_confint_uniform.iloc[:, 1] - group_confint_uniform.iloc[:, 0])
-
-        # Aggregated results
-        result_aggregated = {
-            "Coverage": group_coverage,
-            "CI Length": group_ci_length,
-            "Bias": group_bias,
-            "Uniform Coverage": group_coverage_uniform,
-            "Uniform CI Length": group_ci_length_uniform,
-            "Learner g": learner_g_name,
-            "Learner m": learner_m_name,
-            "Score": score,
-            "In-sample-norm.": in_sample_normalization,
-            "DGP": dgp_type,
-            "level": level,
-        }
-
-        result = {
-            "detailed": result_detailed,
-            "aggregated": result_aggregated,
-        }
+        # add parameters to the result
+        for result_dict in result.values():
+            result_dict.update({
+                "Learner g": learner_g_name,
+                "Learner m": learner_m_name,
+                "Score": score,
+                "In-sample-norm.": in_sample_normalization,
+                "DGP": dgp_type,
+                "level": level,
+            })
 
         return result
 
@@ -216,3 +175,6 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             )
 
         return result_summary
+
+
+

@@ -115,3 +115,25 @@ class BaseSimulation(ABC):
         for df_name, df in self.result_summary.items():
             df.to_csv(f"{self.output_path}_{df_name}.csv", index=False)
         metadata.to_csv(f"{self.output_path}_metadata.csv", index=False)
+
+    @staticmethod
+    def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
+        """Compute coverage, CI length, and bias."""
+
+        coverage = np.mean((confint.iloc[:, 0] < oracle_thetas) & (oracle_thetas < confint.iloc[:, 1]))
+        ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
+        bias = np.mean(abs(thetas - oracle_thetas))
+        result_dict = {
+            "Coverage": coverage,
+            "CI Length": ci_length,
+            "Bias": bias,
+        }
+
+        if joint_confint is not None:
+            coverage_uniform = all((joint_confint.iloc[:, 0] < oracle_thetas) & (oracle_thetas < joint_confint.iloc[:, 1]))
+            ci_length_uniform = np.mean(joint_confint.iloc[:, 1] - joint_confint.iloc[:, 0])
+
+            result_dict["Uniform Coverage"] = coverage_uniform
+            result_dict["Uniform CI Length"] = ci_length_uniform
+
+        return result_dict
