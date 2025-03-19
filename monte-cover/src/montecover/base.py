@@ -172,8 +172,8 @@ class BaseSimulation(ABC):
             {
                 "DoubleML Version": [dml.__version__],
                 "Script": [self.__class__.__name__],
-                "Date": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-                "Total Runtime (seconds)": [self.total_runtime],
+                "Date": [datetime.now().strftime("%Y-%m-%d %H:%M")],
+                "Total Runtime (minutes)": [self.total_runtime / 60],
                 "Python Version": [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
                 "Config File": [self.config_file],
             }
