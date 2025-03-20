@@ -78,7 +78,7 @@ class BaseSimulation(ABC):
 
     def run_simulation(self):
         """Run the full simulation."""
-        self._initialize_simulation()
+        self._setup_simulation_metrics()
         
         # Loop through repetitions
         for i_rep in range(self.repetitions):
@@ -139,20 +139,10 @@ class BaseSimulation(ABC):
             rep_duration = rep_end_time - rep_start_time
             self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
 
-        # convert results to dataframes
-        for key, value in self.results.items():
-            self.results[key] = pd.DataFrame(value)
+        self._process_results()
 
-        self.end_time = time.time()
-        self.total_runtime = self.end_time - self.start_time
-        self.logger.info(f"Simulation completed in {self.total_runtime:.2f}s")
-
-        # Summarize & save results
-        self.logger.info("Summarizing results")
-        self.result_summary = self.summarize_results()
-
-    def _initialize_simulation(self):
-        """Initialize the simulation run."""
+    def _setup_simulation_metrics(self):
+        """Initialize timing and calculate parameter combination metrics."""
         self.start_time = time.time()
         self.logger.info("Starting simulation")
         self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
@@ -160,10 +150,6 @@ class BaseSimulation(ABC):
         self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
         
         # Calculate expected iterations
-        self._calculate_parameter_combinations()
-
-    def _calculate_parameter_combinations(self):
-        """Calculate parameter combinations and expected iterations."""
         dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
         dml_combinations = [len(v) for v in self.dml_parameters.values()]
         self.total_combinations = np.prod(dgp_combinations + dml_combinations)
@@ -171,7 +157,21 @@ class BaseSimulation(ABC):
         
         self.logger.info(f"Total parameter combinations: {self.total_combinations}")
         self.logger.info(f"Expected total iterations: {self.total_iterations}")
+
+    def _process_results(self):
+        """Process collected results and log completion metrics."""
+        # Convert results to dataframes incrementally
+        for key, value in self.results.items():
+            self.results[key] = pd.DataFrame(value)
         
+        self.end_time = time.time()
+        self.total_runtime = self.end_time - self.start_time
+        self.logger.info(f"Simulation completed in {self.total_runtime:.2f}s")
+        
+        # Summarize results
+        self.logger.info("Summarizing results")
+        self.result_summary = self.summarize_results()
+
     def save_results(self, output_path: str = "results", file_prefix: str = ""):
         """Save the simulation results."""
         os.makedirs(output_path, exist_ok=True)
