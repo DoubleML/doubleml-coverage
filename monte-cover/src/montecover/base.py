@@ -206,22 +206,23 @@ class BaseSimulation(ABC):
     @staticmethod
     def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
         """Compute coverage, CI length, and bias."""
+        lower_bound = confint.iloc[:, 0]
+        upper_bound = confint.iloc[:, 1]
+        coverage_mask = (lower_bound < oracle_thetas) & (oracle_thetas < upper_bound)
 
-        coverage = np.mean((confint.iloc[:, 0] < oracle_thetas) & (oracle_thetas < confint.iloc[:, 1]))
-        ci_length = np.mean(confint.iloc[:, 1] - confint.iloc[:, 0])
-        bias = np.mean(abs(thetas - oracle_thetas))
         result_dict = {
-            "Coverage": coverage,
-            "CI Length": ci_length,
-            "Bias": bias,
+            "Coverage": np.mean(coverage_mask),
+            "CI Length": np.mean(upper_bound - lower_bound),
+            "Bias": np.mean(np.abs(thetas - oracle_thetas)),
         }
 
         if joint_confint is not None:
-            coverage_uniform = all((joint_confint.iloc[:, 0] < oracle_thetas) & (oracle_thetas < joint_confint.iloc[:, 1]))
-            ci_length_uniform = np.mean(joint_confint.iloc[:, 1] - joint_confint.iloc[:, 0])
+            joint_lower_bound = joint_confint.iloc[:, 0]
+            joint_upper_bound = joint_confint.iloc[:, 1]
+            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
 
-            result_dict["Uniform Coverage"] = coverage_uniform
-            result_dict["Uniform CI Length"] = ci_length_uniform
+            result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
+            result_dict["Uniform CI Length"] = np.mean(joint_upper_bound - joint_lower_bound)
 
         return result_dict
 
