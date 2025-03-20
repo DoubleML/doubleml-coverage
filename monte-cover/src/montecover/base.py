@@ -78,23 +78,8 @@ class BaseSimulation(ABC):
 
     def run_simulation(self):
         """Run the full simulation."""
-        self.start_time = time.time()
-        self.logger.info("Starting simulation")
-
-        self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
-        self.logger.info(f"DML Parameters: {self.dml_parameters}")
-        self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
-
-        # Calculate total number of parameter combinations
-        dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
-        dml_combinations = [len(v) for v in self.dml_parameters.values()]
-        total_combinations = np.prod(dgp_combinations + dml_combinations)
-        self.logger.info(f"Total parameter combinations: {total_combinations}")
-
-        # Calculate expected total iterations
-        total_iterations = total_combinations * self.repetitions
-        self.logger.info(f"Expected total iterations: {total_iterations}")
-
+        self._initialize_simulation()
+        
         # Loop through repetitions
         for i_rep in range(self.repetitions):
             rep_start_time = time.time()
@@ -118,7 +103,7 @@ class BaseSimulation(ABC):
                     param_combo += 1
                     # Log parameter combination
                     self.logger.debug(
-                        f"Rep {i_rep+1}, Combo {param_combo}/{total_combinations}: DGPs {dgp_params}, DML {dml_params}"
+                        f"Rep {i_rep+1}, Combo {param_combo}/{self.total_combinations}: DGPs {dgp_params}, DML {dml_params}"
                     )
                     param_start_time = time.time()
 
@@ -166,6 +151,27 @@ class BaseSimulation(ABC):
         self.logger.info("Summarizing results")
         self.result_summary = self.summarize_results()
 
+    def _initialize_simulation(self):
+        """Initialize the simulation run."""
+        self.start_time = time.time()
+        self.logger.info("Starting simulation")
+        self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
+        self.logger.info(f"DML Parameters: {self.dml_parameters}")
+        self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
+        
+        # Calculate expected iterations
+        self._calculate_parameter_combinations()
+
+    def _calculate_parameter_combinations(self):
+        """Calculate parameter combinations and expected iterations."""
+        dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
+        dml_combinations = [len(v) for v in self.dml_parameters.values()]
+        self.total_combinations = np.prod(dgp_combinations + dml_combinations)
+        self.total_iterations = self.total_combinations * self.repetitions
+        
+        self.logger.info(f"Total parameter combinations: {self.total_combinations}")
+        self.logger.info(f"Expected total iterations: {self.total_iterations}")
+        
     def save_results(self, output_path: str = "results", file_prefix: str = ""):
         """Save the simulation results."""
         os.makedirs(output_path, exist_ok=True)
@@ -202,29 +208,6 @@ class BaseSimulation(ABC):
             yaml.dump(self.config, file)
 
         self.logger.info(f"Configuration saved to {output_path}")
-
-    @staticmethod
-    def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
-        """Compute coverage, CI length, and bias."""
-        lower_bound = confint.iloc[:, 0]
-        upper_bound = confint.iloc[:, 1]
-        coverage_mask = (lower_bound < oracle_thetas) & (oracle_thetas < upper_bound)
-
-        result_dict = {
-            "Coverage": np.mean(coverage_mask),
-            "CI Length": np.mean(upper_bound - lower_bound),
-            "Bias": np.mean(np.abs(thetas - oracle_thetas)),
-        }
-
-        if joint_confint is not None:
-            joint_lower_bound = joint_confint.iloc[:, 0]
-            joint_upper_bound = joint_confint.iloc[:, 1]
-            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
-
-            result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
-            result_dict["Uniform CI Length"] = np.mean(joint_upper_bound - joint_lower_bound)
-
-        return result_dict
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load configuration from a YAML file."""
@@ -270,3 +253,26 @@ class BaseSimulation(ABC):
             fh.setLevel(level)
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
+
+    @staticmethod
+    def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
+        """Compute coverage, CI length, and bias."""
+        lower_bound = confint.iloc[:, 0]
+        upper_bound = confint.iloc[:, 1]
+        coverage_mask = (lower_bound < oracle_thetas) & (oracle_thetas < upper_bound)
+
+        result_dict = {
+            "Coverage": np.mean(coverage_mask),
+            "CI Length": np.mean(upper_bound - lower_bound),
+            "Bias": np.mean(np.abs(thetas - oracle_thetas)),
+        }
+
+        if joint_confint is not None:
+            joint_lower_bound = joint_confint.iloc[:, 0]
+            joint_upper_bound = joint_confint.iloc[:, 1]
+            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
+
+            result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
+            result_dict["Uniform CI Length"] = np.mean(joint_upper_bound - joint_lower_bound)
+
+        return result_dict
