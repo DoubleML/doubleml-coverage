@@ -12,7 +12,7 @@ import doubleml as dml
 import numpy as np
 import pandas as pd
 import yaml
-from joblib import Parallel, delayed
+from joblib import Parallel, delayed, parallel_backend
 
 
 class BaseSimulation(ABC):
@@ -111,9 +111,10 @@ class BaseSimulation(ABC):
 
         else:
             self.logger.info(f"Starting parallel execution with n_jobs={n_jobs}")
-            results = Parallel(n_jobs=n_jobs, verbose=10)(
-                delayed(self._process_repetition)(i_rep) for i_rep in range(self.repetitions) if not self._stop_simulation()
-            )
+            with parallel_backend("loky", inner_max_num_threads=1):
+                results = Parallel(n_jobs=n_jobs, verbose=10)(
+                    delayed(self._process_repetition)(i_rep) for i_rep in range(self.repetitions) if not self._stop_simulation()
+                )
 
             # Process results from parallel execution
             for worker_results in results:
