@@ -3,4 +3,3 @@ __pycache__/
 # Logs
 monte-cover/logs/
 *.log
-run_*.out
