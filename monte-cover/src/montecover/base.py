@@ -113,7 +113,9 @@ class BaseSimulation(ABC):
             self.logger.info(f"Starting parallel execution with n_jobs={n_jobs}")
             with parallel_backend("loky", inner_max_num_threads=1):
                 results = Parallel(n_jobs=n_jobs, verbose=10)(
-                    delayed(self._process_repetition)(i_rep) for i_rep in range(self.repetitions) if not self._stop_simulation()
+                    delayed(self._process_repetition)(i_rep)
+                    for i_rep in range(self.repetitions)
+                    if not self._stop_simulation()
                 )
 
             # Process results from parallel execution
