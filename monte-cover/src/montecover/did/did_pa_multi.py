@@ -46,7 +46,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             if learner["ml_g"][0] == "Linear":
                 learner["ml_g"] = ("Linear", LinearRegression())
             elif learner["ml_g"][0] == "LGBM":
-                learner["ml_g"] = ("LGBM", LGBMRegressor(n_estimators=5, verbose=-1))
+                learner["ml_g"] = ("LGBM", LGBMRegressor(n_estimators=100, learning_rate=0.05, verbose=-1, n_jobs=1))
             else:
                 raise ValueError(f"Unknown learner type: {learner['ml_g']}")
 
@@ -54,7 +54,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             if learner["ml_m"][0] == "Linear":
                 learner["ml_m"] = ("Linear", LogisticRegression())
             elif learner["ml_m"][0] == "LGBM":
-                learner["ml_m"] = ("LGBM", LGBMClassifier(n_estimators=5, verbose=-1))
+                learner["ml_m"] = ("LGBM", LGBMClassifier(n_estimators=100, learning_rate=0.05, verbose=-1, n_jobs=1))
             else:
                 raise ValueError(f"Unknown learner type: {learner['ml_m']}")
 
