@@ -88,94 +88,14 @@ class BaseSimulation(ABC):
             if self._stop_simulation():
                 break
 
-            param_combo = 0
-            # loop through all
-            for dgp_param_values in product(*self.dgp_parameters.values()):
-                dgp_params = dict(zip(self.dgp_parameters.keys(), dgp_param_values))
-                dml_data = self._generate_dml_data(dgp_params)
-
-                for dml_param_values in product(*self.dml_parameters.values()):
-                    dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
-
-                    param_combo += 1
-                    # Log parameter combination
-                    self.logger.debug(
-                        f"Rep {i_rep+1}, Combo {param_combo}/{self.total_combinations}: DGPs {dgp_params}, DML {dml_params}"
-                    )
-                    param_start_time = time.time()
-
-                    try:
-                        repetition_results = self.run_single_rep(dml_data, dml_params)
-                        param_end_time = time.time()
-                        param_duration = param_end_time - param_start_time
-
-                        if repetition_results is not None:
-                            assert isinstance(repetition_results, dict), "The result must be a dictionary."
-                            # Process each dataframe in the result dictionary
-                            for result_name, repetition_result in repetition_results.items():
-                                assert isinstance(repetition_result, list), "Each repetition_result must be a list."
-                                for res in repetition_result:
-                                    assert isinstance(res, dict), "Each res must be a dictionary."
-                                    res["repetition"] = i_rep
-                                    # add dgp parameters to the result
-                                    res.update(dgp_params)
-
-                                # Initialize key in results dict if not exists
-                                if result_name not in self.results:
-                                    self.results[result_name] = []
-                                self.results[result_name].extend(repetition_result)
-
-                            self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
-                    except Exception as e:
-                        self.logger.error(
-                            f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, DML parameters {dml_params}: {str(e)}"
-                        )
-                        self.logger.exception("Exception details:")
+            # Running actual simulation
+            self._process_repetition(i_rep)
 
             rep_end_time = time.time()
             rep_duration = rep_end_time - rep_start_time
             self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
 
         self._process_results()
-
-    def _log_parameters(self):
-        """Initialize timing and calculate parameter combination metrics."""
-        self.start_time = time.time()
-        self.logger.info("Starting simulation")
-        self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
-        self.logger.info(f"DML Parameters: {self.dml_parameters}")
-        self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
-
-        # Calculate expected iterations
-        dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
-        dml_combinations = [len(v) for v in self.dml_parameters.values()]
-        self.total_combinations = np.prod(dgp_combinations + dml_combinations)
-        self.total_iterations = self.total_combinations * self.repetitions
-
-        self.logger.info(f"Total parameter combinations: {self.total_combinations}")
-        self.logger.info(f"Expected total iterations: {self.total_iterations}")
-
-    def _stop_simulation(self) -> bool:
-        """Check if simulation should be stopped based on criteria like runtime."""
-        # Check if maximum runtime is exceeded
-        if self.max_runtime and time.time() - self.start_time > self.max_runtime:
-            self.logger.warning("Maximum runtime exceeded. Stopping the simulation.")
-            return True
-        return False
-
-    def _process_results(self):
-        """Process collected results and log completion metrics."""
-        # Convert results to dataframes incrementally
-        for key, value in self.results.items():
-            self.results[key] = pd.DataFrame(value)
-
-        self.end_time = time.time()
-        self.total_runtime = self.end_time - self.start_time
-        self.logger.info(f"Simulation completed in {self.total_runtime:.2f}s")
-
-        # Summarize results
-        self.logger.info("Summarizing results")
-        self.result_summary = self.summarize_results()
 
     def save_results(self, output_path: str = "results", file_prefix: str = ""):
         """Save the simulation results."""
@@ -258,6 +178,107 @@ class BaseSimulation(ABC):
             fh.setLevel(level)
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
+
+    def _log_parameters(self):
+        """Initialize timing and calculate parameter combination metrics."""
+        self.start_time = time.time()
+        self.logger.info("Starting simulation")
+        self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
+        self.logger.info(f"DML Parameters: {self.dml_parameters}")
+        self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
+
+        # Calculate expected iterations
+        dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
+        dml_combinations = [len(v) for v in self.dml_parameters.values()]
+        self.total_combinations = np.prod(dgp_combinations + dml_combinations)
+        self.total_iterations = self.total_combinations * self.repetitions
+
+        self.logger.info(f"Total parameter combinations: {self.total_combinations}")
+        self.logger.info(f"Expected total iterations: {self.total_iterations}")
+
+    def _stop_simulation(self) -> bool:
+        """Check if simulation should be stopped based on criteria like runtime."""
+        # Check if maximum runtime is exceeded
+        if self.max_runtime and time.time() - self.start_time > self.max_runtime:
+            self.logger.warning("Maximum runtime exceeded. Stopping the simulation.")
+            return True
+        return False
+
+    def _process_repetition(self, i_rep):
+        """Process a single repetition with all parameter combinations."""
+        i_param_combo = 0
+
+        # loop through all parameter combinations
+        for dgp_param_values in product(*self.dgp_parameters.values()):
+            dgp_params = dict(zip(self.dgp_parameters.keys(), dgp_param_values))
+            dml_data = self._generate_dml_data(dgp_params)
+
+            for dml_param_values in product(*self.dml_parameters.values()):
+                dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
+                i_param_combo += 1
+
+                self._process_parameter_combination(i_rep, i_param_combo, dgp_params, dml_params, dml_data)
+
+    def _process_parameter_combination(self, i_rep, param_combo, dgp_params, dml_params, dml_data):
+        """Process a single parameter combination."""
+        # Log parameter combination
+        self.logger.debug(
+            f"Rep {i_rep+1}, Combo {param_combo}/{self.total_combinations}: " f"DGPs {dgp_params}, DML {dml_params}"
+        )
+        param_start_time = time.time()
+
+        try:
+            repetition_results = self.run_single_rep(dml_data, dml_params)
+
+            # Log timing
+            param_duration = time.time() - param_start_time
+            self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
+
+            # Store results
+            self._store_results(repetition_results, i_rep, dgp_params)
+
+        except Exception as e:
+            self.logger.error(
+                f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, " f"DML parameters {dml_params}: {str(e)}"
+            )
+            self.logger.exception("Exception details:")
+
+    def _store_results(self, repetition_results, i_rep, dgp_params):
+        """Store the results of a repetition."""
+        if repetition_results is None:
+            return
+
+        assert isinstance(repetition_results, dict), "The result must be a dictionary."
+
+        # Process each dataframe in the result dictionary
+        for result_name, repetition_result in repetition_results.items():
+            assert isinstance(repetition_result, list), "Each repetition_result must be a list."
+
+            for res in repetition_result:
+                assert isinstance(res, dict), "Each res must be a dictionary."
+                res["repetition"] = i_rep
+                # add dgp parameters to the result
+                res.update(dgp_params)
+
+            # Initialize key in results dict if not exists
+            if result_name not in self.results:
+                self.results[result_name] = []
+
+            self.results[result_name].extend(repetition_result)
+
+    def _process_results(self):
+        """Process collected results and log completion metrics."""
+        # Convert results to dataframes incrementally
+        for key, value in self.results.items():
+            self.results[key] = pd.DataFrame(value)
+
+        self.end_time = time.time()
+        self.total_runtime = self.end_time - self.start_time
+        self.logger.info(f"Simulation completed in {self.total_runtime:.2f}s")
+
+        # Summarize results
+        self.logger.info("Summarizing results")
+        self.result_summary = self.summarize_results()
 
     @staticmethod
     def _compute_coverage(thetas, oracle_thetas, confint, joint_confint=None):
