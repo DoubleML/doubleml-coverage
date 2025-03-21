@@ -79,7 +79,7 @@ class BaseSimulation(ABC):
     def run_simulation(self):
         """Run the full simulation."""
         self._setup_simulation_metrics()
-        
+
         # Loop through repetitions
         for i_rep in range(self.repetitions):
             rep_start_time = time.time()
@@ -148,13 +148,13 @@ class BaseSimulation(ABC):
         self.logger.info(f"DGP Parameters: {self.dgp_parameters}")
         self.logger.info(f"DML Parameters: {self.dml_parameters}")
         self.logger.info(f"Confidence Parameters: {self.confidence_parameters}")
-        
+
         # Calculate expected iterations
         dgp_combinations = [len(v) for v in self.dgp_parameters.values()]
         dml_combinations = [len(v) for v in self.dml_parameters.values()]
         self.total_combinations = np.prod(dgp_combinations + dml_combinations)
         self.total_iterations = self.total_combinations * self.repetitions
-        
+
         self.logger.info(f"Total parameter combinations: {self.total_combinations}")
         self.logger.info(f"Expected total iterations: {self.total_iterations}")
 
@@ -163,11 +163,11 @@ class BaseSimulation(ABC):
         # Convert results to dataframes incrementally
         for key, value in self.results.items():
             self.results[key] = pd.DataFrame(value)
-        
+
         self.end_time = time.time()
         self.total_runtime = self.end_time - self.start_time
         self.logger.info(f"Simulation completed in {self.total_runtime:.2f}s")
-        
+
         # Summarize results
         self.logger.info("Summarizing results")
         self.result_summary = self.summarize_results()
