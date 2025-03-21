@@ -12,6 +12,7 @@ import doubleml as dml
 import numpy as np
 import pandas as pd
 import yaml
+from joblib import Parallel, delayed
 
 
 class BaseSimulation(ABC):
@@ -33,6 +34,7 @@ class BaseSimulation(ABC):
         self.repetitions = self.simulation_parameters.get("repetitions", 20)
         self.max_runtime = self.simulation_parameters.get("max_runtime", 5.5 * 3600)
         self.random_seed = self.simulation_parameters.get("random_seed", 42)
+        self.default_n_jobs = self.simulation_parameters.get("n_jobs", 1)
         self.suppress_warnings = suppress_warnings
 
         # Set up logging
@@ -76,24 +78,55 @@ class BaseSimulation(ABC):
         """Summarize the simulation results."""
         pass
 
-    def run_simulation(self):
-        """Run the full simulation."""
-        self._log_parameters()
+    def run_simulation(self, n_jobs=None):
+        """
+        Run the full simulation.
 
-        # Loop through repetitions
-        for i_rep in range(self.repetitions):
-            rep_start_time = time.time()
-            self.logger.info(f"Starting repetition {i_rep + 1}/{self.repetitions}")
+        Parameters:
+        -----------
+        n_jobs : int, optional (default=None)
+            Number of jobs to run in parallel. If None, uses the value from the configuration file.
+            If 1, runs sequentially. If > 1, runs in parallel with the specified number of workers.
+            If -1, uses all available CPU cores (except one).
+        """
+        # Use n_jobs from parameter, or fall back to config value
+        n_jobs = n_jobs if n_jobs is not None else self.default_n_jobs
+        if n_jobs == -1:
+            n_jobs = os.cpu_count() - 1
+        self._log_parameters(n_jobs=n_jobs)
 
-            if self._stop_simulation():
-                break
+        if n_jobs <= 1:
+            for i_rep in range(self.repetitions):
+                rep_start_time = time.time()
+                self.logger.info(f"Starting repetition {i_rep + 1}/{self.repetitions}")
 
-            # Running actual simulation
-            self._process_repetition(i_rep)
+                if self._stop_simulation():
+                    break
 
-            rep_end_time = time.time()
-            rep_duration = rep_end_time - rep_start_time
-            self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
+                # Running actual simulation
+                self._process_repetition(i_rep)
+
+                rep_end_time = time.time()
+                rep_duration = rep_end_time - rep_start_time
+                self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
+        else:
+
+            repetitions_to_run = list(range(self.repetitions))
+            
+            self.logger.info(f"Starting parallel execution with {n_jobs} workers")
+            results = Parallel(n_jobs=n_jobs, verbose=10)(
+                delayed(self._process_repetition)(i_rep)
+                for i_rep in repetitions_to_run
+                if not self._stop_simulation()
+            )
+
+            # Process results from parallel execution
+            for worker_results in results:
+                if worker_results:  # Check if we have results
+                    for result_name, result_list in worker_results.items():
+                        if result_name not in self.results:
+                            self.results[result_name] = []
+                        self.results[result_name].extend(result_list)
 
         self._process_results()
 
@@ -179,7 +212,7 @@ class BaseSimulation(ABC):
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
 
-    def _log_parameters(self):
+    def _log_parameters(self, n_jobs):
         """Initialize timing and calculate parameter combination metrics."""
         self.start_time = time.time()
         self.logger.info("Starting simulation")
@@ -195,6 +228,10 @@ class BaseSimulation(ABC):
 
         self.logger.info(f"Total parameter combinations: {self.total_combinations}")
         self.logger.info(f"Expected total iterations: {self.total_iterations}")
+        if n_jobs <= 1:
+            self.logger.info("Running simulation sequentially")
+        else:
+            self.logger.info(f"Running simulation in parallel with {n_jobs} workers")
 
     def _stop_simulation(self) -> bool:
         """Check if simulation should be stopped based on criteria like runtime."""
@@ -206,7 +243,8 @@ class BaseSimulation(ABC):
 
     def _process_repetition(self, i_rep):
         """Process a single repetition with all parameter combinations."""
-        i_param_combo = 0
+        i_param_comb = 0
+        rep_results = {}
 
         # loop through all parameter combinations
         for dgp_param_values in product(*self.dgp_parameters.values()):
@@ -215,15 +253,23 @@ class BaseSimulation(ABC):
 
             for dml_param_values in product(*self.dml_parameters.values()):
                 dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
-                i_param_combo += 1
+                i_param_comb += 1
 
-                self._process_parameter_combination(i_rep, i_param_combo, dgp_params, dml_params, dml_data)
+                comb_results = self._process_parameter_combination(i_rep, i_param_comb, dgp_params, dml_params, dml_data)
 
-    def _process_parameter_combination(self, i_rep, param_combo, dgp_params, dml_params, dml_data):
+                # Merge results
+                for result_name, result_list in comb_results.items():
+                    if result_name not in rep_results:
+                        rep_results[result_name] = []
+                    rep_results[result_name].extend(result_list)
+    
+        return rep_results
+
+    def _process_parameter_combination(self, i_rep, i_param_comb, dgp_params, dml_params, dml_data):
         """Process a single parameter combination."""
         # Log parameter combination
         self.logger.debug(
-            f"Rep {i_rep+1}, Combo {param_combo}/{self.total_combinations}: " f"DGPs {dgp_params}, DML {dml_params}"
+            f"Rep {i_rep+1}, Combo {i_param_comb}/{self.total_combinations}: " f"DGPs {dgp_params}, DML {dml_params}"
         )
         param_start_time = time.time()
 
@@ -234,37 +280,27 @@ class BaseSimulation(ABC):
             param_duration = time.time() - param_start_time
             self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
 
-            # Store results
-            self._store_results(repetition_results, i_rep, dgp_params)
+            # Process results
+            if repetition_results is None:
+                return {}
+                
+            # Add metadata to results
+            processed_results = {}
+            for result_name, repetition_result in repetition_results.items():
+                processed_results[result_name] = []
+                for res in repetition_result:
+                    res["repetition"] = i_rep
+                    res.update(dgp_params)
+                    processed_results[result_name].append(res)
+                    
+            return processed_results
 
         except Exception as e:
             self.logger.error(
                 f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, " f"DML parameters {dml_params}: {str(e)}"
             )
             self.logger.exception("Exception details:")
-
-    def _store_results(self, repetition_results, i_rep, dgp_params):
-        """Store the results of a repetition."""
-        if repetition_results is None:
-            return
-
-        assert isinstance(repetition_results, dict), "The result must be a dictionary."
-
-        # Process each dataframe in the result dictionary
-        for result_name, repetition_result in repetition_results.items():
-            assert isinstance(repetition_result, list), "Each repetition_result must be a list."
-
-            for res in repetition_result:
-                assert isinstance(res, dict), "Each res must be a dictionary."
-                res["repetition"] = i_rep
-                # add dgp parameters to the result
-                res.update(dgp_params)
-
-            # Initialize key in results dict if not exists
-            if result_name not in self.results:
-                self.results[result_name] = []
-
-            self.results[result_name].extend(repetition_result)
+            return {}
 
     def _process_results(self):
         """Process collected results and log completion metrics."""
