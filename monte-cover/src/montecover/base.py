@@ -85,10 +85,7 @@ class BaseSimulation(ABC):
             rep_start_time = time.time()
             self.logger.info(f"Starting repetition {i_rep + 1}/{self.repetitions}")
 
-            # Check elapsed time
-            elapsed_time = time.time() - self.start_time
-            if elapsed_time > self.max_runtime:
-                self.logger.warning("Maximum runtime exceeded. Stopping the simulation.")
+            if self._stop_simulation():
                 break
 
             param_combo = 0
@@ -157,6 +154,14 @@ class BaseSimulation(ABC):
 
         self.logger.info(f"Total parameter combinations: {self.total_combinations}")
         self.logger.info(f"Expected total iterations: {self.total_iterations}")
+
+    def _stop_simulation(self) -> bool:
+        """Check if simulation should be stopped based on criteria like runtime."""
+        # Check if maximum runtime is exceeded
+        if self.max_runtime and time.time() - self.start_time > self.max_runtime:
+            self.logger.warning("Maximum runtime exceeded. Stopping the simulation.")
+            return True
+        return False
 
     def _process_results(self):
         """Process collected results and log completion metrics."""
