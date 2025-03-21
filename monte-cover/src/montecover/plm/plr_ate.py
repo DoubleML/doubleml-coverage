@@ -118,6 +118,7 @@ class PLRATECoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "repetition": "count",
         }
 
         # Aggregate results (possibly multiple result dfs)
