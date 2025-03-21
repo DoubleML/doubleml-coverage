@@ -4,7 +4,7 @@ from montecover.did.did_multi import DIDMultiCoverageSimulation
 # Create and run simulation with config file
 sim = DIDMultiCoverageSimulation(
     config_file="scripts/did/multi_config.yml",
-    log_level="INFO",
+    log_level="DEBUG",
     log_file="logs/did/multi_sim.log"
 )
 sim.run_simulation()

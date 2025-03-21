@@ -46,5 +46,6 @@ dml_parameters:
   - experimental
 simulation_parameters:
   max_runtime: 19800
+  n_jobs: -2
   random_seed: 42
-  repetitions: 200
+  repetitions: 1000

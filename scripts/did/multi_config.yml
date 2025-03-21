@@ -1,9 +1,10 @@
 # Simulation parameters for DID Multi Coverage
 
 simulation_parameters:
-  repetitions: 200
+  repetitions: 1000
   max_runtime: 19800 # 5.5 hours in seconds
   random_seed: 42
+  n_jobs: -2
 
 dgp_parameters:
   DGP: [1, 4, 6] # Different DGP specifications
