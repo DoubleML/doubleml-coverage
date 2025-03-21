@@ -87,15 +87,14 @@ class BaseSimulation(ABC):
         n_jobs : int, optional (default=None)
             Number of jobs to run in parallel. If None, uses the value from the configuration file.
             If 1, runs sequentially. If > 1, runs in parallel with the specified number of workers.
-            If -1, uses all available CPU cores (except one).
+            If -1, uses all available CPU cores .
+            If -2, uses all available CPU cores except one.
         """
         # Use n_jobs from parameter, or fall back to config value
         n_jobs = n_jobs if n_jobs is not None else self.default_n_jobs
-        if n_jobs == -1:
-            n_jobs = os.cpu_count() - 1
         self._log_parameters(n_jobs=n_jobs)
 
-        if n_jobs <= 1:
+        if n_jobs == 1:
             for i_rep in range(self.repetitions):
                 rep_start_time = time.time()
                 self.logger.info(f"Starting repetition {i_rep + 1}/{self.repetitions}")
@@ -109,15 +108,11 @@ class BaseSimulation(ABC):
                 rep_end_time = time.time()
                 rep_duration = rep_end_time - rep_start_time
                 self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
-        else:
 
-            repetitions_to_run = list(range(self.repetitions))
-            
-            self.logger.info(f"Starting parallel execution with {n_jobs} workers")
+        else:
+            self.logger.info(f"Starting parallel execution with n_jobs={n_jobs}")
             results = Parallel(n_jobs=n_jobs, verbose=10)(
-                delayed(self._process_repetition)(i_rep)
-                for i_rep in repetitions_to_run
-                if not self._stop_simulation()
+                delayed(self._process_repetition)(i_rep) for i_rep in range(self.repetitions) if not self._stop_simulation()
             )
 
             # Process results from parallel execution
@@ -243,6 +238,9 @@ class BaseSimulation(ABC):
 
     def _process_repetition(self, i_rep):
         """Process a single repetition with all parameter combinations."""
+        if self.suppress_warnings:
+            warnings.simplefilter(action="ignore", category=UserWarning)
+
         i_param_comb = 0
         rep_results = {}
 
@@ -262,7 +260,7 @@ class BaseSimulation(ABC):
                     if result_name not in rep_results:
                         rep_results[result_name] = []
                     rep_results[result_name].extend(result_list)
-    
+
         return rep_results
 
     def _process_parameter_combination(self, i_rep, i_param_comb, dgp_params, dml_params, dml_data):
@@ -283,7 +281,7 @@ class BaseSimulation(ABC):
             # Process results
             if repetition_results is None:
                 return {}
-                
+
             # Add metadata to results
             processed_results = {}
             for result_name, repetition_result in repetition_results.items():
@@ -292,7 +290,7 @@ class BaseSimulation(ABC):
                     res["repetition"] = i_rep
                     res.update(dgp_params)
                     processed_results[result_name].append(res)
-                    
+
             return processed_results
 
         except Exception as e:
