@@ -51,7 +51,7 @@ class PLRATECoverageSimulation(BaseSimulation):
         elif ml_string == "Random Forest":
             learner = RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2)
         elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=100, learning_rate=0.05, verbose=-1)
+            learner = LGBMRegressor(n_estimators=100, learning_rate=0.05, verbose=-1, n_jobs=1)
         else:
             raise ValueError(f"Unknown learner type: {ml_string}")
 
