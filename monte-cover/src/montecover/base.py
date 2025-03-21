@@ -78,7 +78,7 @@ class BaseSimulation(ABC):
 
     def run_simulation(self):
         """Run the full simulation."""
-        self._setup_simulation_metrics()
+        self._log_parameters()
 
         # Loop through repetitions
         for i_rep in range(self.repetitions):
@@ -141,7 +141,7 @@ class BaseSimulation(ABC):
 
         self._process_results()
 
-    def _setup_simulation_metrics(self):
+    def _log_parameters(self):
         """Initialize timing and calculate parameter combination metrics."""
         self.start_time = time.time()
         self.logger.info("Starting simulation")
