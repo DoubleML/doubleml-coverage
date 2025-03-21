@@ -98,7 +98,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             score=score,
             in_sample_normalization=in_sample_normalization,
         )
-        dml_model.fit(n_jobs_cv=5)
+        dml_model.fit()
         dml_model.bootstrap(n_rep_boot=2000)
 
         # Oracle values for this model
