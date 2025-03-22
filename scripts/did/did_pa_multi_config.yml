@@ -8,7 +8,7 @@ simulation_parameters:
 
 dgp_parameters:
   DGP: [1, 4, 6] # Different DGP specifications
-  n_obs: [500] # Sample size for each simulation (has to be a list)
+  n_obs: [2000] # Sample size for each simulation (has to be a list)
 
 dml_parameters:
   # ML methods for ml_g and ml_m

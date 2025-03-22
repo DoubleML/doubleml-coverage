@@ -8,7 +8,7 @@ dgp_parameters:
   - 4
   - 6
   n_obs:
-  - 500
+  - 2000
 dml_parameters:
   in_sample_normalization:
   - true
@@ -61,12 +61,12 @@ dml_parameters:
       class_weight: null
       colsample_bytree: 1.0
       importance_type: split
-      learning_rate: 0.05
+      learning_rate: 0.02
       max_depth: -1
       min_child_samples: 20
       min_child_weight: 0.001
       min_split_gain: 0.0
-      n_estimators: 100
+      n_estimators: 500
       n_jobs: 1
       num_leaves: 31
       objective: null
@@ -97,12 +97,12 @@ dml_parameters:
       class_weight: null
       colsample_bytree: 1.0
       importance_type: split
-      learning_rate: 0.05
+      learning_rate: 0.02
       max_depth: -1
       min_child_samples: 20
       min_child_weight: 0.001
       min_split_gain: 0.0
-      n_estimators: 100
+      n_estimators: 500
       n_jobs: 1
       num_leaves: 31
       objective: null
