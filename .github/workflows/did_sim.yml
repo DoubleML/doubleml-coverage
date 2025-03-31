@@ -61,6 +61,7 @@ jobs:
 
     - name: Install Monte-Cover
       run: |
+        cd monte-cover
         uv sync
 
     - name: Install DoubleML from correct branch
