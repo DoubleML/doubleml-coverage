@@ -61,7 +61,7 @@ jobs:
 
     - name: Install Monte-Cover
       run: |
-        uv sync --config-file monte-cover/pyproject.toml
+        uv sync --project monte-cover/pyproject.toml
 
     - name: Install DoubleML from correct branch
       run: |
