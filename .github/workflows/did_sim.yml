@@ -61,12 +61,13 @@ jobs:
 
     - name: Install Monte-Cover
       run: |
-        uv sync --project monte-cover/pyproject.toml --venv .venv
+        uv venv --project monte-cover/pyproject.toml
+        uv sync --project monte-cover/pyproject.toml
 
     - name: Install DoubleML from correct branch
       run: |
-        uv pip uninstall doubleml
-        uv pip install "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
+        uv pip uninstall --project monte-cover/pyproject.toml doubleml
+        uv pip install --project monte-cover/pyproject.toml "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
 
     - name: Set up Git configuration
       run: |
@@ -74,7 +75,7 @@ jobs:
         git config --global user.email 'github-actions@github.com'
 
     - name: Run scripts
-      run: uv run python ${{ matrix.script }}
+      run: uv run --project monte-cover/pyproject.toml ${{ matrix.script }}
 
     - name: Commit any existing changes
       run: |
