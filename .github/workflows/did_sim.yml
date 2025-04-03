@@ -79,7 +79,7 @@ jobs:
     - name: Run scripts
       run: |
         source monte-cover/.venv/bin/activate
-        uv run --project monte-cover/pyproject.toml ${{ matrix.script }}
+        uv run ${{ matrix.script }}
 
     - name: Commit any existing changes
       run: |
