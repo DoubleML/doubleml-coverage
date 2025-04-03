@@ -68,8 +68,8 @@ jobs:
     - name: Install DoubleML from correct branch
       run: |
         source monte-cover/.venv/bin/activate
-        uv pip uninstall --project monte-cover/pyproject.toml doubleml
-        uv pip install --project monte-cover/pyproject.toml "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
+        uv pip uninstall doubleml
+        uv pip install "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
 
     - name: Set up Git configuration
       run: |
