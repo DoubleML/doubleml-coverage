@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.10.dev0,DIDMultiCoverageSimulation,2025-03-22 13:07,161.55725783109665,3.12.9,scripts/did/did_pa_multi_config.yml
+0.10.dev0,DIDMultiCoverageSimulation,2025-04-24 13:16,342.5480104605357,3.12.3,scripts/did/did_pa_multi_config.yml
