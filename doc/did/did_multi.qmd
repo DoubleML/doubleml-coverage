@@ -62,7 +62,13 @@ def make_pretty(df, level, n_rep):
 
 ## ATTE Coverage
 
-The simulations are based on the  the [make_did_SZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_did_SZ2020.html)-DGP with $1000$ observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).
+The simulations are based on the  the [make_did_CS2021](https://docs.doubleml.org/dev/api/generated/doubleml.did.datasets.make_did_CS2021.html)-DGP with $2000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
+
+ - Type 1: Linear outcome model and treatment assignment
+ - Type 4: Nonlinear outcome model and treatment assignment
+ - Type 6: Randomized treatment assignment and nonlinear outcome model
+
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). 
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -110,6 +116,8 @@ make_pretty(df_ate_9, level, n_rep)
 
 ### Experimental Score
 
+The results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.
+
 ```{python}
 #| echo: false
 score = "experimental"
@@ -129,6 +137,10 @@ make_pretty(df_ate_9, level, n_rep)
 ```
 
 ## Aggregated Effects
+
+These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/dev/guide/models.html#difference-in-differences-models-did).
+
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). 
 
 ### Group Effects
 
@@ -165,6 +177,8 @@ make_pretty(df_ate_9, level, n_rep)
 ```
 
 #### Experimental Score
+
+The results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.
 
 ```{python}
 #| echo: false
@@ -220,6 +234,8 @@ make_pretty(df_ate_9, level, n_rep)
 
 #### Experimental Score
 
+The results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.
+
 ```{python}
 #| echo: false
 score = "experimental"
@@ -273,6 +289,9 @@ make_pretty(df_ate_9, level, n_rep)
 ```
 
 #### Experimental Score
+
+The results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.
+
 
 ```{python}
 #| echo: false
