@@ -49,9 +49,9 @@ class PLRATECoverageSimulation(BaseSimulation):
         if ml_string == "Lasso":
             learner = LassoCV()
         elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2)
+            learner = RandomForestRegressor(n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=20)
         elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=100, learning_rate=0.05, verbose=-1, n_jobs=1)
+            learner = LGBMRegressor(n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1)
         else:
             raise ValueError(f"Unknown learner type: {ml_string}")
 

@@ -24,6 +24,8 @@ dml_parameters:
       ml_m: ["Lasso"]
     - ml_g: ["LGBM"]
       ml_m: ["LGBM"]
+    - ml_g: ["LGBM"]
+      ml_m: ["Lasso"]
 
   score: ["partialling out", "IV-type"]
 
