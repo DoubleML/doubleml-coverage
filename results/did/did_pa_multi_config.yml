@@ -1,0 +1,123 @@
+confidence_parameters:
+  level:
+  - 0.95
+  - 0.9
+dgp_parameters:
+  DGP:
+  - 1
+  - 4
+  - 6
+  n_obs:
+  - 2000
+dml_parameters:
+  in_sample_normalization:
+  - true
+  - false
+  learners:
+  - ml_g: !!python/tuple
+    - Linear
+    - !!python/object:sklearn.linear_model._base.LinearRegression
+      _sklearn_version: 1.5.2
+      copy_X: true
+      fit_intercept: true
+      n_jobs: null
+      positive: false
+    ml_m: !!python/tuple
+    - Linear
+    - !!python/object:sklearn.linear_model._logistic.LogisticRegression
+      C: 1.0
+      _sklearn_version: 1.5.2
+      class_weight: null
+      dual: false
+      fit_intercept: true
+      intercept_scaling: 1
+      l1_ratio: null
+      max_iter: 100
+      multi_class: deprecated
+      n_jobs: null
+      penalty: l2
+      random_state: null
+      solver: lbfgs
+      tol: 0.0001
+      verbose: 0
+      warm_start: false
+  - ml_g: !!python/tuple
+    - LGBM
+    - !!python/object:lightgbm.sklearn.LGBMRegressor
+      _Booster: null
+      _best_iteration: -1
+      _best_score: {}
+      _class_map: null
+      _class_weight: null
+      _classes: null
+      _evals_result: {}
+      _n_classes: -1
+      _n_features: -1
+      _n_features_in: -1
+      _objective: null
+      _other_params:
+        verbose: -1
+      boosting_type: gbdt
+      class_weight: null
+      colsample_bytree: 1.0
+      importance_type: split
+      learning_rate: 0.02
+      max_depth: -1
+      min_child_samples: 20
+      min_child_weight: 0.001
+      min_split_gain: 0.0
+      n_estimators: 500
+      n_jobs: 1
+      num_leaves: 31
+      objective: null
+      random_state: null
+      reg_alpha: 0.0
+      reg_lambda: 0.0
+      subsample: 1.0
+      subsample_for_bin: 200000
+      subsample_freq: 0
+      verbose: -1
+    ml_m: !!python/tuple
+    - LGBM
+    - !!python/object:lightgbm.sklearn.LGBMClassifier
+      _Booster: null
+      _best_iteration: -1
+      _best_score: {}
+      _class_map: null
+      _class_weight: null
+      _classes: null
+      _evals_result: {}
+      _n_classes: -1
+      _n_features: -1
+      _n_features_in: -1
+      _objective: null
+      _other_params:
+        verbose: -1
+      boosting_type: gbdt
+      class_weight: null
+      colsample_bytree: 1.0
+      importance_type: split
+      learning_rate: 0.02
+      max_depth: -1
+      min_child_samples: 20
+      min_child_weight: 0.001
+      min_split_gain: 0.0
+      n_estimators: 500
+      n_jobs: 1
+      num_leaves: 31
+      objective: null
+      random_state: null
+      reg_alpha: 0.0
+      reg_lambda: 0.0
+      subsample: 1.0
+      subsample_for_bin: 200000
+      subsample_freq: 0
+      verbose: -1
+  score:
+  - observational
+  - experimental
+simulation_parameters:
+  max_runtime: 19800
+  n_jobs: -2
+  random_seed: 42
+  repetitions: 1000

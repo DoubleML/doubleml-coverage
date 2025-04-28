@@ -7,7 +7,7 @@ import sys
 from lightgbm import LGBMRegressor, LGBMClassifier
 
 import doubleml as dml
-from doubleml.datasets import make_did_SZ2020
+from doubleml.did.datasets import make_did_SZ2020
 
 # Number of repetitions
 n_rep = 1000
