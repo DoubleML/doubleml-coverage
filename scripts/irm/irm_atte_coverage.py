@@ -27,19 +27,33 @@ n_obs_atte = 50000
 R2_d = 0.5
 R2_y = 0.5
 
-v = np.random.uniform(size=[n_obs_atte, ])
-zeta = np.random.standard_normal(size=[n_obs_atte, ])
+v = np.random.uniform(
+    size=[
+        n_obs_atte,
+    ]
+)
+zeta = np.random.standard_normal(
+    size=[
+        n_obs_atte,
+    ]
+)
 
 cov_mat = toeplitz([np.power(0.5, k) for k in range(dim_x)])
-x = np.random.multivariate_normal(np.zeros(dim_x), cov_mat, size=[n_obs_atte, ])
+x = np.random.multivariate_normal(
+    np.zeros(dim_x),
+    cov_mat,
+    size=[
+        n_obs_atte,
+    ],
+)
 
 beta = [1 / (k**2) for k in range(1, dim_x + 1)]
 b_sigma_b = np.dot(np.dot(cov_mat, beta), beta)
-c_y = np.sqrt(R2_y/((1-R2_y) * b_sigma_b))
-c_d = np.sqrt(np.pi**2 / 3. * R2_d/((1-R2_d) * b_sigma_b))
+c_y = np.sqrt(R2_y / ((1 - R2_y) * b_sigma_b))
+c_d = np.sqrt(np.pi**2 / 3.0 * R2_d / ((1 - R2_d) * b_sigma_b))
 
 xx = np.exp(np.dot(x, np.multiply(beta, c_d)))
-d = 1. * ((xx/(1+xx)) > v)
+d = 1.0 * ((xx / (1 + xx)) > v)
 
 y = d * theta + d * np.dot(x, np.multiply(beta, c_y)) + zeta
 y0 = zeta
@@ -52,18 +66,30 @@ print(ATTE)
 np.random.seed(42)
 datasets = []
 for i in range(n_rep):
-    data = make_irm_data(theta=theta, n_obs=n_obs, dim_x=dim_x, return_type='DataFrame')
+    data = make_irm_data(theta=theta, n_obs=n_obs, dim_x=dim_x, return_type="DataFrame")
     datasets.append(data)
 
 # set up hyperparameters
 hyperparam_dict = {
-    "learner_g": [("Lasso", LassoCV()),
-                  ("Random Forest",
-                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "level": [0.95, 0.90]
+    "learner_g": [
+        ("Lasso", LassoCV()),
+        (
+            "Random Forest",
+            RandomForestRegressor(
+                n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2
+            ),
+        ),
+    ],
+    "learner_m": [
+        ("Logistic Regression", LogisticRegressionCV()),
+        (
+            "Random Forest",
+            RandomForestClassifier(
+                n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2
+            ),
+        ),
+    ],
+    "level": [0.95, 0.90],
 }
 
 # set up the results dataframe
@@ -83,10 +109,14 @@ for i_rep in range(n_rep):
         break
 
     # define the DoubleML data object
-    obj_dml_data = dml.DoubleMLData(datasets[i_rep], 'y', 'd')
+    obj_dml_data = dml.DoubleMLData(datasets[i_rep], "y", "d")
 
-    for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
-        for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
+    for learner_g_idx, (learner_g_name, ml_g) in enumerate(
+        hyperparam_dict["learner_g"]
+    ):
+        for learner_m_idx, (learner_m_name, ml_m) in enumerate(
+            hyperparam_dict["learner_m"]
+        ):
             # Set machine learning methods for g & m
             dml_irm = dml.DoubleMLIRM(
                 obj_dml_data=obj_dml_data,
@@ -102,24 +132,31 @@ for i_rep in range(n_rep):
                 ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
 
                 df_results_detailed = pd.concat(
-                    (df_results_detailed,
-                     pd.DataFrame({
-                        "Coverage": coverage.astype(int),
-                        "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
-                        "Bias": abs(dml_irm.coef[0] - ATTE),
-                        "Learner g": learner_g_name,
-                        "Learner m": learner_m_name,
-                        "level": level,
-                        "repetition": i_rep}, index=[0])),
-                    ignore_index=True)
+                    (
+                        df_results_detailed,
+                        pd.DataFrame(
+                            {
+                                "Coverage": coverage.astype(int),
+                                "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
+                                "Bias": abs(dml_irm.coef[0] - ATTE),
+                                "Learner g": learner_g_name,
+                                "Learner m": learner_m_name,
+                                "level": level,
+                                "repetition": i_rep,
+                            },
+                            index=[0],
+                        ),
+                    ),
+                    ignore_index=True,
+                )
 
-df_results = df_results_detailed.groupby(
-    ["Learner g", "Learner m", "level"]).agg(
-        {"Coverage": "mean",
-         "CI Length": "mean",
-         "Bias": "mean",
-         "repetition": "count"}
-    ).reset_index()
+df_results = (
+    df_results_detailed.groupby(["Learner g", "Learner m", "level"])
+    .agg(
+        {"Coverage": "mean", "CI Length": "mean", "Bias": "mean", "repetition": "count"}
+    )
+    .reset_index()
+)
 print(df_results)
 end_time = time.time()
 total_runtime = end_time - start_time
@@ -128,13 +165,17 @@ total_runtime = end_time - start_time
 script_name = "irm_atte_coverage.py"
 path = "results/irm/irm_atte_coverage"
 
-metadata = pd.DataFrame({
-    'DoubleML Version': [dml.__version__],
-    'Script': [script_name],
-    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-    'Total Runtime (seconds)': [total_runtime],
-    'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
-})
+metadata = pd.DataFrame(
+    {
+        "DoubleML Version": [dml.__version__],
+        "Script": [script_name],
+        "Date": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+        "Total Runtime (seconds)": [total_runtime],
+        "Python Version": [
+            f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+        ],
+    }
+)
 print(metadata)
 
 df_results.to_csv(f"{path}.csv", index=False)

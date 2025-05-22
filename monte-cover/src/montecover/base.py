@@ -107,7 +107,9 @@ class BaseSimulation(ABC):
 
                 rep_end_time = time.time()
                 rep_duration = rep_end_time - rep_start_time
-                self.logger.info(f"Repetition {i_rep+1} completed in {rep_duration:.2f}s")
+                self.logger.info(
+                    f"Repetition {i_rep+1} completed in {rep_duration:.2f}s"
+                )
 
         else:
             self.logger.info(f"Starting parallel execution with n_jobs={n_jobs}")
@@ -138,7 +140,9 @@ class BaseSimulation(ABC):
                 "Script": [self.__class__.__name__],
                 "Date": [datetime.now().strftime("%Y-%m-%d %H:%M")],
                 "Total Runtime (minutes)": [self.total_runtime / 60],
-                "Python Version": [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
+                "Python Version": [
+                    f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+                ],
                 "Config File": [self.config_file],
             }
         )
@@ -174,7 +178,9 @@ class BaseSimulation(ABC):
             with open(config_path, "r") as file:
                 config = yaml.safe_load(file)
         else:
-            raise ValueError(f"Unsupported config file format: {config_path}. Use .yaml or .yml")
+            raise ValueError(
+                f"Unsupported config file format: {config_path}. Use .yaml or .yml"
+            )
 
         return config
 
@@ -198,7 +204,9 @@ class BaseSimulation(ABC):
         # Console handler
         ch = logging.StreamHandler()
         ch.setLevel(level)
-        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
 
@@ -256,7 +264,9 @@ class BaseSimulation(ABC):
                 dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
                 i_param_comb += 1
 
-                comb_results = self._process_parameter_combination(i_rep, i_param_comb, dgp_params, dml_params, dml_data)
+                comb_results = self._process_parameter_combination(
+                    i_rep, i_param_comb, dgp_params, dml_params, dml_data
+                )
 
                 # Merge results
                 for result_name, result_list in comb_results.items():
@@ -266,11 +276,14 @@ class BaseSimulation(ABC):
 
         return rep_results
 
-    def _process_parameter_combination(self, i_rep, i_param_comb, dgp_params, dml_params, dml_data):
+    def _process_parameter_combination(
+        self, i_rep, i_param_comb, dgp_params, dml_params, dml_data
+    ):
         """Process a single parameter combination."""
         # Log parameter combination
         self.logger.debug(
-            f"Rep {i_rep+1}, Combo {i_param_comb}/{self.total_combinations}: " f"DGPs {dgp_params}, DML {dml_params}"
+            f"Rep {i_rep+1}, Combo {i_param_comb}/{self.total_combinations}: "
+            f"DGPs {dgp_params}, DML {dml_params}"
         )
         param_start_time = time.time()
 
@@ -279,7 +292,9 @@ class BaseSimulation(ABC):
 
             # Log timing
             param_duration = time.time() - param_start_time
-            self.logger.debug(f"Parameter combination completed in {param_duration:.2f}s")
+            self.logger.debug(
+                f"Parameter combination completed in {param_duration:.2f}s"
+            )
 
             # Process results
             if repetition_results is None:
@@ -298,7 +313,8 @@ class BaseSimulation(ABC):
 
         except Exception as e:
             self.logger.error(
-                f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, " f"DML parameters {dml_params}: {str(e)}"
+                f"Error: repetition {i_rep+1}, DGP parameters {dgp_params}, "
+                f"DML parameters {dml_params}: {str(e)}"
             )
             self.logger.exception("Exception details:")
             return {}
@@ -333,9 +349,13 @@ class BaseSimulation(ABC):
         if joint_confint is not None:
             joint_lower_bound = joint_confint.iloc[:, 0]
             joint_upper_bound = joint_confint.iloc[:, 1]
-            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
+            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (
+                oracle_thetas < joint_upper_bound
+            )
 
             result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
-            result_dict["Uniform CI Length"] = np.mean(joint_upper_bound - joint_lower_bound)
+            result_dict["Uniform CI Length"] = np.mean(
+                joint_upper_bound - joint_lower_bound
+            )
 
         return result_dict
