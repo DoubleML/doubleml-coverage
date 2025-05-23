@@ -57,7 +57,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ## ATE Coverage
