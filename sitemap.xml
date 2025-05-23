@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/rdd/rdd.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/iivm.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/apo.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_gate.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_nonignorable.html</loc>
-    <lastmod>2025-01-10T06:28:11.141Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_gate.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_pa.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/pliv.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_cate.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/plm/pliv.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_cs.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_mar.html</loc>
-    <lastmod>2025-01-10T06:28:11.141Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_multi.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_nonignorable.html</loc>
+    <lastmod>2025-05-23T11:10:53.807Z</lastmod>
   </url>
   <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/qte.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_cate.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/iivm.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
   <url>
     <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm.html</loc>
-    <lastmod>2025-01-10T06:28:11.137Z</lastmod>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/apo.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/rdd/rdd.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_gate.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/irm_cate.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/irm/qte.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/index.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/ssm/ssm_mar.html</loc>
+    <lastmod>2025-05-23T11:10:53.807Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/did/did_pa.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DoubleML.github.io/doubleml-coverage/plm/plr_gate.html</loc>
+    <lastmod>2025-05-23T11:10:53.806Z</lastmod>
   </url>
 </urlset>

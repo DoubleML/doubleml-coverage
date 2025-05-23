@@ -1,199 +1,248 @@
 [
   {
-    "objectID": "rdd/rdd.html",
-    "href": "rdd/rdd.html",
-    "title": "Flexible covariate adjustments in RDD",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "rdd/rdd.html#sharp-design",
-    "href": "rdd/rdd.html#sharp-design",
-    "title": "Flexible covariate adjustments in RDD",
-    "section": "Sharp Design",
-    "text": "Sharp Design\nThe simulations are based on the make_simple_rdd_data-DGP with \\(1000\\) observations. The simulation considers data under a sharp regression discontinuity design.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.9.dev0\nScript                   rdd_sharp_coverage.py\nDate                       2025-01-09 16:17:58\nTotal Runtime (seconds)            4084.605144\nPython Version                          3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nMethod\nLearner g\nfs specification\nBias\nCI Length\nCoverage\n\n\n\n\nrdflex\nGlobal linear\ncutoff\n0.553\n2.623\n0.922\n\n\nrdflex\nLGBM\ncutoff\n0.139\n0.682\n0.960\n\n\nrdflex\nLinear\ncutoff\n0.558\n2.638\n0.918\n\n\nrdflex\nStacked\ncutoff\n0.130\n0.666\n0.964\n\n\nrdflex\nGlobal linear\ncutoff and score\n0.555\n2.622\n0.922\n\n\nrdflex\nLGBM\ncutoff and score\n0.145\n0.713\n0.950\n\n\nrdflex\nLinear\ncutoff and score\n0.558\n2.637\n0.922\n\n\nrdflex\nStacked\ncutoff and score\n0.142\n0.694\n0.956\n\n\nrdflex\nGlobal linear\ninteracted cutoff and score\n0.555\n2.624\n0.926\n\n\nrdflex\nLGBM\ninteracted cutoff and score\n0.151\n0.715\n0.948\n\n\nrdflex\nLinear\ninteracted cutoff and score\n0.554\n2.652\n0.916\n\n\nrdflex\nStacked\ninteracted cutoff and score\n0.142\n0.690\n0.962\n\n\nrdrobust\nlinear\ncutoff\n0.555\n2.597\n0.916\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nMethod\nLearner g\nfs specification\nBias\nCI Length\nCoverage\n\n\n\n\nrdflex\nGlobal linear\ncutoff\n0.553\n2.201\n0.874\n\n\nrdflex\nLGBM\ncutoff\n0.139\n0.572\n0.914\n\n\nrdflex\nLinear\ncutoff\n0.558\n2.214\n0.874\n\n\nrdflex\nStacked\ncutoff\n0.130\n0.559\n0.900\n\n\nrdflex\nGlobal linear\ncutoff and score\n0.555\n2.201\n0.876\n\n\nrdflex\nLGBM\ncutoff and score\n0.145\n0.598\n0.902\n\n\nrdflex\nLinear\ncutoff and score\n0.558\n2.213\n0.870\n\n\nrdflex\nStacked\ncutoff and score\n0.142\n0.582\n0.880\n\n\nrdflex\nGlobal linear\ninteracted cutoff and score\n0.555\n2.202\n0.878\n\n\nrdflex\nLGBM\ninteracted cutoff and score\n0.151\n0.600\n0.886\n\n\nrdflex\nLinear\ninteracted cutoff and score\n0.554\n2.225\n0.880\n\n\nrdflex\nStacked\ninteracted cutoff and score\n0.142\n0.579\n0.904\n\n\nrdrobust\nlinear\ncutoff\n0.555\n2.180\n0.874"
-  },
-  {
-    "objectID": "rdd/rdd.html#fuzzy-design",
-    "href": "rdd/rdd.html#fuzzy-design",
-    "title": "Flexible covariate adjustments in RDD",
-    "section": "Fuzzy Design",
-    "text": "Fuzzy Design\nThe simulations are based on the make_simple_rdd_data-DGP with \\(2000\\) observations. The simulation considers data under a fuzzy regression discontinuity design.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.9.dev0\nScript                   rdd_fuzzy_coverage.py\nDate                       2025-01-09 20:41:20\nTotal Runtime (seconds)           19885.911859\nPython Version                          3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 217 Repetitions\n\n\n\n\n\nMethod\nLearner g\nLearner m\nfs specification\nBias\nCI Length\nCoverage\n\n\n\n\nrdflex\nGlobal linear\nGlobal linear\ncutoff\n2.536\n12.547\n0.977\n\n\nrdflex\nGlobal linear\nLGBM\ncutoff\n2.608\n12.744\n0.982\n\n\nrdflex\nGlobal linear\nLinear\ncutoff\n2.585\n12.716\n0.977\n\n\nrdflex\nGlobal linear\nStacked\ncutoff\n2.610\n12.539\n0.972\n\n\nrdflex\nLGBM\nGlobal linear\ncutoff\n0.465\n2.413\n0.968\n\n\nrdflex\nLGBM\nLGBM\ncutoff\n0.503\n2.431\n0.972\n\n\nrdflex\nLGBM\nLinear\ncutoff\n0.484\n2.475\n0.991\n\n\nrdflex\nLGBM\nStacked\ncutoff\n0.472\n2.399\n0.968\n\n\nrdflex\nLinear\nGlobal linear\ncutoff\n2.529\n12.549\n0.977\n\n\nrdflex\nLinear\nLGBM\ncutoff\n2.618\n12.794\n0.977\n\n\nrdflex\nLinear\nLinear\ncutoff\n2.591\n12.777\n0.977\n\n\nrdflex\nLinear\nStacked\ncutoff\n2.489\n12.374\n0.977\n\n\nrdflex\nStacked\nGlobal linear\ncutoff\n0.499\n2.495\n0.968\n\n\nrdflex\nStacked\nLGBM\ncutoff\n0.463\n2.371\n0.991\n\n\nrdflex\nStacked\nLinear\ncutoff\n0.451\n2.503\n0.982\n\n\nrdflex\nStacked\nStacked\ncutoff\n0.445\n2.401\n0.972\n\n\nrdflex\nGlobal linear\nGlobal linear\ncutoff and score\n2.543\n12.537\n0.977\n\n\nrdflex\nGlobal linear\nLGBM\ncutoff and score\n2.619\n12.850\n0.982\n\n\nrdflex\nGlobal linear\nLinear\ncutoff and score\n2.580\n12.744\n0.977\n\n\nrdflex\nGlobal linear\nStacked\ncutoff and score\n2.618\n12.899\n0.977\n\n\nrdflex\nLGBM\nGlobal linear\ncutoff and score\n0.495\n2.557\n0.982\n\n\nrdflex\nLGBM\nLGBM\ncutoff and score\n0.528\n2.617\n0.968\n\n\nrdflex\nLGBM\nLinear\ncutoff and score\n0.477\n2.610\n0.977\n\n\nrdflex\nLGBM\nStacked\ncutoff and score\n0.506\n2.535\n0.982\n\n\nrdflex\nLinear\nGlobal linear\ncutoff and score\n2.575\n12.653\n0.977\n\n\nrdflex\nLinear\nLGBM\ncutoff and score\n2.678\n12.900\n0.986\n\n\nrdflex\nLinear\nLinear\ncutoff and score\n2.565\n12.749\n0.977\n\n\nrdflex\nLinear\nStacked\ncutoff and score\n2.625\n12.811\n0.972\n\n\nrdflex\nStacked\nGlobal linear\ncutoff and score\n0.495\n2.588\n0.972\n\n\nrdflex\nStacked\nLGBM\ncutoff and score\n0.495\n2.557\n0.968\n\n\nrdflex\nStacked\nLinear\ncutoff and score\n0.501\n2.629\n0.991\n\n\nrdflex\nStacked\nStacked\ncutoff and score\n0.488\n2.674\n0.982\n\n\nrdflex\nGlobal linear\nGlobal linear\ninteracted cutoff and score\n2.515\n12.522\n0.977\n\n\nrdflex\nGlobal linear\nLGBM\ninteracted cutoff and score\n2.643\n12.944\n0.982\n\n\nrdflex\nGlobal linear\nLinear\ninteracted cutoff and score\n2.562\n12.701\n0.977\n\n\nrdflex\nGlobal linear\nStacked\ninteracted cutoff and score\n2.581\n12.557\n0.972\n\n\nrdflex\nLGBM\nGlobal linear\ninteracted cutoff and score\n0.496\n2.544\n0.977\n\n\nrdflex\nLGBM\nLGBM\ninteracted cutoff and score\n0.534\n2.670\n0.982\n\n\nrdflex\nLGBM\nLinear\ninteracted cutoff and score\n0.520\n2.622\n0.986\n\n\nrdflex\nLGBM\nStacked\ninteracted cutoff and score\n0.522\n2.529\n0.986\n\n\nrdflex\nLinear\nGlobal linear\ninteracted cutoff and score\n2.593\n12.699\n0.977\n\n\nrdflex\nLinear\nLGBM\ninteracted cutoff and score\n2.723\n13.189\n0.982\n\n\nrdflex\nLinear\nLinear\ninteracted cutoff and score\n2.600\n12.847\n0.977\n\n\nrdflex\nLinear\nStacked\ninteracted cutoff and score\n2.629\n12.776\n0.972\n\n\nrdflex\nStacked\nGlobal linear\ninteracted cutoff and score\n0.528\n2.647\n0.972\n\n\nrdflex\nStacked\nLGBM\ninteracted cutoff and score\n0.512\n2.629\n0.977\n\n\nrdflex\nStacked\nLinear\ninteracted cutoff and score\n0.513\n2.662\n0.963\n\n\nrdflex\nStacked\nStacked\ninteracted cutoff and score\n0.483\n2.594\n0.986\n\n\nrdrobust\nlinear\nlinear\ncutoff\n2.523\n12.356\n0.972\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 217 Repetitions\n\n\n\n\n\nMethod\nLearner g\nLearner m\nfs specification\nBias\nCI Length\nCoverage\n\n\n\n\nrdflex\nGlobal linear\nGlobal linear\ncutoff\n2.536\n10.530\n0.945\n\n\nrdflex\nGlobal linear\nLGBM\ncutoff\n2.608\n10.695\n0.945\n\n\nrdflex\nGlobal linear\nLinear\ncutoff\n2.585\n10.672\n0.940\n\n\nrdflex\nGlobal linear\nStacked\ncutoff\n2.610\n10.523\n0.949\n\n\nrdflex\nLGBM\nGlobal linear\ncutoff\n0.465\n2.025\n0.935\n\n\nrdflex\nLGBM\nLGBM\ncutoff\n0.503\n2.040\n0.931\n\n\nrdflex\nLGBM\nLinear\ncutoff\n0.484\n2.077\n0.954\n\n\nrdflex\nLGBM\nStacked\ncutoff\n0.472\n2.013\n0.908\n\n\nrdflex\nLinear\nGlobal linear\ncutoff\n2.529\n10.531\n0.945\n\n\nrdflex\nLinear\nLGBM\ncutoff\n2.618\n10.737\n0.945\n\n\nrdflex\nLinear\nLinear\ncutoff\n2.591\n10.723\n0.935\n\n\nrdflex\nLinear\nStacked\ncutoff\n2.489\n10.385\n0.945\n\n\nrdflex\nStacked\nGlobal linear\ncutoff\n0.499\n2.094\n0.926\n\n\nrdflex\nStacked\nLGBM\ncutoff\n0.463\n1.990\n0.949\n\n\nrdflex\nStacked\nLinear\ncutoff\n0.451\n2.100\n0.940\n\n\nrdflex\nStacked\nStacked\ncutoff\n0.445\n2.015\n0.935\n\n\nrdflex\nGlobal linear\nGlobal linear\ncutoff and score\n2.543\n10.521\n0.945\n\n\nrdflex\nGlobal linear\nLGBM\ncutoff and score\n2.619\n10.784\n0.945\n\n\nrdflex\nGlobal linear\nLinear\ncutoff and score\n2.580\n10.695\n0.945\n\n\nrdflex\nGlobal linear\nStacked\ncutoff and score\n2.618\n10.825\n0.949\n\n\nrdflex\nLGBM\nGlobal linear\ncutoff and score\n0.495\n2.146\n0.954\n\n\nrdflex\nLGBM\nLGBM\ncutoff and score\n0.528\n2.196\n0.940\n\n\nrdflex\nLGBM\nLinear\ncutoff and score\n0.477\n2.190\n0.945\n\n\nrdflex\nLGBM\nStacked\ncutoff and score\n0.506\n2.128\n0.963\n\n\nrdflex\nLinear\nGlobal linear\ncutoff and score\n2.575\n10.618\n0.931\n\n\nrdflex\nLinear\nLGBM\ncutoff and score\n2.678\n10.826\n0.954\n\n\nrdflex\nLinear\nLinear\ncutoff and score\n2.565\n10.699\n0.926\n\n\nrdflex\nLinear\nStacked\ncutoff and score\n2.625\n10.752\n0.935\n\n\nrdflex\nStacked\nGlobal linear\ncutoff and score\n0.495\n2.172\n0.926\n\n\nrdflex\nStacked\nLGBM\ncutoff and score\n0.495\n2.146\n0.949\n\n\nrdflex\nStacked\nLinear\ncutoff and score\n0.501\n2.206\n0.945\n\n\nrdflex\nStacked\nStacked\ncutoff and score\n0.488\n2.244\n0.959\n\n\nrdflex\nGlobal linear\nGlobal linear\ninteracted cutoff and score\n2.515\n10.509\n0.945\n\n\nrdflex\nGlobal linear\nLGBM\ninteracted cutoff and score\n2.643\n10.863\n0.949\n\n\nrdflex\nGlobal linear\nLinear\ninteracted cutoff and score\n2.562\n10.659\n0.949\n\n\nrdflex\nGlobal linear\nStacked\ninteracted cutoff and score\n2.581\n10.538\n0.945\n\n\nrdflex\nLGBM\nGlobal linear\ninteracted cutoff and score\n0.496\n2.135\n0.935\n\n\nrdflex\nLGBM\nLGBM\ninteracted cutoff and score\n0.534\n2.240\n0.945\n\n\nrdflex\nLGBM\nLinear\ninteracted cutoff and score\n0.520\n2.201\n0.931\n\n\nrdflex\nLGBM\nStacked\ninteracted cutoff and score\n0.522\n2.123\n0.945\n\n\nrdflex\nLinear\nGlobal linear\ninteracted cutoff and score\n2.593\n10.657\n0.935\n\n\nrdflex\nLinear\nLGBM\ninteracted cutoff and score\n2.723\n11.068\n0.949\n\n\nrdflex\nLinear\nLinear\ninteracted cutoff and score\n2.600\n10.782\n0.949\n\n\nrdflex\nLinear\nStacked\ninteracted cutoff and score\n2.629\n10.722\n0.931\n\n\nrdflex\nStacked\nGlobal linear\ninteracted cutoff and score\n0.528\n2.222\n0.926\n\n\nrdflex\nStacked\nLGBM\ninteracted cutoff and score\n0.512\n2.206\n0.935\n\n\nrdflex\nStacked\nLinear\ninteracted cutoff and score\n0.513\n2.234\n0.917\n\n\nrdflex\nStacked\nStacked\ninteracted cutoff and score\n0.483\n2.177\n0.949\n\n\nrdrobust\nlinear\nlinear\ncutoff\n2.523\n10.370\n0.940"
-  },
-  {
-    "objectID": "irm/iivm.html",
-    "href": "irm/iivm.html",
-    "title": "IIVM Models",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/iivm.html#late-coverage",
-    "href": "irm/iivm.html#late-coverage",
-    "title": "IIVM Models",
-    "section": "LATE Coverage",
-    "text": "LATE Coverage\nThe simulations are based on the the make_iivm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                     0.10.dev0\nScript                   iivm_late_coverage.py\nDate                       2025-01-08 13:50:46\nTotal Runtime (seconds)            5734.383909\nPython Version                          3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.224\n1.107\n0.956\n\n\nLasso\nRandom Forest\n0.231\n1.138\n0.960\n\n\nRandom Forest\nLogistic Regression\n0.233\n1.148\n0.949\n\n\nRandom Forest\nRandom Forest\n0.234\n1.182\n0.962\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.224\n0.929\n0.902\n\n\nLasso\nRandom Forest\n0.231\n0.955\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.233\n0.963\n0.905\n\n\nRandom Forest\nRandom Forest\n0.234\n0.992\n0.905"
-  },
-  {
-    "objectID": "irm/apo.html",
-    "href": "irm/apo.html",
-    "title": "APO Models",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/apo.html#apo-pointwise-coverage",
-    "href": "irm/apo.html#apo-pointwise-coverage",
-    "title": "APO Models",
-    "section": "APO Pointwise Coverage",
-    "text": "APO Pointwise Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-01-08 15:02:49\nTotal Runtime (seconds)         10054.695461\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nTreatment Level\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.000\n2.076\n10.316\n0.963\n\n\nLGBM\nLGBM\n1.000\n9.193\n45.558\n0.967\n\n\nLGBM\nLGBM\n2.000\n9.594\n44.674\n0.952\n\n\nLGBM\nLogistic\n0.000\n1.337\n6.704\n0.955\n\n\nLGBM\nLogistic\n1.000\n1.695\n8.845\n0.968\n\n\nLGBM\nLogistic\n2.000\n1.661\n8.724\n0.971\n\n\nLinear\nLGBM\n0.000\n1.307\n6.552\n0.949\n\n\nLinear\nLGBM\n1.000\n2.127\n12.751\n0.982\n\n\nLinear\nLGBM\n2.000\n1.635\n8.953\n0.967\n\n\nLinear\nLogistic\n0.000\n1.286\n6.358\n0.951\n\n\nLinear\nLogistic\n1.000\n1.280\n6.455\n0.954\n\n\nLinear\nLogistic\n2.000\n1.281\n6.394\n0.959\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nTreatment Level\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.000\n2.076\n8.658\n0.911\n\n\nLGBM\nLGBM\n1.000\n9.193\n38.233\n0.914\n\n\nLGBM\nLGBM\n2.000\n9.594\n37.492\n0.891\n\n\nLGBM\nLogistic\n0.000\n1.337\n5.626\n0.901\n\n\nLGBM\nLogistic\n1.000\n1.695\n7.423\n0.920\n\n\nLGBM\nLogistic\n2.000\n1.661\n7.321\n0.918\n\n\nLinear\nLGBM\n0.000\n1.307\n5.498\n0.901\n\n\nLinear\nLGBM\n1.000\n2.127\n10.701\n0.951\n\n\nLinear\nLGBM\n2.000\n1.635\n7.514\n0.932\n\n\nLinear\nLogistic\n0.000\n1.286\n5.336\n0.900\n\n\nLinear\nLogistic\n1.000\n1.280\n5.418\n0.904\n\n\nLinear\nLogistic\n2.000\n1.281\n5.366\n0.905"
-  },
-  {
-    "objectID": "irm/apo.html#apos-coverage",
-    "href": "irm/apo.html#apos-coverage",
-    "title": "APO Models",
-    "section": "APOS Coverage",
-    "text": "APOS Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-01-08 15:02:49\nTotal Runtime (seconds)         10054.695461\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n7.118\n33.615\n0.958\n40.868\n0.973\n\n\nLGBM\nLogistic\n1.571\n8.090\n0.963\n9.592\n0.959\n\n\nLinear\nLGBM\n1.726\n9.418\n0.967\n11.234\n0.974\n\n\nLinear\nLogistic\n1.280\n6.402\n0.957\n6.818\n0.953\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n7.118\n28.210\n0.906\n36.194\n0.925\n\n\nLGBM\nLogistic\n1.571\n6.789\n0.915\n8.394\n0.924\n\n\nLinear\nLGBM\n1.726\n7.903\n0.927\n9.850\n0.939\n\n\nLinear\nLogistic\n1.280\n5.373\n0.904\n5.796\n0.906"
-  },
-  {
-    "objectID": "irm/apo.html#causal-contrast-coverage",
-    "href": "irm/apo.html#causal-contrast-coverage",
-    "title": "APO Models",
-    "section": "Causal Contrast Coverage",
-    "text": "Causal Contrast Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-01-08 15:02:49\nTotal Runtime (seconds)         10054.695461\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 5: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n9.786\n45.131\n0.949\n51.424\n0.965\n\n\nLGBM\nLogistic\n1.268\n6.822\n0.962\n7.765\n0.961\n\n\nLinear\nLGBM\n1.507\n8.855\n0.989\n10.090\n0.992\n\n\nLinear\nLogistic\n0.297\n1.361\n0.933\n1.550\n0.916\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 6: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n9.786\n37.875\n0.888\n44.829\n0.898\n\n\nLGBM\nLogistic\n1.268\n5.725\n0.927\n6.774\n0.926\n\n\nLinear\nLGBM\n1.507\n7.431\n0.958\n8.799\n0.975\n\n\nLinear\nLogistic\n0.297\n1.143\n0.873\n1.351\n0.869"
-  },
-  {
-    "objectID": "irm/irm_gate.html",
-    "href": "irm/irm_gate.html",
-    "title": "GATEs",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/irm_gate.html#gate-coverage",
-    "href": "irm/irm_gate.html#gate-coverage",
-    "title": "GATEs",
-    "section": "GATE Coverage",
-    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_gate_coverage.py\nDate                      2025-01-08 13:08:04\nTotal Runtime (seconds)           3153.398027\nPython Version                         3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.485\n2.575\n0.977\n5.085\n1.000\n\n\nLGBM\nLogistic Regression\n0.089\n0.465\n0.961\n0.920\n0.998\n\n\nLasso\nLGBM\n0.497\n2.440\n0.959\n4.820\n1.000\n\n\nLasso\nLogistic Regression\n0.090\n0.478\n0.960\n0.940\n0.999\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.485\n2.161\n0.941\n5.064\n1.000\n\n\nLGBM\nLogistic Regression\n0.089\n0.390\n0.916\n0.919\n0.997\n\n\nLasso\nLGBM\n0.497\n2.048\n0.904\n4.807\n1.000\n\n\nLasso\nLogistic Regression\n0.090\n0.401\n0.917\n0.942\n0.999"
-  },
-  {
-    "objectID": "ssm/ssm_nonignorable.html",
-    "href": "ssm/ssm_nonignorable.html",
-    "title": "SSM under Nonignorable Nonresponse",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "ssm/ssm_nonignorable.html#ate-coverage",
-    "href": "ssm/ssm_nonignorable.html#ate-coverage",
-    "title": "SSM under Nonignorable Nonresponse",
-    "section": "ATE Coverage",
-    "text": "ATE Coverage\nThe simulations are based on the make_ssm_data-DGP with \\(500\\) observations. The simulation considers data with nonignorable nonresponse.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                0.10.dev0\nScript                   ssm_nonignorable_ate_coverage.py\nDate                                  2025-01-08 14:24:21\nTotal Runtime (seconds)                       7745.532069\nPython Version                                     3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner pi\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\nLGBM\n3.667\n15.499\n0.966\n\n\nLGBM\nLGBM\nLogistic\n1.327\n5.758\n0.974\n\n\nLGBM\nLogistic\nLGBM\n1.232\n5.472\n0.959\n\n\nLGBM\nLogistic\nLogistic\n0.728\n3.015\n0.940\n\n\nLasso\nLGBM\nLGBM\n2.892\n12.159\n0.975\n\n\nLasso\nLGBM\nLogistic\n2.051\n8.416\n0.974\n\n\nLasso\nLogistic\nLGBM\n1.187\n4.970\n0.950\n\n\nLasso\nLogistic\nLogistic\n0.566\n2.375\n0.928\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner pi\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\nLGBM\n3.667\n13.007\n0.919\n\n\nLGBM\nLGBM\nLogistic\n1.327\n4.832\n0.918\n\n\nLGBM\nLogistic\nLGBM\n1.232\n4.593\n0.897\n\n\nLGBM\nLogistic\nLogistic\n0.728\n2.530\n0.867\n\n\nLasso\nLGBM\nLGBM\n2.892\n10.204\n0.931\n\n\nLasso\nLGBM\nLogistic\n2.051\n7.063\n0.917\n\n\nLasso\nLogistic\nLGBM\n1.187\n4.171\n0.894\n\n\nLasso\nLogistic\nLogistic\n0.566\n1.993\n0.870"
-  },
-  {
-    "objectID": "plm/plr_gate.html",
-    "href": "plm/plr_gate.html",
-    "title": "GATEs",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "plm/plr_gate.html#gate-coverage",
-    "href": "plm/plr_gate.html#gate-coverage",
-    "title": "GATEs",
-    "section": "GATE Coverage",
-    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE PLR Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   plr_gate_coverage.py\nDate                      2025-01-08 13:02:47\nTotal Runtime (seconds)           2835.537957\nPython Version                         3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.155\n0.507\n0.775\n0.999\n0.955\n\n\nLGBM\nLasso\n0.171\n0.752\n0.915\n1.486\n0.998\n\n\nLasso\nLGBM\n0.692\n0.601\n0.057\n1.184\n0.013\n\n\nLasso\nLasso\n0.085\n0.438\n0.958\n0.864\n1.000\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.155\n0.425\n0.694\n0.999\n0.953\n\n\nLGBM\nLasso\n0.171\n0.631\n0.859\n1.483\n1.000\n\n\nLasso\nLGBM\n0.692\n0.504\n0.033\n1.184\n0.009\n\n\nLasso\nLasso\n0.085\n0.367\n0.912\n0.862\n0.999"
-  },
-  {
-    "objectID": "plm/plr.html",
-    "href": "plm/plr.html",
-    "title": "Basic PLR Models",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "plm/plr.html#ate-coverage",
-    "href": "plm/plr.html#ate-coverage",
-    "title": "Basic PLR Models",
-    "section": "ATE Coverage",
-    "text": "ATE Coverage\nThe simulations are based on the the make_plr_CCDDHNR2018-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   plr_ate_coverage.py\nDate                     2025-01-08 14:10:27\nTotal Runtime (seconds)          6916.502653\nPython Version                        3.12.8\n\n\n\n\n\n\nPartialling out\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\n0.035\n0.175\n0.956\n\n\nLasso\nRandom Forest\n0.042\n0.171\n0.888\n\n\nRandom Forest\nLasso\n0.036\n0.181\n0.952\n\n\nRandom Forest\nRandom Forest\n0.037\n0.174\n0.946\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\n0.035\n0.146\n0.908\n\n\nLasso\nRandom Forest\n0.042\n0.143\n0.816\n\n\nRandom Forest\nLasso\n0.036\n0.152\n0.901\n\n\nRandom Forest\nRandom Forest\n0.037\n0.146\n0.878\n\n\n\n\n\n\n\n\n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\n0.035\n0.166\n0.945\n\n\nLasso\nRandom Forest\n0.036\n0.175\n0.953\n\n\nRandom Forest\nLasso\n0.036\n0.169\n0.951\n\n\nRandom Forest\nRandom Forest\n0.037\n0.178\n0.948\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\n0.035\n0.139\n0.881\n\n\nLasso\nRandom Forest\n0.036\n0.147\n0.895\n\n\nRandom Forest\nLasso\n0.036\n0.142\n0.883\n\n\nRandom Forest\nRandom Forest\n0.037\n0.149\n0.893"
-  },
-  {
-    "objectID": "plm/plr.html#ate-sensitivity",
-    "href": "plm/plr.html#ate-sensitivity",
-    "title": "Basic PLR Models",
-    "section": "ATE Sensitivity",
-    "text": "ATE Sensitivity\nThe simulations are based on the the make_confounded_plr_data-DGP with \\(1000\\) observations as highlighted in the Example Gallery. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes unobserved confounders, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nBoth sensitivity parameters are set to \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the upper coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.10.dev0\nScript                   plr_ate_sensitivity.py\nDate                        2025-01-08 16:36:12\nTotal Runtime (seconds)            15659.224348\nPython Version                           3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n        \n        \n        \n        \n        \n        \n        \n        \n    \n    \n   \n    \n      \n  \n        \n    \n    \n  \n        \n    \n    \n  \n        \n    \n      \n  \n        \n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n        \n    \n\n\nThis is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)\n\n\n\n\n\nPartialling out\n\n\n\n\n\n\n\nTable 5: Coverage for 95.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.922\n1.646\n0.283\n0.114\n1.000\n0.962\n0.123\n0.052\n\n\nLGBM\nRandom Forest\n0.995\n1.810\n0.292\n0.150\n1.000\n0.980\n0.118\n0.045\n\n\nRandom Forest\nLGBM\n1.573\n2.774\n0.403\n0.008\n1.000\n0.948\n0.128\n0.067\n\n\nRandom Forest\nRandom Forest\n1.737\n3.061\n0.464\n0.018\n1.000\n0.946\n0.128\n0.064\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 6: Coverage for 90.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.922\n1.646\n0.283\n0.052\n1.000\n0.878\n0.123\n0.067\n\n\nLGBM\nRandom Forest\n0.995\n1.810\n0.292\n0.078\n1.000\n0.918\n0.118\n0.060\n\n\nRandom Forest\nLGBM\n1.573\n2.774\n0.403\n0.002\n1.000\n0.818\n0.128\n0.081\n\n\nRandom Forest\nRandom Forest\n1.737\n3.061\n0.464\n0.000\n1.000\n0.824\n0.128\n0.078\n\n\n\n\n\n\n\n\n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n\n\n\nTable 7: Coverage for 95.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.643\n1.345\n0.271\n0.650\n1.000\n1.000\n0.088\n0.014\n\n\nLGBM\nRandom Forest\n0.932\n1.698\n0.267\n0.160\n1.000\n0.994\n0.118\n0.043\n\n\nRandom Forest\nLGBM\n0.888\n2.120\n0.463\n0.746\n1.000\n1.000\n0.072\n0.009\n\n\nRandom Forest\nRandom Forest\n1.619\n2.948\n0.400\n0.038\n1.000\n0.972\n0.120\n0.057\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 8: Coverage for 90.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.643\n1.345\n0.271\n0.490\n1.000\n0.998\n0.088\n0.025\n\n\nLGBM\nRandom Forest\n0.932\n1.698\n0.267\n0.072\n1.000\n0.934\n0.118\n0.059\n\n\nRandom Forest\nLGBM\n0.888\n2.120\n0.463\n0.554\n1.000\n1.000\n0.072\n0.018\n\n\nRandom Forest\nRandom Forest\n1.619\n2.948\n0.400\n0.012\n1.000\n0.892\n0.120\n0.071"
-  },
-  {
-    "objectID": "did/did_cs.html",
-    "href": "did/did_cs.html",
-    "title": "DiD for Repeated Cross-Sections",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "did/did_cs.html#atte-coverage",
-    "href": "did/did_cs.html#atte-coverage",
-    "title": "DiD for Repeated Cross-Sections",
-    "section": "ATTE Coverage",
-    "text": "ATTE Coverage\nThe simulations are based on the the make_did_SZ2020-DGP with \\(1000\\) observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   did_cs_atte_coverage.py\nDate                         2025-01-08 16:52:06\nTotal Runtime (seconds)             16598.133431\nPython Version                            3.12.8\n\n\n\n\n\n\nObservational Score\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n11.671\n59.601\n0.973\n\n\nLGBM\nLGBM\n2\nFalse\n13.470\n70.532\n0.977\n\n\nLGBM\nLGBM\n3\nFalse\n12.635\n67.470\n0.989\n\n\nLGBM\nLGBM\n4\nFalse\n16.709\n83.443\n0.982\n\n\nLGBM\nLGBM\n5\nFalse\n7.536\n38.945\n0.973\n\n\nLGBM\nLGBM\n6\nFalse\n7.328\n37.242\n0.960\n\n\nLGBM\nLGBM\n1\nTrue\n4.470\n21.342\n0.954\n\n\nLGBM\nLGBM\n2\nTrue\n4.861\n24.388\n0.965\n\n\nLGBM\nLGBM\n3\nTrue\n4.795\n23.936\n0.958\n\n\nLGBM\nLGBM\n4\nTrue\n5.634\n28.391\n0.956\n\n\nLGBM\nLGBM\n5\nTrue\n4.118\n19.511\n0.943\n\n\nLGBM\nLGBM\n6\nTrue\n3.734\n17.859\n0.957\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n11.671\n50.018\n0.940\n\n\nLGBM\nLGBM\n2\nFalse\n13.470\n59.192\n0.929\n\n\nLGBM\nLGBM\n3\nFalse\n12.635\n56.623\n0.945\n\n\nLGBM\nLGBM\n4\nFalse\n16.709\n70.028\n0.945\n\n\nLGBM\nLGBM\n5\nFalse\n7.536\n32.684\n0.932\n\n\nLGBM\nLGBM\n6\nFalse\n7.328\n31.255\n0.922\n\n\nLGBM\nLGBM\n1\nTrue\n4.470\n17.911\n0.903\n\n\nLGBM\nLGBM\n2\nTrue\n4.861\n20.467\n0.928\n\n\nLGBM\nLGBM\n3\nTrue\n4.795\n20.088\n0.916\n\n\nLGBM\nLGBM\n4\nTrue\n5.634\n23.827\n0.913\n\n\nLGBM\nLGBM\n5\nTrue\n4.118\n16.374\n0.890\n\n\nLGBM\nLGBM\n6\nTrue\n3.734\n14.988\n0.891\n\n\n\n\n\n\n\n\n\n\n\n\n\nExperimental Score\nRemark that the only two valid DGPs are DGP \\(5\\) and DGP \\(6\\). All other DGPs are invalid due to non-experimental treatment assignment.\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n3.906\n12.418\n0.796\n\n\nLGBM\nLGBM\n2\nFalse\n3.717\n13.290\n0.830\n\n\nLGBM\nLGBM\n3\nFalse\n2.981\n12.070\n0.900\n\n\nLGBM\nLGBM\n4\nFalse\n3.911\n12.212\n0.788\n\n\nLGBM\nLGBM\n5\nFalse\n2.905\n14.243\n0.950\n\n\nLGBM\nLGBM\n6\nFalse\n2.476\n12.404\n0.951\n\n\nLGBM\nLGBM\n1\nTrue\n3.985\n12.442\n0.774\n\n\nLGBM\nLGBM\n2\nTrue\n3.723\n13.283\n0.832\n\n\nLGBM\nLGBM\n3\nTrue\n2.994\n12.082\n0.896\n\n\nLGBM\nLGBM\n4\nTrue\n3.951\n12.223\n0.782\n\n\nLGBM\nLGBM\n5\nTrue\n2.944\n14.277\n0.949\n\n\nLGBM\nLGBM\n6\nTrue\n2.562\n12.421\n0.955\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n3.906\n10.421\n0.714\n\n\nLGBM\nLGBM\n2\nFalse\n3.717\n11.154\n0.747\n\n\nLGBM\nLGBM\n3\nFalse\n2.981\n10.130\n0.826\n\n\nLGBM\nLGBM\n4\nFalse\n3.911\n10.248\n0.709\n\n\nLGBM\nLGBM\n5\nFalse\n2.905\n11.953\n0.897\n\n\nLGBM\nLGBM\n6\nFalse\n2.476\n10.410\n0.901\n\n\nLGBM\nLGBM\n1\nTrue\n3.985\n10.442\n0.695\n\n\nLGBM\nLGBM\n2\nTrue\n3.723\n11.147\n0.769\n\n\nLGBM\nLGBM\n3\nTrue\n2.994\n10.140\n0.822\n\n\nLGBM\nLGBM\n4\nTrue\n3.951\n10.258\n0.707\n\n\nLGBM\nLGBM\n5\nTrue\n2.944\n11.982\n0.894\n\n\nLGBM\nLGBM\n6\nTrue\n2.562\n10.424\n0.894"
-  },
-  {
-    "objectID": "did/did_pa.html",
-    "href": "did/did_pa.html",
-    "title": "DiD for Panel Data",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "did/did_pa.html#atte-coverage",
-    "href": "did/did_pa.html#atte-coverage",
-    "title": "DiD for Panel Data",
-    "section": "ATTE Coverage",
-    "text": "ATTE Coverage\nThe simulations are based on the the make_did_SZ2020-DGP with \\(1000\\) observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   did_pa_atte_coverage.py\nDate                         2025-01-08 16:22:26\nTotal Runtime (seconds)              14811.19887\nPython Version                            3.12.8\n\n\n\n\n\n\nObservational Score\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n3.379\n15.002\n0.953\n\n\nLGBM\nLGBM\n2\nFalse\n3.622\n17.536\n0.966\n\n\nLGBM\nLGBM\n3\nFalse\n3.413\n17.144\n0.977\n\n\nLGBM\nLGBM\n4\nFalse\n5.765\n21.602\n0.932\n\n\nLGBM\nLGBM\n5\nFalse\n1.901\n9.180\n0.960\n\n\nLGBM\nLGBM\n6\nFalse\n1.799\n9.020\n0.972\n\n\nLGBM\nLGBM\n1\nTrue\n1.030\n4.966\n0.967\n\n\nLGBM\nLGBM\n2\nTrue\n1.224\n5.982\n0.963\n\n\nLGBM\nLGBM\n3\nTrue\n1.133\n5.844\n0.969\n\n\nLGBM\nLGBM\n4\nTrue\n1.370\n7.100\n0.971\n\n\nLGBM\nLGBM\n5\nTrue\n0.828\n4.110\n0.965\n\n\nLGBM\nLGBM\n6\nTrue\n0.800\n4.053\n0.970\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n3.379\n12.590\n0.893\n\n\nLGBM\nLGBM\n2\nFalse\n3.622\n14.717\n0.914\n\n\nLGBM\nLGBM\n3\nFalse\n3.413\n14.388\n0.933\n\n\nLGBM\nLGBM\n4\nFalse\n5.765\n18.129\n0.842\n\n\nLGBM\nLGBM\n5\nFalse\n1.901\n7.704\n0.917\n\n\nLGBM\nLGBM\n6\nFalse\n1.799\n7.570\n0.922\n\n\nLGBM\nLGBM\n1\nTrue\n1.030\n4.168\n0.906\n\n\nLGBM\nLGBM\n2\nTrue\n1.224\n5.020\n0.917\n\n\nLGBM\nLGBM\n3\nTrue\n1.133\n4.905\n0.921\n\n\nLGBM\nLGBM\n4\nTrue\n1.370\n5.959\n0.925\n\n\nLGBM\nLGBM\n5\nTrue\n0.828\n3.449\n0.920\n\n\nLGBM\nLGBM\n6\nTrue\n0.800\n3.402\n0.925\n\n\n\n\n\n\n\n\n\n\n\n\n\nExperimental Score\nRemark that the only two valid DGPs are DGP \\(5\\) and DGP \\(6\\). All other DGPs are invalid due to non-experimental treatment assignment.\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n2.170\n2.577\n0.094\n\n\nLGBM\nLGBM\n2\nFalse\n1.321\n2.537\n0.475\n\n\nLGBM\nLGBM\n3\nFalse\n1.001\n2.240\n0.584\n\n\nLGBM\nLGBM\n4\nFalse\n1.917\n2.244\n0.122\n\n\nLGBM\nLGBM\n5\nFalse\n0.521\n2.460\n0.951\n\n\nLGBM\nLGBM\n6\nFalse\n0.434\n2.155\n0.948\n\n\nLGBM\nLGBM\n1\nTrue\n2.171\n2.573\n0.099\n\n\nLGBM\nLGBM\n2\nTrue\n1.320\n2.538\n0.470\n\n\nLGBM\nLGBM\n3\nTrue\n1.000\n2.239\n0.598\n\n\nLGBM\nLGBM\n4\nTrue\n1.924\n2.247\n0.127\n\n\nLGBM\nLGBM\n5\nTrue\n0.520\n2.459\n0.947\n\n\nLGBM\nLGBM\n6\nTrue\n0.437\n2.156\n0.944\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nDGP\nIn-sample-norm.\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n1\nFalse\n2.170\n2.162\n0.051\n\n\nLGBM\nLGBM\n2\nFalse\n1.321\n2.130\n0.377\n\n\nLGBM\nLGBM\n3\nFalse\n1.001\n1.880\n0.470\n\n\nLGBM\nLGBM\n4\nFalse\n1.917\n1.883\n0.078\n\n\nLGBM\nLGBM\n5\nFalse\n0.521\n2.064\n0.889\n\n\nLGBM\nLGBM\n6\nFalse\n0.434\n1.809\n0.908\n\n\nLGBM\nLGBM\n1\nTrue\n2.171\n2.160\n0.049\n\n\nLGBM\nLGBM\n2\nTrue\n1.320\n2.130\n0.373\n\n\nLGBM\nLGBM\n3\nTrue\n1.000\n1.879\n0.477\n\n\nLGBM\nLGBM\n4\nTrue\n1.924\n1.886\n0.084\n\n\nLGBM\nLGBM\n5\nTrue\n0.520\n2.064\n0.891\n\n\nLGBM\nLGBM\n6\nTrue\n0.437\n1.809\n0.897"
-  },
-  {
-    "objectID": "plm/plr_cate.html",
-    "href": "plm/plr_cate.html",
-    "title": "CATEs",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "plm/plr_cate.html#cate-coverage",
-    "href": "plm/plr_cate.html#cate-coverage",
-    "title": "CATEs",
-    "section": "CATE Coverage",
-    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE PLR Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   plr_cate_coverage.py\nDate                      2025-01-08 14:25:31\nTotal Runtime (seconds)           7808.868788\nPython Version                         3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.117\n0.294\n0.652\n0.626\n0.831\n\n\nLGBM\nLasso\n0.091\n0.404\n0.921\n0.861\n0.995\n\n\nLasso\nLGBM\n0.496\n0.360\n0.053\n0.766\n0.000\n\n\nLasso\nLasso\n0.050\n0.244\n0.944\n0.523\n0.998\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.117\n0.246\n0.549\n0.626\n0.838\n\n\nLGBM\nLasso\n0.091\n0.339\n0.864\n0.862\n0.996\n\n\nLasso\nLGBM\n0.496\n0.302\n0.042\n0.766\n0.000\n\n\nLasso\nLasso\n0.050\n0.205\n0.892\n0.520\n0.999"
-  },
-  {
     "objectID": "plm/pliv.html",
     "href": "plm/pliv.html",
     "title": "PLIV Models",
     "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
   },
   {
     "objectID": "plm/pliv.html#late-coverage",
     "href": "plm/pliv.html#late-coverage",
     "title": "PLIV Models",
     "section": "LATE Coverage",
-    "text": "LATE Coverage\nThe simulations are based on the the make_pliv_CHS2015-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                     0.10.dev0\nScript                   pliv_late_coverage.py\nDate                       2025-01-08 17:34:57\nTotal Runtime (seconds)           19185.318093\nPython Version                          3.12.8\n\n\n\n\n\n\nPartialling out\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nLearner r\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\nLasso\n0.072\n0.357\n0.947\n\n\nLasso\nLasso\nRandom Forest\n0.074\n0.366\n0.947\n\n\nLasso\nRandom Forest\nLasso\n0.077\n0.378\n0.952\n\n\nLasso\nRandom Forest\nRandom Forest\n0.081\n0.359\n0.948\n\n\nRandom Forest\nLasso\nLasso\n0.080\n0.394\n0.954\n\n\nRandom Forest\nLasso\nRandom Forest\n0.077\n0.380\n0.949\n\n\nRandom Forest\nRandom Forest\nLasso\n0.107\n0.419\n0.862\n\n\nRandom Forest\nRandom Forest\nRandom Forest\n0.078\n0.362\n0.926\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nLearner r\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\nLasso\n0.072\n0.299\n0.899\n\n\nLasso\nLasso\nRandom Forest\n0.074\n0.307\n0.899\n\n\nLasso\nRandom Forest\nLasso\n0.077\n0.317\n0.906\n\n\nLasso\nRandom Forest\nRandom Forest\n0.081\n0.301\n0.874\n\n\nRandom Forest\nLasso\nLasso\n0.080\n0.331\n0.905\n\n\nRandom Forest\nLasso\nRandom Forest\n0.077\n0.319\n0.905\n\n\nRandom Forest\nRandom Forest\nLasso\n0.107\n0.351\n0.792\n\n\nRandom Forest\nRandom Forest\nRandom Forest\n0.078\n0.304\n0.866\n\n\n\n\n\n\n\n\n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner r\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\nLasso\n0.072\n0.276\n0.873\n\n\nLasso\nLasso\nRandom Forest\n0.072\n0.276\n0.866\n\n\nLasso\nRandom Forest\nLasso\n0.078\n0.315\n0.900\n\n\nLasso\nRandom Forest\nRandom Forest\n0.077\n0.315\n0.914\n\n\nRandom Forest\nLasso\nLasso\n0.077\n0.289\n0.864\n\n\nRandom Forest\nLasso\nRandom Forest\n0.075\n0.288\n0.878\n\n\nRandom Forest\nRandom Forest\nLasso\n0.080\n0.332\n0.894\n\n\nRandom Forest\nRandom Forest\nRandom Forest\n0.080\n0.327\n0.889\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner r\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLasso\nLasso\n0.072\n0.232\n0.806\n\n\nLasso\nLasso\nRandom Forest\n0.072\n0.232\n0.808\n\n\nLasso\nRandom Forest\nLasso\n0.078\n0.264\n0.830\n\n\nLasso\nRandom Forest\nRandom Forest\n0.077\n0.265\n0.834\n\n\nRandom Forest\nLasso\nLasso\n0.077\n0.242\n0.797\n\n\nRandom Forest\nLasso\nRandom Forest\n0.075\n0.242\n0.802\n\n\nRandom Forest\nRandom Forest\nLasso\n0.080\n0.279\n0.828\n\n\nRandom Forest\nRandom Forest\nRandom Forest\n0.080\n0.274\n0.819"
+    "text": "LATE Coverage\nThe simulations are based on the the make_pliv_CHS2015-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                     0.10.dev0\nScript                   pliv_late_coverage.py\nDate                       2025-05-22 16:55:09\nTotal Runtime (seconds)           19353.436544\nPython Version                         3.12.10\n\n\n\n\n\n\nPartialling out\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "ssm/ssm_mar.html",
-    "href": "ssm/ssm_mar.html",
-    "title": "SSM with Missingness at Random",
+    "objectID": "plm/plr_cate.html",
+    "href": "plm/plr_cate.html",
+    "title": "CATEs",
     "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "ssm/ssm_mar.html#ate-coverage",
-    "href": "ssm/ssm_mar.html#ate-coverage",
-    "title": "SSM with Missingness at Random",
+    "objectID": "plm/plr_cate.html#cate-coverage",
+    "href": "plm/plr_cate.html#cate-coverage",
+    "title": "CATEs",
+    "section": "CATE Coverage",
+    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE PLR Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   plr_cate_coverage.py\nDate                      2025-05-22 12:47:29\nTotal Runtime (seconds)            4525.56906\nPython Version                         3.12.3\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_cs.html",
+    "href": "did/did_cs.html",
+    "title": "DiD for Repeated Cross-Sections",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "did/did_cs.html#atte-coverage",
+    "href": "did/did_cs.html#atte-coverage",
+    "title": "DiD for Repeated Cross-Sections",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\nThe simulations are based on the the make_did_SZ2020-DGP with \\(1000\\) observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   did_cs_atte_coverage.py\nDate                         2025-05-22 15:05:03\nTotal Runtime (seconds)             12767.107242\nPython Version                            3.12.3\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nRemark that the only two valid DGPs are DGP \\(5\\) and DGP \\(6\\). All other DGPs are invalid due to non-experimental treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_multi.html",
+    "href": "did/did_multi.html",
+    "title": "DiD for Panel Data over Multiple Periods",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "did/did_multi.html#atte-coverage",
+    "href": "did/did_multi.html#atte-coverage",
+    "title": "DiD for Panel Data over Multiple Periods",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\nThe simulations are based on the the make_did_CS2021-DGP with \\(2000\\) observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:\n\nType 1: Linear outcome model and treatment assignment\nType 4: Nonlinear outcome model and treatment assignment\nType 6: Randomized treatment assignment and nonlinear outcome model\n\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                   0.10.dev0\nScript                            DIDMultiCoverageSimulation\nDate                                        2025-05-23 09:01\nTotal Runtime (minutes)                           152.655488\nPython Version                                        3.12.9\nConfig File              scripts/did/did_pa_multi_config.yml\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_multi.html#aggregated-effects",
+    "href": "did/did_multi.html#aggregated-effects",
+    "title": "DiD for Panel Data over Multiple Periods",
+    "section": "Aggregated Effects",
+    "text": "Aggregated Effects\nThese simulations test different types of aggregation, as described in DiD User Guide.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidende intervals).\n\nGroup Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nTime Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nEvent Study Aggregation\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "ssm/ssm_nonignorable.html",
+    "href": "ssm/ssm_nonignorable.html",
+    "title": "SSM under Nonignorable Nonresponse",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "ssm/ssm_nonignorable.html#ate-coverage",
+    "href": "ssm/ssm_nonignorable.html#ate-coverage",
+    "title": "SSM under Nonignorable Nonresponse",
     "section": "ATE Coverage",
-    "text": "ATE Coverage\nThe simulations are based on the make_ssm_data-DGP with \\(500\\) observations. The simulation considers data under missingness at random.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   ssm_mar_ate_coverage.py\nDate                         2025-01-08 14:14:00\nTotal Runtime (seconds)               7131.66297\nPython Version                            3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner pi\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\nLGBM\n1.525\n7.024\n0.981\n\n\nLGBM\nLGBM\nLogistic\n0.615\n3.076\n0.973\n\n\nLGBM\nLogistic\nLGBM\n0.654\n3.069\n0.985\n\n\nLGBM\nLogistic\nLogistic\n0.127\n0.643\n0.958\n\n\nLasso\nLGBM\nLGBM\n1.270\n5.995\n0.981\n\n\nLasso\nLGBM\nLogistic\n0.622\n2.790\n0.955\n\n\nLasso\nLogistic\nLGBM\n0.613\n2.740\n0.970\n\n\nLasso\nLogistic\nLogistic\n0.123\n0.610\n0.961\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nLearner pi\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\nLGBM\n1.525\n5.895\n0.934\n\n\nLGBM\nLGBM\nLogistic\n0.615\n2.582\n0.927\n\n\nLGBM\nLogistic\nLGBM\n0.654\n2.576\n0.945\n\n\nLGBM\nLogistic\nLogistic\n0.127\n0.540\n0.914\n\n\nLasso\nLGBM\nLGBM\n1.270\n5.031\n0.939\n\n\nLasso\nLGBM\nLogistic\n0.622\n2.341\n0.887\n\n\nLasso\nLogistic\nLGBM\n0.613\n2.300\n0.919\n\n\nLasso\nLogistic\nLogistic\n0.123\n0.512\n0.897"
+    "text": "ATE Coverage\nThe simulations are based on the make_ssm_data-DGP with \\(500\\) observations. The simulation considers data with nonignorable nonresponse.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                0.10.dev0\nScript                   ssm_nonignorable_ate_coverage.py\nDate                                  2025-05-22 13:29:53\nTotal Runtime (seconds)                       7036.344849\nPython Version                                    3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/iivm.html",
+    "href": "irm/iivm.html",
+    "title": "IIVM Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/iivm.html#late-coverage",
+    "href": "irm/iivm.html#late-coverage",
+    "title": "IIVM Models",
+    "section": "LATE Coverage",
+    "text": "LATE Coverage\nThe simulations are based on the the make_iivm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                     0.10.dev0\nScript                   iivm_late_coverage.py\nDate                       2025-05-22 13:10:22\nTotal Runtime (seconds)            5866.210592\nPython Version                         3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html",
+    "href": "irm/irm.html",
+    "title": "Basic IRM Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/irm.html#ate-coverage",
+    "href": "irm/irm.html#ate-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATE Coverage",
+    "text": "ATE Coverage\nThe simulations are based on the the make_irm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_ate_coverage.py\nDate                     2025-05-22 12:32:44\nTotal Runtime (seconds)          3604.067243\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html#atte-coverage",
+    "href": "irm/irm.html#atte-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\nAs for the ATE, the simulations are based on the the make_irm_data-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_atte_coverage.py\nDate                      2025-05-22 13:53:23\nTotal Runtime (seconds)           3572.697675\nPython Version                        3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html#sensitivity",
+    "href": "irm/irm.html#sensitivity",
+    "title": "Basic IRM Models",
+    "section": "Sensitivity",
+    "text": "Sensitivity\nThe simulations are based on the the ADD-DGP with \\(10,000\\) observations. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nThe confounding is set such that both sensitivity parameters are approximately \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\n\n\n\n\n\n\n\n\n\n    \n        \n        \n        \n        \n        \n        \n        \n        \n    \n    \n   \n    \n      \n  \n        \n    \n    \n  \n        \n    \n    \n  \n        \n    \n      \n  \n        \n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n        \n    \n\n\nThis is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)\n\n\n\n\n\nATE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.10.dev0\nScript                   irm_ate_sensitivity.py\nDate                        2025-05-22 14:48:09\nTotal Runtime (seconds)             6858.955474\nPython Version                          3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nATTE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   irm_atte_sensitivity.py\nDate                         2025-05-22 14:47:30\nTotal Runtime (seconds)              6819.734954\nPython Version                           3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/apo.html",
+    "href": "irm/apo.html",
+    "title": "APO Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/apo.html#apo-pointwise-coverage",
+    "href": "irm/apo.html#apo-pointwise-coverage",
+    "title": "APO Models",
+    "section": "APO Pointwise Coverage",
+    "text": "APO Pointwise Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-05-22 13:10:29\nTotal Runtime (seconds)          5871.561926\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/apo.html#apos-coverage",
+    "href": "irm/apo.html#apos-coverage",
+    "title": "APO Models",
+    "section": "APOS Coverage",
+    "text": "APOS Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-05-22 13:10:29\nTotal Runtime (seconds)          5871.561926\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/apo.html#causal-contrast-coverage",
+    "href": "irm/apo.html#causal-contrast-coverage",
+    "title": "APO Models",
+    "section": "Causal Contrast Coverage",
+    "text": "Causal Contrast Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_apo_coverage.py\nDate                     2025-05-22 13:10:29\nTotal Runtime (seconds)          5871.561926\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "rdd/rdd.html",
+    "href": "rdd/rdd.html",
+    "title": "Flexible covariate adjustments in RDD",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "rdd/rdd.html#sharp-design",
+    "href": "rdd/rdd.html#sharp-design",
+    "title": "Flexible covariate adjustments in RDD",
+    "section": "Sharp Design",
+    "text": "Sharp Design\nThe simulations are based on the make_simple_rdd_data-DGP with \\(1000\\) observations. The simulation considers data under a sharp regression discontinuity design.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.9.dev0\nScript                   rdd_sharp_coverage.py\nDate                       2025-05-22 12:43:00\nTotal Runtime (seconds)            4216.746794\nPython Version                         3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "rdd/rdd.html#fuzzy-design",
+    "href": "rdd/rdd.html#fuzzy-design",
+    "title": "Flexible covariate adjustments in RDD",
+    "section": "Fuzzy Design",
+    "text": "Fuzzy Design\nThe simulations are based on the make_simple_rdd_data-DGP with \\(2000\\) observations. The simulation considers data under a fuzzy regression discontinuity design.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.9.dev0\nScript                   rdd_fuzzy_coverage.py\nDate                       2025-05-22 17:03:51\nTotal Runtime (seconds)           19875.749115\nPython Version                         3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm_gate.html",
+    "href": "irm/irm_gate.html",
+    "title": "GATEs",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/irm_gate.html#gate-coverage",
+    "href": "irm/irm_gate.html#gate-coverage",
+    "title": "GATEs",
+    "section": "GATE Coverage",
+    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_gate_coverage.py\nDate                      2025-05-22 12:06:46\nTotal Runtime (seconds)           2053.328589\nPython Version                        3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm_cate.html",
+    "href": "irm/irm_cate.html",
+    "title": "CATEs",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/irm_cate.html#cate-coverage",
+    "href": "irm/irm_cate.html#cate-coverage",
+    "title": "CATEs",
+    "section": "CATE Coverage",
+    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_cate_coverage.py\nDate                      2025-05-22 14:27:33\nTotal Runtime (seconds)           5618.293743\nPython Version                        3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html",
+    "href": "irm/qte.html",
+    "title": "Quantile Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/qte.html#qte",
+    "href": "irm/qte.html#qte",
+    "title": "Quantile Models",
+    "section": "QTE",
+    "text": "QTE\nThe results are based on a location-scale model as described the corresponding Example with \\(5000\\) observations.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                        pq_coverage.py\nDate                     2025-05-22 16:20:49\nTotal Runtime (seconds)          17287.96974\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html#potential-quantiles",
+    "href": "irm/qte.html#potential-quantiles",
+    "title": "Quantile Models",
+    "section": "Potential Quantiles",
+    "text": "Potential Quantiles\n\nY(0) - Quantile\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nY(1) - Quantile\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html#lqte",
+    "href": "irm/qte.html#lqte",
+    "title": "Quantile Models",
+    "section": "LQTE",
+    "text": "LQTE\nThe results are based on a location-scale model as described the corresponding Example with \\(10,000\\) observations.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                       lpq_coverage.py\nDate                     2025-05-22 16:36:53\nTotal Runtime (seconds)         18251.836868\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html#local-potential-quantiles",
+    "href": "irm/qte.html#local-potential-quantiles",
+    "title": "Quantile Models",
+    "section": "Local Potential Quantiles",
+    "text": "Local Potential Quantiles\n\nLocal Y(0) - Quantile\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nLocal Y(1) - Quantile\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html#cvar-effects",
+    "href": "irm/qte.html#cvar-effects",
+    "title": "Quantile Models",
+    "section": "CVaR Effects",
+    "text": "CVaR Effects\nThe results are based on a location-scale model as described the corresponding Example with \\(5,000\\) observations. Remark that the process is not linear.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                      cvar_coverage.py\nDate                     2025-05-22 15:47:04\nTotal Runtime (seconds)          15261.78109\nPython Version                       3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/qte.html#cvar-potential-quantiles",
+    "href": "irm/qte.html#cvar-potential-quantiles",
+    "title": "Quantile Models",
+    "section": "CVaR Potential Quantiles",
+    "text": "CVaR Potential Quantiles\n\nCVaR Y(0)\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nCVaR Y(1)\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
     "objectID": "index.html",
@@ -210,94 +259,66 @@
     "text": "Coverage Simulations\nGenerally, the DoubleML package solves a moment equation\n\\[\n\\mathbb{E}[\\psi(W,\\theta_0,\\eta_0)] = 0\n\\]\nwhere \\(W\\) denotes the observed data, \\(\\theta_0\\) the parameter of interest, and \\(\\eta_0\\) a vector of nuisance functions/elements. Using the confint() method, the package provides confidence intervals \\([\\hat{\\theta}_{\\text{lower}}, \\hat{\\theta}_{\\text{upper}}]\\) for the parameter of interest \\(\\theta_0\\).\nThis repository verifies coverage properties of the confidence intervals provided by the package. Usually, the coverage is assessed by simulating \\(n_{\\text{sim}}\\) datasets and calculating the proportion of confidence intervals that cover the true parameter value\n\\[\n\\text{Coverage} = \\frac{1}{n_{\\text{sim}}} \\sum_{i=1}^{n_{\\text{sim}}} \\mathbb{1}(\\hat{\\theta}_{\\text{lower},i} \\leq \\theta_0 \\leq \\hat{\\theta}_{\\text{upper},i})\n\\]\nfor a nominal coverage level is \\(1-\\alpha\\). The corresponding coverage results are highlighted according to the following color scheme:\n\nGreen if the deviation to the nominal level is below \\(5\\%\\)\nYellow if the deviation to the nominal level is above \\(5\\%\\) and below \\(10\\%\\)\nRed if the deviation to the nominal level is above \\(10\\%\\)\n\nFor simulations with multiple parameters of interest, usually pointwise and uniform coverage is assessed.\n\n\nFurthermore, the simulations provide the average length of the confidence intervals and the average absolute bias of the point estimates\n\\[\n\\begin{align*}\n\\text{Bias} &= \\frac{1}{n_{\\text{sim}}} \\sum_{i=1}^{n_{\\text{sim}}} |\\hat{\\theta}_i - \\theta_0|\\\\\n\\text{CI Length} &= \\frac{1}{n_{\\text{sim}}} \\sum_{i=1}^{n_{\\text{sim}}} (\\hat{\\theta}_{\\text{upper},i} - \\hat{\\theta}_{\\text{lower},i}).\n\\end{align*}\n\\]"
   },
   {
-    "objectID": "irm/qte.html",
-    "href": "irm/qte.html",
-    "title": "Quantile Models",
+    "objectID": "ssm/ssm_mar.html",
+    "href": "ssm/ssm_mar.html",
+    "title": "SSM with Missingness at Random",
     "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "irm/qte.html#qte",
-    "href": "irm/qte.html#qte",
-    "title": "Quantile Models",
-    "section": "QTE",
-    "text": "QTE\nThe results are based on a location-scale model as described the corresponding Example with \\(5000\\) observations.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                        pq_coverage.py\nDate                     2025-01-08 17:13:20\nTotal Runtime (seconds)         17871.711226\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.155\n0.736\n0.940\n1.031\n0.910\n\n\nLGBM\nLogistic Regression\n0.123\n0.507\n0.909\n0.714\n0.840\n\n\nLogistic Regression\nLGBM\n0.159\n0.749\n0.947\n1.029\n0.920\n\n\nLogistic Regression\nLogistic Regression\n0.124\n0.518\n0.912\n0.720\n0.850\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.155\n0.618\n0.882\n0.934\n0.850\n\n\nLGBM\nLogistic Regression\n0.123\n0.426\n0.827\n0.646\n0.780\n\n\nLogistic Regression\nLGBM\n0.159\n0.629\n0.897\n0.931\n0.870\n\n\nLogistic Regression\nLogistic Regression\n0.124\n0.434\n0.841\n0.647\n0.810"
-  },
-  {
-    "objectID": "irm/qte.html#potential-quantiles",
-    "href": "irm/qte.html#potential-quantiles",
-    "title": "Quantile Models",
-    "section": "Potential Quantiles",
-    "text": "Potential Quantiles\n\nY(0) - Quantile\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.149\n0.692\n0.935\n\n\nLGBM\nLogistic Regression\n0.114\n0.460\n0.888\n\n\nLogistic Regression\nLGBM\n0.151\n0.701\n0.942\n\n\nLogistic Regression\nLogistic Regression\n0.112\n0.464\n0.905\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.149\n0.580\n0.884\n\n\nLGBM\nLogistic Regression\n0.114\n0.386\n0.812\n\n\nLogistic Regression\nLGBM\n0.151\n0.588\n0.886\n\n\nLogistic Regression\nLogistic Regression\n0.112\n0.390\n0.825\n\n\n\n\n\n\n\n\n\n\n\n\n\nY(1) - Quantile\n\n\n\n\n\n\n\nTable 5: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.059\n0.298\n0.961\n\n\nLGBM\nLogistic Regression\n0.054\n0.273\n0.962\n\n\nLogistic Regression\nLGBM\n0.059\n0.303\n0.962\n\n\nLogistic Regression\nLogistic Regression\n0.057\n0.275\n0.955\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 6: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.059\n0.250\n0.914\n\n\nLGBM\nLogistic Regression\n0.054\n0.229\n0.913\n\n\nLogistic Regression\nLGBM\n0.059\n0.254\n0.917\n\n\nLogistic Regression\nLogistic Regression\n0.057\n0.231\n0.898"
-  },
-  {
-    "objectID": "irm/qte.html#lqte",
-    "href": "irm/qte.html#lqte",
-    "title": "Quantile Models",
-    "section": "LQTE",
-    "text": "LQTE\nThe results are based on a location-scale model as described the corresponding Example with \\(10,000\\) observations.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                       lpq_coverage.py\nDate                     2025-01-08 17:24:33\nTotal Runtime (seconds)         18545.282371\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 7: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.385\n1.950\n0.963\n2.540\n0.970\n\n\nLGBM\nLogistic Regression\n0.375\n1.868\n0.950\n2.427\n0.950\n\n\nLogistic Regression\nLGBM\n0.372\n1.929\n0.964\n2.487\n0.980\n\n\nLogistic Regression\nLogistic Regression\n0.372\n1.864\n0.948\n2.408\n0.950\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 8: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.385\n1.637\n0.923\n2.255\n0.940\n\n\nLGBM\nLogistic Regression\n0.375\n1.568\n0.908\n2.157\n0.910\n\n\nLogistic Regression\nLGBM\n0.372\n1.619\n0.919\n2.208\n0.920\n\n\nLogistic Regression\nLogistic Regression\n0.372\n1.564\n0.908\n2.137\n0.900"
-  },
-  {
-    "objectID": "irm/qte.html#local-potential-quantiles",
-    "href": "irm/qte.html#local-potential-quantiles",
-    "title": "Quantile Models",
-    "section": "Local Potential Quantiles",
-    "text": "Local Potential Quantiles\n\nLocal Y(0) - Quantile\n\n\n\n\n\n\n\nTable 9: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.232\n1.396\n0.972\n\n\nLGBM\nLogistic Regression\n0.227\n1.340\n0.976\n\n\nLogistic Regression\nLGBM\n0.221\n1.372\n0.981\n\n\nLogistic Regression\nLogistic Regression\n0.206\n1.322\n0.979\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 10: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.232\n1.172\n0.940\n\n\nLGBM\nLogistic Regression\n0.227\n1.125\n0.950\n\n\nLogistic Regression\nLGBM\n0.221\n1.152\n0.950\n\n\nLogistic Regression\nLogistic Regression\n0.206\n1.110\n0.953\n\n\n\n\n\n\n\n\n\n\n\n\n\nLocal Y(1) - Quantile\n\n\n\n\n\n\n\nTable 11: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.328\n1.981\n0.990\n\n\nLGBM\nLogistic Regression\n0.322\n1.896\n0.970\n\n\nLogistic Regression\nLGBM\n0.301\n1.916\n0.982\n\n\nLogistic Regression\nLogistic Regression\n0.305\n1.854\n0.984\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 12: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.328\n1.662\n0.958\n\n\nLGBM\nLogistic Regression\n0.322\n1.591\n0.941\n\n\nLogistic Regression\nLGBM\n0.301\n1.608\n0.960\n\n\nLogistic Regression\nLogistic Regression\n0.305\n1.556\n0.948"
-  },
-  {
-    "objectID": "irm/qte.html#cvar-effects",
-    "href": "irm/qte.html#cvar-effects",
-    "title": "Quantile Models",
-    "section": "CVaR Effects",
-    "text": "CVaR Effects\nThe results are based on a location-scale model as described the corresponding Example with \\(5,000\\) observations. Remark that the process is not linear.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                      cvar_coverage.py\nDate                     2025-01-08 16:49:01\nTotal Runtime (seconds)         16412.116838\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 13: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.144\n0.693\n0.949\n0.811\n0.940\n\n\nLGBM\nLogistic Regression\n0.123\n0.497\n0.874\n0.584\n0.860\n\n\nLinear\nLGBM\n0.179\n0.723\n0.865\n0.830\n0.850\n\n\nLinear\nLogistic Regression\n0.152\n0.541\n0.815\n0.619\n0.800\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 14: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.144\n0.582\n0.904\n0.706\n0.880\n\n\nLGBM\nLogistic Regression\n0.123\n0.417\n0.810\n0.506\n0.780\n\n\nLinear\nLGBM\n0.179\n0.607\n0.802\n0.718\n0.800\n\n\nLinear\nLogistic Regression\n0.152\n0.454\n0.713\n0.534\n0.710"
-  },
-  {
-    "objectID": "irm/qte.html#cvar-potential-quantiles",
-    "href": "irm/qte.html#cvar-potential-quantiles",
-    "title": "Quantile Models",
-    "section": "CVaR Potential Quantiles",
-    "text": "CVaR Potential Quantiles\n\nCVaR Y(0)\n\n\n\n\n\n\n\nTable 15: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.139\n0.679\n0.946\n\n\nLGBM\nLogistic Regression\n0.118\n0.484\n0.889\n\n\nLinear\nLGBM\n0.175\n0.691\n0.862\n\n\nLinear\nLogistic Regression\n0.155\n0.512\n0.778\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 16: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.139\n0.570\n0.888\n\n\nLGBM\nLogistic Regression\n0.118\n0.406\n0.819\n\n\nLinear\nLGBM\n0.175\n0.580\n0.769\n\n\nLinear\nLogistic Regression\n0.155\n0.429\n0.689\n\n\n\n\n\n\n\n\n\n\n\n\n\nCVaR Y(1)\n\n\n\n\n\n\n\nTable 17: Coverage for 95.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.044\n0.227\n0.978\n\n\nLGBM\nLogistic Regression\n0.044\n0.212\n0.963\n\n\nLinear\nLGBM\n0.047\n0.257\n0.977\n\n\nLinear\nLogistic Regression\n0.049\n0.230\n0.942\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 18: Coverage for 90.0%-Confidence Interval over 100 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLGBM\nLGBM\n0.044\n0.191\n0.932\n\n\nLGBM\nLogistic Regression\n0.044\n0.178\n0.913\n\n\nLinear\nLGBM\n0.047\n0.216\n0.929\n\n\nLinear\nLogistic Regression\n0.049\n0.193\n0.882"
-  },
-  {
-    "objectID": "irm/irm_cate.html",
-    "href": "irm/irm_cate.html",
-    "title": "CATEs",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/irm_cate.html#cate-coverage",
-    "href": "irm/irm_cate.html#cate-coverage",
-    "title": "CATEs",
-    "section": "CATE Coverage",
-    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_cate_coverage.py\nDate                      2025-01-08 14:19:05\nTotal Runtime (seconds)           7429.032528\nPython Version                         3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.148\n0.795\n0.972\n1.690\n1.000\n\n\nLGBM\nLogistic Regression\n0.059\n0.281\n0.942\n0.599\n0.996\n\n\nLasso\nLGBM\n0.158\n0.766\n0.949\n1.634\n1.000\n\n\nLasso\nLogistic Regression\n0.062\n0.295\n0.941\n0.629\n0.997\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\nUniform CI Length\nUniform Coverage\n\n\n\n\nLGBM\nLGBM\n0.148\n0.667\n0.936\n1.689\n1.000\n\n\nLGBM\nLogistic Regression\n0.059\n0.235\n0.889\n0.596\n0.996\n\n\nLasso\nLGBM\n0.158\n0.643\n0.896\n1.632\n1.000\n\n\nLasso\nLogistic Regression\n0.062\n0.247\n0.889\n0.630\n0.998"
-  },
-  {
-    "objectID": "irm/irm.html",
-    "href": "irm/irm.html",
-    "title": "Basic IRM Models",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/irm.html#ate-coverage",
-    "href": "irm/irm.html#ate-coverage",
-    "title": "Basic IRM Models",
+    "objectID": "ssm/ssm_mar.html#ate-coverage",
+    "href": "ssm/ssm_mar.html#ate-coverage",
+    "title": "SSM with Missingness at Random",
     "section": "ATE Coverage",
-    "text": "ATE Coverage\nThe simulations are based on the the make_irm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   irm_ate_coverage.py\nDate                     2025-01-08 13:14:33\nTotal Runtime (seconds)          3543.555382\nPython Version                        3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.123\n0.557\n0.935\n\n\nLasso\nRandom Forest\n0.148\n0.721\n0.959\n\n\nRandom Forest\nLogistic Regression\n0.150\n0.617\n0.883\n\n\nRandom Forest\nRandom Forest\n0.154\n0.754\n0.959\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.123\n0.468\n0.875\n\n\nLasso\nRandom Forest\n0.148\n0.605\n0.906\n\n\nRandom Forest\nLogistic Regression\n0.150\n0.518\n0.803\n\n\nRandom Forest\nRandom Forest\n0.154\n0.633\n0.899"
+    "text": "ATE Coverage\nThe simulations are based on the make_ssm_data-DGP with \\(500\\) observations. The simulation considers data under missingness at random.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   ssm_mar_ate_coverage.py\nDate                         2025-05-22 12:57:04\nTotal Runtime (seconds)              5067.488474\nPython Version                           3.12.10\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/irm.html#atte-coverage",
-    "href": "irm/irm.html#atte-coverage",
-    "title": "Basic IRM Models",
+    "objectID": "did/did_pa.html",
+    "href": "did/did_pa.html",
+    "title": "DiD for Panel Data",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "did/did_pa.html#atte-coverage",
+    "href": "did/did_pa.html#atte-coverage",
+    "title": "DiD for Panel Data",
     "section": "ATTE Coverage",
-    "text": "ATTE Coverage\nAs for the ATE, the simulations are based on the the make_irm_data-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   irm_atte_coverage.py\nDate                      2025-01-08 13:14:10\nTotal Runtime (seconds)           3538.650552\nPython Version                         3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 3: Coverage for 95.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.134\n0.635\n0.942\n\n\nLasso\nRandom Forest\n0.181\n0.872\n0.948\n\n\nRandom Forest\nLogistic Regression\n0.150\n0.656\n0.928\n\n\nRandom Forest\nRandom Forest\n0.183\n0.894\n0.948\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 4: Coverage for 90.0%-Confidence Interval over 1000 Repetitions\n\n\n\n\n\nLearner g\nLearner m\nBias\nCI Length\nCoverage\n\n\n\n\nLasso\nLogistic Regression\n0.134\n0.533\n0.887\n\n\nLasso\nRandom Forest\n0.181\n0.732\n0.895\n\n\nRandom Forest\nLogistic Regression\n0.150\n0.551\n0.871\n\n\nRandom Forest\nRandom Forest\n0.183\n0.750\n0.901"
+    "text": "ATTE Coverage\nThe simulations are based on the the make_did_SZ2020-DGP with \\(1000\\) observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   did_pa_atte_coverage.py\nDate                         2025-05-22 14:30:49\nTotal Runtime (seconds)             10714.369588\nPython Version                            3.12.3\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nRemark that the only two valid DGPs are DGP \\(5\\) and DGP \\(6\\). All other DGPs are invalid due to non-experimental treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/irm.html#sensitivity",
-    "href": "irm/irm.html#sensitivity",
-    "title": "Basic IRM Models",
-    "section": "Sensitivity",
-    "text": "Sensitivity\nThe simulations are based on the the ADD-DGP with \\(10,000\\) observations. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nThe confounding is set such that both sensitivity parameters are approximately \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\n\n\n\n\n\n\n\n\n\n    \n        \n        \n        \n        \n        \n        \n        \n        \n    \n    \n   \n    \n      \n  \n        \n    \n    \n  \n        \n    \n    \n  \n        \n    \n      \n  \n        \n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n        \n    \n\n\nThis is the init_notebook_mode cell from ITables v2.2.4\n(you should not see this message - is your notebook trusted?)\n\n\n\n\n\nATE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.10.dev0\nScript                   irm_ate_sensitivity.py\nDate                        2025-01-08 14:51:20\nTotal Runtime (seconds)             9351.407656\nPython Version                           3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 5: Coverage for 95.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.179\n0.043\n0.322\n0.318\n0.998\n1.000\n0.124\n0.034\n\n\nLGBM\nLogistic Regr.\n0.149\n0.029\n0.298\n0.548\n1.000\n1.000\n0.101\n0.019\n\n\nLinear Reg.\nLGBM\n0.179\n0.045\n0.319\n0.314\n0.998\n1.000\n0.126\n0.035\n\n\nLinear Reg.\nLogistic Regr.\n0.090\n0.057\n0.235\n0.974\n1.000\n1.000\n0.063\n0.001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 6: Coverage for 90.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.179\n0.043\n0.322\n0.112\n0.962\n1.000\n0.124\n0.054\n\n\nLGBM\nLogistic Regr.\n0.149\n0.029\n0.298\n0.292\n1.000\n1.000\n0.101\n0.035\n\n\nLinear Reg.\nLGBM\n0.179\n0.045\n0.319\n0.122\n0.964\n1.000\n0.126\n0.055\n\n\nLinear Reg.\nLogistic Regr.\n0.090\n0.057\n0.235\n0.860\n1.000\n1.000\n0.063\n0.007\n\n\n\n\n\n\n\n\n\n\n\n\n\nATTE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.10.dev0\nScript                   irm_atte_sensitivity.py\nDate                         2025-01-08 15:14:53\nTotal Runtime (seconds)              10782.06734\nPython Version                            3.12.8\n\n\n\n\n\n\n\n\n\n\n\n\nTable 7: Coverage for 95.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.135\n0.065\n0.259\n0.826\n0.982\n1.000\n0.105\n0.012\n\n\nLGBM\nLogistic Regr.\n0.131\n0.065\n0.259\n0.834\n0.984\n1.000\n0.098\n0.011\n\n\nLinear Reg.\nLGBM\n0.125\n0.065\n0.244\n0.858\n0.986\n1.000\n0.099\n0.010\n\n\nLinear Reg.\nLogistic Regr.\n0.074\n0.095\n0.175\n0.976\n0.998\n1.000\n0.058\n0.002\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 8: Coverage for 90.0%-Confidence Interval over 500 Repetitions\n\n\n\n\n\nLearner l\nLearner m\nBias\nBias (Lower)\nBias (Upper)\nCoverage\nCoverage (Lower)\nCoverage (Upper)\nRV\nRVa\n\n\n\n\nLGBM\nLGBM\n0.135\n0.065\n0.259\n0.702\n0.950\n1.000\n0.105\n0.024\n\n\nLGBM\nLogistic Regr.\n0.131\n0.065\n0.259\n0.714\n0.964\n1.000\n0.098\n0.022\n\n\nLinear Reg.\nLGBM\n0.125\n0.065\n0.244\n0.754\n0.962\n1.000\n0.099\n0.020\n\n\nLinear Reg.\nLogistic Regr.\n0.074\n0.095\n0.175\n0.948\n0.996\n1.000\n0.058\n0.004"
+    "objectID": "plm/plr.html",
+    "href": "plm/plr.html",
+    "title": "Basic PLR Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "plm/plr.html#ate-coverage",
+    "href": "plm/plr.html#ate-coverage",
+    "title": "Basic PLR Models",
+    "section": "ATE Coverage",
+    "text": "ATE Coverage\nThe simulations are based on the the make_plr_CCDDHNR2018-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                   0.10.dev0\nScript                   plr_ate_coverage.py\nDate                     2025-05-22 13:19:23\nTotal Runtime (seconds)           6440.37046\nPython Version                        3.12.3\n\n\n\n\n\n\nPartialling out\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "plm/plr.html#ate-sensitivity",
+    "href": "plm/plr.html#ate-sensitivity",
+    "title": "Basic PLR Models",
+    "section": "ATE Sensitivity",
+    "text": "ATE Sensitivity\nThe simulations are based on the the make_confounded_plr_data-DGP with \\(1000\\) observations as highlighted in the Example Gallery. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes unobserved confounders, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nBoth sensitivity parameters are set to \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the upper coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                      0.10.dev0\nScript                   plr_ate_sensitivity.py\nDate                        2025-05-22 14:16:38\nTotal Runtime (seconds)             9875.844212\nPython Version                           3.12.3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n        \n        \n        \n        \n        \n        \n        \n        \n    \n    \n   \n    \n      \n  \n        \n    \n    \n  \n        \n    \n    \n  \n        \n    \n      \n  \n        \n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n        \n    \n\n\nThis is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)\n\n\n\n\n\nPartialling out\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nIV-type\nFor the IV-type score, the learners ml_l and ml_g are both set to the same type of learner (here Learner g).\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "plm/plr_gate.html",
+    "href": "plm/plr_gate.html",
+    "title": "GATEs",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.0\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "plm/plr_gate.html#gate-coverage",
+    "href": "plm/plr_gate.html#gate-coverage",
+    "title": "GATEs",
+    "section": "GATE Coverage",
+    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE PLR Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                    0.10.dev0\nScript                   plr_gate_coverage.py\nDate                      2025-05-22 11:58:55\nTotal Runtime (seconds)           1613.382139\nPython Version                         3.12.3\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.0 from the init_notebook_mode cell...\n    (need help?)"
   }
 ]
