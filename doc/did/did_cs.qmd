@@ -87,7 +87,7 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage"]
 ```
 
-### Observational Score 
+### Observational Score
 
 ```{python}
 #| echo: false
@@ -107,7 +107,7 @@ df_ate_9 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
 make_pretty(df_ate_9, level, n_rep)
 ```
 
-### Experimental Score 
+### Experimental Score
 
 Remark that the only two valid DGPs are DGP $5$ and DGP $6$. All other DGPs are invalid due to non-experimental treatment assignment.
 
@@ -128,4 +128,3 @@ level = 0.9
 df_ate_9 = df[(df['level'] == level) & (df["Score"] == score)][display_columns]
 make_pretty(df_ate_9, level, n_rep)
 ```
-

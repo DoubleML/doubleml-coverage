@@ -110,7 +110,7 @@ make_pretty(df_ate_9, level, n_rep)
 
 The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/api.html#datasets-module)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -206,7 +206,7 @@ make_pretty(df_ate_9, level, n_rep)
 
 The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/api.html#datasets-module)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 

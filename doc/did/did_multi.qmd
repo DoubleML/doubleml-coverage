@@ -68,7 +68,7 @@ The simulations are based on the  the [make_did_CS2021](https://docs.doubleml.or
  - Type 4: Nonlinear outcome model and treatment assignment
  - Type 6: Randomized treatment assignment and nonlinear outcome model
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -93,7 +93,7 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
-### Observational Score 
+### Observational Score
 
 ```{python}
 #| echo: false
@@ -140,7 +140,7 @@ make_pretty(df_ate_9, level, n_rep)
 
 These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/dev/guide/models.html#difference-in-differences-models-did).
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals).
 
 ### Group Effects
 
@@ -156,7 +156,7 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
-#### Observational Score 
+#### Observational Score
 
 ```{python}
 #| echo: false
@@ -212,7 +212,7 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
-#### Observational Score 
+#### Observational Score
 
 ```{python}
 #| echo: false
@@ -268,7 +268,7 @@ n_rep = df["repetition"].unique()[0]
 display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
-#### Observational Score 
+#### Observational Score
 
 ```{python}
 #| echo: false

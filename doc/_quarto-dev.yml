@@ -5,7 +5,7 @@ project:
 metadata-files:
   - _website.yml
 
-website: 
+website:
   drafts:
     - index.qmd
     # IRM

@@ -24,18 +24,32 @@ alpha_x = 1.0
 np.random.seed(42)
 datasets = []
 for i in range(n_rep):
-    data = make_iivm_data(theta=theta, n_obs=n_obs, dim_x=dim_x, alpha_x=alpha_x, return_type='DataFrame')
+    data = make_iivm_data(
+        theta=theta, n_obs=n_obs, dim_x=dim_x, alpha_x=alpha_x, return_type="DataFrame"
+    )
     datasets.append(data)
 
 # set up hyperparameters
 hyperparam_dict = {
-    "learner_g": [("Lasso", LassoCV()),
-                  ("Random Forest",
-                   RandomForestRegressor(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "learner_m": [("Logistic Regression", LogisticRegressionCV()),
-                  ("Random Forest",
-                   RandomForestClassifier(n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2))],
-    "level": [0.95, 0.90]
+    "learner_g": [
+        ("Lasso", LassoCV()),
+        (
+            "Random Forest",
+            RandomForestRegressor(
+                n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2
+            ),
+        ),
+    ],
+    "learner_m": [
+        ("Logistic Regression", LogisticRegressionCV()),
+        (
+            "Random Forest",
+            RandomForestClassifier(
+                n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2
+            ),
+        ),
+    ],
+    "level": [0.95, 0.90],
 }
 
 # set up the results dataframe
@@ -55,10 +69,14 @@ for i_rep in range(n_rep):
         break
 
     # define the DoubleML data object
-    obj_dml_data = dml.DoubleMLData(datasets[i_rep], 'y', 'd', z_cols='z')
+    obj_dml_data = dml.DoubleMLData(datasets[i_rep], "y", "d", z_cols="z")
 
-    for learner_g_idx, (learner_g_name, ml_g) in enumerate(hyperparam_dict["learner_g"]):
-        for learner_m_idx, (learner_m_name, ml_m) in enumerate(hyperparam_dict["learner_m"]):
+    for learner_g_idx, (learner_g_name, ml_g) in enumerate(
+        hyperparam_dict["learner_g"]
+    ):
+        for learner_m_idx, (learner_m_name, ml_m) in enumerate(
+            hyperparam_dict["learner_m"]
+        ):
             # Set machine learning methods for g & m
             dml_iivm = dml.DoubleMLIIVM(
                 obj_dml_data=obj_dml_data,
@@ -74,24 +92,31 @@ for i_rep in range(n_rep):
                 ci_length = confint.iloc[0, 1] - confint.iloc[0, 0]
 
                 df_results_detailed = pd.concat(
-                    (df_results_detailed,
-                     pd.DataFrame({
-                        "Coverage": coverage.astype(int),
-                        "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
-                        "Bias": abs(dml_iivm.coef[0] - theta),
-                        "Learner g": learner_g_name,
-                        "Learner m": learner_m_name,
-                        "level": level,
-                        "repetition": i_rep}, index=[0])),
-                    ignore_index=True)
+                    (
+                        df_results_detailed,
+                        pd.DataFrame(
+                            {
+                                "Coverage": coverage.astype(int),
+                                "CI Length": confint.iloc[0, 1] - confint.iloc[0, 0],
+                                "Bias": abs(dml_iivm.coef[0] - theta),
+                                "Learner g": learner_g_name,
+                                "Learner m": learner_m_name,
+                                "level": level,
+                                "repetition": i_rep,
+                            },
+                            index=[0],
+                        ),
+                    ),
+                    ignore_index=True,
+                )
 
-df_results = df_results_detailed.groupby(
-    ["Learner g", "Learner m", "level"]).agg(
-        {"Coverage": "mean",
-         "CI Length": "mean",
-         "Bias": "mean",
-         "repetition": "count"}
-    ).reset_index()
+df_results = (
+    df_results_detailed.groupby(["Learner g", "Learner m", "level"])
+    .agg(
+        {"Coverage": "mean", "CI Length": "mean", "Bias": "mean", "repetition": "count"}
+    )
+    .reset_index()
+)
 print(df_results)
 
 end_time = time.time()
@@ -101,13 +126,17 @@ total_runtime = end_time - start_time
 script_name = "iivm_late_coverage.py"
 path = "results/irm/iivm_late_coverage"
 
-metadata = pd.DataFrame({
-    'DoubleML Version': [dml.__version__],
-    'Script': [script_name],
-    'Date': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-    'Total Runtime (seconds)': [total_runtime],
-    'Python Version': [f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"],
-})
+metadata = pd.DataFrame(
+    {
+        "DoubleML Version": [dml.__version__],
+        "Script": [script_name],
+        "Date": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+        "Total Runtime (seconds)": [total_runtime],
+        "Python Version": [
+            f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+        ],
+    }
+)
 print(metadata)
 
 df_results.to_csv(f"{path}.csv", index=False)

@@ -63,7 +63,7 @@ def make_pretty(df, level, n_rep):
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html) with $5000$ observations.
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -264,7 +264,7 @@ def make_pretty(df, level, n_rep):
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html#Local-Potential-Quantiles-(LPQs)) with $10,000$ observations.
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -465,7 +465,7 @@ def make_pretty(df, level, n_rep):
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_cvar.html) with $5,000$ observations. Remark that the process is not linear.
 
-The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals). 
+The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
