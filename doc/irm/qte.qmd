@@ -56,7 +56,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ## QTE
@@ -147,7 +147,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ### Y(0) - Quantile
@@ -259,7 +259,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html#Local-Potential-Quantiles-(LPQs)) with $10,000$ observations.
@@ -348,7 +348,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ### Local Y(0) - Quantile
@@ -460,7 +460,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_cvar.html) with $5,000$ observations. Remark that the process is not linear.
@@ -549,7 +549,7 @@ def make_pretty(df, level, n_rep):
     styled_df = color_coverage(styled_df, level)
     caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
 
-    return show(styled_df, caption=caption)
+    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ### CVaR Y(0)
