@@ -4,6 +4,7 @@ repos:
     hooks:
     # File format checks
     -   id: check-yaml
+        exclude: ^results/
     -   id: check-toml
     # Code quality checks
     -   id: debug-statements
