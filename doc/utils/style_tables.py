@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from pandas.io.formats.style import Styler
+from typing import Union, Optional, List, Any
+from itables import show
 
 
 # Define highlighting tiers as a list of dictionaries or tuples
@@ -78,9 +80,9 @@ def color_coverage_columns(
 def create_styled_table(
     df: pd.DataFrame,
     level: float,
-    n_rep: int,  # Or Union[int, str] if "N/A" is possible
+    n_rep: Union[int, str],
     caption_prefix: str = "Coverage",
-    coverage_cols: list[str] = ["Coverage"],
+    coverage_cols: List[str] = ["Coverage"],
     float_precision: str = "{:.3f}",
 ) -> Styler:
     """
@@ -102,21 +104,18 @@ def create_styled_table(
             if not df.columns.tolist()
             else [None] * len(empty_df_cols)
         )
-        return (
-            pd.DataFrame(
-                (
-                    dict(zip(empty_df_cols, [[v] for v in message_val]))
-                    if not df.columns.tolist()
-                    else []
-                ),
-                columns=empty_df_cols,
-            )
-            .style.hide(axis="index")
-            .set_caption("No data to display.")
+        df_to_style = pd.DataFrame(
+            (
+                dict(zip(empty_df_cols, [[v] for v in message_val]))
+                if not df.columns.tolist()
+                else {}  # Pass empty dict for empty DataFrame with columns
+            ),
+            columns=empty_df_cols,
         )
+        return df_to_style.style.hide(axis="index").set_caption("No data to display.")
 
     # Prepare float formatting dictionary
-    float_cols = df.select_dtypes(include=["float"]).columns
+    float_cols = df.select_dtypes(include=["float", "float64", "float32"]).columns
     format_dict = {col: float_precision for col in float_cols if col in df.columns}
 
     # Create and set the caption text
@@ -141,3 +140,92 @@ def create_styled_table(
     )
 
     return styled_df
+
+
+def generate_and_show_styled_table(
+    main_df: pd.DataFrame,
+    filters: dict[str, Any],
+    display_cols: List[str],
+    n_rep: Union[int, str],
+    level_col: str = "level",
+    rename_map: Optional[dict[str, str]] = None,
+    caption_prefix: str = "Coverage",
+    coverage_highlight_cols: List[str] = ["Coverage"],
+    float_precision: str = "{:.3f}",
+):
+    """
+    Filters a DataFrame based on a dictionary of conditions,
+    creates a styled table, and displays it.
+    """
+    if main_df.empty:
+        print("Warning: Input DataFrame is empty.")
+        # Optionally, show an empty table or a message
+        empty_styled_df = (
+            pd.DataFrame(columns=display_cols)
+            .style.hide(axis="index")
+            .set_caption("No data available (input empty).")
+        )
+        show(empty_styled_df, allow_html=True)
+        return
+
+    # Build filter condition
+    current_df = main_df
+    filter_conditions = []
+    filter_description_parts = []
+
+    for col, value in filters.items():
+        if col not in current_df.columns:
+            print(
+                f"Warning: Filter column '{col}' not found in DataFrame. Skipping this filter."
+            )
+            continue
+        current_df = current_df[current_df[col] == value]
+        filter_conditions.append(f"{col} == {value}")
+        filter_description_parts.append(f"{col}='{value}'")
+
+    filter_description = " & ".join(filter_description_parts)
+
+    if current_df.empty:
+        level_val = filters.get(level_col, "N/A")
+        level_percent_display = (
+            f"{level_val*100}%" if isinstance(level_val, (int, float)) else level_val
+        )
+        caption_msg = f"No data after filtering for {filter_description} at {level_percent_display} level."
+        print(f"Warning: {caption_msg}")
+        empty_styled_df = (
+            pd.DataFrame(columns=display_cols)
+            .style.hide(axis="index")
+            .set_caption(caption_msg)
+        )
+        show(empty_styled_df, allow_html=True)
+        return
+
+    df_filtered = current_df[
+        display_cols
+    ].copy()  # Select display columns after filtering
+
+    if rename_map:
+        df_filtered.rename(columns=rename_map, inplace=True)
+
+    # Determine the level for styling from the filters, if present
+    styling_level = filters.get(level_col)
+    if styling_level is None or not isinstance(styling_level, (float, int)):
+        print(
+            f"Warning: '{level_col}' not found in filters or is not numeric. Cannot determine styling level for highlighting."
+        )
+        # Fallback or raise error, for now, we'll proceed without level-specific caption part if it's missing
+        # Or you could try to infer it if there's only one unique level in the filtered data
+        if level_col in df_filtered.columns and df_filtered[level_col].nunique() == 1:
+            styling_level = df_filtered[level_col].iloc[0]
+        else:  # Default to a common value or skip styling that depends on 'level'
+            styling_level = 0.95  # Default, or handle error
+
+    styled_table = create_styled_table(
+        df_filtered,
+        styling_level,  # Use the level from filters for styling
+        n_rep,
+        caption_prefix=caption_prefix,
+        coverage_cols=coverage_highlight_cols,
+        float_precision=float_precision,
+    )
+    show(styled_table, allow_html=True)
