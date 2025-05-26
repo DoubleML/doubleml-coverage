@@ -8,55 +8,17 @@ jupyter: python3
 
 import numpy as np
 import pandas as pd
-from itables import init_notebook_mode, show, options
+from itables import init_notebook_mode
+import os
+import sys
+
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
 
 init_notebook_mode(all_interactive=True)
-
-def highlight_range(s, level=0.95, dist=0.05, props=''):
-    color_grid = np.where((s >= level-dist) &
-                          (s <= level+dist), props, '')
-    return color_grid
-
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage", "Uniform Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage", "Uniform Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
 ```
 
 ## QTE
@@ -79,105 +41,82 @@ print(metadata_df.T.to_string(header=False))
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/pq_coverage_qte.csv", index_col=None)
+# set up data
+df_qte = pd.read_csv("../../results/irm/pq_coverage_qte.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_qte["repetition"].nunique() == 1
+n_rep_qte = df_qte["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_qte = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_qte,
+    filters={"level": 0.95},
+    display_cols=display_columns_qte,
+    n_rep=n_rep_qte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_qte,
+    filters={"level": 0.9},
+    display_cols=display_columns_qte,
+    n_rep=n_rep_qte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ## Potential Quantiles
 
-```{python}
-#| echo: false
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
-```
 
 ### Y(0) - Quantile
 
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/pq_coverage_pq0.csv", index_col=None)
+# set up data
+df_pq0 = pd.read_csv("../../results/irm/pq_coverage_pq0.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_pq0["repetition"].nunique() == 1
+n_rep_pq0 = df_pq0["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns_pq = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_pq0,
+    filters={"level": 0.95},
+    display_cols=display_columns_pq,
+    n_rep=n_rep_pq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_pq0,
+    filters={"level": 0.9},
+    display_cols=display_columns_pq,
+    n_rep=n_rep_pq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ### Y(1) - Quantile
@@ -186,81 +125,41 @@ make_pretty(df_ate_9, level, n_rep)
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../results/irm/pq_coverage_pq1.csv", index_col=None)
+df_pq1 = pd.read_csv("../../results/irm/pq_coverage_pq1.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_pq1["repetition"].nunique() == 1
+n_rep_pq1 = df_pq1["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+# display_columns_pq is the same as for Y(0)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_pq1,
+    filters={"level": 0.95},
+    display_cols=display_columns_pq,
+    n_rep=n_rep_pq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_pq1,
+    filters={"level": 0.9},
+    display_cols=display_columns_pq,
+    n_rep=n_rep_pq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ## LQTE
-
-```{python}
-#| echo: false
-
-def highlight_range(s, level=0.95, dist=0.05, props=''):
-    color_grid = np.where((s >= level-dist) &
-                          (s <= level+dist), props, '')
-    return color_grid
-
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage", "Uniform Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage", "Uniform Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
-```
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html#Local-Potential-Quantiles-(LPQs)) with $10,000$ observations.
 
@@ -280,105 +179,81 @@ print(metadata_df.T.to_string(header=False))
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/lpq_coverage_lqte.csv", index_col=None)
+# set up data
+df_lqte = pd.read_csv("../../results/irm/lpq_coverage_lqte.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_lqte["repetition"].nunique() == 1
+n_rep_lqte = df_lqte["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_lqte = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lqte,
+    filters={"level": 0.95},
+    display_cols=display_columns_lqte,
+    n_rep=n_rep_lqte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lqte,
+    filters={"level": 0.9},
+    display_cols=display_columns_lqte,
+    n_rep=n_rep_lqte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ## Local Potential Quantiles
-
-```{python}
-#| echo: false
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
-```
 
 ### Local Y(0) - Quantile
 
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/lpq_coverage_lpq0.csv", index_col=None)
+# set up data
+df_lpq0 = pd.read_csv("../../results/irm/lpq_coverage_lpq0.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_lpq0["repetition"].nunique() == 1
+n_rep_lpq0 = df_lpq0["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns_lpq = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lpq0,
+    filters={"level": 0.95},
+    display_cols=display_columns_lpq,
+    n_rep=n_rep_lpq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lpq0,
+    filters={"level": 0.9},
+    display_cols=display_columns_lpq,
+    n_rep=n_rep_lpq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ### Local Y(1) - Quantile
@@ -386,82 +261,42 @@ make_pretty(df_ate_9, level, n_rep)
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/lpq_coverage_lpq1.csv", index_col=None)
+# set up data
+df_lpq1 = pd.read_csv("../../results/irm/lpq_coverage_lpq1.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_lpq1["repetition"].nunique() == 1
+n_rep_lpq1 = df_lpq1["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+# display_columns_lpq is the same as for Local Y(0)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lpq1,
+    filters={"level": 0.95},
+    display_cols=display_columns_lpq,
+    n_rep=n_rep_lpq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_lpq1,
+    filters={"level": 0.9},
+    display_cols=display_columns_lpq,
+    n_rep=n_rep_lpq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ## CVaR Effects
-
-```{python}
-#| echo: false
-
-def highlight_range(s, level=0.95, dist=0.05, props=''):
-    color_grid = np.where((s >= level-dist) &
-                          (s <= level+dist), props, '')
-    return color_grid
-
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage", "Uniform Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage", "Uniform Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage", "Uniform Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
-```
 
 The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_cvar.html) with $5,000$ observations. Remark that the process is not linear.
 
@@ -481,105 +316,81 @@ print(metadata_df.T.to_string(header=False))
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/cvar_coverage_qte.csv", index_col=None)
+# set up data
+df_cvar_qte = pd.read_csv("../../results/irm/cvar_coverage_qte.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_cvar_qte["repetition"].nunique() == 1
+n_rep_cvar_qte = df_cvar_qte["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_cvar_qte = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_qte,
+    filters={"level": 0.95},
+    display_cols=display_columns_cvar_qte,
+    n_rep=n_rep_cvar_qte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_qte,
+    filters={"level": 0.9},
+    display_cols=display_columns_cvar_qte,
+    n_rep=n_rep_cvar_qte,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
 ```
 
 ## CVaR Potential Quantiles
-
-```{python}
-#| echo: false
-
-def color_coverage(df, level):
-    # color coverage column order is important
-    styled_df = df.apply(
-        highlight_range,
-        level=level,
-        dist=1.0,
-        props='color:black;background-color:red',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.1,
-        props='color:black;background-color:yellow',
-        subset=["Coverage"])
-    styled_df = styled_df.apply(
-        highlight_range,
-        level=level,
-        dist=0.05,
-        props='color:white;background-color:darkgreen',
-        subset=["Coverage"])
-
-    # set all coverage values to bold
-    styled_df = styled_df.set_properties(
-        **{'font-weight': 'bold'},
-        subset=["Coverage"])
-    return styled_df
-
-
-def make_pretty(df, level, n_rep):
-    styled_df = df.style.hide(axis="index")
-    # Format only float columns
-    float_cols = df.select_dtypes(include=['float']).columns
-    styled_df = styled_df.format({col: "{:.3f}" for col in float_cols})
-
-    # color coverage column order is important
-    styled_df = color_coverage(styled_df, level)
-    caption = f"Coverage for {level*100}%-Confidence Interval over {n_rep} Repetitions"
-
-    return show(styled_df, caption=caption, allow_html=True)
-```
 
 ### CVaR Y(0)
 
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/cvar_coverage_pq0.csv", index_col=None)
+# set up data
+df_cvar_pq0 = pd.read_csv("../../results/irm/cvar_coverage_pq0.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_cvar_pq0["repetition"].nunique() == 1
+n_rep_cvar_pq0 = df_cvar_pq0["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns_cvar_pq = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_pq0,
+    filters={"level": 0.95},
+    display_cols=display_columns_cvar_pq,
+    n_rep=n_rep_cvar_pq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_pq0,
+    filters={"level": 0.9},
+    display_cols=display_columns_cvar_pq,
+    n_rep=n_rep_cvar_pq0,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ### CVaR Y(1)
@@ -587,27 +398,37 @@ make_pretty(df_ate_9, level, n_rep)
 ```{python}
 #| echo: false
 
-# set up data and rename columns
-df = pd.read_csv("../../results/irm/cvar_coverage_pq1.csv", index_col=None)
+# set up data
+df_cvar_pq1 = pd.read_csv("../../results/irm/cvar_coverage_pq1.csv", index_col=None)
 
-assert df["repetition"].nunique() == 1
-n_rep = df["repetition"].unique()[0]
+assert df_cvar_pq1["repetition"].nunique() == 1
+n_rep_cvar_pq1 = df_cvar_pq1["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+# display_columns_cvar_pq is the same as for CVaR Y(0)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.95
-df_ate_95 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_95, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_pq1,
+    filters={"level": 0.95},
+    display_cols=display_columns_cvar_pq,
+    n_rep=n_rep_cvar_pq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
 
-level = 0.9
-df_ate_9 = df[df['level'] == level][display_columns]
-make_pretty(df_ate_9, level, n_rep)
+generate_and_show_styled_table(
+    main_df=df_cvar_pq1,
+    filters={"level": 0.9},
+    display_cols=display_columns_cvar_pq,
+    n_rep=n_rep_cvar_pq1,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
