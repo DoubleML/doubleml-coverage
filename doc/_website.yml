@@ -1,6 +1,7 @@
 website:
   title: "DoubleML Coverage"
   favicon: _static/favicon.ico
+  site-url: https://docs.doubleml.org/doubleml-coverage/
   search:
     location: sidebar
   sidebar:

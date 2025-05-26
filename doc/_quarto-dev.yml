@@ -6,6 +6,7 @@ metadata-files:
   - _website.yml
 
 website:
+  site-url: https://docs.doubleml.org/doubleml-coverage/dev/
   drafts:
     - index.qmd
     # IRM
