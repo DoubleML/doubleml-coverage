@@ -9,7 +9,7 @@ jupyter: python3
 
 import numpy as np
 import pandas as pd
-from itables import init_notebook_mode, show, options
+from itables import init_notebook_mode
 import os
 import sys
 
@@ -17,7 +17,7 @@ doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
 if doc_dir not in sys.path:
     sys.path.append(doc_dir)
 
-from utils.style_tables import create_styled_table
+from utils.style_tables import generate_and_show_styled_table
 
 init_notebook_mode(all_interactive=True)
 ```
@@ -57,25 +57,30 @@ display_columns_coverage = ["Learner g", "Learner m", "Bias", "CI Length", "Cove
 
 ```{python}
 # | echo: false
-score_po = "partialling out"
-level_95 = 0.95
 
-df_po_95 = df_coverage[(df_coverage["level"] == level_95) & (df_coverage["score"] == score_po)][display_columns_coverage].copy()
-df_po_95.rename(columns={"Learner g": "Learner l"}, inplace=True)
-
-styled_table_po_95 = create_styled_table(df_po_95, level_95, n_rep_coverage, coverage_cols=["Coverage"])
-show(styled_table_po_95, allow_html=True)
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "score": "partialling out"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
-level_90 = 0.9
 
-df_po_90 = df_coverage[(df_coverage['level'] == level_90) & (df_coverage["score"] == score_po)][display_columns_coverage].copy()
-df_po_90.rename(columns={"Learner g": "Learner l"}, inplace=True)
-
-styled_table_po_90 = create_styled_table(df_po_90, level_90, n_rep_coverage, coverage_cols=["Coverage"])
-show(styled_table_po_90, allow_html=True)
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "score": "partialling out"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ### IV-type
@@ -84,23 +89,28 @@ For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same t
 
 ```{python}
 #| echo: false
-score_iv = "IV-type"
-# level_95 is already defined
 
-df_iv_95 = df_coverage[(df_coverage['level'] == level_95) & (df_coverage["score"] == score_iv)][display_columns_coverage]
-
-styled_table_iv_95 = create_styled_table(df_iv_95, level_95, n_rep_coverage, coverage_cols=["Coverage"])
-show(styled_table_iv_95, allow_html=True)
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "score": "IV-type"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ```{python}
 #| echo: false
-# level_90 is already defined
 
-df_iv_90 = df_coverage[(df_coverage['level'] == level_90) & (df_coverage["score"] == score_iv)][display_columns_coverage]
-
-styled_table_iv_90 = create_styled_table(df_iv_90, level_90, n_rep_coverage, coverage_cols=["Coverage"])
-show(styled_table_iv_90, allow_html=True)
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "score": "IV-type"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
 ```
 
 ## ATE Sensitivity
@@ -143,34 +153,30 @@ display_columns_sensitivity = [
 
 ```{python}
 #| echo: false
-# score_po and level_95 are defined above
 
-df_sens_po_95 = df_sensitivity[(df_sensitivity['level'] == level_95) & (df_sensitivity["score"] == score_po)][display_columns_sensitivity].copy()
-df_sens_po_95.rename(columns={"Learner g": "Learner l"}, inplace=True)
-
-styled_sens_po_95 = create_styled_table(
-    df_sens_po_95,
-    level_95,
-    n_rep_sensitivity,
-    coverage_cols=["Coverage", "Coverage (Upper)"] # Highlight both
+generate_and_show_styled_table(
+    main_df=df_sensitivity,
+    filters={"level": 0.95, "score": "partialling out"},
+    display_cols=display_columns_sensitivity,
+    n_rep=n_rep_sensitivity,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage", "Coverage (Upper)"]
 )
-show(styled_sens_po_95, allow_html=True)
 ```
 
 ```{python}
 #| echo: false
-# score_po and level_90 are defined above
-
-df_sens_po_90 = df_sensitivity[(df_sensitivity['level'] == level_90) & (df_sensitivity["score"] == score_po)][display_columns_sensitivity].copy()
-df_sens_po_90.rename(columns={"Learner g": "Learner l"}, inplace=True)
-
-styled_sens_po_90 = create_styled_table(
-    df_sens_po_90,
-    level_90,
-    n_rep_sensitivity,
-    coverage_cols=["Coverage", "Coverage (Upper)"]
+#| 
+generate_and_show_styled_table(
+    main_df=df_sensitivity,
+    filters={"level": 0.9, "score": "partialling out"},
+    display_cols=display_columns_sensitivity,
+    n_rep=n_rep_sensitivity,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage", "Coverage (Upper)"]
 )
-show(styled_sens_po_90, allow_html=True)
 ```
 
 ### IV-type
@@ -179,30 +185,26 @@ For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same t
 
 ```{python}
 #| echo: false
-# score_iv and level_95 are defined above
 
-df_sens_iv_95 = df_sensitivity[(df_sensitivity['level'] == level_95) & (df_sensitivity["score"] == score_iv)][display_columns_sensitivity]
-
-styled_sens_iv_95 = create_styled_table(
-    df_sens_iv_95,
-    level_95,
-    n_rep_sensitivity,
-    coverage_cols=["Coverage", "Coverage (Upper)"]
+generate_and_show_styled_table(
+    main_df=df_sensitivity,
+    filters={"level": 0.95, "score": "IV-type"},
+    display_cols=display_columns_sensitivity,
+    n_rep=n_rep_sensitivity,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Coverage (Upper)"]
 )
-show(styled_sens_iv_95, allow_html=True)
 ```
 
 ```{python}
 #| echo: false
-# score_iv and level_90 are defined above
 
-df_sens_iv_90 = df_sensitivity[(df_sensitivity['level'] == level_90) & (df_sensitivity["score"] == score_iv)][display_columns_sensitivity]
-
-styled_sens_iv_90 = create_styled_table(
-    df_sens_iv_90,
-    level_90,
-    n_rep_sensitivity,
-    coverage_cols=["Coverage", "Coverage (Upper)"]
+generate_and_show_styled_table(
+    main_df=df_sensitivity,
+    filters={"level": 0.9, "score": "IV-type"},
+    display_cols=display_columns_sensitivity,
+    n_rep=n_rep_sensitivity,
+    level_col="level",
+    coverage_highlight_cols=["Coverage", "Coverage (Upper)"]
 )
-show(styled_sens_iv_90, allow_html=True)
 ```
