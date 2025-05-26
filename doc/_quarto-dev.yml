@@ -15,6 +15,7 @@ website:
     - irm/irm_cate.qmd
     - irm/apo.qmd
     - irm/qte.qmd
+    - irm/iivm.qmd
     # PLM
     - plm/plr.qmd
     - plm/plr_gate.qmd
