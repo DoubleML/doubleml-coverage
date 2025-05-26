@@ -35,7 +35,9 @@ class PLRATECoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
         for learner in self.dml_parameters["learners"]:
             assert "ml_g" in learner, "No ml_g specified in the config file"
             assert "ml_m" in learner, "No ml_m specified in the config file"
@@ -49,9 +51,13 @@ class PLRATECoverageSimulation(BaseSimulation):
         if ml_string == "Lasso":
             learner = LassoCV()
         elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=20)
+            learner = RandomForestRegressor(
+                n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=20
+            )
         elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1)
+            learner = LGBMRegressor(
+                n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1
+            )
         else:
             raise ValueError(f"Unknown learner type: {ml_string}")
 
@@ -124,7 +130,9 @@ class PLRATECoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
@@ -132,7 +140,10 @@ class PLRATECoverageSimulation(BaseSimulation):
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
         data = make_plr_CCDDHNR2018(
-            alpha=dgp_params["theta"], n_obs=dgp_params["n_obs"], dim_x=dgp_params["dim_x"], return_type="DataFrame"
+            alpha=dgp_params["theta"],
+            n_obs=dgp_params["n_obs"],
+            dim_x=dgp_params["dim_x"],
+            return_type="DataFrame",
         )
         dml_data = dml.DoubleMLData(data, "y", "d")
         return dml_data
