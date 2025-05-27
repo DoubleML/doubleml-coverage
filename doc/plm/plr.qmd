@@ -167,7 +167,7 @@ generate_and_show_styled_table(
 
 ```{python}
 #| echo: false
-#| 
+#|
 generate_and_show_styled_table(
     main_df=df_sensitivity,
     filters={"level": 0.9, "score": "partialling out"},
