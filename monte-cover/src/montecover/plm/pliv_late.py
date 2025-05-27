@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_plr_CCDDHNR2018
+from doubleml.datasets import make_pliv_CHS2015
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LassoCV
@@ -9,8 +9,8 @@ from sklearn.linear_model import LassoCV
 from montecover.base import BaseSimulation
 
 
-class PLRATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
+class PLIVLATECoverageSimulation(BaseSimulation):
+    """Simulation class for PLIV LATE coverage."""
 
     def __init__(
         self,
@@ -33,13 +33,14 @@ class PLRATECoverageSimulation(BaseSimulation):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
         assert "learners" in self.dml_parameters, "No learners specified in the config file"
-        for learner in self.dml_parameters["learners"]:
-            assert "ml_g" in learner, "No ml_g specified in the config file"
-            assert "ml_m" in learner, "No ml_m specified in the config file"
 
-            # Convert ml_g strings to actual objects
-            learner["ml_g"] = self._convert_ml_string_to_object(learner["ml_g"][0])
-            learner["ml_m"] = self._convert_ml_string_to_object(learner["ml_m"][0])
+        required_learners = ["ml_g", "ml_m", "ml_r"]
+        for learner in self.dml_parameters["learners"]:
+            for ml in required_learners:
+                assert ml in learner, f"No {ml} specified in the config file"
+
+                # Convert ml strings to actual objects
+                learner[ml] = self._convert_ml_string_to_object(learner[ml][0])
 
     def _convert_ml_string_to_object(self, ml_string):
         """Convert a string to a machine learning object."""
@@ -66,14 +67,16 @@ class PLRATECoverageSimulation(BaseSimulation):
         # Extract parameters
         learner_g_name, ml_g = dml_params["learners"]["ml_g"]
         learner_m_name, ml_m = dml_params["learners"]["ml_m"]
+        learner_r_name, ml_r = dml_params["learners"]["ml_r"]
         score = dml_params["score"]
 
         # Model
-        dml_model = dml.DoubleMLPLR(
+        dml_model = dml.DoubleMLPLIV(
             obj_dml_data=dml_data,
             ml_l=ml_g,
             ml_m=ml_m,
             ml_g=ml_g if score == "IV-type" else None,
+            ml_r=ml_r,
             score=score,
         )
         dml_model.fit()
@@ -96,6 +99,7 @@ class PLRATECoverageSimulation(BaseSimulation):
                     {
                         "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
+                        "Learner r": learner_r_name,
                         "Score": score,
                         "level": level,
                     }
@@ -128,11 +132,12 @@ class PLRATECoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_plr_CCDDHNR2018(
+        data = make_pliv_CHS2015(
             alpha=dgp_params["theta"],
             n_obs=dgp_params["n_obs"],
             dim_x=dgp_params["dim_x"],
+            dim_z=dgp_params["dim_z"],
             return_type="DataFrame",
         )
-        dml_data = dml.DoubleMLData(data, "y", "d")
+        dml_data = dml.DoubleMLData(data, "y", "d", z_cols="Z1")
         return dml_data
