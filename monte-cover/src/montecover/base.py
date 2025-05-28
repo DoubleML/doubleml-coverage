@@ -349,11 +349,11 @@ class BaseSimulation(ABC):
         if joint_confint is not None:
             joint_lower_bound = joint_confint.iloc[:, 0]
             joint_upper_bound = joint_confint.iloc[:, 1]
-            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (
+            joint_coverage_mask = (joint_lower_bound < oracle_thetas) & (
                 oracle_thetas < joint_upper_bound
             )
 
-            result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
+            result_dict["Uniform Coverage"] = np.all(joint_coverage_mask)
             result_dict["Uniform CI Length"] = np.mean(
                 joint_upper_bound - joint_lower_bound
             )
