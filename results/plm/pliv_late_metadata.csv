@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.10.0,PLIVLATECoverageSimulation,2025-05-28 14:19,63.04629045327504,3.12.9,scripts/plm/pliv_late_config.yml
+0.11.dev0,PLIVLATECoverageSimulation,2025-05-28 17:55,333.0460760434469,3.12.3,scripts/plm/pliv_late_config.yml
