@@ -34,7 +34,9 @@ class PLRGATECoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
         for learner in self.dml_parameters["learners"]:
             assert "ml_g" in learner, "No ml_g specified in the config file"
             assert "ml_m" in learner, "No ml_m specified in the config file"
@@ -48,9 +50,13 @@ class PLRGATECoverageSimulation(BaseSimulation):
         if ml_string == "Lasso":
             learner = LassoCV()
         elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=2)
+            learner = RandomForestRegressor(
+                n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=2
+            )
         elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1)
+            learner = LGBMRegressor(
+                n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1
+            )
         else:
             raise ValueError(f"Unknown learner type: {ml_string}")
 
@@ -83,7 +89,9 @@ class PLRGATECoverageSimulation(BaseSimulation):
 
         self.logger.info("Calculating oracle values")
         groups = self._generate_groups(data_oracle["data"])
-        true_effects = [data_oracle["effects"][groups[group]].mean() for group in groups.columns]
+        true_effects = [
+            data_oracle["effects"][groups[group]].mean() for group in groups.columns
+        ]
 
         self.oracle_values = dict()
         self.oracle_values["gates"] = true_effects
@@ -116,7 +124,9 @@ class PLRGATECoverageSimulation(BaseSimulation):
             level_result = dict()
             confint = gate_model.confint(level=level)
             effects = confint["effect"]
-            uniform_confint = gate_model.confint(level=0.95, joint=True, n_rep_boot=2000)
+            uniform_confint = gate_model.confint(
+                level=0.95, joint=True, n_rep_boot=2000
+            )
             level_result["coverage"] = self._compute_coverage(
                 thetas=effects,
                 oracle_thetas=self.oracle_values["gates"],
@@ -157,7 +167,9 @@ class PLRGATECoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
