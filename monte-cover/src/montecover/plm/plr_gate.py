@@ -1,8 +1,8 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-import pandas as pd
 import numpy as np
+import pandas as pd
 from doubleml.datasets import make_heterogeneous_data
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import RandomForestRegressor
