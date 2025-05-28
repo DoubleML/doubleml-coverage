@@ -34,8 +34,8 @@ class PLRATECoverageSimulation(BaseSimulation):
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
-            for key in required_learners:
-                assert key in learner, f"No {key} specified in the config file"
+            for ml in required_learners:
+                assert ml in learner, f"No {ml} specified in the config file"
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""

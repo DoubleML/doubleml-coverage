@@ -2,11 +2,9 @@ from typing import Any, Dict, Optional
 
 import doubleml as dml
 from doubleml.datasets import make_pliv_CHS2015
-from lightgbm import LGBMRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LassoCV
 
 from montecover.base import BaseSimulation
+from montecover.utils import create_learner_from_config
 
 
 class PLIVLATECoverageSimulation(BaseSimulation):
@@ -32,34 +30,12 @@ class PLIVLATECoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert (
-            "learners" in self.dml_parameters
-        ), "No learners specified in the config file"
+        assert "learners" in self.dml_parameters, "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m", "ml_r"]
         for learner in self.dml_parameters["learners"]:
             for ml in required_learners:
                 assert ml in learner, f"No {ml} specified in the config file"
-
-                # Convert ml strings to actual objects
-                learner[ml] = self._convert_ml_string_to_object(learner[ml][0])
-
-    def _convert_ml_string_to_object(self, ml_string):
-        """Convert a string to a machine learning object."""
-        if ml_string == "Lasso":
-            learner = LassoCV()
-        elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(
-                n_estimators=100, max_features=20, max_depth=5, min_samples_leaf=2
-            )
-        elif ml_string == "LGBM":
-            learner = LGBMRegressor(
-                n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1
-            )
-        else:
-            raise ValueError(f"Unknown learner type: {ml_string}")
-
-        return (ml_string, learner)
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
@@ -70,10 +46,12 @@ class PLIVLATECoverageSimulation(BaseSimulation):
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
+
         # Extract parameters
-        learner_g_name, ml_g = dml_params["learners"]["ml_g"]
-        learner_m_name, ml_m = dml_params["learners"]["ml_m"]
-        learner_r_name, ml_r = dml_params["learners"]["ml_r"]
+        learner_config = dml_params["learners"]
+        learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
+        learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
+        learner_r_name, ml_r = create_learner_from_config(learner_config["ml_r"])
         score = dml_params["score"]
 
         # Model
@@ -131,9 +109,7 @@ class PLIVLATECoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = (
-                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
-            )
+            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
