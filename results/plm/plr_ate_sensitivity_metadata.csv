@@ -1,2 +1,2 @@
-DoubleML Version,Script,Date,Total Runtime (seconds),Python Version
-0.10.dev0,plr_ate_sensitivity.py,2025-05-22 14:16:38,9875.844212293625,3.12.3
+DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
+0.10.0,PLRATESensitivityCoverageSimulation,2025-05-28 11:33,22.490594506263733,3.12.9,scripts/plm/plr_ate_sensitivity_config.yml
