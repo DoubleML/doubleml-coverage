@@ -3,16 +3,17 @@ from typing import Any, Dict, Optional
 import doubleml as dml
 import numpy as np
 import pandas as pd
+import patsy
 from doubleml.datasets import make_heterogeneous_data
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LassoCV
+from sklearn.linear_model import LassoCV, LinearRegression
 
 from montecover.base import BaseSimulation
 
 
-class PLRGATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for GATE estimation."""
+class PLRCATECoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLPLR for CATE estimation."""
 
     def __init__(
         self,
@@ -56,20 +57,6 @@ class PLRGATECoverageSimulation(BaseSimulation):
 
         return (ml_string, learner)
 
-    def _generate_groups(self, data):
-        """Generate groups for the simulation."""
-        groups = pd.DataFrame(
-            np.column_stack(
-                (
-                    data["X_0"] <= 0.3,
-                    (data["X_0"] > 0.3) & (data["X_0"] <= 0.7),
-                    data["X_0"] > 0.7,
-                )
-            ),
-            columns=["Group 1", "Group 2", "Group 3"],
-        )
-        return groups
-
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
         # Oracle values
@@ -82,11 +69,20 @@ class PLRGATECoverageSimulation(BaseSimulation):
         )
 
         self.logger.info("Calculating oracle values")
-        groups = self._generate_groups(data_oracle["data"])
-        oracle_gates = [data_oracle["effects"][groups[group]].mean() for group in groups.columns]
+
+        design_matrix_oracle = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": data_oracle["data"]["X_0"]})
+        spline_basis_oracle = pd.DataFrame(design_matrix_oracle)
+        oracle_model = LinearRegression()
+        oracle_model.fit(spline_basis_oracle, data_oracle["effects"])
+
+        # evaluate on grid
+        grid = {"x": np.linspace(0.1, 0.9, 100)}
+        spline_grid_oracle = pd.DataFrame(patsy.build_design_matrices([design_matrix_oracle.design_info], grid)[0])
+        oracle_cates = oracle_model.predict(spline_grid_oracle)
 
         self.oracle_values = dict()
-        self.oracle_values["gates"] = oracle_gates
+        self.oracle_values["cates"] = oracle_cates
+        self.oracle_values["grid"] = grid
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
@@ -105,21 +101,25 @@ class PLRGATECoverageSimulation(BaseSimulation):
         )
         dml_model.fit()
 
-        # gate
-        groups = self._generate_groups(dml_data.data)
-        gate_model = dml_model.gate(groups=groups)
+        # cate
+        design_matrix = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": dml_data.data["X_0"]})
+        spline_basis = pd.DataFrame(design_matrix)
+        cate_model = dml_model.cate(basis=spline_basis)
+
+        # evaluation spline basis
+        spline_grid = pd.DataFrame(patsy.build_design_matrices([design_matrix.design_info], self.oracle_values["grid"])[0])
 
         result = {
             "coverage": [],
         }
         for level in self.confidence_parameters["level"]:
             level_result = dict()
-            confint = gate_model.confint(level=level)
+            confint = cate_model.confint(basis=spline_grid, level=level)
             effects = confint["effect"]
-            uniform_confint = gate_model.confint(level=0.95, joint=True, n_rep_boot=2000)
+            uniform_confint = cate_model.confint(basis=spline_grid, level=0.95, joint=True, n_rep_boot=2000)
             level_result["coverage"] = self._compute_coverage(
                 thetas=effects,
-                oracle_thetas=self.oracle_values["gates"],
+                oracle_thetas=self.oracle_values["cates"],
                 confint=confint.iloc[:, [0, 2]],
                 joint_confint=uniform_confint.iloc[:, [0, 2]],
             )
