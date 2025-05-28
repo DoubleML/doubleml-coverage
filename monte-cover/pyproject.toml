@@ -9,7 +9,7 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "black>=25.1.0",
-    "doubleml[rdd]>=0.9.3",
+    "doubleml[rdd]>=0.10.0",
     "ipykernel>=6.29.5",
     "itables>=2.2.5",
     "joblib>=1.4.2",
