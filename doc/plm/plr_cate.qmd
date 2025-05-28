@@ -57,12 +57,14 @@ else:
 display_columns_cate = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
 ```
 
+### Partialling out
+
 ```{python}
 #| echo: false
 
 generate_and_show_styled_table(
     main_df=df_cate,
-    filters={"level": 0.95},
+    filters={"level": 0.95, "Score": "partialling out"},
     display_cols=display_columns_cate,
     n_rep=n_rep_cate,
     level_col="level",
@@ -76,7 +78,38 @@ generate_and_show_styled_table(
 
 generate_and_show_styled_table(
     main_df=df_cate,
-    filters={"level": 0.9},
+    filters={"level": 0.9, "Score": "partialling out"},
+    display_cols=display_columns_cate,
+    n_rep=n_rep_cate,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
+```
+
+
+### IV-type
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_cate,
+    filters={"level": 0.95, "Score": "IV-type"},
+    display_cols=display_columns_cate,
+    n_rep=n_rep_cate,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage", "Uniform Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_cate,
+    filters={"level": 0.9, "Score": "IV-type"},
     display_cols=display_columns_cate,
     n_rep=n_rep_cate,
     level_col="level",
