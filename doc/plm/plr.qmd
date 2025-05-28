@@ -135,7 +135,7 @@ print(metadata_df_sens.T.to_string(header=False))
 #| echo: false
 
 # set up data and rename columns
-df_sensitivity = pd.read_csv("../../results/plm/plr_ate_sensitivity.csv", index_col=None)
+df_sensitivity = pd.read_csv("../../results/plm/plr_ate_sensitivity_coverage.csv", index_col=None)
 
 if "repetition" in df_sensitivity.columns and df_sensitivity["repetition"].nunique() == 1:
     n_rep_sensitivity = df_sensitivity["repetition"].unique()[0]
@@ -156,7 +156,7 @@ display_columns_sensitivity = [
 
 generate_and_show_styled_table(
     main_df=df_sensitivity,
-    filters={"level": 0.95, "score": "partialling out"},
+    filters={"level": 0.95, "Score": "partialling out"},
     display_cols=display_columns_sensitivity,
     n_rep=n_rep_sensitivity,
     level_col="level",
@@ -170,7 +170,7 @@ generate_and_show_styled_table(
 #|
 generate_and_show_styled_table(
     main_df=df_sensitivity,
-    filters={"level": 0.9, "score": "partialling out"},
+    filters={"level": 0.9, "Score": "partialling out"},
     display_cols=display_columns_sensitivity,
     n_rep=n_rep_sensitivity,
     level_col="level",
@@ -188,7 +188,7 @@ For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same t
 
 generate_and_show_styled_table(
     main_df=df_sensitivity,
-    filters={"level": 0.95, "score": "IV-type"},
+    filters={"level": 0.95, "Score": "IV-type"},
     display_cols=display_columns_sensitivity,
     n_rep=n_rep_sensitivity,
     level_col="level",
@@ -201,7 +201,7 @@ generate_and_show_styled_table(
 
 generate_and_show_styled_table(
     main_df=df_sensitivity,
-    filters={"level": 0.9, "score": "IV-type"},
+    filters={"level": 0.9, "Score": "IV-type"},
     display_cols=display_columns_sensitivity,
     n_rep=n_rep_sensitivity,
     level_col="level",

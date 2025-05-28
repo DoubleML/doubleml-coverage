@@ -21,7 +21,7 @@ learner_definitions:
       n_estimators: 200
       max_features: 10
       max_depth: 5
-      min_samples_leaf: 20
+      min_samples_leaf: 2
 
   lgbm: &lgbm
     name: "LGBM Regr."
