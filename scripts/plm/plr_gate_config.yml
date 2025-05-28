@@ -12,21 +12,41 @@ dgp_parameters:
   support_size: [5] # Number of non-zero coefficients
   n_x: [1]
 
+# Define reusable learner configurations
+learner_definitions:
+  lasso: &lasso
+    name: "LassoCV"
+
+  rf: &rf
+    name: "RF Regr."
+    params:
+      n_estimators: 200
+      max_features: 10
+      max_depth: 5
+      min_samples_leaf: 2
+
+  lgbm: &lgbm
+    name: "LGBM Regr."
+    params:
+      n_estimators: 500
+      learning_rate: 0.01
+
 dml_parameters:
-  # ML methods for ml_g and ml_m
   learners:
-    - ml_g: ["Lasso"]
-      ml_m: ["Lasso"]
-    - ml_g: ["Random Forest"]
-      ml_m: ["Random Forest"]
-    - ml_g: ["Lasso"]
-      ml_m: ["Random Forest"]
-    - ml_g: ["Random Forest"]
-      ml_m: ["Lasso"]
-    - ml_g: ["LGBM"]
-      ml_m: ["LGBM"]
-    - ml_g: ["LGBM"]
-      ml_m: ["Lasso"]
+    - ml_g: *lasso
+      ml_m: *lasso
+    - ml_g: *rf
+      ml_m: *rf
+    - ml_g: *lasso
+      ml_m: *rf
+    - ml_g: *rf
+      ml_m: *lasso
+    - ml_g: *lgbm
+      ml_m: *lgbm
+    - ml_g: *lgbm
+      ml_m: *lasso
+    - ml_g: *lasso
+      ml_m: *lgbm
 
   score: ["partialling out", "IV-type"]
 

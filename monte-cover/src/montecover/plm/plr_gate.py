@@ -4,11 +4,9 @@ import doubleml as dml
 import numpy as np
 import pandas as pd
 from doubleml.datasets import make_heterogeneous_data
-from lightgbm import LGBMRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LassoCV
 
 from montecover.base import BaseSimulation
+from montecover.utils import create_learner_from_config
 
 
 class PLRGATECoverageSimulation(BaseSimulation):
@@ -35,26 +33,11 @@ class PLRGATECoverageSimulation(BaseSimulation):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
         assert "learners" in self.dml_parameters, "No learners specified in the config file"
+
+        required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
-            assert "ml_g" in learner, "No ml_g specified in the config file"
-            assert "ml_m" in learner, "No ml_m specified in the config file"
-
-            # Convert ml_g strings to actual objects
-            learner["ml_g"] = self._convert_ml_string_to_object(learner["ml_g"][0])
-            learner["ml_m"] = self._convert_ml_string_to_object(learner["ml_m"][0])
-
-    def _convert_ml_string_to_object(self, ml_string):
-        """Convert a string to a machine learning object."""
-        if ml_string == "Lasso":
-            learner = LassoCV()
-        elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=2)
-        elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1)
-        else:
-            raise ValueError(f"Unknown learner type: {ml_string}")
-
-        return (ml_string, learner)
+            for ml in required_learners:
+                assert ml in learner, f"No {ml} specified in the config file"
 
     def _generate_groups(self, data):
         """Generate groups for the simulation."""
@@ -91,8 +74,9 @@ class PLRGATECoverageSimulation(BaseSimulation):
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
-        learner_g_name, ml_g = dml_params["learners"]["ml_g"]
-        learner_m_name, ml_m = dml_params["learners"]["ml_m"]
+        learner_config = dml_params["learners"]
+        learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
+        learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         score = dml_params["score"]
 
         # Model
