@@ -1,4 +1,4 @@
-# Simulation parameters for sharp RDD Coverage
+# Simulation parameters for fuzzy RDD Coverage
 
 simulation_parameters:
   repetitions: 1000
@@ -8,7 +8,7 @@ simulation_parameters:
 
 dgp_parameters:
   n_obs: [1000] # Sample size
-  fuzzy: [False]
+  fuzzy: [True]
   cutoff: [0.0]
 
 # Define reusable learner configurations
@@ -19,14 +19,32 @@ learner_definitions:
       n_estimators: 100
       learning_rate: 0.05
 
+  lgbmc: &lgbmc
+    name: "LGBM Clas."
+    params:
+      n_estimators: 100
+      learning_rate: 0.05
+
   global_linear: &global_linear
     name: "Global Linear"
+
+  global_logistic: &global_logistic
+    name: "Global Logistic"
 
   local_linear: &local_linear
     name: "Linear"
 
+  local_logistic: &local_logistic
+    name: "Logistic"
+
   stacked_reg: &stacked_reg
     name: "Stacked Regr."
+    params:
+      n_estimators: 100
+      learning_rate: 0.05
+
+  stacked_cls: &stacked_cls
+    name: "Stacked Clas."
     params:
       n_estimators: 100
       learning_rate: 0.05
@@ -36,10 +54,13 @@ dml_parameters:
 
   learners:
     - ml_g: *lgbmr
+      ml_m: *lgbmc
     - ml_g: *global_linear
+      ml_m: *global_logistic
     - ml_g: *local_linear
+      ml_m: *local_logistic
     - ml_g: *stacked_reg
-
+      ml_m: *stacked_cls
 
 confidence_parameters:
   level: [0.95, 0.90] # Confidence levels
