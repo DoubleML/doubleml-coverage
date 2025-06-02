@@ -1,14 +1,18 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_plr_CCDDHNR2018
+import numpy as np
+import pandas as pd
+import patsy
+from doubleml.datasets import make_heterogeneous_data
+from sklearn.linear_model import LinearRegression
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class PLRATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
+class PLRCATECoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLPLR for CATE estimation."""
 
     def __init__(
         self,
@@ -39,10 +43,30 @@ class PLRATECoverageSimulation(BaseSimulation):
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
+        # Oracle values
+        data_oracle = make_heterogeneous_data(
+            n_obs=int(1e6),
+            p=self.dgp_parameters["p"][0],
+            support_size=self.dgp_parameters["support_size"][0],
+            n_x=self.dgp_parameters["n_x"][0],
+            binary_treatment=False,
+        )
+
         self.logger.info("Calculating oracle values")
 
+        design_matrix_oracle = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": data_oracle["data"]["X_0"]})
+        spline_basis_oracle = pd.DataFrame(design_matrix_oracle)
+        oracle_model = LinearRegression()
+        oracle_model.fit(spline_basis_oracle, data_oracle["effects"])
+
+        # evaluate on grid
+        grid = {"x": np.linspace(0.1, 0.9, 100)}
+        spline_grid_oracle = pd.DataFrame(patsy.build_design_matrices([design_matrix_oracle.design_info], grid)[0])
+        oracle_cates = oracle_model.predict(spline_grid_oracle)
+
         self.oracle_values = dict()
-        self.oracle_values["theta"] = self.dgp_parameters["theta"]
+        self.oracle_values["cates"] = oracle_cates
+        self.oracle_values["grid"] = grid
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
@@ -62,16 +86,27 @@ class PLRATECoverageSimulation(BaseSimulation):
         )
         dml_model.fit()
 
+        # cate
+        design_matrix = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": dml_data.data["X_0"]})
+        spline_basis = pd.DataFrame(design_matrix)
+        cate_model = dml_model.cate(basis=spline_basis)
+
+        # evaluation spline basis
+        spline_grid = pd.DataFrame(patsy.build_design_matrices([design_matrix.design_info], self.oracle_values["grid"])[0])
+
         result = {
             "coverage": [],
         }
         for level in self.confidence_parameters["level"]:
             level_result = dict()
+            confint = cate_model.confint(basis=spline_grid, level=level)
+            effects = confint["effect"]
+            uniform_confint = cate_model.confint(basis=spline_grid, level=0.95, joint=True, n_rep_boot=2000)
             level_result["coverage"] = self._compute_coverage(
-                thetas=dml_model.coef,
-                oracle_thetas=self.oracle_values["theta"],
-                confint=dml_model.confint(level=level),
-                joint_confint=None,
+                thetas=effects,
+                oracle_thetas=self.oracle_values["cates"],
+                confint=confint.iloc[:, [0, 2]],
+                joint_confint=uniform_confint.iloc[:, [0, 2]],
             )
 
             # add parameters to the result
@@ -99,6 +134,8 @@ class PLRATECoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Uniform Coverage": "mean",
+            "Uniform CI Length": "mean",
             "repetition": "count",
         }
 
@@ -112,11 +149,12 @@ class PLRATECoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_plr_CCDDHNR2018(
-            alpha=dgp_params["theta"],
+        data = make_heterogeneous_data(
             n_obs=dgp_params["n_obs"],
-            dim_x=dgp_params["dim_x"],
-            return_type="DataFrame",
+            p=dgp_params["p"],
+            support_size=dgp_params["support_size"],
+            n_x=dgp_params["n_x"],
+            binary_treatment=False,
         )
-        dml_data = dml.DoubleMLData(data, "y", "d")
+        dml_data = dml.DoubleMLData(data["data"], "y", "d")
         return dml_data

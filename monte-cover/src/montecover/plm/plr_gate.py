@@ -1,14 +1,16 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_plr_CCDDHNR2018
+import numpy as np
+import pandas as pd
+from doubleml.datasets import make_heterogeneous_data
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class PLRATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
+class PLRGATECoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLPLR for GATE estimation."""
 
     def __init__(
         self,
@@ -37,12 +39,37 @@ class PLRATECoverageSimulation(BaseSimulation):
             for ml in required_learners:
                 assert ml in learner, f"No {ml} specified in the config file"
 
+    def _generate_groups(self, data):
+        """Generate groups for the simulation."""
+        groups = pd.DataFrame(
+            np.column_stack(
+                (
+                    data["X_0"] <= 0.3,
+                    (data["X_0"] > 0.3) & (data["X_0"] <= 0.7),
+                    data["X_0"] > 0.7,
+                )
+            ),
+            columns=["Group 1", "Group 2", "Group 3"],
+        )
+        return groups
+
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
+        # Oracle values
+        data_oracle = make_heterogeneous_data(
+            n_obs=int(1e6),
+            p=self.dgp_parameters["p"][0],
+            support_size=self.dgp_parameters["support_size"][0],
+            n_x=self.dgp_parameters["n_x"][0],
+            binary_treatment=False,
+        )
+
         self.logger.info("Calculating oracle values")
+        groups = self._generate_groups(data_oracle["data"])
+        oracle_gates = [data_oracle["effects"][groups[group]].mean() for group in groups.columns]
 
         self.oracle_values = dict()
-        self.oracle_values["theta"] = self.dgp_parameters["theta"]
+        self.oracle_values["gates"] = oracle_gates
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
@@ -62,16 +89,23 @@ class PLRATECoverageSimulation(BaseSimulation):
         )
         dml_model.fit()
 
+        # gate
+        groups = self._generate_groups(dml_data.data)
+        gate_model = dml_model.gate(groups=groups)
+
         result = {
             "coverage": [],
         }
         for level in self.confidence_parameters["level"]:
             level_result = dict()
+            confint = gate_model.confint(level=level)
+            effects = confint["effect"]
+            uniform_confint = gate_model.confint(level=0.95, joint=True, n_rep_boot=2000)
             level_result["coverage"] = self._compute_coverage(
-                thetas=dml_model.coef,
-                oracle_thetas=self.oracle_values["theta"],
-                confint=dml_model.confint(level=level),
-                joint_confint=None,
+                thetas=effects,
+                oracle_thetas=self.oracle_values["gates"],
+                confint=confint.iloc[:, [0, 2]],
+                joint_confint=uniform_confint.iloc[:, [0, 2]],
             )
 
             # add parameters to the result
@@ -99,6 +133,8 @@ class PLRATECoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Uniform Coverage": "mean",
+            "Uniform CI Length": "mean",
             "repetition": "count",
         }
 
@@ -112,11 +148,12 @@ class PLRATECoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_plr_CCDDHNR2018(
-            alpha=dgp_params["theta"],
+        data = make_heterogeneous_data(
             n_obs=dgp_params["n_obs"],
-            dim_x=dgp_params["dim_x"],
-            return_type="DataFrame",
+            p=dgp_params["p"],
+            support_size=dgp_params["support_size"],
+            n_x=dgp_params["n_x"],
+            binary_treatment=False,
         )
-        dml_data = dml.DoubleMLData(data, "y", "d")
+        dml_data = dml.DoubleMLData(data["data"], "y", "d")
         return dml_data

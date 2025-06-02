@@ -1,4 +1,4 @@
-# Simulation parameters for PLR ATE Coverage
+# Simulation parameters for PLR ATE Sensitivity Coverage
 
 simulation_parameters:
   repetitions: 1000
@@ -8,8 +8,7 @@ simulation_parameters:
 
 dgp_parameters:
   theta: [0.5] # Treatment effect
-  n_obs: [500] # Sample size
-  dim_x: [20] # Number of covariates
+  n_obs: [1000] # Sample size
 
 # Define reusable learner configurations
 learner_definitions:
@@ -22,13 +21,14 @@ learner_definitions:
       n_estimators: 200
       max_features: 10
       max_depth: 5
-      min_samples_leaf: 20
+      min_samples_leaf: 2
 
   lgbm: &lgbm
     name: "LGBM Regr."
     params:
       n_estimators: 500
-      learning_rate: 0.01
+      learning_rate: 0.05
+      min_child_samples: 5
 
 dml_parameters:
   learners:

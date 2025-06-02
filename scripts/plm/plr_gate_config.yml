@@ -1,4 +1,4 @@
-# Simulation parameters for PLR ATE Coverage
+# Simulation parameters for PLR GATE Coverage
 
 simulation_parameters:
   repetitions: 1000
@@ -7,9 +7,10 @@ simulation_parameters:
   n_jobs: -2
 
 dgp_parameters:
-  theta: [0.5] # Treatment effect
   n_obs: [500] # Sample size
-  dim_x: [20] # Number of covariates
+  p: [10] # Number of covariates
+  support_size: [5] # Number of non-zero coefficients
+  n_x: [1]
 
 # Define reusable learner configurations
 learner_definitions:
@@ -22,7 +23,7 @@ learner_definitions:
       n_estimators: 200
       max_features: 10
       max_depth: 5
-      min_samples_leaf: 20
+      min_samples_leaf: 2
 
   lgbm: &lgbm
     name: "LGBM Regr."

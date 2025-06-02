@@ -10,6 +10,8 @@ dgp_parameters:
   - 500
   dim_x:
   - 20
+  dim_z:
+  - 1
 learner_definitions:
   lasso: &id001
     name: LassoCV
@@ -17,30 +19,35 @@ learner_definitions:
     name: RF Regr.
     params:
       n_estimators: 200
-      max_features: 10
+      max_features: 20
       max_depth: 5
-      min_samples_leaf: 20
-  lgbm: &id003
-    name: LGBM Regr.
-    params:
-      n_estimators: 500
-      learning_rate: 0.01
+      min_samples_leaf: 2
 dml_parameters:
   learners:
   - ml_g: *id001
     ml_m: *id001
+    ml_r: *id001
   - ml_g: *id002
     ml_m: *id002
+    ml_r: *id002
   - ml_g: *id001
     ml_m: *id002
+    ml_r: *id002
   - ml_g: *id002
     ml_m: *id001
-  - ml_g: *id003
-    ml_m: *id003
-  - ml_g: *id003
-    ml_m: *id001
+    ml_r: *id002
+  - ml_g: *id002
+    ml_m: *id002
+    ml_r: *id001
   - ml_g: *id001
-    ml_m: *id003
+    ml_m: *id001
+    ml_r: *id002
+  - ml_g: *id002
+    ml_m: *id001
+    ml_r: *id001
+  - ml_g: *id001
+    ml_m: *id002
+    ml_r: *id001
   score:
   - partialling out
   - IV-type

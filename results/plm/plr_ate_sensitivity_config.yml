@@ -7,9 +7,7 @@ dgp_parameters:
   theta:
   - 0.5
   n_obs:
-  - 500
-  dim_x:
-  - 20
+  - 1000
 learner_definitions:
   lasso: &id001
     name: LassoCV
@@ -19,12 +17,13 @@ learner_definitions:
       n_estimators: 200
       max_features: 10
       max_depth: 5
-      min_samples_leaf: 20
+      min_samples_leaf: 2
   lgbm: &id003
     name: LGBM Regr.
     params:
       n_estimators: 500
-      learning_rate: 0.01
+      learning_rate: 0.05
+      min_child_samples: 5
 dml_parameters:
   learners:
   - ml_g: *id001
