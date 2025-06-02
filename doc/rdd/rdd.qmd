@@ -47,7 +47,7 @@ df_sharp = pd.read_csv("../../results/rdd/rdd_sharp_coverage.csv", index_col=Non
 assert df_sharp["repetition"].nunique() == 1
 n_rep_sharp = df_sharp["repetition"].unique()[0]
 
-display_columns_sharp = ["Method", "Learner g", "fs specification", "Bias", "CI Length", "Coverage"]
+display_columns_sharp = ["Method", "Learner g", "fs_specification", "Bias", "CI Length", "Coverage"]
 ```
 
 ```{python}
@@ -99,7 +99,7 @@ df_fuzzy = pd.read_csv("../../results/rdd/rdd_fuzzy_coverage.csv", index_col=Non
 assert df_fuzzy["repetition"].nunique() == 1
 n_rep_fuzzy = df_fuzzy["repetition"].unique()[0]
 
-display_columns_fuzzy = ["Method", "Learner g", "Learner m", "fs specification", "Bias", "CI Length", "Coverage"]
+display_columns_fuzzy = ["Method", "Learner g", "Learner m", "fs_specification", "Bias", "CI Length", "Coverage"]
 ```
 
 ```{python}
