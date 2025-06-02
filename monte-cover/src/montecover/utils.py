@@ -1,8 +1,9 @@
 from typing import Any, Callable, Dict, Tuple
 
+from doubleml.utils import GlobalRegressor
 from lightgbm import LGBMClassifier, LGBMRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.linear_model import LassoCV, LinearRegression, LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, StackingClassifier, StackingRegressor
+from sklearn.linear_model import LassoCV, LinearRegression, LogisticRegression, Ridge
 
 LearnerInstantiator = Callable[[Dict[str, Any]], Any]
 # Map learner abbreviations to their instantiation logic
@@ -14,6 +15,29 @@ LEARNER_REGISTRY: Dict[str, LearnerInstantiator] = {
     "LGBM Clas.": lambda params: LGBMClassifier(**{**{"verbose": -1, "n_jobs": 1}, **params}),
     "Linear": lambda params: LinearRegression(**params),
     "Logistic": lambda params: LogisticRegression(**params),
+    "Global Linear": lambda params: GlobalRegressor(LinearRegression(**params)),
+    "Global Logistic": lambda params: GlobalRegressor(LogisticRegression(**params)),
+    "Stacked Regr.": lambda params: StackingRegressor(
+        estimators=[
+            ("lr", LinearRegression()),
+            (
+                "lgbm",
+                LGBMRegressor(**{**{"verbose": -1, "n_jobs": 1}, **params}),
+            ),
+            ("glr", GlobalRegressor(LinearRegression())),
+        ],
+        final_estimator=Ridge(),
+    ),
+    "Stacked Clas.": lambda params: StackingClassifier(
+        estimators=[
+            ("lr", LogisticRegression()),
+            (
+                "lgbm",
+                LGBMClassifier(**{**{"verbose": -1, "n_jobs": 1}, **params}),
+            ),
+            ("glr", GlobalRegressor(LogisticRegression())),
+        ],
+    ),
 }
 
 
