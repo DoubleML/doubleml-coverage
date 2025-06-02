@@ -1,6 +1,6 @@
 from typing import Any, Callable, Dict, Tuple
 
-from doubleml.utils import GlobalRegressor
+from doubleml.utils import GlobalClassifier, GlobalRegressor
 from lightgbm import LGBMClassifier, LGBMRegressor
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, StackingClassifier, StackingRegressor
 from sklearn.linear_model import LassoCV, LinearRegression, LogisticRegression, Ridge
@@ -16,7 +16,7 @@ LEARNER_REGISTRY: Dict[str, LearnerInstantiator] = {
     "Linear": lambda params: LinearRegression(**params),
     "Logistic": lambda params: LogisticRegression(**params),
     "Global Linear": lambda params: GlobalRegressor(LinearRegression(**params)),
-    "Global Logistic": lambda params: GlobalRegressor(LogisticRegression(**params)),
+    "Global Logistic": lambda params: GlobalClassifier(LogisticRegression(**params)),
     "Stacked Regr.": lambda params: StackingRegressor(
         estimators=[
             ("lr", LinearRegression()),
@@ -35,8 +35,9 @@ LEARNER_REGISTRY: Dict[str, LearnerInstantiator] = {
                 "lgbm",
                 LGBMClassifier(**{**{"verbose": -1, "n_jobs": 1}, **params}),
             ),
-            ("glr", GlobalRegressor(LogisticRegression())),
+            ("glr", GlobalClassifier(LogisticRegression())),
         ],
+        final_estimator=LogisticRegression(),
     ),
 }
 

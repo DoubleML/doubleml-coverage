@@ -51,7 +51,7 @@ class RDDCoverageSimulation(BaseSimulation):
         """Calculate oracle values for the simulation."""
         self.logger.info("Calculating oracle values")
 
-        data_oracle = make_simple_rdd_data(n_obs=int(1e5), fuzzy=self.fuzzy, cutoff=self.cutoff)
+        data_oracle = make_simple_rdd_data(n_obs=int(1e6), fuzzy=self.fuzzy, cutoff=self.cutoff)
         # get oracle value
         score = data_oracle["score"]
         ite = data_oracle["oracle_values"]["Y1"] - data_oracle["oracle_values"]["Y0"]
