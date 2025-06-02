@@ -1,0 +1,2 @@
+DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
+0.11.dev0,RDDCoverageSimulation,2025-06-02 13:17,65.69356084664663,3.12.3,scripts/rdd/rdd_sharp_config.yml
