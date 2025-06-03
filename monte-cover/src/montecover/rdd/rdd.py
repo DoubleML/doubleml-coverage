@@ -114,7 +114,11 @@ class RDDCoverageSimulation(BaseSimulation):
 
         benchmark_results_list = []
         for level in self.confidence_parameters["level"]:
-            rd_model = rdrobust(y=Y, x=score, covs=Z, c=self.cutoff, level=level * 100)
+            if self.fuzzy:
+                D = dml_data.data[dml_data.d_cols]
+                rd_model = rdrobust(y=Y, x=score, fuzzy=D, covs=Z, c=self.cutoff, level=level * 100)
+            else:
+                rd_model = rdrobust(y=Y, x=score, covs=Z, c=self.cutoff, level=level * 100)
             coef_rd = rd_model.coef.loc["Robust", "Coeff"]
             ci_lower_rd = rd_model.ci.loc["Robust", "CI Lower"]
             ci_upper_rd = rd_model.ci.loc["Robust", "CI Upper"]
