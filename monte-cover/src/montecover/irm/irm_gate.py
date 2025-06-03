@@ -28,7 +28,6 @@ class IRMGATECoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
-        self.logger.info(f"Oracle values: {self.oracle_values}")
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
@@ -71,6 +70,8 @@ class IRMGATECoverageSimulation(BaseSimulation):
 
         self.oracle_values = dict()
         self.oracle_values["gates"] = oracle_gates
+
+        self.logger.info(f"Oracle values: {self.oracle_values}")
 
     def run_single_rep(self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
