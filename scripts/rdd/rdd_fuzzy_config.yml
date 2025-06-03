@@ -7,7 +7,7 @@ simulation_parameters:
   n_jobs: -2
 
 dgp_parameters:
-  n_obs: [1000] # Sample size
+  n_obs: [2000] # Sample size
   fuzzy: [True]
   cutoff: [0.0]
 
@@ -16,14 +16,16 @@ learner_definitions:
   lgbmr: &lgbmr
     name: "LGBM Regr."
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
 
   lgbmc: &lgbmc
     name: "LGBM Clas."
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
 
   global_linear: &global_linear
     name: "Global Linear"
@@ -40,14 +42,16 @@ learner_definitions:
   stacked_reg: &stacked_reg
     name: "Stacked Regr."
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
 
   stacked_cls: &stacked_cls
     name: "Stacked Clas."
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
 
 dml_parameters:
   fs_specification: ["cutoff", "cutoff and score", "interacted cutoff and score"]
