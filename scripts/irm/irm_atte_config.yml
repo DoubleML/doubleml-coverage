@@ -24,7 +24,7 @@ learner_definitions:
     params:
       n_estimators: 200
       max_features: 20
-      max_depth: 5
+      max_depth: 20
       min_samples_leaf: 2
 
   rfc: &rfc
@@ -32,8 +32,8 @@ learner_definitions:
     params:
       n_estimators: 200
       max_features: 20
-      max_depth: 5
-      min_samples_leaf: 2
+      max_depth: 20
+      min_samples_leaf: 20
 
   lgbmr: &lgbmr
     name: "LGBM Regr."
