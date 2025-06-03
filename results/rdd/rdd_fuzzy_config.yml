@@ -5,7 +5,7 @@ simulation_parameters:
   n_jobs: -2
 dgp_parameters:
   n_obs:
-  - 1000
+  - 2000
   fuzzy:
   - true
   cutoff:
@@ -14,13 +14,15 @@ learner_definitions:
   lgbmr: &id001
     name: LGBM Regr.
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
   lgbmc: &id002
     name: LGBM Clas.
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
   global_linear: &id003
     name: Global Linear
   global_logistic: &id004
@@ -32,13 +34,15 @@ learner_definitions:
   stacked_reg: &id007
     name: Stacked Regr.
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
   stacked_cls: &id008
     name: Stacked Clas.
     params:
-      n_estimators: 100
-      learning_rate: 0.05
+      n_estimators: 200
+      learning_rate: 0.02
+      max_depth: 5
 dml_parameters:
   fs_specification:
   - cutoff
