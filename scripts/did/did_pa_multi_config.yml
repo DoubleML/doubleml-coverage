@@ -10,13 +10,33 @@ dgp_parameters:
   DGP: [1, 4, 6] # Different DGP specifications
   n_obs: [2000] # Sample size for each simulation (has to be a list)
 
+# Define reusable learner configurations
+learner_definitions:
+  linear: &linear
+    name: "Linear"
+
+  logistic: &logistic
+    name: "Logistic"
+
+  lgbmr: &lgbmr
+    name: "LGBM Regr."
+    params:
+      n_estimators: 500
+      learning_rate: 0.02
+
+  lgbmc: &lgbmc
+    name: "LGBM Clas."
+    params:
+      n_estimators: 500
+      learning_rate: 0.02
+
 dml_parameters:
   # ML methods for ml_g and ml_m
   learners:
-    - ml_g: ["Linear"]
-      ml_m: ["Linear"]
-    - ml_g: ["LGBM"]
-      ml_m: ["LGBM"]
+    - ml_g: *linear
+      ml_m: *logistic
+    - ml_g: *lgbmr
+      ml_m: *lgbmc
 
   score:
     - observational # Standard DML score

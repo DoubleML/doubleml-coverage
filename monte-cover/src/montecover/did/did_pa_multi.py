@@ -4,10 +4,9 @@ import doubleml as dml
 import numpy as np
 import pandas as pd
 from doubleml.did.datasets import make_did_CS2021
-from lightgbm import LGBMClassifier, LGBMRegressor
-from sklearn.linear_model import LinearRegression, LogisticRegression
 
 from montecover.base import BaseSimulation
+from montecover.utils import create_learner_from_config
 
 
 class DIDMultiCoverageSimulation(BaseSimulation):
@@ -36,39 +35,13 @@ class DIDMultiCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
+        # Process ML models in parameter grid
+        assert "learners" in self.dml_parameters, "No learners specified in the config file"
 
-        assert (
-            "learners" in self.dml_parameters
-        ), "No learners specified in the config file"
+        required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
-            assert "ml_g" in learner, "No ml_g specified in the config file"
-            assert "ml_m" in learner, "No ml_m specified in the config file"
-
-            # Convert ml_g strings to actual objects
-            if learner["ml_g"][0] == "Linear":
-                learner["ml_g"] = ("Linear", LinearRegression())
-            elif learner["ml_g"][0] == "LGBM":
-                learner["ml_g"] = (
-                    "LGBM",
-                    LGBMRegressor(
-                        n_estimators=500, learning_rate=0.02, verbose=-1, n_jobs=1
-                    ),
-                )
-            else:
-                raise ValueError(f"Unknown learner type: {learner['ml_g']}")
-
-            # Convert ml_m strings to actual objects
-            if learner["ml_m"][0] == "Linear":
-                learner["ml_m"] = ("Linear", LogisticRegression())
-            elif learner["ml_m"][0] == "LGBM":
-                learner["ml_m"] = (
-                    "LGBM",
-                    LGBMClassifier(
-                        n_estimators=500, learning_rate=0.02, verbose=-1, n_jobs=1
-                    ),
-                )
-            else:
-                raise ValueError(f"Unknown learner type: {learner['ml_m']}")
+            for ml in required_learners:
+                assert ml in learner, f"No {ml} specified in the config file"
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
@@ -102,8 +75,9 @@ class DIDMultiCoverageSimulation(BaseSimulation):
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
-        learner_g_name, ml_g = dml_params["learners"]["ml_g"]
-        learner_m_name, ml_m = dml_params["learners"]["ml_m"]
+        learner_config = dml_params["learners"]
+        learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
+        learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         score = dml_params["score"]
         in_sample_normalization = dml_params["in_sample_normalization"]
 
