@@ -107,6 +107,7 @@ class APOCoverageSimulation(BaseSimulation):
                     {
                         "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
+                        "Treatment Level": treatment_level,
                         "level": level,
                     }
                 )
@@ -120,7 +121,7 @@ class APOCoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner g", "Learner m", "level"]
+        groupby_cols = ["Learner g", "Learner m", "Treatment Level", "level"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
