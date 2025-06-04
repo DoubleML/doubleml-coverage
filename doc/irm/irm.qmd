@@ -135,7 +135,7 @@ generate_and_show_styled_table(
 
 ## Sensitivity
 
-The simulations are based on the  the ADD-DGP with $10,000$ observations. As the DGP is nonlinear, we will only use corresponding learners. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.
+The simulations are based on the  the [make_confounded_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_confounded_irm_data.html#doubleml.datasets.make_confounded_irm_data)-DGP with $5,000$ observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.
 
 The confounding is set such that both sensitivity parameters are approximately $cf_y=cf_d=0.1$, such that the robustness value $RV$ should be approximately $10\%$.
 Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of $\rho$ has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of $|\rho|=1$.
@@ -157,7 +157,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data and rename columns
-df_ate_sens = pd.read_csv("../../results/irm/irm_ate_sensitivity.csv", index_col=None)
+df_ate_sens = pd.read_csv("../../results/irm/irm_ate_sensitivity_coverage.csv", index_col=None)
 
 assert df_ate_sens["repetition"].nunique() == 1
 n_rep_ate_sens = df_ate_sens["repetition"].unique()[0]
@@ -211,7 +211,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data
-df_atte_sens = pd.read_csv("../../results/irm/irm_atte_sensitivity.csv", index_col=None)
+df_atte_sens = pd.read_csv("../../results/irm/irm_atte_sensitivity_coverage.csv", index_col=None)
 
 assert df_atte_sens["repetition"].nunique() == 1
 n_rep_atte_sens = df_atte_sens["repetition"].unique()[0]
