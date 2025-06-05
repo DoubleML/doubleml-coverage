@@ -31,7 +31,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/pq_coverage_metadata.csv'
+metadata_file = '../../results/irm/pq_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -42,7 +42,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data
-df_qte = pd.read_csv("../../results/irm/pq_coverage_qte.csv", index_col=None)
+df_qte = pd.read_csv("../../results/irm/pq_effect_coverage.csv", index_col=None)
 
 assert df_qte["repetition"].nunique() == 1
 n_rep_qte = df_qte["repetition"].unique()[0]
@@ -85,7 +85,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_pq0 = pd.read_csv("../../results/irm/pq_coverage_pq0.csv", index_col=None)
+df_pq0 = pd.read_csv("../../results/irm/pq_Y0_coverage.csv", index_col=None)
 
 assert df_pq0["repetition"].nunique() == 1
 n_rep_pq0 = df_pq0["repetition"].unique()[0]
@@ -125,7 +125,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data and rename columns
-df_pq1 = pd.read_csv("../../results/irm/pq_coverage_pq1.csv", index_col=None)
+df_pq1 = pd.read_csv("../../results/irm/pq_Y1_coverage.csv", index_col=None)
 
 assert df_pq1["repetition"].nunique() == 1
 n_rep_pq1 = df_pq1["repetition"].unique()[0]
@@ -161,7 +161,7 @@ generate_and_show_styled_table(
 
 ## LQTE
 
-The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html#Local-Potential-Quantiles-(LPQs)) with $10,000$ observations.
+The results are based on a location-scale model as described the corresponding [Example](https://docs.doubleml.org/stable/examples/py_double_ml_pq.html#Local-Potential-Quantiles-(LPQs)) with $5,000$ observations.
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
@@ -169,7 +169,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/lpq_coverage_metadata.csv'
+metadata_file = '../../results/irm/lpq_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -180,7 +180,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data
-df_lqte = pd.read_csv("../../results/irm/lpq_coverage_lqte.csv", index_col=None)
+df_lqte = pd.read_csv("../../results/irm/lpq_effect_coverage.csv", index_col=None)
 
 assert df_lqte["repetition"].nunique() == 1
 n_rep_lqte = df_lqte["repetition"].unique()[0]
@@ -222,7 +222,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_lpq0 = pd.read_csv("../../results/irm/lpq_coverage_lpq0.csv", index_col=None)
+df_lpq0 = pd.read_csv("../../results/irm/lpq_Y0_coverage.csv", index_col=None)
 
 assert df_lpq0["repetition"].nunique() == 1
 n_rep_lpq0 = df_lpq0["repetition"].unique()[0]
@@ -262,7 +262,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_lpq1 = pd.read_csv("../../results/irm/lpq_coverage_lpq1.csv", index_col=None)
+df_lpq1 = pd.read_csv("../../results/irm/lpq_Y1_coverage.csv", index_col=None)
 
 assert df_lpq1["repetition"].nunique() == 1
 n_rep_lpq1 = df_lpq1["repetition"].unique()[0]
@@ -306,7 +306,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/cvar_coverage_metadata.csv'
+metadata_file = '../../results/irm/cvar_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -317,7 +317,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data
-df_cvar_qte = pd.read_csv("../../results/irm/cvar_coverage_qte.csv", index_col=None)
+df_cvar_qte = pd.read_csv("../../results/irm/cvar_effect_coverage.csv", index_col=None)
 
 assert df_cvar_qte["repetition"].nunique() == 1
 n_rep_cvar_qte = df_cvar_qte["repetition"].unique()[0]
@@ -359,7 +359,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_cvar_pq0 = pd.read_csv("../../results/irm/cvar_coverage_pq0.csv", index_col=None)
+df_cvar_pq0 = pd.read_csv("../../results/irm/cvar_Y0_coverage.csv", index_col=None)
 
 assert df_cvar_pq0["repetition"].nunique() == 1
 n_rep_cvar_pq0 = df_cvar_pq0["repetition"].unique()[0]
@@ -399,7 +399,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_cvar_pq1 = pd.read_csv("../../results/irm/cvar_coverage_pq1.csv", index_col=None)
+df_cvar_pq1 = pd.read_csv("../../results/irm/cvar_Y1_coverage.csv", index_col=None)
 
 assert df_cvar_pq1["repetition"].nunique() == 1
 n_rep_cvar_pq1 = df_cvar_pq1["repetition"].unique()[0]

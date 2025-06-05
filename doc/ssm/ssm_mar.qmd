@@ -30,7 +30,7 @@ The simulations are based on the [make_ssm_data](https://docs.doubleml.org/stabl
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/ssm_mar_ate_coverage_metadata.csv'
+metadata_file = '../../results/ssm/ssm_mar_ate_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -42,7 +42,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data and rename columns
-df = pd.read_csv("../../results/irm/ssm_mar_ate_coverage.csv", index_col=None)
+df = pd.read_csv("../../results/ssm/ssm_mar_ate_coverage.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
