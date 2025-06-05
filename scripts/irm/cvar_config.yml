@@ -1,0 +1,63 @@
+# Simulation parameters for CVAR Coverage
+
+simulation_parameters:
+  repetitions: 200
+  max_runtime: 19800 # 5.5 hours in seconds
+  random_seed: 42
+  n_jobs: -2
+
+dgp_parameters:
+  n_obs: [5000] # Sample size
+  dim_x: [5] # Number of covariates
+
+# Define reusable learner configurations
+learner_definitions:
+  linear: &linear
+    name: "Linear"
+
+  logit: &logit
+    name: "Logistic"
+
+  lgbmr: &lgbmr
+    name: "LGBM Regr."
+    params:
+      n_estimators: 200           # Fewer trees — faster
+      learning_rate: 0.05         # Balanced speed and stability
+      num_leaves: 15              # Modest complexity for smaller data
+      max_depth: 5                # Limit tree depth to avoid overfitting
+      min_child_samples: 10       # Minimum samples per leaf — conservative
+      subsample: 0.9              # Slightly randomized rows
+      colsample_bytree: 0.9       # Slightly randomized features
+      reg_alpha: 0.0              # No L1 regularization (faster)
+      reg_lambda: 0.1             # Light L2 regularization
+      random_state: 42            # Reproducible
+
+  lgbmc: &lgbmc
+    name: "LGBM Clas."
+    params:
+      n_estimators: 200           # Fewer trees — faster
+      learning_rate: 0.05         # Balanced speed and stability
+      num_leaves: 15              # Modest complexity for smaller data
+      max_depth: 5                # Limit tree depth to avoid overfitting
+      min_child_samples: 10       # Minimum samples per leaf — conservative
+      subsample: 0.9              # Slightly randomized rows
+      colsample_bytree: 0.9       # Slightly randomized features
+      reg_alpha: 0.0              # No L1 regularization (faster)
+      reg_lambda: 0.1             # Light L2 regularization
+      random_state: 42            # Reproducible
+
+dml_parameters:
+  tau_vec: [[0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]] # Quantiles
+  trimming_threshold: [0.01]
+  learners:
+    - ml_g: *linear
+      ml_m: *logit
+    - ml_g: *lgbmr
+      ml_m: *lgbmc
+    - ml_g: *lgbmr
+      ml_m: *logit
+    - ml_g: *linear
+      ml_m: *lgbmc
+
+confidence_parameters:
+  level: [0.95, 0.90] # Confidence levels
