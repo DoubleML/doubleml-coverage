@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/iivm_late_coverage.py',
+          'scripts/irm/iivm_late.py',
         ]
 
     steps:
