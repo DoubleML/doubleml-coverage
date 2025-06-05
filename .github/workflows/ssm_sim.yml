@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/irm/ssm_mar_ate_coverage.py',
-          'scripts/irm/ssm_nonignorable_ate_coverage.py',
+          'scripts/ssm/ssm_mar_ate.py',
+          'scripts/ssm/ssm_nonig_ate.py',
         ]
 
     steps:
@@ -73,7 +73,7 @@ jobs:
 
     - name: Commit any existing changes
       run: |
-        git add results/irm
+        git add results/ssm
         git commit -m "Update results from script: ${{ matrix.script }}" || echo "No changed results to commit"
 
     - name: Wait random time
