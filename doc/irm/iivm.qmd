@@ -30,7 +30,7 @@ The simulations are based on the  the [make_iivm_data](https://docs.doubleml.org
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/iivm_late_coverage_metadata.csv'
+metadata_file = '../../results/irm/iivm_late_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -46,7 +46,7 @@ df = pd.read_csv("../../results/irm/iivm_late_coverage.csv", index_col=None)
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns = ["Learner g", "Learner m", "Learner r", "Bias", "CI Length", "Coverage"]
 ```
 
 
