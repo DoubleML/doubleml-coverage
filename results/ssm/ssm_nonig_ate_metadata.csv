@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.10.0,SSMNonIgnorableATECoverageSimulation,2025-06-05 10:40,19.940552759170533,3.12.9,scripts/ssm/ssm_nonig_ate_config.yml
+0.11.dev0,SSMNonIgnorableATECoverageSimulation,2025-06-05 19:37,152.50586200555165,3.12.3,scripts/ssm/ssm_nonig_ate_config.yml

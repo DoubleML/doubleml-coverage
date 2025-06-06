@@ -21,14 +21,30 @@ learner_definitions:
   lgbmr: &lgbmr
     name: "LGBM Regr."
     params:
-      n_estimators: 500
-      learning_rate: 0.02
+      n_estimators: 300            # More trees to learn slowly and steadily
+      learning_rate: 0.03          # Lower learning rate to improve generalization
+      num_leaves: 7                # Fewer leaves — simpler trees
+      max_depth: 3                 # Shallow trees reduce overfitting
+      min_child_samples: 20        # Require more samples per leaf
+      subsample: 0.8               # More row sampling to add randomness
+      colsample_bytree: 0.8        # More feature sampling
+      reg_alpha: 0.1               # Add L1 regularization
+      reg_lambda: 1.0              # Increase L2 regularization
+      random_state: 42             # Reproducible
 
   lgbmc: &lgbmc
     name: "LGBM Clas."
     params:
-      n_estimators: 500
-      learning_rate: 0.02
+      n_estimators: 300            # More trees to learn slowly and steadily
+      learning_rate: 0.03          # Lower learning rate to improve generalization
+      num_leaves: 7                # Fewer leaves — simpler trees
+      max_depth: 3                 # Shallow trees reduce overfitting
+      min_child_samples: 20        # Require more samples per leaf
+      subsample: 0.8               # More row sampling to add randomness
+      colsample_bytree: 0.8        # More feature sampling
+      reg_alpha: 0.1               # Add L1 regularization
+      reg_lambda: 1.0              # Increase L2 regularization
+      random_state: 42             # Reproducible
 
 dml_parameters:
   # ML methods for ml_g and ml_m

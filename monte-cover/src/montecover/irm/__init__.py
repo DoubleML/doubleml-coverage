@@ -3,6 +3,7 @@
 from montecover.irm.apo import APOCoverageSimulation
 from montecover.irm.apos import APOSCoverageSimulation
 from montecover.irm.cvar import CVARCoverageSimulation
+from montecover.irm.iivm_late import IIVMLATECoverageSimulation
 from montecover.irm.irm_ate import IRMATECoverageSimulation
 from montecover.irm.irm_ate_sensitivity import IRMATESensitivityCoverageSimulation
 from montecover.irm.irm_atte import IRMATTECoverageSimulation
@@ -17,6 +18,7 @@ __all__ = [
     "APOSCoverageSimulation",
     "CVARCoverageSimulation",
     "IRMATECoverageSimulation",
+    "IIVMLATECoverageSimulation",
     "IRMATESensitivityCoverageSimulation",
     "IRMATTECoverageSimulation",
     "IRMATTESensitivityCoverageSimulation",

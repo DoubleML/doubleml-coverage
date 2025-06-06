@@ -48,20 +48,27 @@ jobs:
       with:
         ref: ${{ env.TARGET_BRANCH }}
 
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        version: "0.7.8"
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version-file: "monte-cover/pyproject.toml"
 
-    - name: Install dependencies
+    - name: Install Monte-Cover
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        cd monte-cover
+        uv venv
+        uv sync
 
     - name: Install DoubleML from correct branch
       run: |
-        pip uninstall -y doubleml
-        pip install "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
+        source monte-cover/.venv/bin/activate
+        uv pip uninstall doubleml
+        uv pip install "doubleml @ git+https://github.com/DoubleML/doubleml-for-py@${{ env.DML_BRANCH }}"
 
     - name: Set up Git configuration
       run: |
@@ -69,7 +76,9 @@ jobs:
         git config --global user.email 'github-actions@github.com'
 
     - name: Run scripts
-      run: python ${{ matrix.script }}
+      run: |
+        source monte-cover/.venv/bin/activate
+        uv run ${{ matrix.script }}
 
     - name: Commit any existing changes
       run: |
