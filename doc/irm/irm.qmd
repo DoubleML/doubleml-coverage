@@ -30,7 +30,7 @@ The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/irm/irm_ate_coverage_metadata.csv'
+metadata_file = '../../results/irm/irm_ate_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```

@@ -32,7 +32,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/plm/plr_gate_coverage_metadata.csv'
+metadata_file = '../../results/plm/plr_gate_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```

@@ -31,7 +31,7 @@ The simulations are based on the [make_simple_rdd_data](https://docs.doubleml.or
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/rdd/rdd_sharp_coverage_metadata.csv'
+metadata_file = '../../results/rdd/rdd_sharp_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -83,7 +83,7 @@ The simulations are based on the [make_simple_rdd_data](https://docs.doubleml.or
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/rdd/rdd_fuzzy_coverage_metadata.csv'
+metadata_file = '../../results/rdd/rdd_fuzzy_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```

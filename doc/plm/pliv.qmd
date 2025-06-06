@@ -30,7 +30,7 @@ The simulations are based on the  the [make_pliv_CHS2015](https://docs.doubleml.
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/plm/pliv_late_coverage_metadata.csv'
+metadata_file = '../../results/plm/pliv_late_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
