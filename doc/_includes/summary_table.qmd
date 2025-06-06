@@ -1,0 +1,281 @@
+```{python}
+# | echo: false
+import pandas as pd
+from pathlib import Path
+from IPython.display import display
+import json
+from datetime import datetime
+
+
+def load_and_summarize_results():
+    """Load CSV results and create summary table."""
+
+    # Get results directory relative to doc folder
+    results_dir = Path("../results")
+
+    if not results_dir.exists():
+        return "Results directory not found. Please check the path."
+
+    summary_data = []
+
+    # Define model mappings based on actual file structure
+    model_mappings = {
+        "irm": {
+            "category": "IRM",
+            "files": {
+                "irm_ate_coverage.csv": {"type": "Basic", "effect": "ATE"},
+                "irm_atte_coverage.csv": {"type": "Basic", "effect": "ATTE"},
+                "irm_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
+                "irm_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+                "pq_effect_coverage.csv": {"type": "Quantile", "effect": "QTE"},
+                "lpq_effect_coverage.csv": {"type": "Quantile", "effect": "LQTE"},
+                "cvar_effect_coverage.csv": {"type": "Risk Measure", "effect": "CVAR"},
+            },
+        },
+        "plm": {
+            "category": "PLM",
+            "files": {
+                "plr_ate_coverage.csv": {"type": "Basic PLR", "effect": "ATE"},
+                "pliv_late_coverage.csv": {"type": "PLIV", "effect": "LATE"},
+                "plr_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
+                "plr_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+            },
+        },
+        "did": {
+            "category": "DID",
+            "files": {
+                "did_pa_atte_coverage.csv": {"type": "Panel Data", "effect": "ATTE"},
+                "did_cs_atte_coverage.csv": {"type": "Cross-Section", "effect": "ATTE"},
+                "did_multi_group.csv": {"type": "Multi-Period", "effect": "Group Effects"},
+                "did_multi_eventstudy.csv": {"type": "Multi-Period", "effect": "Event Study"},
+            },
+        },
+        "ssm": {
+            "category": "SSM",
+            "files": {
+                "ssm_mar_ate_coverage.csv": {"type": "MAR", "effect": "ATE"},
+                "ssm_nonig_ate_coverage.csv": {"type": "Nonignorable", "effect": "ATE"},
+            },
+        },
+        "rdd": {
+            "category": "RDD",
+            "files": {
+                "rdd_sharp_coverage.csv": {"type": "Sharp Design", "effect": "Local Effect"},
+                "rdd_fuzzy_coverage.csv": {"type": "Fuzzy Design", "effect": "Local Effect"},
+            },
+        },
+    }
+
+    # Process each model category
+    for model_dir, config in model_mappings.items():
+        model_path = results_dir / model_dir
+        if not model_path.exists():
+            continue
+
+        # Look for CSV metadata files in the model directory
+        metadata_files = list(model_path.glob("*_metadata.csv"))
+        # print(f"Found metadata CSV files in {model_dir}: {[f.name for f in metadata_files]}")
+
+        # Default metadata values
+        timestamp = "N/A"
+        doubleml_version = "N/A"
+
+        # Try to read metadata from the first CSV metadata file found
+        if metadata_files:
+            try:
+                metadata_df = pd.read_csv(metadata_files[0])
+                # print(f"Metadata columns in {metadata_files[0].name}: {list(metadata_df.columns)}")
+
+                # Get the first row of metadata
+                if not metadata_df.empty:
+                    first_row = metadata_df.iloc[0]
+
+                    # Look for timestamp columns
+                    for col in ["timestamp", "run_time", "date", "time", "Date"]:
+                        if col in metadata_df.columns:
+                            timestamp = first_row[col]
+                            break
+
+                    # Look for version columns
+                    for col in ["doubleml_version", "version", "dml_version", "DoubleML Version"]:
+                        if col in metadata_df.columns:
+                            doubleml_version = first_row[col]
+                            break
+
+                # Format timestamp if available
+                if timestamp != "N/A" and pd.notna(timestamp):
+                    try:
+                        dt = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
+                        timestamp = dt.strftime("%Y-%m-%d %H:%M")
+                    except:
+                        pass
+
+            except Exception as e:
+                # print(f"Error reading metadata from {metadata_files[0]}: {e}")
+                pass
+
+        # Process coverage files for this category and create averaged results
+        for filename, file_config in config["files"].items():
+            file_path = model_path / filename
+            if not file_path.exists():
+                continue
+
+            try:
+                df = pd.read_csv(file_path)
+
+                # Filter for 95% confidence level results
+                if "level" in df.columns:
+                    df_95 = df[df["level"] == 0.95].copy()
+                else:
+                    df_95 = df.copy()
+
+                if df_95.empty:
+                    continue
+
+                # Find coverage column
+                coverage_col = None
+                for col in ["Coverage", "coverage", "Coverage Rate"]:
+                    if col in df_95.columns:
+                        coverage_col = col
+                        break
+
+                if coverage_col is None:
+                    continue
+
+                # Find sample size column
+                sample_size_col = None
+                for col in ["repetition", "n_rep", "sample_size", "n"]:
+                    if col in df_95.columns:
+                        sample_size_col = col
+                        break
+
+                # Calculate average coverage rate across all combinations
+                avg_coverage = df_95[coverage_col].mean()
+                total_sample_size = df_95[sample_size_col].iloc[0] if sample_size_col else "N/A"
+
+                # Determine status based on deviation from 0.95
+                deviation = abs(avg_coverage - 0.95)
+                if deviation <= 0.05:
+                    status = "Good"
+                elif deviation <= 0.10:
+                    status = "Marginal"
+                else:
+                    status = "Poor"
+
+                summary_data.append(
+                    {
+                        "Model Category": config["category"],
+                        "Model Type": file_config["type"],
+                        "Effect": file_config["effect"],
+                        "Coverage Rate": avg_coverage,
+                        "Repetitions": total_sample_size,
+                        "Status": status,
+                        "Last Modified": timestamp,
+                        "DoubleML Version": doubleml_version,
+                        "Deviation": deviation,
+                    }
+                )
+
+            except Exception as e:
+                print(f"Error processing {file_path}: {e}")
+                continue
+
+    if not summary_data:
+        return "No coverage results found in the CSV files."
+
+    return summary_data
+
+
+# Generate the summary data
+summary_data = load_and_summarize_results()
+
+if isinstance(summary_data, str):
+    print(summary_data)
+else:
+    # Create DataFrame and sort
+    df = pd.DataFrame(summary_data)
+    df_sorted = df.sort_values(["Model Category", "Deviation"])
+
+    # Display as a nice table using pandas styling
+    display_df = df_sorted[
+        [
+            "Model Category",
+            "Model Type",
+            "Effect",
+            "Coverage Rate",
+            "Status",
+            "Repetitions",
+            "Last Modified",
+            "DoubleML Version",
+        ]
+    ].copy()
+
+    # Format the coverage rate to 3 decimal places
+    display_df["Coverage Rate"] = display_df["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    # Apply improved styling
+    def style_table(df):
+        # Color function for status
+        def color_status(val):
+            if val == "Good":
+                return "background-color: #d4edda; color: #155724; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #c3e6cb;"
+            elif val == "Marginal":
+                return "background-color: #fff3cd; color: #856404; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #ffeaa7;"
+            else:
+                return "background-color: #f8d7da; color: #721c24; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #f5c6cb;"
+
+        # Apply status colors
+        styled = df.style.map(color_status, subset=["Status"])
+
+        # Set table-wide properties
+        styled = styled.set_table_styles(
+            [
+                {
+                    "selector": "thead th",
+                    "props": [
+                        ("background-color", "#f8f9fa"),
+                        ("color", "#495057"),
+                        ("font-weight", "bold"),
+                        ("text-align", "center"),
+                        ("padding", "12px"),
+                        ("border", "1px solid #dee2e6"),
+                    ],
+                },
+                {
+                    "selector": "tbody td",
+                    "props": [("padding", "10px"), ("border", "1px solid #dee2e6"), ("text-align", "center")],
+                },
+                {
+                    "selector": "table",
+                    "props": [
+                        ("border-collapse", "collapse"),
+                        ("margin", "20px auto"),
+                        ("box-shadow", "0 2px 8px rgba(0,0,0,0.1)"),
+                        ("border-radius", "8px"),
+                        ("overflow", "hidden"),
+                    ],
+                },
+                {"selector": "tbody tr:nth-child(even)", "props": [("background-color", "#f8f9fa")]},
+                {"selector": "tbody tr:hover", "props": [("background-color", "#e9ecef")]},
+            ]
+        )
+
+        return styled
+
+    # Create and display styled table
+    styled_df = style_table(display_df)
+    display(styled_df)
+```
+
+The table above summarizes coverage rates for 95% confidence intervals across all DoubleML models tested in this project. Results are color-coded according to the deviation from the nominal 95% coverage rate:
+
+- **Coverage Rate**: Proportion of confidence intervals containing the true parameter (target: 0.95)
+- **Repetitions**: Number of independent simulation runs performed
+- **Last Modified**: When the simulation was run
+- **DoubleML Version**: Version of DoubleML used for the simulation
+- **Status**: 
+  - **Good** (Green): Coverage within 5% of nominal level (0.90-1.00)
+  - **Marginal** (Yellow): Coverage deviates 5-10% from nominal level
+  - **Poor** (Red): Coverage deviates more than 10% from nominal level
+
+For detailed methodology and complete results, explore the individual model pages using the navigation menu.
