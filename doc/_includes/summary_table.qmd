@@ -18,40 +18,53 @@ def load_and_summarize_results():
 
     summary_data = []
 
-    # Define model mappings based on actual file structure
+    # Define model mappings in the same order as website navigation
     model_mappings = {
         "irm": {
             "category": "IRM",
+            "order": 1,
             "files": {
                 "irm_ate_coverage.csv": {"type": "Basic", "effect": "ATE"},
                 "irm_atte_coverage.csv": {"type": "Basic", "effect": "ATTE"},
                 "irm_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
                 "irm_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+                "apo_coverage.csv": {"type": "APO", "effect": "APO"},
                 "pq_effect_coverage.csv": {"type": "Quantile", "effect": "QTE"},
                 "lpq_effect_coverage.csv": {"type": "Quantile", "effect": "LQTE"},
                 "cvar_effect_coverage.csv": {"type": "Risk Measure", "effect": "CVAR"},
+                "iivm_late_coverage.csv": {"type": "IIVM", "effect": "LATE"},
+                # Add sensitivity analysis files
+                "irm_ate_sensitivity_coverage.csv": {"type": "Sensitivity", "effect": "ATE"},
+                "irm_atte_sensitivity_coverage.csv": {"type": "Sensitivity", "effect": "ATTE"},
             },
         },
         "plm": {
             "category": "PLM",
+            "order": 2,
             "files": {
                 "plr_ate_coverage.csv": {"type": "Basic PLR", "effect": "ATE"},
-                "pliv_late_coverage.csv": {"type": "PLIV", "effect": "LATE"},
                 "plr_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
                 "plr_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+                "pliv_late_coverage.csv": {"type": "PLIV", "effect": "LATE"},
+                # Add sensitivity analysis files
+                "plr_ate_sensitivity_coverage.csv": {"type": "Sensitivity", "effect": "ATE"},
             },
         },
         "did": {
             "category": "DID",
+            "order": 3,
             "files": {
-                "did_pa_atte_coverage.csv": {"type": "Panel Data", "effect": "ATTE"},
-                "did_cs_atte_coverage.csv": {"type": "Cross-Section", "effect": "ATTE"},
                 "did_multi_group.csv": {"type": "Multi-Period", "effect": "Group Effects"},
                 "did_multi_eventstudy.csv": {"type": "Multi-Period", "effect": "Event Study"},
+                "did_multi_time.csv": {"type": "Multi-Period", "effect": "Time Effects"},
+                "did_multi_detailed.csv": {"type": "Multi-Period", "effect": "ATTE Detailed"},
+                "did_pa_atte_coverage.csv": {"type": "Panel Data", "effect": "ATTE"},
+                "did_cs_atte_coverage.csv": {"type": "Cross-Section", "effect": "ATTE"},
             },
         },
         "ssm": {
             "category": "SSM",
+            "order": 4,
             "files": {
                 "ssm_mar_ate_coverage.csv": {"type": "MAR", "effect": "ATE"},
                 "ssm_nonig_ate_coverage.csv": {"type": "Nonignorable", "effect": "ATE"},
@@ -59,6 +72,7 @@ def load_and_summarize_results():
         },
         "rdd": {
             "category": "RDD",
+            "order": 5,
             "files": {
                 "rdd_sharp_coverage.csv": {"type": "Sharp Design", "effect": "Local Effect"},
                 "rdd_fuzzy_coverage.csv": {"type": "Fuzzy Design", "effect": "Local Effect"},
@@ -72,53 +86,79 @@ def load_and_summarize_results():
         if not model_path.exists():
             continue
 
-        # Look for CSV metadata files in the model directory
-        metadata_files = list(model_path.glob("*_metadata.csv"))
-        # print(f"Found metadata CSV files in {model_dir}: {[f.name for f in metadata_files]}")
+        # Look for specific metadata files for different model types
+        def find_metadata_file(filename):
+            """Find metadata file for a specific coverage file."""
+            base_name = filename.replace("_coverage.csv", "")
+            metadata_candidates = [
+                f"{base_name}_metadata.csv",
+                # For QTE/LQTE/CVAR, check the base model metadata
+                "pq_metadata.csv" if "pq_effect" in filename else None,
+                "lpq_metadata.csv" if "lpq_effect" in filename else None,
+                "cvar_metadata.csv" if "cvar_effect" in filename else None,
+                # For DID multi-period files, use the common metadata file
+                "did_multi_metadata.csv" if filename.startswith("did_multi") else None,
+            ]
 
-        # Default metadata values
-        timestamp = "N/A"
-        doubleml_version = "N/A"
-
-        # Try to read metadata from the first CSV metadata file found
-        if metadata_files:
-            try:
-                metadata_df = pd.read_csv(metadata_files[0])
-                # print(f"Metadata columns in {metadata_files[0].name}: {list(metadata_df.columns)}")
-
-                # Get the first row of metadata
-                if not metadata_df.empty:
-                    first_row = metadata_df.iloc[0]
-
-                    # Look for timestamp columns
-                    for col in ["timestamp", "run_time", "date", "time", "Date"]:
-                        if col in metadata_df.columns:
-                            timestamp = first_row[col]
-                            break
-
-                    # Look for version columns
-                    for col in ["doubleml_version", "version", "dml_version", "DoubleML Version"]:
-                        if col in metadata_df.columns:
-                            doubleml_version = first_row[col]
-                            break
-
-                # Format timestamp if available
-                if timestamp != "N/A" and pd.notna(timestamp):
-                    try:
-                        dt = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
-                        timestamp = dt.strftime("%Y-%m-%d %H:%M")
-                    except:
-                        pass
-
-            except Exception as e:
-                # print(f"Error reading metadata from {metadata_files[0]}: {e}")
-                pass
+            for candidate in metadata_candidates:
+                if candidate and (model_path / candidate).exists():
+                    return model_path / candidate
+            return None
 
         # Process coverage files for this category and create averaged results
         for filename, file_config in config["files"].items():
             file_path = model_path / filename
             if not file_path.exists():
                 continue
+
+            # Find appropriate metadata file
+            metadata_file = find_metadata_file(filename)
+
+            # Default metadata values
+            timestamp = "N/A"
+            doubleml_version = "N/A"
+
+            # Try to read metadata
+            if metadata_file:
+                try:
+                    metadata_df = pd.read_csv(metadata_file)
+
+                    # Get the first row of metadata
+                    if not metadata_df.empty:
+                        first_row = metadata_df.iloc[0]
+
+                        # Look for timestamp columns
+                        for col in ["timestamp", "run_time", "date", "time", "Date"]:
+                            if col in metadata_df.columns:
+                                timestamp = first_row[col]
+                                break
+
+                        # Look for version columns
+                        for col in ["doubleml_version", "version", "dml_version", "DoubleML Version"]:
+                            if col in metadata_df.columns:
+                                doubleml_version = first_row[col]
+                                break
+
+                    # Format timestamp if available
+                    if timestamp != "N/A" and pd.notna(timestamp):
+                        try:
+                            timestamp_str = str(timestamp).strip()
+
+                            # Try to parse as datetime and format as readable date
+                            try:
+                                # First try pandas to_datetime which handles most formats
+                                parsed_date = pd.to_datetime(timestamp_str)
+                                timestamp = parsed_date.strftime("%b %d, %Y")
+                            except:
+                                # If that fails, just extract date part if there's time info
+                                if " " in timestamp_str:
+                                    timestamp = timestamp_str.split(" ")[0]
+                        except:
+                            # If everything fails, keep original value
+                            pass
+
+                except Exception as e:
+                    pass
 
             try:
                 df = pd.read_csv(file_path)
@@ -132,12 +172,20 @@ def load_and_summarize_results():
                 if df_95.empty:
                     continue
 
-                # Find coverage column
+                # Find coverage column - for sensitivity files, prioritize bound coverage
                 coverage_col = None
-                for col in ["Coverage", "coverage", "Coverage Rate"]:
-                    if col in df_95.columns:
-                        coverage_col = col
-                        break
+                if "sensitivity" in filename.lower():
+                    # For sensitivity analysis, look for bound coverage columns first
+                    for col in ["Coverage (Lower)", "Coverage (Upper)", "Coverage", "coverage"]:
+                        if col in df_95.columns:
+                            coverage_col = col
+                            break
+                else:
+                    # For regular files, use standard coverage
+                    for col in ["Coverage", "coverage", "Coverage Rate"]:
+                        if col in df_95.columns:
+                            coverage_col = col
+                            break
 
                 if coverage_col is None:
                     continue
@@ -162,11 +210,19 @@ def load_and_summarize_results():
                 else:
                     status = "Poor"
 
+                # Add coverage type info for sensitivity analysis
+                coverage_info = file_config["effect"]
+                if "sensitivity" in filename.lower() and "Coverage (Lower)" in coverage_col:
+                    coverage_info += " (Lower Bound)"
+                elif "sensitivity" in filename.lower() and "Coverage (Upper)" in coverage_col:
+                    coverage_info += " (Upper Bound)"
+
                 summary_data.append(
                     {
                         "Model Category": config["category"],
+                        "Category Order": config["order"],
                         "Model Type": file_config["type"],
-                        "Effect": file_config["effect"],
+                        "Effect": coverage_info,
                         "Coverage Rate": avg_coverage,
                         "Repetitions": total_sample_size,
                         "Status": status,
@@ -192,9 +248,9 @@ summary_data = load_and_summarize_results()
 if isinstance(summary_data, str):
     print(summary_data)
 else:
-    # Create DataFrame and sort
+    # Create DataFrame and sort by category order first, then by deviation
     df = pd.DataFrame(summary_data)
-    df_sorted = df.sort_values(["Model Category", "Deviation"])
+    df_sorted = df.sort_values(["Category Order", "Deviation"])
 
     # Display as a nice table using pandas styling
     display_df = df_sorted[
@@ -273,7 +329,7 @@ The table above summarizes coverage rates for 95% confidence intervals across al
 - **Repetitions**: Number of independent simulation runs performed
 - **Last Modified**: When the simulation was run
 - **DoubleML Version**: Version of DoubleML used for the simulation
-- **Status**: 
+- **Status**:
   - **Good** (Green): Coverage within 5% of nominal level (0.90-1.00)
   - **Marginal** (Yellow): Coverage deviates 5-10% from nominal level
   - **Poor** (Red): Coverage deviates more than 10% from nominal level

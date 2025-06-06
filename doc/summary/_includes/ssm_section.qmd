@@ -1,0 +1,19 @@
+## Sample Selection Models (SSM)
+
+### Coverage Results
+
+```{python}
+#| echo: false
+
+if "SSM" in category_results and category_results["SSM"]["regular"]:
+    df_ssm = pd.DataFrame(category_results["SSM"]["regular"])
+    df_ssm_sorted = df_ssm.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df = df_ssm_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df["Coverage Rate"] = display_df["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df, is_sensitivity=False))
+else:
+    print("No SSM coverage results found.")
+```

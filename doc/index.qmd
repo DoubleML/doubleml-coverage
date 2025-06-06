@@ -13,7 +13,3 @@ You can find the code for the simulations in the [GitHub repository](https://git
 ## Coverage Simulations
 
 {{< include _includes/coverage_sim_description.qmd >}}
-
-## Coverage Results Summary
-
-{{< include _includes/summary_table.qmd >}}

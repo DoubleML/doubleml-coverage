@@ -1,0 +1,39 @@
+## Interactive Regression Models (IRM)
+
+### Regular Coverage Results
+
+```{python}
+#| echo: false
+
+if "IRM" in category_results and category_results["IRM"]["regular"]:
+    df_irm = pd.DataFrame(category_results["IRM"]["regular"])
+    df_irm_sorted = df_irm.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df = df_irm_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df["Coverage Rate"] = display_df["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df, is_sensitivity=False))
+else:
+    print("No IRM regular coverage results found.")
+```
+
+### Sensitivity Analysis Results
+
+```{python}
+#| echo: false
+
+if "IRM" in category_results and category_results["IRM"]["sensitivity"]:
+    df_irm_sens = pd.DataFrame(category_results["IRM"]["sensitivity"])
+    df_irm_sens_sorted = df_irm_sens.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_sens = df_irm_sens_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_sens["Coverage Rate"] = display_df_sens["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_sens, is_sensitivity=True))
+
+    print("\n**Note**: Sensitivity analysis results show coverage under unobserved confounding. Low coverage rates are expected due to bias from omitted confounders.")
+else:
+    print("No IRM sensitivity analysis results found.")
+```

@@ -1,0 +1,39 @@
+## Partially Linear Models (PLM)
+
+### Regular Coverage Results
+
+```{python}
+#| echo: false
+
+if "PLM" in category_results and category_results["PLM"]["regular"]:
+    df_plm = pd.DataFrame(category_results["PLM"]["regular"])
+    df_plm_sorted = df_plm.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df = df_plm_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df["Coverage Rate"] = display_df["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df, is_sensitivity=False))
+else:
+    print("No PLM regular coverage results found.")
+```
+
+### Sensitivity Analysis Results
+
+```{python}
+#| echo: false
+
+if "PLM" in category_results and category_results["PLM"]["sensitivity"]:
+    df_plm_sens = pd.DataFrame(category_results["PLM"]["sensitivity"])
+    df_plm_sens_sorted = df_plm_sens.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_sens = df_plm_sens_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_sens["Coverage Rate"] = display_df_sens["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_sens, is_sensitivity=True))
+
+    print("\n**Note**: Sensitivity analysis results show coverage under unobserved confounding. Low coverage rates are expected due to bias from omitted confounders.")
+else:
+    print("No PLM sensitivity analysis results found.")
+```

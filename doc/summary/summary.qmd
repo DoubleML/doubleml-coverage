@@ -1,0 +1,21 @@
+---
+title: "Coverage Results Summary"
+
+jupyter: python3
+---
+
+{{< include _includes/utils.qmd >}}
+
+This page provides a comprehensive overview of coverage simulation results across all DoubleML model categories. Each section includes both regular coverage assessments and sensitivity analysis results where available.
+
+{{< include _includes/irm_section.qmd >}}
+
+{{< include _includes/plm_section.qmd >}}
+
+{{< include _includes/did_section.qmd >}}
+
+{{< include _includes/ssm_section.qmd >}}
+
+{{< include _includes/rdd_section.qmd >}}
+
+{{< include _includes/legend.qmd >}}

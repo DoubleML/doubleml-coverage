@@ -1,0 +1,299 @@
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+from itables import init_notebook_mode
+import os
+import sys
+from pathlib import Path
+from IPython.display import display
+
+# Fix the path to go back to the doc directory from summary subdirectory
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
+
+init_notebook_mode(all_interactive=True)
+
+def load_metadata_info(model_dir, coverage_file):
+    """Load metadata information for a given coverage file."""
+    results_dir = Path("../../results")
+    model_path = results_dir / model_dir
+
+    # Try to find corresponding metadata file
+    metadata_file = coverage_file.replace("_coverage.csv", "_metadata.csv")
+    metadata_path = model_path / metadata_file
+
+    # Special cases for files that don't follow the standard naming pattern
+    if not metadata_path.exists():
+        # For QTE/LQTE/CVAR, check the base model metadata
+        if "pq_effect" in coverage_file:
+            metadata_path = model_path / "pq_metadata.csv"
+        elif "lpq_effect" in coverage_file:
+            metadata_path = model_path / "lpq_metadata.csv"
+        elif "cvar_effect" in coverage_file:
+            metadata_path = model_path / "cvar_metadata.csv"
+        # For DID multi-period files, use the common metadata file
+        elif coverage_file.startswith("did_multi"):
+            metadata_path = model_path / "did_multi_metadata.csv"
+        # For other files that don't end with _coverage.csv, try base name
+        elif not coverage_file.endswith("_coverage.csv"):
+            base_name = coverage_file.replace(".csv", "")
+            metadata_path = model_path / f"{base_name}_metadata.csv"
+
+    if metadata_path.exists():
+        try:
+            metadata_df = pd.read_csv(metadata_path)
+            if not metadata_df.empty:
+                # Get date and format as Y-m-d (without leading zeros)
+                date_value = metadata_df["Date"].iloc[0]
+                formatted_date = date_value
+
+                # Try to parse and reformat the date
+                if pd.notna(date_value):
+                    try:
+                        date_str = str(date_value).strip()
+                        # Try to parse as datetime and format as readable date
+                        parsed_date = pd.to_datetime(date_str)
+                        formatted_date = parsed_date.strftime("%b %d, %Y")
+                    except:
+                        # If that fails, just extract date part if there's time info
+                        if " " in date_str:
+                            formatted_date = date_str.split(" ")[0]
+
+                return {
+                    "doubleml_version": metadata_df["DoubleML Version"].iloc[0],
+                    "date": formatted_date,
+                }
+        except Exception as e:
+            print(f"Error reading metadata from {metadata_path}: {e}")
+
+    return {"doubleml_version": "N/A", "date": "N/A"}
+
+def load_and_summarize_by_category():
+    """Load CSV results and create summary tables by category."""
+
+    # Get results directory relative to doc folder
+    results_dir = Path("../../results")
+
+    if not results_dir.exists():
+        return "Results directory not found."
+
+    # Define model mappings with both regular and sensitivity files
+    model_mappings = {
+        "irm": {
+            "category": "IRM",
+            "regular_files": {
+                "irm_ate_coverage.csv": {"type": "Basic", "effect": "ATE"},
+                "irm_atte_coverage.csv": {"type": "Basic", "effect": "ATTE"},
+                "irm_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
+                "irm_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+                "pq_effect_coverage.csv": {"type": "Quantile", "effect": "QTE"},
+                "lpq_effect_coverage.csv": {"type": "Quantile", "effect": "LQTE"},
+                "cvar_effect_coverage.csv": {"type": "Risk Measure", "effect": "CVAR"},
+                "apo_coverage.csv": {"type": "APO", "effect": "APO"},
+                "apos_coverage.csv": {"type": "APOS", "effect": "APOS"},
+                "iivm_late_coverage.csv": {"type": "IIVM", "effect": "LATE"},
+            },
+            "sensitivity_files": {
+                "irm_ate_sensitivity_coverage.csv": {"type": "Basic (Sensitivity)", "effect": "ATE"},
+                "irm_atte_sensitivity_coverage.csv": {"type": "Basic (Sensitivity)", "effect": "ATTE"},
+            },
+        },
+        "plm": {
+            "category": "PLM",
+            "regular_files": {
+                "plr_ate_coverage.csv": {"type": "Basic PLR", "effect": "ATE"},
+                "pliv_late_coverage.csv": {"type": "PLIV", "effect": "LATE"},
+                "plr_gate_coverage.csv": {"type": "Heterogeneous", "effect": "GATE"},
+                "plr_cate_coverage.csv": {"type": "Heterogeneous", "effect": "CATE"},
+            },
+            "sensitivity_files": {
+                "plr_ate_sensitivity_coverage.csv": {"type": "Basic PLR (Sensitivity)", "effect": "ATE"},
+            },
+        },
+        "did": {
+            "category": "DID",
+            "regular_files": {
+                "did_pa_atte_coverage.csv": {"type": "Panel Data", "effect": "ATTE"},
+                "did_cs_atte_coverage.csv": {"type": "Cross-Section", "effect": "ATTE"},
+                "did_multi_group.csv": {"type": "Multi-Period", "effect": "Group Effects"},
+                "did_multi_eventstudy.csv": {"type": "Multi-Period", "effect": "Event Study"},
+                "did_multi_time.csv": {"type": "Multi-Period", "effect": "Time Effects"},
+                "did_multi_detailed.csv": {"type": "Multi-Period", "effect": "ATTE Detailed"},
+            },
+            "sensitivity_files": {},
+        },
+        "ssm": {
+            "category": "SSM",
+            "regular_files": {
+                "ssm_mar_ate_coverage.csv": {"type": "MAR", "effect": "ATE"},
+                "ssm_nonig_ate_coverage.csv": {"type": "Nonignorable", "effect": "ATE"},
+            },
+            "sensitivity_files": {},
+        },
+        "rdd": {
+            "category": "RDD",
+            "regular_files": {
+                "rdd_sharp_coverage.csv": {"type": "Sharp Design", "effect": "Local Effect"},
+                "rdd_fuzzy_coverage.csv": {"type": "Fuzzy Design", "effect": "Local Effect"},
+            },
+            "sensitivity_files": {},
+        },
+    }
+
+    def process_files(model_dir, files_dict, file_type="regular"):
+        """Process a set of files and return summary data."""
+        model_path = results_dir / model_dir
+        if not model_path.exists():
+            return []
+
+        summary_data = []
+
+        for filename, file_config in files_dict.items():
+            file_path = model_path / filename
+            if not file_path.exists():
+                continue
+
+            try:
+                df = pd.read_csv(file_path)
+
+                # Load metadata information
+                metadata = load_metadata_info(model_dir, filename)
+
+                # Filter for 95% confidence level results
+                if "level" in df.columns:
+                    df_95 = df[df["level"] == 0.95].copy()
+                else:
+                    df_95 = df.copy()
+
+                if df_95.empty:
+                    continue
+
+                # Find coverage column - for sensitivity files, prioritize bound coverage
+                coverage_col = None
+                if file_type == "sensitivity":
+                    # For sensitivity analysis, look for bound coverage columns first
+                    for col in ["Coverage (Lower)", "Coverage (Upper)", "Coverage", "coverage"]:
+                        if col in df_95.columns:
+                            coverage_col = col
+                            break
+                else:
+                    # For regular files, use standard coverage
+                    for col in ["Coverage", "coverage", "Coverage Rate"]:
+                        if col in df_95.columns:
+                            coverage_col = col
+                            break
+
+                if coverage_col is None:
+                    continue
+
+                # Find sample size column
+                sample_size_col = None
+                for col in ["repetition", "n_rep", "sample_size", "n"]:
+                    if col in df_95.columns:
+                        sample_size_col = col
+                        break
+
+                # Calculate average coverage rate
+                avg_coverage = df_95[coverage_col].mean()
+                total_sample_size = df_95[sample_size_col].iloc[0] if sample_size_col else "N/A"
+
+                # Determine status based on deviation from 0.95
+                deviation = abs(avg_coverage - 0.95)
+                if file_type == "sensitivity":
+                    # For sensitivity analysis, we expect poor coverage due to bias
+                    if deviation >= 0.30:
+                        status = "Expected (High Bias)"
+                    elif deviation >= 0.15:
+                        status = "Moderate Bias"
+                    else:
+                        status = "Low Bias"
+                else:
+                    # Regular coverage assessment
+                    if deviation <= 0.05:
+                        status = "Good"
+                    elif deviation <= 0.10:
+                        status = "Marginal"
+                    else:
+                        status = "Poor"
+
+                # Add coverage type info for sensitivity analysis
+                effect_label = file_config["effect"]
+                if file_type == "sensitivity" and "Coverage (Lower)" in coverage_col:
+                    effect_label += " (Lower Bound)"
+                elif file_type == "sensitivity" and "Coverage (Upper)" in coverage_col:
+                    effect_label += " (Upper Bound)"
+
+                summary_data.append({
+                    "Model Type": file_config["type"],
+                    "Effect": effect_label,
+                    "Coverage Rate": avg_coverage,
+                    "Repetitions": total_sample_size,
+                    "Status": status,
+                    "Deviation": deviation,
+                    "DoubleML Version": metadata["doubleml_version"],
+                    "Last Modified": metadata["date"],
+                })
+
+            except Exception as e:
+                print(f"Error processing {file_path}: {e}")
+                continue
+
+        return summary_data
+
+    # Process each category
+    category_results = {}
+    for model_dir, config in model_mappings.items():
+        category_results[config["category"]] = {
+            "regular": process_files(model_dir, config["regular_files"], "regular"),
+            "sensitivity": process_files(model_dir, config["sensitivity_files"], "sensitivity"),
+        }
+
+    return category_results
+
+def style_summary_table(df, is_sensitivity=False):
+    """Apply styling to summary tables."""
+
+    def color_status(val):
+        if is_sensitivity:
+            if "Expected" in val:
+                return "background-color: #e7f3ff; color: #0056b3; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #b3d9ff;"
+            elif "Moderate" in val:
+                return "background-color: #fff3cd; color: #856404; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #ffeaa7;"
+            else:
+                return "background-color: #d4edda; color: #155724; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #c3e6cb;"
+        else:
+            if val == "Good":
+                return "background-color: #d4edda; color: #155724; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #c3e6cb;"
+            elif val == "Marginal":
+                return "background-color: #fff3cd; color: #856404; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #ffeaa7;"
+            else:
+                return "background-color: #f8d7da; color: #721c24; font-weight: bold; padding: 4px 8px; border-radius: 4px; border: 1px solid #f5c6cb;"
+
+    styled = df.style.map(color_status, subset=["Status"])
+
+    styled = styled.set_table_styles([
+        {"selector": "thead th", "props": [
+            ("background-color", "#f8f9fa"), ("color", "#495057"), ("font-weight", "bold"),
+            ("text-align", "center"), ("padding", "12px"), ("border", "1px solid #dee2e6")
+        ]},
+        {"selector": "tbody td", "props": [
+            ("padding", "10px"), ("border", "1px solid #dee2e6"), ("text-align", "center")
+        ]},
+        {"selector": "table", "props": [
+            ("border-collapse", "collapse"), ("margin", "20px auto"),
+            ("box-shadow", "0 2px 8px rgba(0,0,0,0.1)"), ("border-radius", "8px"), ("overflow", "hidden")
+        ]},
+        {"selector": "tbody tr:nth-child(even)", "props": [("background-color", "#f8f9fa")]},
+        {"selector": "tbody tr:hover", "props": [("background-color", "#e9ecef")]},
+    ])
+
+    return styled
+
+# Generate the summary data
+category_results = load_and_summarize_by_category()
+```

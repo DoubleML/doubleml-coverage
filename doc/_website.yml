@@ -11,6 +11,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: summary/summary.qmd
+        text: Summary
       - text: "IRM"
         menu:
           - irm/irm.qmd

@@ -1,0 +1,19 @@
+## Regression Discontinuity Design (RDD)
+
+### Coverage Results
+
+```{python}
+#| echo: false
+
+if "RDD" in category_results and category_results["RDD"]["regular"]:
+    df_rdd = pd.DataFrame(category_results["RDD"]["regular"])
+    df_rdd_sorted = df_rdd.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df = df_rdd_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df["Coverage Rate"] = display_df["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df, is_sensitivity=False))
+else:
+    print("No RDD coverage results found.")
+```

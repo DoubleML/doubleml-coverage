@@ -1,0 +1,17 @@
+## Legend
+
+### Regular Coverage Assessment
+- **Coverage Rate**: Proportion of confidence intervals containing the true parameter (target: 0.95)
+- **Status**:
+  - **Good** (Green): Coverage within 5% of nominal level (0.90-1.00)
+  - **Marginal** (Yellow): Coverage deviates 5-10% from nominal level
+  - **Poor** (Red): Coverage deviates more than 10% from nominal level
+
+### Sensitivity Analysis Assessment
+- **Coverage Rate**: Proportion of confidence intervals containing the true parameter under confounding
+- **Status**:
+  - **Expected (High Bias)** (Blue): Coverage significantly below nominal due to substantial bias
+  - **Moderate Bias** (Yellow): Moderate deviation suggesting moderate confounding effects
+  - **Low Bias** (Green): Coverage close to nominal despite confounding setup
+
+For detailed methodology and complete results, explore the individual model pages using the navigation menu.
