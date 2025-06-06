@@ -11,7 +11,7 @@ You can find the code for the simulations in the [GitHub repository](https://git
 
 ## Coverage Simulations
 
-Generally, the [DoubleML package](https://docs.doubleml.org/stable/index.html) solves a moment equation 
+Generally, the [DoubleML package](https://docs.doubleml.org/stable/index.html) solves a moment equation
 
 $$
 \mathbb{E}[\psi(W,\theta_0,\eta_0)] = 0
@@ -25,7 +25,7 @@ $$
 \text{Coverage} = \frac{1}{n_{\text{sim}}} \sum_{i=1}^{n_{\text{sim}}} \mathbb{1}(\hat{\theta}_{\text{lower},i} \leq \theta_0 \leq \hat{\theta}_{\text{upper},i})
 $$
 
-for a nominal coverage level is $1-\alpha$. 
+for a nominal coverage level is $1-\alpha$.
 The corresponding coverage results are highlighted according to the following color scheme:
 
 * <span style="background-color: #00FF00; color: black; padding: 2px 5px; border-radius: 3px;">Green</span> if the deviation to the nominal level is below $5\%$
@@ -249,5 +249,3 @@ fig.show()
 :::
 
 :::
-
-
