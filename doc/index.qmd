@@ -28,9 +28,26 @@ $$
 for a nominal coverage level is $1-\alpha$.
 The corresponding coverage results are highlighted according to the following color scheme:
 
-* <span style="background-color: #00FF00; color: black; padding: 2px 5px; border-radius: 3px;">Green</span> if the deviation to the nominal level is below $5\%$
-* <span style="background-color: #FFFF00; color: black; padding: 2px 5px; border-radius: 3px;">Yellow</span> if the deviation to the nominal level is above $5\%$ and below $10\%$
-* <span style="background-color: #FF0000; color: black; padding: 2px 5px; border-radius: 3px;">Red</span> if the deviation to the nominal level is above $10\%$
+```{python}
+#| echo: false
+#| output: asis
+from utils.styling import get_html_color_span
+
+# Generate color legend using centralized configuration
+good_span = get_html_color_span("good")
+medium_span = get_html_color_span("medium")
+poor_span = get_html_color_span("poor")
+
+from IPython.display import Markdown, display
+
+markdown_output = f"""
+* {good_span} if the deviation to the nominal level is below 5%
+* {medium_span} if the deviation to the nominal level is above 5% and below 10%
+* {poor_span} if the deviation to the nominal level is above 10%
+"""
+
+display(Markdown(markdown_output))
+```
 
 For simulations with multiple parameters of interest, usually pointwise and uniform coverage is assessed.
 
@@ -245,7 +262,5 @@ fig.update_layout(
 
 fig.show()
 ```
-
-:::
 
 :::
