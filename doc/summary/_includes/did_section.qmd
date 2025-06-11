@@ -1,6 +1,6 @@
 ## Difference-in-Differences (DID)
 
-### Coverage Results
+### All Coverage Results
 
 ```{python}
 #| echo: false
@@ -16,4 +16,96 @@ if "DID" in category_results and category_results["DID"]["regular"]:
     display(style_summary_table(display_df, is_sensitivity=False))
 else:
     print("No DID coverage results found.")
+```
+
+### Coverage Results by DGP Type
+
+#### DGP 1 & 4 (Challenging Settings)
+
+```{python}
+#| echo: false
+
+# Load results with filter for DGP 1 and 4
+challenging_results = load_and_summarize_by_category(filters={'DGP': [1, 4]})
+
+if "DID" in challenging_results and challenging_results["DID"]["regular"]:
+    df_challenging = pd.DataFrame(challenging_results["DID"]["regular"])
+    df_challenging_sorted = df_challenging.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_challenging = df_challenging_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_challenging["Coverage Rate"] = display_df_challenging["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_challenging, is_sensitivity=False))
+    print("\n**Note**: DGP 1 & 4 represent more challenging settings with potential confounding.")
+else:
+    print("No DID results found for DGP 1 & 4.")
+```
+
+#### DGP 6 (Well-specified Setting)
+
+```{python}
+#| echo: false
+
+# Load results with filter for DGP 6
+wellspec_results = load_and_summarize_by_category(filters={'DGP': 6})
+
+if "DID" in wellspec_results and wellspec_results["DID"]["regular"]:
+    df_wellspec = pd.DataFrame(wellspec_results["DID"]["regular"])
+    df_wellspec_sorted = df_wellspec.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_wellspec = df_wellspec_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_wellspec["Coverage Rate"] = display_df_wellspec["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_wellspec, is_sensitivity=False))
+    print("\n**Note**: DGP 6 represents a well-specified setting where the model assumptions are satisfied.")
+else:
+    print("No DID results found for DGP 6.")
+```
+
+### Coverage Results by Score Type
+
+#### Experimental Score
+
+```{python}
+#| echo: false
+
+# Load results with filter for experimental score
+exp_results = load_and_summarize_by_category(filters={'Score': 'experimental'})
+
+if "DID" in exp_results and exp_results["DID"]["regular"]:
+    df_exp = pd.DataFrame(exp_results["DID"]["regular"])
+    df_exp_sorted = df_exp.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_exp = df_exp_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_exp["Coverage Rate"] = display_df_exp["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_exp, is_sensitivity=False))
+    print("\n**Note**: Experimental score uses the experimental approach for moment conditions.")
+else:
+    print("No DID results found for experimental score.")
+```
+
+#### Observational Score
+
+```{python}
+#| echo: false
+
+# Load results with filter for observational score
+obs_results = load_and_summarize_by_category(filters={'Score': 'observational'})
+
+if "DID" in obs_results and obs_results["DID"]["regular"]:
+    df_obs = pd.DataFrame(obs_results["DID"]["regular"])
+    df_obs_sorted = df_obs.sort_values(["Deviation"])
+
+    # Format coverage rate and prepare display
+    display_df_obs = df_obs_sorted[["Model Type", "Effect", "Coverage Rate", "Status", "Repetitions", "DoubleML Version", "Last Modified"]].copy()
+    display_df_obs["Coverage Rate"] = display_df_obs["Coverage Rate"].apply(lambda x: f"{x:.3f}")
+
+    display(style_summary_table(display_df_obs, is_sensitivity=False))
+    print("\n**Note**: Observational score uses the observational approach for moment conditions.")
+else:
+    print("No DID results found for observational score.")
 ```

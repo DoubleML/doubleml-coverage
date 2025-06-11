@@ -89,6 +89,13 @@ def load_and_summarize_results():
         # Look for specific metadata files for different model types
         def find_metadata_file(filename):
             """Find metadata file for a specific coverage file."""
+            # For DID multi-period files, always use the common metadata file
+            if filename.startswith("did_multi"):
+                metadata_path = model_path / "did_multi_metadata.csv"
+                if metadata_path.exists():
+                    return metadata_path
+            
+            # For other files, try standard naming
             base_name = filename.replace("_coverage.csv", "")
             metadata_candidates = [
                 f"{base_name}_metadata.csv",
@@ -96,10 +103,8 @@ def load_and_summarize_results():
                 "pq_metadata.csv" if "pq_effect" in filename else None,
                 "lpq_metadata.csv" if "lpq_effect" in filename else None,
                 "cvar_metadata.csv" if "cvar_effect" in filename else None,
-                # For DID multi-period files, use the common metadata file
-                "did_multi_metadata.csv" if filename.startswith("did_multi") else None,
             ]
-
+            
             for candidate in metadata_candidates:
                 if candidate and (model_path / candidate).exists():
                     return model_path / candidate

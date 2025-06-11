@@ -22,11 +22,41 @@ def load_metadata_info(model_dir, coverage_file):
     """Load metadata information for a given coverage file."""
     results_dir = Path("../../results")
     model_path = results_dir / model_dir
-
-    # Try to find corresponding metadata file
+    
+    # For DID multi-period files, always use the common metadata file
+    if coverage_file.startswith("did_multi"):
+        metadata_path = model_path / "did_multi_metadata.csv"
+        if metadata_path.exists():
+            try:
+                metadata_df = pd.read_csv(metadata_path)
+                if not metadata_df.empty:
+                    # Get date and format as readable date
+                    date_value = metadata_df["Date"].iloc[0]
+                    formatted_date = date_value
+                    
+                    # Try to parse and reformat the date
+                    if pd.notna(date_value):
+                        try:
+                            date_str = str(date_value).strip()
+                            # Try to parse as datetime and format as readable date
+                            parsed_date = pd.to_datetime(date_str)
+                            formatted_date = parsed_date.strftime("%b %d, %Y")
+                        except:
+                            # If that fails, just extract date part if there's time info
+                            if " " in date_str:
+                                formatted_date = date_str.split(" ")[0]
+                    
+                    return {
+                        "doubleml_version": metadata_df["DoubleML Version"].iloc[0],
+                        "date": formatted_date,
+                    }
+            except Exception as e:
+                print(f"Error reading metadata from {metadata_path}: {e}")
+    
+    # Try to find corresponding metadata file for other files
     metadata_file = coverage_file.replace("_coverage.csv", "_metadata.csv")
     metadata_path = model_path / metadata_file
-
+    
     # Special cases for files that don't follow the standard naming pattern
     if not metadata_path.exists():
         # For QTE/LQTE/CVAR, check the base model metadata
@@ -36,22 +66,19 @@ def load_metadata_info(model_dir, coverage_file):
             metadata_path = model_path / "lpq_metadata.csv"
         elif "cvar_effect" in coverage_file:
             metadata_path = model_path / "cvar_metadata.csv"
-        # For DID multi-period files, use the common metadata file
-        elif coverage_file.startswith("did_multi"):
-            metadata_path = model_path / "did_multi_metadata.csv"
         # For other files that don't end with _coverage.csv, try base name
         elif not coverage_file.endswith("_coverage.csv"):
             base_name = coverage_file.replace(".csv", "")
             metadata_path = model_path / f"{base_name}_metadata.csv"
-
+    
     if metadata_path.exists():
         try:
             metadata_df = pd.read_csv(metadata_path)
             if not metadata_df.empty:
-                # Get date and format as Y-m-d (without leading zeros)
+                # Get date and format as readable date
                 date_value = metadata_df["Date"].iloc[0]
                 formatted_date = date_value
-
+                
                 # Try to parse and reformat the date
                 if pd.notna(date_value):
                     try:
@@ -63,19 +90,25 @@ def load_metadata_info(model_dir, coverage_file):
                         # If that fails, just extract date part if there's time info
                         if " " in date_str:
                             formatted_date = date_str.split(" ")[0]
-
+                
                 return {
                     "doubleml_version": metadata_df["DoubleML Version"].iloc[0],
                     "date": formatted_date,
                 }
         except Exception as e:
             print(f"Error reading metadata from {metadata_path}: {e}")
-
+    
     return {"doubleml_version": "N/A", "date": "N/A"}
 
-def load_and_summarize_by_category():
-    """Load CSV results and create summary tables by category."""
-
+def load_and_summarize_by_category(filters=None):
+    """Load CSV results and create summary tables by category.
+    
+    Args:
+        filters (dict): Optional filters to apply to the data.
+                       Format: {'column_name': 'value' or ['value1', 'value2']}
+                       Example: {'DGP': [1, 6], 'Score': 'experimental'}
+    """
+    
     # Get results directory relative to doc folder
     results_dir = Path("../../results")
 
@@ -172,6 +205,16 @@ def load_and_summarize_by_category():
 
                 if df_95.empty:
                     continue
+
+                # Apply optional filters if provided
+                if filters:
+                    for column, value in filters.items():
+                        if column in df_95.columns:  # Only apply filter if column exists
+                            if isinstance(value, list):
+                                df_95 = df_95[df_95[column].isin(value)]
+                            else:
+                                df_95 = df_95[df_95[column] == value]
+                        # Skip filter if column doesn't exist in this dataset
 
                 # Find coverage column - for sensitivity files, prioritize bound coverage
                 coverage_col = None
