@@ -1,0 +1,312 @@
+---
+title: "PLM Summary"
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+from itables import init_notebook_mode
+import os
+import sys
+
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
+from utils.styling import get_coverage_tier_html_span
+
+init_notebook_mode(all_interactive=True)
+
+def load_metadata(file_path):
+    """Load metadata from a CSV file and return relevant information."""
+    try:
+        metadata_df = pd.read_csv(file_path)
+        if len(metadata_df) > 0:
+            # Format date to be more readable
+            date_str = metadata_df.iloc[0].get('Date', 'Unknown')
+            formatted_date = date_str
+            if date_str != 'Unknown' and date_str != 'N/A':
+                try:
+                    # Try to parse and reformat the date to "Jun 05, 2025" format
+                    from datetime import datetime
+                    if len(date_str.split()) > 1:  # Has time component
+                        dt = datetime.strptime(date_str, '%Y-%m-%d %H:%M')
+                        formatted_date = dt.strftime('%b %d, %Y')
+                    else:  # Just date
+                        dt = datetime.strptime(date_str, '%Y-%m-%d')
+                        formatted_date = dt.strftime('%b %d, %Y')
+                except:
+                    formatted_date = date_str  # Keep original if parsing fails
+            
+            return {
+                'doubleml_version': metadata_df.iloc[0].get('DoubleML Version', 'Unknown'),
+                'date': formatted_date,
+                'runtime': metadata_df.iloc[0].get('Total Runtime (minutes)', 'Unknown'),
+                'python_version': metadata_df.iloc[0].get('Python Version', 'Unknown')
+            }
+    except:
+        pass
+    return None
+```
+
+## PLM Coverage Analysis
+
+```{python}
+#| echo: false
+
+def get_model_tier_summary(file_path, model_name):
+    """Get configuration distribution by tier and best config from highest tier"""
+    try:
+        df = pd.read_csv(file_path)
+        df_95 = df[df['level'] == 0.95]
+        
+        if len(df_95) == 0:
+            return None
+            
+        # Categorize by performance tiers
+        good = df_95[abs(df_95['Coverage'] - 0.95) <= 0.05]
+        moderate = df_95[(abs(df_95['Coverage'] - 0.95) > 0.05) & (abs(df_95['Coverage'] - 0.95) <= 0.10)]
+        weak = df_95[abs(df_95['Coverage'] - 0.95) > 0.10]
+        
+        # Find best configuration from highest available tier
+        if len(good) > 0:
+            best_tier = "good"
+            best_config = good.loc[good['CI Length'].idxmin()]
+        elif len(moderate) > 0:
+            best_tier = "moderate"
+            best_config = moderate.loc[moderate['CI Length'].idxmin()]
+        else:
+            best_tier = "weak"
+            best_config = weak.loc[weak['CI Length'].idxmin()]
+        
+        return {
+            'model': model_name,
+            'n_good': len(good),
+            'n_moderate': len(moderate),
+            'n_weak': len(weak),
+            'n_total': len(df_95),
+            'best_tier': best_tier,
+            'coverage': best_config['Coverage'],
+            'ci_length': best_config['CI Length'],
+            'bias': best_config['Bias'],
+            'learner_g': best_config.get('Learner g', 'N/A'),
+            'learner_m': best_config.get('Learner m', 'N/A'),
+            'learner_r': best_config.get('Learner r', 'N/A'),
+            'score': best_config.get('Score', 'N/A')
+        }
+    except:
+        return None
+
+def get_tier_color(tier):
+    if tier == "good":
+        return "good"
+    elif tier == "moderate":
+        return "medium"
+    else:
+        return "poor"
+
+# Load tier summaries for each model separately
+plr_ate_summary = get_model_tier_summary("../../results/plm/plr_ate_coverage.csv", "PLR ATE")
+plr_gate_summary = get_model_tier_summary("../../results/plm/plr_gate_coverage.csv", "PLR GATE")
+plr_cate_summary = get_model_tier_summary("../../results/plm/plr_cate_coverage.csv", "PLR CATE")
+pliv_summary = get_model_tier_summary("../../results/plm/pliv_late_coverage.csv", "PLIV")
+
+# Collect all summaries for table display
+all_summaries = [plr_ate_summary, plr_gate_summary, plr_cate_summary, pliv_summary]
+```
+
+The table below highlights the best-performing configuration for each causal estimand based on coverage accuracy and confidence interval efficiency.
+
+```{python}
+#| echo: false
+#| output: asis
+
+# Create properly formatted table with restructured columns
+print("| DoubleML Class | Causal Estimand | Coverage | CI Length | Configuration Quality Distribution | Details | Last Modified | DoubleML Version |")
+print("|----------------|-----------------|----------|-----------|-----------------------------------|---------|---------------|------------------|")
+
+for i, summary in enumerate(all_summaries):
+    if summary:
+        coverage = summary['coverage']
+        tier_color = get_tier_color(summary['best_tier'])
+        tier_span = get_coverage_tier_html_span(tier_color, text=f"{coverage:.1%}")
+        
+        model_name = summary['model']
+        
+        # Map model names to DoubleML classes and causal estimands
+        model_mapping = {
+            'PLR ATE': {'class': 'DoubleMLPLR', 'estimand': 'ATE'},
+            'PLR GATE': {'class': 'DoubleMLPLR', 'estimand': 'GATE'},
+            'PLR CATE': {'class': 'DoubleMLPLR', 'estimand': 'CATE'},
+            'PLIV': {'class': 'DoubleMLPLIV', 'estimand': 'LATE'}
+        }
+        
+        doubleml_class = model_mapping.get(model_name, {}).get('class', model_name)
+        causal_estimand = model_mapping.get(model_name, {}).get('estimand', model_name)
+        
+        ci_length = summary['ci_length']
+        n_good = summary['n_good']
+        n_moderate = summary['n_moderate']
+        n_weak = summary['n_weak']
+        
+        # Get metadata for additional columns
+        metadata_files = {
+            'PLR ATE': '../../results/plm/plr_ate_metadata.csv',
+            'PLR GATE': '../../results/plm/plr_gate_metadata.csv', 
+            'PLR CATE': '../../results/plm/plr_cate_metadata.csv',
+            'PLIV': '../../results/plm/pliv_late_metadata.csv'
+        }
+        
+        metadata = load_metadata(metadata_files.get(model_name))
+        last_modified = metadata['date'] if metadata else 'N/A'
+        doubleml_version = metadata['doubleml_version'] if metadata else 'N/A'
+        
+        # Create distribution string with better spacing
+        distribution = f"🟢 {n_good} • 🟡 {n_moderate} • 🔴 {n_weak}"
+        
+        # Format CI length with consistent decimal places
+        ci_formatted = f"`{ci_length:.3f}`"
+        
+        print(f"| **{doubleml_class}** | {causal_estimand} | {tier_span} | {ci_formatted} | {distribution} | [View Details](#config-{model_name.lower().replace(' ', '-')}) | {last_modified} | {doubleml_version} |")
+
+print("")
+print("**Legend:** 🟢 Good (≤5% deviation from nominal) • 🟡 Moderate (5-10% deviation) • 🔴 Weak (>10% deviation)")
+print("")
+print("**Note:** The \"best\" performing configuration is dependent on the data generating process and not straightforward generalizable.")
+print("")
+```
+
+## Configuration Details
+
+```{python}
+#| echo: false
+#| output: asis
+
+for i, summary in enumerate(all_summaries):
+    if summary:
+        model_name = summary['model']
+        config_id = f"config-{model_name.lower().replace(' ', '-')}"
+        
+        # Map model names to DoubleML classes and causal estimands for headers
+        model_mapping = {
+            'PLR ATE': {'class': 'DoubleMLPLR', 'estimand': 'Average Treatment Effect'},
+            'PLR GATE': {'class': 'DoubleMLPLR', 'estimand': 'Group Average Treatment Effect'},
+            'PLR CATE': {'class': 'DoubleMLPLR', 'estimand': 'Conditional Average Treatment Effect'},
+            'PLIV': {'class': 'DoubleMLPLIV', 'estimand': 'Local Average Treatment Effect'}
+        }
+        
+        doubleml_class = model_mapping.get(model_name, {}).get('class', model_name)
+        causal_estimand = model_mapping.get(model_name, {}).get('estimand', model_name)
+        
+        # Map model names to correct file names
+        file_mapping = {
+            'PLR ATE': 'plr.qmd',
+            'PLR GATE': 'plr_gate.qmd', 
+            'PLR CATE': 'plr_cate.qmd',
+            'PLIV': 'pliv.qmd'
+        }
+        
+        file_link = file_mapping.get(model_name, f"{model_name.lower().replace(' ', '_')}.qmd")
+        
+        print(f"""
+<div id="{config_id}">
+<div class="card">
+<div class="card-header">
+<h3>{doubleml_class} - {causal_estimand}</h3>
+</div>
+<div class="card-body">
+
+**🎯 Coverage Performance:** {summary['coverage']:.1%} coverage • {summary['ci_length']:.3f} CI length • {summary['bias']:.4f} bias
+
+**⚙️ Configuration:** {summary['learner_g']} (g) • {summary['learner_m']} (m)""")
+        
+        # Add instrument learner for PLIV
+        if summary['learner_r'] != 'N/A':
+            print(f" • {summary['learner_r']} (r)")
+        
+        print(f""" • {summary['score']} score
+
+**📊 Quality:** {summary['n_total']} total • 🟢 {summary['n_good']} high • 🟡 {summary['n_moderate']} moderate • 🔴 {summary['n_weak']} low
+
+[📖 View Complete Analysis]({file_link}){{.btn .btn-primary .btn-sm}}
+
+</div>
+</div>
+</div>
+
+""")
+
+print("\n")
+```
+
+## Sensitivity Analysis Results
+
+The table below shows robustness analysis for the PLR ATE estimator, testing how sensitive the results are to violations of the unconfoundedness assumption.
+
+```{python}
+#| echo: false
+#| output: asis
+
+def get_sensitivity_summary(file_path):
+    """Get sensitivity analysis summary from PLR ATE sensitivity results"""
+    try:
+        df = pd.read_csv(file_path)
+        df_95 = df[df['level'] == 0.95]
+        
+        if len(df_95) == 0:
+            return None
+        
+        # Find best configuration (highest coverage with lowest CI length as tiebreaker)
+        best_config = df_95.loc[df_95.groupby(['Learner g', 'Learner m', 'Score'])['Coverage'].idxmax()]
+        best_overall = best_config.loc[best_config['Coverage'].idxmax()]
+        
+        return {
+            'learner_g': best_overall['Learner g'],
+            'learner_m': best_overall['Learner m'], 
+            'score': best_overall['Score'],
+            'coverage': best_overall['Coverage'],
+            'ci_length': best_overall['CI Length'],
+            'bias': best_overall['Bias'],
+            'coverage_lower': best_overall['Coverage (Lower)'],
+            'coverage_upper': best_overall['Coverage (Upper)'],
+            'rv': best_overall['RV'],
+            'rva': best_overall['RVa'],
+            'bias_lower': best_overall['Bias (Lower)'],
+            'bias_upper': best_overall['Bias (Upper)']
+        }
+    except:
+        return None
+
+# Load sensitivity analysis data
+sensitivity_summary = get_sensitivity_summary("../../results/plm/plr_ate_sensitivity_coverage.csv")
+
+if sensitivity_summary:
+    print("| DoubleML Class | Estimand | Coverage | CI Length | RV | RVa | Bias Range | Coverage Range | Configuration |")
+    print("|----------------|----------|----------|-----------|----|----|------------|----------------|---------------|")
+    
+    coverage_range = f"{sensitivity_summary['coverage_lower']:.1%} - {sensitivity_summary['coverage_upper']:.1%}"
+    bias_range = f"{sensitivity_summary['bias_lower']:.3f} - {sensitivity_summary['bias_upper']:.3f}"
+    config = f"{sensitivity_summary['learner_g']} (g) • {sensitivity_summary['learner_m']} (m) • {sensitivity_summary['score']}"
+    
+    print(f"| **DoubleMLPLR** | ATE | {sensitivity_summary['coverage']:.1%} | `{sensitivity_summary['ci_length']:.3f}` | `{sensitivity_summary['rv']:.3f}` | `{sensitivity_summary['rva']:.3f}` | {bias_range} | {coverage_range} | {config} |")
+    
+    print("")
+    print("**Sensitivity Metrics:**")
+    print("- **RV (Robustness Value):** Strength of confounding needed to explain away the effect")
+    print("- **RVa:** Robustness value for significance level α")  
+    print("- **Coverage/Bias Range:** Performance bounds across different confounding scenarios")
+    
+    # Add metadata for sensitivity analysis
+    metadata = load_metadata("../../results/plm/plr_ate_sensitivity_metadata.csv")
+    if metadata:
+        print(f"- **Last Updated:** {metadata['date']} | **DoubleML Version:** {metadata['doubleml_version']}")
+else:
+    print("*Sensitivity analysis data not available.*")
+
+print("")
+```

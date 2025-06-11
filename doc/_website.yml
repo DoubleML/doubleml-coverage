@@ -13,6 +13,7 @@ website:
         text: Home
       - text: "IRM"
         menu:
+          - irm/index.qmd
           - irm/irm.qmd
           - irm/irm_gate.qmd
           - irm/irm_cate.qmd
@@ -21,21 +22,25 @@ website:
           - irm/iivm.qmd
       - text: "PLM"
         menu:
+          - plm/index.qmd
           - plm/plr.qmd
           - plm/plr_gate.qmd
           - plm/plr_cate.qmd
           - plm/pliv.qmd
       - text: "DID"
         menu:
+          - did/index.qmd
           - did/did_multi.qmd
           - did/did_pa.qmd
           - did/did_cs.qmd
       - text: "SSM"
         menu:
+          - ssm/index.qmd
           - ssm/ssm_mar.qmd
           - ssm/ssm_nonignorable.qmd
       - text: "RDD"
         menu:
+          - rdd/index.qmd
           - rdd/rdd.qmd
     right:
       - icon: book
