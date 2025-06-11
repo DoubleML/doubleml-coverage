@@ -26,6 +26,6 @@ table_styling:
   hover_bg: "#f5f5f5"
 
 coverage_thresholds:
-  good: 0.05    # Within 5% of nominal level
-  medium: 0.1   # Within 10% of nominal level
-  poor: 1.0     # Beyond 10% of nominal level
+  good: 0.05 # Within 5% of nominal level
+  medium: 0.1 # Within 10% of nominal level
+  poor: 1.0 # Beyond 10% of nominal level

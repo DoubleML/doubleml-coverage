@@ -6,18 +6,18 @@ from itables import show
 from .styling import (
     TABLE_STYLING,
     COVERAGE_THRESHOLDS,
-    get_coverage_tier_props,
+    get_coverage_tier_css_props,
 )
 
 
 # Define highlighting tiers using centralized color configuration
 HIGHLIGHT_TIERS = [
-    {"dist": COVERAGE_THRESHOLDS["poor"], "props": get_coverage_tier_props("poor")},
+    {"dist": COVERAGE_THRESHOLDS["poor"], "props": get_coverage_tier_css_props("poor")},
     {
         "dist": COVERAGE_THRESHOLDS["medium"],
-        "props": get_coverage_tier_props("medium", "500"),
+        "props": get_coverage_tier_css_props("medium", "500"),
     },
-    {"dist": COVERAGE_THRESHOLDS["good"], "props": get_coverage_tier_props("good")},
+    {"dist": COVERAGE_THRESHOLDS["good"], "props": get_coverage_tier_css_props("good")},
 ]
 
 
@@ -31,11 +31,32 @@ def _apply_highlight_range(
     s_numeric = pd.to_numeric(
         s_col, errors="coerce"
     )  # Convert to numeric, non-convertibles become NaN
+
     # Apply style ONLY if value is WITHIN the current dist from level
-    # This means for tiered styling, the order of applying styles in the calling function matters.
-    # If a value falls into multiple dist categories, the LAST applied style for that dist will win.
-    condition = (s_numeric >= level - dist) & (s_numeric <= level + dist)
+    # Use absolute difference to determine which tier applies
+    abs_diff = np.abs(s_numeric - level)
+    condition = abs_diff <= dist
     return np.where(condition, props, "")
+
+
+def _determine_coverage_tier(value: float, level: float) -> str:
+    """
+    Determine which coverage tier a value belongs to based on distance from level.
+    Returns the most specific (smallest distance) tier that applies.
+    """
+    if pd.isna(value):
+        return ""
+
+    abs_diff = abs(value - level)
+
+    # Check tiers from most specific to least specific
+    sorted_tiers = sorted(HIGHLIGHT_TIERS, key=lambda x: x["dist"])
+
+    for tier in sorted_tiers:
+        if abs_diff <= tier["dist"]:
+            return tier["props"]
+
+    return ""
 
 
 def _apply_base_table_styling(styler: Styler) -> Styler:
@@ -114,7 +135,7 @@ def color_coverage_columns(
 ) -> Styler:
     """
     Applies tiered highlighting to specified coverage columns of a Styler object.
-    The order of application matters: more specific (narrower dist) rules are applied last to override.
+    Uses non-overlapping logic to prevent CSS conflicts.
     """
     if not isinstance(styler, Styler):
         raise TypeError("Expected a pandas Styler object.")
@@ -132,24 +153,22 @@ def color_coverage_columns(
     # Apply base styling first
     current_styler = _apply_base_table_styling(styler)
 
-    # Apply highlighting rules from the defined tiers
-    # The order in HIGHLIGHT_TIERS is important if props are meant to override.
-    # Pandas Styler.apply applies styles sequentially. If a cell matches multiple
-    # conditions from different .apply calls, the styles from later calls typically override
-    # or merge with earlier ones, depending on the CSS properties.
-    # For background-color, later calls will override.
-    for tier in HIGHLIGHT_TIERS:
-        current_styler = current_styler.apply(
-            _apply_highlight_range,
-            level=level,
-            dist=tier["dist"],
-            props=tier["props"],
-            subset=valid_coverage_cols,
-        )
+    # Apply single tier styling to prevent conflicts
+    def apply_coverage_tier_to_cell(s_col):
+        """Apply only the most appropriate coverage tier for each cell."""
+        return s_col.apply(lambda x: _determine_coverage_tier(x, level))
+
+    current_styler = current_styler.apply(
+        apply_coverage_tier_to_cell, subset=valid_coverage_cols
+    )
 
     # Apply additional styling to coverage columns for emphasis
     current_styler = current_styler.set_properties(
-        **{"text-align": "center", "font-family": "monospace", "font-size": "13px"},
+        **{
+            "text-align": "center",
+            "font-family": "monospace",
+            "font-size": "13px",
+        },
         subset=valid_coverage_cols,
     )
 

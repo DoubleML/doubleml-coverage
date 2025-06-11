@@ -26,7 +26,7 @@ TABLE_STYLING = _THEME["table_styling"]
 COVERAGE_THRESHOLDS = _THEME["coverage_thresholds"]
 
 
-def get_coverage_tier_props(tier: str, font_weight: str = "600") -> str:
+def get_coverage_tier_css_props(tier: str, font_weight: str = "600") -> str:
     """
     Generate CSS properties string for a coverage performance tier.
 
@@ -51,7 +51,7 @@ def get_coverage_tier_props(tier: str, font_weight: str = "600") -> str:
     )
 
 
-def get_html_color_span(tier: str, text: str = None) -> str:
+def get_coverage_tier_html_span(tier: str, text: str = None) -> str:
     """
     Generate HTML span element with coverage tier styling for documentation.
 
