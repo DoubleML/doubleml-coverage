@@ -3,17 +3,21 @@ import pandas as pd
 from pandas.io.formats.style import Styler
 from typing import Union, Optional, List, Any
 from itables import show
+from .styling import (
+    TABLE_STYLING,
+    COVERAGE_THRESHOLDS,
+    get_coverage_tier_css_props,
+)
 
 
-# Define highlighting tiers as a list of dictionaries or tuples
-# Each element defines: dist, props. Applied in order (later rules can override).
-# Order: from least specific (largest dist) to most specific (smallest dist)
-# or ensure the _apply_highlight_range logic correctly handles overlaps if props are different.
-# Current logic: more specific (smaller dist) rules are applied last and override.
+# Define highlighting tiers using centralized color configuration
 HIGHLIGHT_TIERS = [
-    {"dist": 1.0, "props": "color:black;background-color:red;"},
-    {"dist": 0.1, "props": "color:black;background-color:yellow;"},
-    {"dist": 0.05, "props": "color:white;background-color:darkgreen;"},
+    {"dist": COVERAGE_THRESHOLDS["poor"], "props": get_coverage_tier_css_props("poor")},
+    {
+        "dist": COVERAGE_THRESHOLDS["medium"],
+        "props": get_coverage_tier_css_props("medium", "500"),
+    },
+    {"dist": COVERAGE_THRESHOLDS["good"], "props": get_coverage_tier_css_props("good")},
 ]
 
 
@@ -27,11 +31,103 @@ def _apply_highlight_range(
     s_numeric = pd.to_numeric(
         s_col, errors="coerce"
     )  # Convert to numeric, non-convertibles become NaN
+
     # Apply style ONLY if value is WITHIN the current dist from level
-    # This means for tiered styling, the order of applying styles in the calling function matters.
-    # If a value falls into multiple dist categories, the LAST applied style for that dist will win.
-    condition = (s_numeric >= level - dist) & (s_numeric <= level + dist)
+    # Use absolute difference to determine which tier applies
+    abs_diff = np.abs(s_numeric - level)
+    condition = abs_diff <= dist
     return np.where(condition, props, "")
+
+
+def _determine_coverage_tier(value: float, level: float) -> str:
+    """
+    Determine which coverage tier a value belongs to based on distance from level.
+    Returns the most specific (smallest distance) tier that applies.
+    """
+    if pd.isna(value):
+        return ""
+
+    abs_diff = abs(value - level)
+
+    # Check tiers from most specific to least specific
+    sorted_tiers = sorted(HIGHLIGHT_TIERS, key=lambda x: x["dist"])
+
+    for tier in sorted_tiers:
+        if abs_diff <= tier["dist"]:
+            return tier["props"]
+
+    return ""
+
+
+def _apply_base_table_styling(styler: Styler) -> Styler:
+    """
+    Apply base styling to the table including headers, borders, and overall appearance.
+    """
+    # Define CSS styles for clean table appearance using centralized colors
+    styles = [
+        # Table-wide styling
+        {
+            "selector": "table",
+            "props": [
+                ("border-collapse", "separate"),
+                ("border-spacing", "0"),
+                ("width", "100%"),
+                (
+                    "font-family",
+                    '"Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif',
+                ),
+                ("font-size", "14px"),
+                ("line-height", "1.5"),
+                ("box-shadow", "0 2px 8px rgba(0,0,0,0.1)"),
+                ("border-radius", "8px"),
+                ("overflow", "hidden"),
+            ],
+        },
+        # Header styling
+        {
+            "selector": "thead th",
+            "props": [
+                ("background-color", TABLE_STYLING["header_bg"]),
+                ("color", TABLE_STYLING["header_text"]),
+                ("font-weight", "600"),
+                ("text-align", "center"),
+                ("padding", "12px 16px"),
+                ("border-bottom", f'2px solid {TABLE_STYLING["border"]}'),
+                ("position", "sticky"),
+                ("top", "0"),
+                ("z-index", "10"),
+            ],
+        },
+        # Cell styling
+        {
+            "selector": "tbody td",
+            "props": [
+                ("padding", "10px 16px"),
+                ("text-align", "center"),
+                ("border-bottom", f'1px solid {TABLE_STYLING["border"]}'),
+                ("transition", "background-color 0.2s ease"),
+            ],
+        },
+        # Row hover effect
+        {
+            "selector": "tbody tr:hover td",
+            "props": [("background-color", TABLE_STYLING["hover_bg"])],
+        },
+        # Caption styling
+        {
+            "selector": "caption",
+            "props": [
+                ("color", TABLE_STYLING["caption_color"]),
+                ("font-size", "16px"),
+                ("font-weight", "600"),
+                ("margin-bottom", "16px"),
+                ("text-align", "left"),
+                ("caption-side", "top"),
+            ],
+        },
+    ]
+
+    return styler.set_table_styles(styles)
 
 
 def color_coverage_columns(
@@ -39,7 +135,7 @@ def color_coverage_columns(
 ) -> Styler:
     """
     Applies tiered highlighting to specified coverage columns of a Styler object.
-    The order of application matters: more specific (narrower dist) rules are applied last to override.
+    Uses non-overlapping logic to prevent CSS conflicts.
     """
     if not isinstance(styler, Styler):
         raise TypeError("Expected a pandas Styler object.")
@@ -54,26 +150,28 @@ def color_coverage_columns(
     if not valid_coverage_cols:
         return styler  # No valid columns to style
 
-    # Apply highlighting rules from the defined tiers
-    # The order in HIGHLIGHT_TIERS is important if props are meant to override.
-    # Pandas Styler.apply applies styles sequentially. If a cell matches multiple
-    # conditions from different .apply calls, the styles from later calls typically override
-    # or merge with earlier ones, depending on the CSS properties.
-    # For background-color, later calls will override.
-    current_styler = styler
-    for tier in HIGHLIGHT_TIERS:
-        current_styler = current_styler.apply(
-            _apply_highlight_range,
-            level=level,
-            dist=tier["dist"],
-            props=tier["props"],
-            subset=valid_coverage_cols,
-        )
+    # Apply base styling first
+    current_styler = _apply_base_table_styling(styler)
 
-    # Set font to bold for the coverage columns
-    current_styler = current_styler.set_properties(
-        **{"font-weight": "bold"}, subset=valid_coverage_cols
+    # Apply single tier styling to prevent conflicts
+    def apply_coverage_tier_to_cell(s_col):
+        """Apply only the most appropriate coverage tier for each cell."""
+        return s_col.apply(lambda x: _determine_coverage_tier(x, level))
+
+    current_styler = current_styler.apply(
+        apply_coverage_tier_to_cell, subset=valid_coverage_cols
     )
+
+    # Apply additional styling to coverage columns for emphasis
+    current_styler = current_styler.set_properties(
+        **{
+            "text-align": "center",
+            "font-family": "monospace",
+            "font-size": "13px",
+        },
+        subset=valid_coverage_cols,
+    )
+
     return current_styler
 
 
