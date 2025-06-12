@@ -20,6 +20,7 @@ jobs:
           'scripts/did/did_pa_atte_coverage.py',
           'scripts/did/did_cs_atte_coverage.py',
           'scripts/did/did_pa_multi.py',
+          'scripts/did/did_cs_multi.py',
         ]
 
     steps:
