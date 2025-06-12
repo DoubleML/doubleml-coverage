@@ -8,6 +8,7 @@ based on the centralized theme configuration.
 import yaml
 from pathlib import Path
 from typing import Dict, Any
+import copy
 
 
 def _load_theme_config() -> Dict[str, Any]:
@@ -87,4 +88,4 @@ def get_theme_config() -> Dict[str, Any]:
     Returns:
         Dictionary containing all theme settings
     """
-    return _THEME.copy()
+    return copy.deepcopy(_THEME)
