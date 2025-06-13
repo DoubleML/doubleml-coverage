@@ -84,74 +84,32 @@
     "text": "ATTE Coverage\nThe simulations are based on the the make_did_SZ2020-DGP with \\(1000\\) observations. Learners are only set to boosting, due to time constraints (and the nonlinearity of some of the DGPs).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                       0.11.dev0\nScript                   did_pa_atte_coverage.py\nDate                         2025-06-06 08:42:11\nTotal Runtime (seconds)              11024.60303\nPython Version                            3.12.3\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nRemark that the only two valid DGPs are DGP \\(5\\) and DGP \\(6\\). All other DGPs are invalid due to non-experimental treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/irm.html",
-    "href": "irm/irm.html",
-    "title": "Basic IRM Models",
+    "objectID": "irm/iivm.html",
+    "href": "irm/iivm.html",
+    "title": "IIVM Models",
     "section": "",
     "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "irm/irm.html#ate-coverage",
-    "href": "irm/irm.html#ate-coverage",
-    "title": "Basic IRM Models",
-    "section": "ATE Coverage",
-    "text": "ATE Coverage\nThe simulations are based on the the make_irm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                              0.11.dev0\nScript                         IRMATECoverageSimulation\nDate                                   2025-06-05 14:42\nTotal Runtime (minutes)                      125.660617\nPython Version                                   3.12.3\nConfig File              scripts/irm/irm_ate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+    "objectID": "irm/iivm.html#late-coverage",
+    "href": "irm/iivm.html#late-coverage",
+    "title": "IIVM Models",
+    "section": "LATE Coverage",
+    "text": "LATE Coverage\nThe simulations are based on the the make_iivm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                   0.10.0\nScript                         IIVMLATECoverageSimulation\nDate                                     2025-06-05 14:57\nTotal Runtime (minutes)                          2.219698\nPython Version                                     3.12.9\nConfig File              scripts/irm/iivm_late_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/irm.html#atte-coverage",
-    "href": "irm/irm.html#atte-coverage",
-    "title": "Basic IRM Models",
-    "section": "ATTE Coverage",
-    "text": "ATTE Coverage\nAs for the ATE, the simulations are based on the the make_irm_data-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMATTECoverageSimulation\nDate                                    2025-06-05 14:42\nTotal Runtime (minutes)                         126.0816\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_atte_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
-  },
-  {
-    "objectID": "irm/irm.html#sensitivity",
-    "href": "irm/irm.html#sensitivity",
-    "title": "Basic IRM Models",
-    "section": "Sensitivity",
-    "text": "Sensitivity\nThe simulations are based on the the make_confounded_irm_data-DGP with \\(5,000\\) observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nThe confounding is set such that both sensitivity parameters are approximately \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\nATE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                          0.11.dev0\nScript                          IRMATESensitivityCoverageSimulation\nDate                                               2025-06-05 13:14\nTotal Runtime (minutes)                                   37.417967\nPython Version                                               3.12.3\nConfig File              scripts/irm/irm_ate_sensitivity_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nATTE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                           0.11.dev0\nScript                          IRMATTESensitivityCoverageSimulation\nDate                                                2025-06-05 13:14\nTotal Runtime (minutes)                                    37.619707\nPython Version                                                3.12.3\nConfig File              scripts/irm/irm_atte_sensitivity_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
-  },
-  {
-    "objectID": "irm/apo.html",
-    "href": "irm/apo.html",
-    "title": "APO Models",
+    "objectID": "irm/irm_cate.html",
+    "href": "irm/irm_cate.html",
+    "title": "CATEs",
     "section": "",
     "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "irm/apo.html#apo-pointwise-coverage",
-    "href": "irm/apo.html#apo-pointwise-coverage",
-    "title": "APO Models",
-    "section": "APO Pointwise Coverage",
-    "text": "APO Pointwise Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                          0.11.dev0\nScript                        APOCoverageSimulation\nDate                               2025-06-05 13:49\nTotal Runtime (minutes)                   73.869388\nPython Version                               3.12.3\nConfig File              scripts/irm/apo_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
-  },
-  {
-    "objectID": "irm/apo.html#apos-coverage",
-    "href": "irm/apo.html#apos-coverage",
-    "title": "APO Models",
-    "section": "APOS Coverage",
-    "text": "APOS Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                           0.11.dev0\nScript                        APOSCoverageSimulation\nDate                                2025-06-05 13:49\nTotal Runtime (minutes)                    73.850344\nPython Version                                3.12.3\nConfig File              scripts/irm/apos_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
-  },
-  {
-    "objectID": "irm/apo.html#causal-contrast-coverage",
-    "href": "irm/apo.html#causal-contrast-coverage",
-    "title": "APO Models",
-    "section": "Causal Contrast Coverage",
-    "text": "Causal Contrast Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                           0.11.dev0\nScript                        APOSCoverageSimulation\nDate                                2025-06-05 13:49\nTotal Runtime (minutes)                    73.850344\nPython Version                                3.12.3\nConfig File              scripts/irm/apos_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
-  },
-  {
-    "objectID": "irm/irm_gate.html",
-    "href": "irm/irm_gate.html",
-    "title": "GATEs",
-    "section": "",
-    "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
-  },
-  {
-    "objectID": "irm/irm_gate.html#gate-coverage",
-    "href": "irm/irm_gate.html#gate-coverage",
-    "title": "GATEs",
-    "section": "GATE Coverage",
-    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMGATECoverageSimulation\nDate                                    2025-06-05 13:55\nTotal Runtime (minutes)                        79.232833\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_gate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+    "objectID": "irm/irm_cate.html#cate-coverage",
+    "href": "irm/irm_cate.html#cate-coverage",
+    "title": "CATEs",
+    "section": "CATE Coverage",
+    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMCATECoverageSimulation\nDate                                    2025-06-05 13:56\nTotal Runtime (minutes)                        79.611211\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_cate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
     "objectID": "irm/qte.html",
@@ -203,50 +161,113 @@
     "text": "CVaR Potential Quantiles\n\nCVaR Y(0)\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nCVaR Y(1)\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/irm_cate.html",
-    "href": "irm/irm_cate.html",
-    "title": "CATEs",
+    "objectID": "irm/irm_gate.html",
+    "href": "irm/irm_gate.html",
+    "title": "GATEs",
     "section": "",
     "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "irm/irm_cate.html#cate-coverage",
-    "href": "irm/irm_cate.html#cate-coverage",
-    "title": "CATEs",
-    "section": "CATE Coverage",
-    "text": "CATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(2000\\) observations. The groups are defined based on the first covariate, analogously to the CATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMCATECoverageSimulation\nDate                                    2025-06-05 13:56\nTotal Runtime (minutes)                        79.611211\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_cate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+    "objectID": "irm/irm_gate.html#gate-coverage",
+    "href": "irm/irm_gate.html#gate-coverage",
+    "title": "GATEs",
+    "section": "GATE Coverage",
+    "text": "GATE Coverage\nThe simulations are based on the the make_heterogeneous_data-DGP with \\(500\\) observations. The groups are defined based on the first covariate, analogously to the GATE IRM Example, but rely on LightGBM to estimate nuisance elements (due to time constraints).\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all groups (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMGATECoverageSimulation\nDate                                    2025-06-05 13:55\nTotal Runtime (minutes)                        79.232833\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_gate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "irm/iivm.html",
-    "href": "irm/iivm.html",
-    "title": "IIVM Models",
+    "objectID": "irm/apo.html",
+    "href": "irm/apo.html",
+    "title": "APO Models",
     "section": "",
     "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "irm/iivm.html#late-coverage",
-    "href": "irm/iivm.html#late-coverage",
-    "title": "IIVM Models",
-    "section": "LATE Coverage",
-    "text": "LATE Coverage\nThe simulations are based on the the make_iivm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                   0.10.0\nScript                         IIVMLATECoverageSimulation\nDate                                     2025-06-05 14:57\nTotal Runtime (minutes)                          2.219698\nPython Version                                     3.12.9\nConfig File              scripts/irm/iivm_late_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+    "objectID": "irm/apo.html#apo-pointwise-coverage",
+    "href": "irm/apo.html#apo-pointwise-coverage",
+    "title": "APO Models",
+    "section": "APO Pointwise Coverage",
+    "text": "APO Pointwise Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                          0.11.dev0\nScript                        APOCoverageSimulation\nDate                               2025-06-05 13:49\nTotal Runtime (minutes)                   73.869388\nPython Version                               3.12.3\nConfig File              scripts/irm/apo_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "did/did_multi.html",
-    "href": "did/did_multi.html",
+    "objectID": "irm/apo.html#apos-coverage",
+    "href": "irm/apo.html#apos-coverage",
+    "title": "APO Models",
+    "section": "APOS Coverage",
+    "text": "APOS Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                           0.11.dev0\nScript                        APOSCoverageSimulation\nDate                                2025-06-05 13:49\nTotal Runtime (minutes)                    73.850344\nPython Version                                3.12.3\nConfig File              scripts/irm/apos_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/apo.html#causal-contrast-coverage",
+    "href": "irm/apo.html#causal-contrast-coverage",
+    "title": "APO Models",
+    "section": "Causal Contrast Coverage",
+    "text": "Causal Contrast Coverage\nThe simulations are based on the the make_irm_data_discrete_treatments-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                           0.11.dev0\nScript                        APOSCoverageSimulation\nDate                                2025-06-05 13:49\nTotal Runtime (minutes)                    73.850344\nPython Version                                3.12.3\nConfig File              scripts/irm/apos_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html",
+    "href": "irm/irm.html",
+    "title": "Basic IRM Models",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "irm/irm.html#ate-coverage",
+    "href": "irm/irm.html#ate-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATE Coverage",
+    "text": "ATE Coverage\nThe simulations are based on the the make_irm_data-DGP with \\(500\\) observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                              0.11.dev0\nScript                         IRMATECoverageSimulation\nDate                                   2025-06-05 14:42\nTotal Runtime (minutes)                      125.660617\nPython Version                                   3.12.3\nConfig File              scripts/irm/irm_ate_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html#atte-coverage",
+    "href": "irm/irm.html#atte-coverage",
+    "title": "Basic IRM Models",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\nAs for the ATE, the simulations are based on the the make_irm_data-DGP with \\(500\\) observations.\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                               0.11.dev0\nScript                         IRMATTECoverageSimulation\nDate                                    2025-06-05 14:42\nTotal Runtime (minutes)                         126.0816\nPython Version                                    3.12.3\nConfig File              scripts/irm/irm_atte_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "irm/irm.html#sensitivity",
+    "href": "irm/irm.html#sensitivity",
+    "title": "Basic IRM Models",
+    "section": "Sensitivity",
+    "text": "Sensitivity\nThe simulations are based on the the make_confounded_irm_data-DGP with \\(5,000\\) observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.\nThe confounding is set such that both sensitivity parameters are approximately \\(cf_y=cf_d=0.1\\), such that the robustness value \\(RV\\) should be approximately \\(10\\%\\). Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of \\(\\rho\\) has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of \\(|\\rho|=1\\).\n\nATE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                          0.11.dev0\nScript                          IRMATESensitivityCoverageSimulation\nDate                                               2025-06-05 13:14\nTotal Runtime (minutes)                                   37.417967\nPython Version                                               3.12.3\nConfig File              scripts/irm/irm_ate_sensitivity_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nATTE\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                           0.11.dev0\nScript                          IRMATTESensitivityCoverageSimulation\nDate                                                2025-06-05 13:14\nTotal Runtime (minutes)                                    37.619707\nPython Version                                                3.12.3\nConfig File              scripts/irm/irm_atte_sensitivity_config.yml\n\n\n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_cs_multi.html",
+    "href": "did/did_cs_multi.html",
+    "title": "DiD for Cross-Sectional Data over Multiple Periods",
+    "section": "",
+    "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
+  },
+  {
+    "objectID": "did/did_cs_multi.html#atte-coverage",
+    "href": "did/did_cs_multi.html#atte-coverage",
+    "title": "DiD for Cross-Sectional Data over Multiple Periods",
+    "section": "ATTE Coverage",
+    "text": "ATTE Coverage\nThe simulations are based on the make_did_cs_CS2021-DGP with \\(2000\\) observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:\n\nType 1: Linear outcome model and treatment assignment\nType 4: Nonlinear outcome model and treatment assignment\nType 6: Randomized treatment assignment and nonlinear outcome model\n\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidence intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                   0.11.dev0\nScript                          DIDCSMultiCoverageSimulation\nDate                                        2025-06-13 08:24\nTotal Runtime (minutes)                            86.963452\nPython Version                                        3.12.9\nConfig File              scripts/did/did_cs_multi_config.yml\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_cs_multi.html#aggregated-effects",
+    "href": "did/did_cs_multi.html#aggregated-effects",
+    "title": "DiD for Cross-Sectional Data over Multiple Periods",
+    "section": "Aggregated Effects",
+    "text": "Aggregated Effects\nThese simulations test different types of aggregation, as described in DiD User Guide.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidence intervals).\n\nGroup Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nTime Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nEvent Study Aggregation\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+  },
+  {
+    "objectID": "did/did_pa_multi.html",
+    "href": "did/did_pa_multi.html",
     "title": "DiD for Panel Data over Multiple Periods",
     "section": "",
     "text": "This is the init_notebook_mode cell from ITables v2.4.2\n(you should not see this message - is your notebook trusted?)"
   },
   {
-    "objectID": "did/did_multi.html#atte-coverage",
-    "href": "did/did_multi.html#atte-coverage",
+    "objectID": "did/did_pa_multi.html#atte-coverage",
+    "href": "did/did_pa_multi.html#atte-coverage",
     "title": "DiD for Panel Data over Multiple Periods",
     "section": "ATTE Coverage",
-    "text": "ATTE Coverage\nThe simulations are based on the the make_did_CS2021-DGP with \\(2000\\) observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:\n\nType 1: Linear outcome model and treatment assignment\nType 4: Nonlinear outcome model and treatment assignment\nType 6: Randomized treatment assignment and nonlinear outcome model\n\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                      0.10.0\nScript                            DIDMultiCoverageSimulation\nDate                                        2025-06-06 08:13\nTotal Runtime (minutes)                            60.662748\nPython Version                                        3.12.9\nConfig File              scripts/did/did_pa_multi_config.yml\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
+    "text": "ATTE Coverage\nThe simulations are based on the the make_did_CS2021-DGP with \\(2000\\) observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:\n\nType 1: Linear outcome model and treatment assignment\nType 4: Nonlinear outcome model and treatment assignment\nType 6: Randomized treatment assignment and nonlinear outcome model\n\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidende intervals).\n\n\n\n\n\n\nMetadata\n\n\n\n\n\n\n\nDoubleML Version                                   0.11.dev0\nScript                            DIDMultiCoverageSimulation\nDate                                        2025-06-13 08:54\nTotal Runtime (minutes)                            24.264069\nPython Version                                        3.12.9\nConfig File              scripts/did/did_pa_multi_config.yml\n\n\n\n\n\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
   },
   {
-    "objectID": "did/did_multi.html#aggregated-effects",
-    "href": "did/did_multi.html#aggregated-effects",
+    "objectID": "did/did_pa_multi.html#aggregated-effects",
+    "href": "did/did_pa_multi.html#aggregated-effects",
     "title": "DiD for Panel Data over Multiple Periods",
     "section": "Aggregated Effects",
     "text": "Aggregated Effects\nThese simulations test different types of aggregation, as described in DiD User Guide.\nThe non-uniform results (coverage, ci length and bias) refer to averaged values over all \\(ATTs\\) (point-wise confidende intervals).\n\nGroup Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nTime Effects\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\nEvent Study Aggregation\n\nObservational Score\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\nExperimental Score\nThe results are only valid for the DGP 6, as the experimental score assumes a randomized treatment assignment.\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)\n    \n\n\n\n\n\n\n\n    \n    \n    Loading ITables v2.4.2 from the init_notebook_mode cell...\n    (need help?)"
