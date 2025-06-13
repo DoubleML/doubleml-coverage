@@ -161,7 +161,7 @@ class BaseSimulation(ABC):
             self.logger.warning(f"Adding .yaml extension to output path: {output_path}")
 
         with open(output_path, "w") as file:
-            yaml.dump(self.config, file)
+            yaml.dump(self.config, file, sort_keys=False, default_flow_style=False, indent=2, allow_unicode=True)
 
         self.logger.info(f"Configuration saved to {output_path}")
 
@@ -333,9 +333,9 @@ class BaseSimulation(ABC):
         if joint_confint is not None:
             joint_lower_bound = joint_confint.iloc[:, 0]
             joint_upper_bound = joint_confint.iloc[:, 1]
-            joint_coverage_mark = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
+            joint_coverage_mask = (joint_lower_bound < oracle_thetas) & (oracle_thetas < joint_upper_bound)
 
-            result_dict["Uniform Coverage"] = np.all(joint_coverage_mark)
+            result_dict["Uniform Coverage"] = np.all(joint_coverage_mask)
             result_dict["Uniform CI Length"] = np.mean(joint_upper_bound - joint_lower_bound)
 
         return result_dict

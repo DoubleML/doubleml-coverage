@@ -20,6 +20,7 @@ jobs:
           'scripts/did/did_pa_atte_coverage.py',
           'scripts/did/did_cs_atte_coverage.py',
           'scripts/did/did_pa_multi.py',
+          'scripts/did/did_cs_multi.py',
         ]
 
     steps:
@@ -52,7 +53,7 @@ jobs:
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       with:
-        version: "0.6.11"
+        version: "0.7.8"
 
     - name: Set up Python
       uses: actions/setup-python@v5
