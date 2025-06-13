@@ -9,6 +9,7 @@ simulation_parameters:
 dgp_parameters:
   DGP: [1, 4, 6] # Different DGP specifications
   n_obs: [2000] # Sample size for each simulation (has to be a list)
+  lambda_t: [0.5]
 
 # Define reusable learner configurations
 learner_definitions:

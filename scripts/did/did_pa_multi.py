@@ -7,7 +7,7 @@ sim = DIDMultiCoverageSimulation(
     log_file="logs/did/did_pa_multi_sim.log",
 )
 sim.run_simulation()
-sim.save_results(output_path="results/did/", file_prefix="did_multi")
+sim.save_results(output_path="results/did/", file_prefix="did_pa_multi")
 
 # Save config file for reproducibility
 sim.save_config("results/did/did_pa_multi_config.yml")

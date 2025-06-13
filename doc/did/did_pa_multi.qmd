@@ -36,7 +36,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/did/did_multi_metadata.csv'
+metadata_file = '../../results/did/did_pa_multi_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -47,7 +47,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data
-df = pd.read_csv("../../results/did/did_multi_detailed.csv", index_col=None)
+df = pd.read_csv("../../results/did/did_pa_multi_detailed.csv", index_col=None)
 
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
@@ -122,7 +122,7 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 #| echo: false
 
 # set up data
-df_group = pd.read_csv("../../results/did/did_multi_group.csv", index_col=None)
+df_group = pd.read_csv("../../results/did/did_pa_multi_group.csv", index_col=None)
 
 assert df_group["repetition"].nunique() == 1
 n_rep_group = df_group["repetition"].unique()[0]
@@ -190,7 +190,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_time = pd.read_csv("../../results/did/did_multi_time.csv", index_col=None)
+df_time = pd.read_csv("../../results/did/did_pa_multi_time.csv", index_col=None)
 
 assert df_time["repetition"].nunique() == 1
 n_rep_time = df_time["repetition"].unique()[0]
@@ -258,7 +258,7 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_es = pd.read_csv("../../results/did/did_multi_eventstudy.csv", index_col=None)
+df_es = pd.read_csv("../../results/did/did_pa_multi_eventstudy.csv", index_col=None)
 
 assert df_es["repetition"].nunique() == 1
 n_rep_es = df_es["repetition"].unique()[0]
