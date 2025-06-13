@@ -35,7 +35,6 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        # Process ML models in parameter grid
         assert "learners" in self.dml_parameters, "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
