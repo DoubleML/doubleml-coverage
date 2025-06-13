@@ -27,7 +27,7 @@ website:
           - plm/pliv.qmd
       - text: "DID"
         menu:
-          - did/did_multi.qmd
+          - did/did_pa_multi.qmd
           - did/did_cs_multi.qmd
           - did/did_pa.qmd
           - did/did_cs.qmd
