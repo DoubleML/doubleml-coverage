@@ -2,15 +2,13 @@ from typing import Any, Dict, Optional
 
 import doubleml as dml
 from doubleml.datasets import make_plr_CCDDHNR2018
-from lightgbm import LGBMRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LassoCV
 
 from montecover.base import BaseSimulation
+from montecover.utils import create_learner_from_config
 
 
 class PLRATECoverageSimulation(BaseSimulation):
-    """Simulation study for coverage properties of DoubleMLPLR for ATE estimation."""
+    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
         self,
@@ -26,9 +24,6 @@ class PLRATECoverageSimulation(BaseSimulation):
             log_file=log_file,
         )
 
-        # Additional results storage for aggregated results
-        self.results_aggregated = []
-
         # Calculate oracle values
         self._calculate_oracle_values()
 
@@ -36,26 +31,11 @@ class PLRATECoverageSimulation(BaseSimulation):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
         assert "learners" in self.dml_parameters, "No learners specified in the config file"
+
+        required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
-            assert "ml_g" in learner, "No ml_g specified in the config file"
-            assert "ml_m" in learner, "No ml_m specified in the config file"
-
-            # Convert ml_g strings to actual objects
-            learner["ml_g"] = self._convert_ml_string_to_object(learner["ml_g"][0])
-            learner["ml_m"] = self._convert_ml_string_to_object(learner["ml_m"][0])
-
-    def _convert_ml_string_to_object(self, ml_string):
-        """Convert a string to a machine learning object."""
-        if ml_string == "Lasso":
-            learner = LassoCV()
-        elif ml_string == "Random Forest":
-            learner = RandomForestRegressor(n_estimators=200, max_features=10, max_depth=5, min_samples_leaf=20)
-        elif ml_string == "LGBM":
-            learner = LGBMRegressor(n_estimators=500, learning_rate=0.01, verbose=-1, n_jobs=1)
-        else:
-            raise ValueError(f"Unknown learner type: {ml_string}")
-
-        return (ml_string, learner)
+            for ml in required_learners:
+                assert ml in learner, f"No {ml} specified in the config file"
 
     def _calculate_oracle_values(self):
         """Calculate oracle values for the simulation."""
@@ -67,8 +47,9 @@ class PLRATECoverageSimulation(BaseSimulation):
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
-        learner_g_name, ml_g = dml_params["learners"]["ml_g"]
-        learner_m_name, ml_m = dml_params["learners"]["ml_m"]
+        learner_config = dml_params["learners"]
+        learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
+        learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         score = dml_params["score"]
 
         # Model
@@ -132,7 +113,10 @@ class PLRATECoverageSimulation(BaseSimulation):
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
         data = make_plr_CCDDHNR2018(
-            alpha=dgp_params["theta"], n_obs=dgp_params["n_obs"], dim_x=dgp_params["dim_x"], return_type="DataFrame"
+            alpha=dgp_params["theta"],
+            n_obs=dgp_params["n_obs"],
+            dim_x=dgp_params["dim_x"],
+            return_type="DataFrame",
         )
         dml_data = dml.DoubleMLData(data, "y", "d")
         return dml_data

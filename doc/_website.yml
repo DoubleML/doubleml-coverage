@@ -1,6 +1,7 @@
 website:
   title: "DoubleML Coverage"
   favicon: _static/favicon.ico
+  site-url: https://docs.doubleml.org/doubleml-coverage/
   search:
     location: sidebar
   sidebar:
@@ -17,6 +18,7 @@ website:
           - irm/irm_cate.qmd
           - irm/apo.qmd
           - irm/qte.qmd
+          - irm/iivm.qmd
       - text: "PLM"
         menu:
           - plm/plr.qmd
@@ -25,7 +27,8 @@ website:
           - plm/pliv.qmd
       - text: "DID"
         menu:
-          - did/did_multi.qmd
+          - did/did_pa_multi.qmd
+          - did/did_cs_multi.qmd
           - did/did_pa.qmd
           - did/did_cs.qmd
       - text: "SSM"

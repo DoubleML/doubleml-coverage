@@ -1,7 +1,7 @@
 # Simulation parameters for DID Multi Coverage
 
 simulation_parameters:
-  repetitions: 1000
+  repetitions: 500
   max_runtime: 19800 # 5.5 hours in seconds
   random_seed: 42
   n_jobs: -2
@@ -10,13 +10,49 @@ dgp_parameters:
   DGP: [1, 4, 6] # Different DGP specifications
   n_obs: [2000] # Sample size for each simulation (has to be a list)
 
+# Define reusable learner configurations
+learner_definitions:
+  linear: &linear
+    name: "Linear"
+
+  logistic: &logistic
+    name: "Logistic"
+
+  lgbmr: &lgbmr
+    name: "LGBM Regr."
+    params:
+      n_estimators: 300            # More trees to learn slowly and steadily
+      learning_rate: 0.03          # Lower learning rate to improve generalization
+      num_leaves: 7                # Fewer leaves — simpler trees
+      max_depth: 3                 # Shallow trees reduce overfitting
+      min_child_samples: 20        # Require more samples per leaf
+      subsample: 0.8               # More row sampling to add randomness
+      colsample_bytree: 0.8        # More feature sampling
+      reg_alpha: 0.1               # Add L1 regularization
+      reg_lambda: 1.0              # Increase L2 regularization
+      random_state: 42             # Reproducible
+
+  lgbmc: &lgbmc
+    name: "LGBM Clas."
+    params:
+      n_estimators: 300            # More trees to learn slowly and steadily
+      learning_rate: 0.03          # Lower learning rate to improve generalization
+      num_leaves: 7                # Fewer leaves — simpler trees
+      max_depth: 3                 # Shallow trees reduce overfitting
+      min_child_samples: 20        # Require more samples per leaf
+      subsample: 0.8               # More row sampling to add randomness
+      colsample_bytree: 0.8        # More feature sampling
+      reg_alpha: 0.1               # Add L1 regularization
+      reg_lambda: 1.0              # Increase L2 regularization
+      random_state: 42             # Reproducible
+
 dml_parameters:
   # ML methods for ml_g and ml_m
   learners:
-    - ml_g: ["Linear"]
-      ml_m: ["Linear"]
-    - ml_g: ["LGBM"]
-      ml_m: ["LGBM"]
+    - ml_g: *linear
+      ml_m: *logistic
+    - ml_g: *lgbmr
+      ml_m: *lgbmc
 
   score:
     - observational # Standard DML score

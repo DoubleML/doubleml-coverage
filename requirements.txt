@@ -6,3 +6,4 @@ scikit-learn
 lightgbm
 itables
 ipykernel
+pre-commit>=4.2.0

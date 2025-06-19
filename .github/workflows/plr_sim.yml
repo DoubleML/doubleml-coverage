@@ -17,10 +17,10 @@ jobs:
     strategy:
       matrix:
         script: [
-          'scripts/plm/plr_ate_coverage.py',
+          'scripts/plm/plr_ate.py',
           'scripts/plm/plr_ate_sensitivity.py',
-          'scripts/plm/plr_cate_coverage.py',
-          'scripts/plm/plr_gate_coverage.py',
+          'scripts/plm/plr_cate.py',
+          'scripts/plm/plr_gate.py',
         ]
 
     steps:
@@ -53,8 +53,8 @@ jobs:
     - name: Install uv
       uses: astral-sh/setup-uv@v5
       with:
-        version: "0.6.11"
-  
+        version: "0.7.8"
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
