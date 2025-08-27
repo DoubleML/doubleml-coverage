@@ -96,7 +96,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner m", "Learner M", "Learner T", "Score", "level"]
+        groupby_cols = ["Learner m", "Learner M", "Learner t", "Score", "level"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
