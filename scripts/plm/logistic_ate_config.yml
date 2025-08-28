@@ -54,24 +54,42 @@ dml_parameters:
     - ml_m: *lgbm
       ml_M: *lgbm-class
       ml_t: *lgbm
-#    - ml_m: *rf
-#      ml_M: *lgbm
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *rf
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *lgbm
-#      ml_t: *rf
-#    - ml_m: *lgbm
-#      ml_M: *rf
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *lgbm
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *rf
-#      ml_t: *lgbm
+    - ml_m: *rf
+      ml_M: *lgbm
+      ml_t: *lgbm-class
+    - ml_m: *lgbm
+      ml_M: *rf-class
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *rf
+    - ml_m: *lgbm
+      ml_M: *rf-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *lgbm-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *rf-class
+      ml_t: *lgbm
+    - ml_m: *lasso
+      ml_M: *lgbm
+      ml_t: *lgbm-class
+    - ml_m: *lgbm
+      ml_M: *logistic
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *lasso
+    - ml_m: *lasso
+      ml_M: *rf-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *logistic
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *rf-class
+      ml_t: *lasso
 
   score: ["nuisance_space", "instrument"]
 
