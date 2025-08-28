@@ -15,11 +15,9 @@ learner_definitions:
     name: LassoCV
   rf: &id001
     name: RF Regr.
-    params:
-      n_estimators: 200
-      max_features: 10
-      max_depth: 5
-      min_samples_leaf: 20
+  rf-class: &id002
+    name: RF Clas.
+    params: null
   lgbm:
     name: LGBM Regr.
     params:
@@ -28,7 +26,7 @@ learner_definitions:
 dml_parameters:
   learners:
   - ml_m: *id001
-    ml_M: *id001
+    ml_M: *id002
     ml_t: *id001
   score:
   - nuisance_space

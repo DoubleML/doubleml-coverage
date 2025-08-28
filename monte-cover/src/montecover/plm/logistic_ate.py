@@ -114,11 +114,10 @@ class LogisticATECoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_logistic_LZZ2020(
+        dml_data = make_logistic_LZZ2020(
             alpha=dgp_params["theta"],
             n_obs=dgp_params["n_obs"],
             dim_x=dgp_params["dim_x"],
-            return_type="DataFrame",
+            return_type="DoubleMLData",
         )
-        dml_data = dml.DoubleMLData(data, "y", "d", "p")
         return dml_data

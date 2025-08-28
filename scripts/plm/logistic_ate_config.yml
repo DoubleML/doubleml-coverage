@@ -19,18 +19,14 @@ learner_definitions:
   rf: &rf
     name: "RF Regr."
     params:
-      n_estimators: 200
-      max_features: 10
-      max_depth: 5
-      min_samples_leaf: 20
+      n_estimators: 100
+      max_features: "sqrt"
 
   rf-class: &rf-class
     name: "RF Clas."
     params:
-      n_estimators: 200
-      max_features: 10
-      max_depth: 5
-      min_samples_leaf: 20
+      n_estimators: 100
+      max_features: "sqrt"
 
   lgbm: &lgbm
     name: "LGBM Regr."
