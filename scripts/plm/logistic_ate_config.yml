@@ -16,6 +16,9 @@ learner_definitions:
   lasso: &lasso
     name: "LassoCV"
 
+  logistic: &logistic
+    name: "Logistic"
+
   rf: &rf
     name: "RF Regr."
     params:
@@ -34,7 +37,7 @@ learner_definitions:
       n_estimators: 500
       learning_rate: 0.01
 
-  lgbm: &lgbm-class
+  lgbm-class: &lgbm-class
     name: "LGBM Clas."
     params:
       n_estimators: 500
@@ -43,7 +46,7 @@ learner_definitions:
 dml_parameters:
   learners:
     - ml_m: *lasso
-      ml_M: *lasso
+      ml_M: *logistic
       ml_t: *lasso
     - ml_m: *rf
       ml_M: *rf-class
