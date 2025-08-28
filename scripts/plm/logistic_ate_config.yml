@@ -34,17 +34,23 @@ learner_definitions:
       n_estimators: 500
       learning_rate: 0.01
 
+  lgbm: &lgbm-class
+    name: "LGBM Clas."
+    params:
+      n_estimators: 500
+      learning_rate: 0.01
+
 dml_parameters:
   learners:
-#    - ml_m: *lasso
-#      ml_M: *lasso
-#      ml_t: *lasso
+    - ml_m: *lasso
+      ml_M: *lasso
+      ml_t: *lasso
     - ml_m: *rf
       ml_M: *rf-class
       ml_t: *rf
-#    - ml_m: *lgbm
-#      ml_M: *lgbm
-#      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *lgbm
 #    - ml_m: *rf
 #      ml_M: *lgbm
 #      ml_t: *lgbm
@@ -64,7 +70,7 @@ dml_parameters:
 #      ml_M: *rf
 #      ml_t: *lgbm
 
-  score: ["nuisance_space"]
+  score: ["nuisance_space", "instrument"]
 
 confidence_parameters:
   level: [0.95, 0.90] # Confidence levels
