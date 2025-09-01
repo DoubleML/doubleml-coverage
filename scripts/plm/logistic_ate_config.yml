@@ -55,8 +55,8 @@ dml_parameters:
       ml_M: *lgbm-class
       ml_t: *lgbm
     - ml_m: *rf
-      ml_M: *lgbm
-      ml_t: *lgbm-class
+      ml_M: *lgbm-class
+      ml_t: *lgbm
     - ml_m: *lgbm
       ml_M: *rf-class
       ml_t: *lgbm
@@ -73,8 +73,8 @@ dml_parameters:
       ml_M: *rf-class
       ml_t: *lgbm
     - ml_m: *lasso
-      ml_M: *lgbm
-      ml_t: *lgbm-class
+      ml_M: *lgbm-class
+      ml_t: *lgbm
     - ml_m: *lgbm
       ml_M: *logistic
       ml_t: *lgbm
