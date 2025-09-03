@@ -6,6 +6,7 @@ sim = LogisticATECoverageSimulation(
     log_level="INFO",
     log_file="logs/plm/logistic_ate_sim.log",
 )
+print("Calling file")
 sim.run_simulation()
 sim.save_results(output_path="results/plm/", file_prefix="logistic_ate")
 

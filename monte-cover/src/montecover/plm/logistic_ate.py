@@ -25,7 +25,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
             log_level=log_level,
             log_file=log_file,
         )
-
+        print("In LogisticATECoverageSimulation init")
         # Calculate oracle values
         self._calculate_oracle_values()
 
@@ -51,6 +51,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
+        print("Running single rep")
         learner_config = dml_params["learners"]
         learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         learner_M_name, ml_M = create_learner_from_config(learner_config["ml_M"])
