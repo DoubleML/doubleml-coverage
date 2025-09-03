@@ -97,7 +97,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
                 )
             for key, res in level_result.items():
                 result[key].append(res)
-        print(f"Results for loop {result}")
+
         return result
 
     def summarize_results(self):
