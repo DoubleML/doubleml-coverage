@@ -48,51 +48,50 @@ dml_parameters:
     - ml_m: *lasso
       ml_M: *logistic
       ml_t: *lasso
-#    - ml_m: *rf
-#      ml_M: *rf-class
-#      ml_t: *rf
-#    - ml_m: *lgbm
-#      ml_M: *lgbm-class
-#      ml_t: *lgbm
-#    - ml_m: *rf
-#      ml_M: *lgbm-class
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *rf-class
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *lgbm-class
-#      ml_t: *rf
-#    - ml_m: *lgbm
-#      ml_M: *rf-class
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *lgbm-class
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *rf-class
-#      ml_t: *lgbm
-#    - ml_m: *lasso
-#      ml_M: *lgbm-class
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *logistic
-#      ml_t: *lgbm
-#    - ml_m: *lgbm
-#      ml_M: *lgbm-class
-#      ml_t: *lasso
-#    - ml_m: *lasso
-#      ml_M: *rf-class
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *logistic
-#      ml_t: *rf
-#    - ml_m: *rf
-#      ml_M: *rf-class
-#      ml_t: *lasso
+    - ml_m: *rf
+      ml_M: *rf-class
+      ml_t: *rf
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *lgbm
+    - ml_m: *rf
+      ml_M: *lgbm-class
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *rf-class
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *rf
+    - ml_m: *lgbm
+      ml_M: *rf-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *lgbm-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *rf-class
+      ml_t: *lgbm
+    - ml_m: *lasso
+      ml_M: *lgbm-class
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *logistic
+      ml_t: *lgbm
+    - ml_m: *lgbm
+      ml_M: *lgbm-class
+      ml_t: *lasso
+    - ml_m: *lasso
+      ml_M: *rf-class
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *logistic
+      ml_t: *rf
+    - ml_m: *rf
+      ml_M: *rf-class
+      ml_t: *lasso
 
-#  score: ["nuisance_space", "instrument"]
-  score: ["nuisance_space"]
+  score: ["nuisance_space", "instrument"]
 
 confidence_parameters:
   level: [0.95, 0.90] # Confidence levels
