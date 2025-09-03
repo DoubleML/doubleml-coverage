@@ -1,3 +1,4 @@
+import warnings
 from typing import Any, Dict, Optional
 
 import doubleml as dml
@@ -16,6 +17,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
             suppress_warnings: bool = True,
             log_level: str = "INFO",
             log_file: Optional[str] = None,
+            use_failed_scores: bool = False,
     ):
         super().__init__(
             config_file=config_file,
@@ -26,6 +28,8 @@ class LogisticATECoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
+
+        self._use_failed_scores = use_failed_scores
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
@@ -61,7 +65,15 @@ class LogisticATECoverageSimulation(BaseSimulation):
             ml_t=ml_t,
             score=score,)
 
-        dml_model.fit()
+        if self._use_failed_scores:
+            dml_model.fit()
+        else:
+            warnings.filterwarnings("error")
+            try:
+                dml_model.fit()
+            except Warning as w:
+                return None
+            warnings.resetwarnings()
 
         result = {
             "coverage": [],
