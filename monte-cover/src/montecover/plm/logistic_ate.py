@@ -73,7 +73,8 @@ class LogisticATECoverageSimulation(BaseSimulation):
             try:
                 dml_model.fit()
             except Warning as w:
-                self.logger.debug(f"Warning during fitting: {w}. Returning None for this repetition.")
+                self.logger.info(f"Warning during fitting: {w}. Returning None for this repetition.")
+                print("Fit warning")
                 return None
             warnings.resetwarnings()
 
