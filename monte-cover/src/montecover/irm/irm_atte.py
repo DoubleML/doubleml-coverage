@@ -2,7 +2,7 @@ from typing import Any, Dict, Optional
 
 import doubleml as dml
 import numpy as np
-from doubleml.datasets import make_irm_data
+from doubleml.irm.datasets import make_irm_data
 from scipy.linalg import toeplitz
 
 from montecover.base import BaseSimulation

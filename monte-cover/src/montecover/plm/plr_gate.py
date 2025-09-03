@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import doubleml as dml
 import numpy as np
 import pandas as pd
-from doubleml.datasets import make_heterogeneous_data
+from doubleml.plm.datasets import make_heterogeneous_data
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
