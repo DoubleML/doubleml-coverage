@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.10.dev0,LogisticATECoverageSimulation,2025-06-22 18:53,0.22107456922531127,3.12.2,scripts/plm/logistic_ate_config.yml
+0.10.dev0,LogisticATECoverageSimulation,2025-09-03 22:35,447.33407898743945,3.12.9,scripts/plm/logistic_ate_config.yml

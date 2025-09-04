@@ -1,5 +1,5 @@
 simulation_parameters:
-  repetitions: 10
+  repetitions: 1000
   max_runtime: 86400
   random_seed: 42
   n_jobs: -2
@@ -15,22 +15,22 @@ learner_definitions:
     name: LassoCV
   logistic: &id002
     name: Logistic
-  rf:
+  rf: &id003
     name: RF Regr.
     params:
       n_estimators: 100
       max_features: sqrt
-  rf-class:
+  rf-class: &id004
     name: RF Clas.
     params:
       n_estimators: 100
       max_features: sqrt
-  lgbm:
+  lgbm: &id005
     name: LGBM Regr.
     params:
       n_estimators: 500
       learning_rate: 0.01
-  lgbm-class:
+  lgbm-class: &id006
     name: LGBM Clas.
     params:
       n_estimators: 500
@@ -40,8 +40,51 @@ dml_parameters:
   - ml_m: *id001
     ml_M: *id002
     ml_t: *id001
+  - ml_m: *id003
+    ml_M: *id004
+    ml_t: *id003
+  - ml_m: *id005
+    ml_M: *id006
+    ml_t: *id005
+  - ml_m: *id003
+    ml_M: *id006
+    ml_t: *id005
+  - ml_m: *id005
+    ml_M: *id004
+    ml_t: *id005
+  - ml_m: *id005
+    ml_M: *id006
+    ml_t: *id003
+  - ml_m: *id005
+    ml_M: *id004
+    ml_t: *id003
+  - ml_m: *id003
+    ml_M: *id006
+    ml_t: *id003
+  - ml_m: *id003
+    ml_M: *id004
+    ml_t: *id005
+  - ml_m: *id001
+    ml_M: *id006
+    ml_t: *id005
+  - ml_m: *id005
+    ml_M: *id002
+    ml_t: *id005
+  - ml_m: *id005
+    ml_M: *id006
+    ml_t: *id001
+  - ml_m: *id001
+    ml_M: *id004
+    ml_t: *id003
+  - ml_m: *id003
+    ml_M: *id002
+    ml_t: *id003
+  - ml_m: *id003
+    ml_M: *id004
+    ml_t: *id001
   score:
   - nuisance_space
+  - instrument
 confidence_parameters:
   level:
   - 0.95
