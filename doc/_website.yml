@@ -25,6 +25,7 @@ website:
           - plm/plr_gate.qmd
           - plm/plr_cate.qmd
           - plm/pliv.qmd
+          - plm/logistic.qmd
       - text: "DID"
         menu:
           - did/did_pa_multi.qmd
