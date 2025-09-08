@@ -119,5 +119,5 @@ class SSMMarATECoverageSimulation(BaseSimulation):
             mar=True,
             return_type="DataFrame",
         )
-        dml_data = dml.DoubleMLData(data, "y", "d", s_col="s")
+        dml_data = dml.data.DoubleMLSSMData(data, "y", "d", s_col="s")
         return dml_data
