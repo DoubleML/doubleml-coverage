@@ -53,7 +53,7 @@ else:
 display_columns_coverage = ["Learner m", "Learner M", "Learner t", "Bias", "CI Length", "Coverage"]
 ```
 
-### Partialling out
+### Nuisance space
 
 ```{python}
 # | echo: false
@@ -83,9 +83,8 @@ generate_and_show_styled_table(
 )
 ```
 
-### IV-type
+### Instrument
 
-For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same type of learner (here **Learner g**).
 
 ```{python}
 #| echo: false
