@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_ssm_data
+from doubleml.irm.datasets import make_ssm_data
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
@@ -119,5 +119,5 @@ class SSMMarATECoverageSimulation(BaseSimulation):
             mar=True,
             return_type="DataFrame",
         )
-        dml_data = dml.DoubleMLData(data, "y", "d", s_col="s")
+        dml_data = dml.data.DoubleMLSSMData(data, "y", "d", s_col="s")
         return dml_data
