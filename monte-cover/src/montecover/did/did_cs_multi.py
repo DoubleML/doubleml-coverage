@@ -170,7 +170,11 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.data.DoubleMLPanelData:
         """Generate data for the simulation."""
-        data = make_did_cs_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"], lambda_t=dgp_params["lambda_t"])
+        data = make_did_cs_CS2021(
+            n_obs=dgp_params["n_obs"],
+            dgp_type=dgp_params["DGP"],
+            lambda_t=dgp_params["lambda_t"],
+        )
         dml_data = dml.data.DoubleMLPanelData(
             data,
             y_col="y",

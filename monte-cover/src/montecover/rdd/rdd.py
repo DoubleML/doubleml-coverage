@@ -59,7 +59,12 @@ class RDDCoverageSimulation(BaseSimulation):
         # subset score and ite for faster computation
         score_subset = (score >= (self.cutoff - 0.02)) & (score <= (self.cutoff + 0.02))
         self.logger.info(f"Oracle score subset size: {np.sum(score_subset)}")
-        kernel_reg = KernelReg(endog=ite[score_subset], exog=score[score_subset], var_type="c", reg_type="ll")
+        kernel_reg = KernelReg(
+            endog=ite[score_subset],
+            exog=score[score_subset],
+            var_type="c",
+            reg_type="ll",
+        )
         effect_at_cutoff, _ = kernel_reg.fit(np.array([self.cutoff]))
         oracle_effect = effect_at_cutoff[0]
 
@@ -232,7 +237,10 @@ class RDDCoverageSimulation(BaseSimulation):
 
         x_cols = ["x" + str(i) for i in range(data["X"].shape[1])]
         columns = ["y", "d", "score"] + x_cols
-        df = pd.DataFrame(np.column_stack((data["Y"], data["D"], data["score"], data["X"])), columns=columns)
+        df = pd.DataFrame(
+            np.column_stack((data["Y"], data["D"], data["score"], data["X"])),
+            columns=columns,
+        )
 
         dml_data = dml.data.DoubleMLRDDData(
             data=df,

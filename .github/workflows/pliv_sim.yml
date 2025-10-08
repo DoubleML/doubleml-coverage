@@ -18,6 +18,7 @@ jobs:
       matrix:
         script: [
           'scripts/plm/pliv_late.py',
+          'scripts/plm/pliv_late_cluster.py',
         ]
 
     steps:
@@ -62,7 +63,7 @@ jobs:
         cd monte-cover
         uv venv
         uv sync
-  
+
     - name: Install DoubleML from correct branch
       run: |
         source monte-cover/.venv/bin/activate

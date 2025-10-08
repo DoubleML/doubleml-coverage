@@ -161,7 +161,14 @@ class BaseSimulation(ABC):
             self.logger.warning(f"Adding .yaml extension to output path: {output_path}")
 
         with open(output_path, "w") as file:
-            yaml.dump(self.config, file, sort_keys=False, default_flow_style=False, indent=2, allow_unicode=True)
+            yaml.dump(
+                self.config,
+                file,
+                sort_keys=False,
+                default_flow_style=False,
+                indent=2,
+                allow_unicode=True,
+            )
 
         self.logger.info(f"Configuration saved to {output_path}")
 

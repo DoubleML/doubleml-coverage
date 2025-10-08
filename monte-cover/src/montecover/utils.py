@@ -2,7 +2,12 @@ from typing import Any, Callable, Dict, Tuple
 
 from doubleml.utils import GlobalClassifier, GlobalRegressor
 from lightgbm import LGBMClassifier, LGBMRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, StackingClassifier, StackingRegressor
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    RandomForestRegressor,
+    StackingClassifier,
+    StackingRegressor,
+)
 from sklearn.linear_model import LassoCV, LinearRegression, LogisticRegression, Ridge
 
 LearnerInstantiator = Callable[[Dict[str, Any]], Any]
