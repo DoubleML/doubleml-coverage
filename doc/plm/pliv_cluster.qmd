@@ -1,0 +1,114 @@
+---
+title: "PLIV Models with Clustering"
+
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+from itables import init_notebook_mode
+import os
+import sys
+
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
+
+init_notebook_mode(all_interactive=True)
+```
+
+## LATE Coverage
+
+The simulations are based on the  the [make_pliv_multiway_cluster_CKMS2021](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $N=25=M$ observations. Due to the linearity of the DGP, Lasso is a nearly optimal choice for the nuisance estimation.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/pliv_late_cluster_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df_coverage_pliv = pd.read_csv("../../results/plm/pliv_late_cluster_coverage.csv", index_col=None)
+
+if "repetition" in df_coverage_pliv.columns and df_coverage_pliv["repetition"].nunique() == 1:
+    n_rep_pliv = df_coverage_pliv["repetition"].unique()[0]
+elif "n_rep" in df_coverage_pliv.columns and df_coverage_pliv["n_rep"].nunique() == 1:
+    n_rep_pliv = df_coverage_pliv["n_rep"].unique()[0]
+else:
+    n_rep_pliv = "N/A"
+
+display_columns_pliv = ["Learner g", "Learner m", "Learner r", "Bias", "CI Length", "Coverage"]
+```
+
+### Partialling out
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_pliv,
+    filters={"level": 0.95, "Score": "partialling out"},
+    display_cols=display_columns_pliv,
+    n_rep=n_rep_pliv,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_pliv,
+    filters={"level": 0.90, "Score": "partialling out"},
+    display_cols=display_columns_pliv,
+    n_rep=n_rep_pliv,
+    level_col="level",
+    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+### IV-type
+
+For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same type of learner (here **Learner g**).
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_pliv,
+    filters={"level": 0.95, "Score": "IV-type"},
+    display_cols=display_columns_pliv,
+    n_rep=n_rep_pliv,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_pliv,
+    filters={"level": 0.9, "Score": "IV-type"},
+    display_cols=display_columns_pliv,
+    n_rep=n_rep_pliv,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
