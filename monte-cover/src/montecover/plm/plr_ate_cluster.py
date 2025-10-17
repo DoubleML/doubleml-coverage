@@ -113,13 +113,20 @@ class PLRATEClusterCoverageSimulation(BaseSimulation):
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
         data_dict = make_plr_cluster_data(
-            n_obs=dgp_params["n_obs"],
+            n_clusters1=dgp_params["n_clusters1"],
+            n_clusters2=dgp_params["n_clusters2"],
             dim_x=dgp_params["dim_x"],
             alpha=dgp_params["alpha"],
-            n_clusters1=50,
-            obs_per_cluster=20,
-            linear=True,
+            obs_per_cluster=dgp_params["obs_per_cluster"],
+            linear=dgp_params["linear"],
+            cluster_correlation=dgp_params["cluster_correlation"],
+            error_correlation=dgp_params["error_correlation"],
+            cluster_size_variation=dgp_params["cluster_size_variation"],
         )
         x_cols = [f"X{i}" for i in range(1, dgp_params["dim_x"] + 1)]
-        dml_data = dml.DoubleMLData(data_dict["data"], "y", "d", x_cols=x_cols, cluster_cols=["cluster1"])
+        if dgp_params["n_clusters2"] is None:
+            cluster_cols = ["cluster1"]
+        else:
+            cluster_cols = ["cluster1", "cluster2"]
+        dml_data = dml.DoubleMLData(data_dict["data"], "y", "d", x_cols=x_cols, cluster_cols=cluster_cols)
         return dml_data

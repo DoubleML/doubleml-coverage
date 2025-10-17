@@ -10,7 +10,7 @@ dgp_parameters:
   alpha: [0.5] # Treatment effect
   dim_x: [5] # Number of covariates
   n_clusters1: [200]
-  n_clusters2: [null]  # None for YAML should be null
+  n_clusters2: [200]
   obs_per_cluster: [5]
   linear: [True]
   cluster_correlation: [0.7]
