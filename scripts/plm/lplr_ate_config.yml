@@ -1,4 +1,4 @@
-# Simulation parameters for PLR ATE Coverage
+# Simulation parameters for LPLR ATE Coverage
 
 simulation_parameters:
   repetitions: 1000
