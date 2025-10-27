@@ -2,13 +2,13 @@ import warnings
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_logistic_LZZ2020
+from doubleml.plm.data import make_lplr_LZZ2020
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class LogisticATECoverageSimulation(BaseSimulation):
+class LPLRATECoverageSimulation(BaseSimulation):
     """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
@@ -58,7 +58,7 @@ class LogisticATECoverageSimulation(BaseSimulation):
         score = dml_params["score"]
 
         # Model
-        dml_model = dml.DoubleMLLogit(
+        dml_model = dml.DoubleMLLPLR(
             obj_dml_data=dml_data,
             ml_m=ml_m,
             ml_M=ml_M,
@@ -123,4 +123,4 @@ class LogisticATECoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        return make_logistic_LZZ2020(**dgp_params)
+        return make_lplr_LZZ2020(**dgp_params)
