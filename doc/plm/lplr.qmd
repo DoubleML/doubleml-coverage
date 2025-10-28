@@ -1,5 +1,5 @@
 ---
-title: "Logistic Models"
+title: "Logistic Partial Linear Regression Models"
 
 jupyter: python3
 ---
@@ -24,13 +24,13 @@ init_notebook_mode(all_interactive=True)
 
 ## ATE Coverage
 
-The simulations are based on the  the [make_logistic_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_plr_CCDDHNR2018.html)-DGP with $500$ observations.
+The simulations are based on the  the [make_lplr_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_lplr_LZZ2020.html)-DGP with $500$ observations.
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
 ```{python}
 #| echo: false
-metadata_file = '../../results/plm/logistic_ate_metadata.csv'
+metadata_file = '../../results/plm/lplr_ate_metadata.csv'
 metadata_df = pd.read_csv(metadata_file)
 print(metadata_df.T.to_string(header=False))
 ```
@@ -41,7 +41,7 @@ print(metadata_df.T.to_string(header=False))
 #| echo: false
 
 # set up data and rename columns
-df_coverage = pd.read_csv("../../results/plm/logistic_ate_coverage.csv", index_col=None)
+df_coverage = pd.read_csv("../../results/plm/lplr_ate_coverage.csv", index_col=None)
 
 if "repetition" in df_coverage.columns and df_coverage["repetition"].nunique() == 1:
     n_rep_coverage = df_coverage["repetition"].unique()[0]

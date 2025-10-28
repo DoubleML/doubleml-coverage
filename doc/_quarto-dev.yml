@@ -21,7 +21,7 @@ website:
     - plm/plr_gate.qmd
     - plm/plr_cate.qmd
     - plm/pliv.qmd
-    - plm/logistic.qmd
+    - plm/lplr.qmd
     # DID
     - did/did_pa.qmd
     - did/did_cs.qmd
