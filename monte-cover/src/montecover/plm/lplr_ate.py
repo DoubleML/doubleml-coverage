@@ -2,7 +2,7 @@ import warnings
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.plm.data import make_lplr_LZZ2020
+from doubleml.plm.datasets import make_lplr_LZZ2020
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
