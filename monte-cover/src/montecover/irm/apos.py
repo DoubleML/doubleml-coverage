@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import doubleml as dml
 import numpy as np
 import pandas as pd
-from doubleml.datasets import make_irm_data_discrete_treatments
+from doubleml.irm.datasets import make_irm_data_discrete_treatments
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config

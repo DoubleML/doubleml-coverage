@@ -108,7 +108,7 @@ class RDDCoverageSimulation(BaseSimulation):
         """Run a benchmark using rdrobust for RDD."""
 
         # Extract parameters
-        score = dml_data.data[dml_data.s_col]
+        score = dml_data.data[dml_data.score_col]
         Y = dml_data.data[dml_data.y_col]
         Z = dml_data.data[dml_data.x_cols]
 
@@ -230,10 +230,15 @@ class RDDCoverageSimulation(BaseSimulation):
             cutoff=dgp_params["cutoff"],
         )
 
-        score = data["score"]
-        Y = data["Y"]
-        X = data["X"].reshape(dgp_params["n_obs"], -1)
-        D = data["D"]
+        x_cols = ["x" + str(i) for i in range(data["X"].shape[1])]
+        columns = ["y", "d", "score"] + x_cols
+        df = pd.DataFrame(np.column_stack((data["Y"], data["D"], data["score"], data["X"])), columns=columns)
 
-        dml_data = dml.DoubleMLData.from_arrays(y=Y, d=D, x=X, s=score)
+        dml_data = dml.data.DoubleMLRDDData(
+            data=df,
+            y_col="y",
+            d_cols=["d"],
+            x_cols=x_cols,
+            score_col="score",
+        )
         return dml_data
