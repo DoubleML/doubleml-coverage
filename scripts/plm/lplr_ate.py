@@ -4,7 +4,7 @@ from montecover.plm import LPLRATECoverageSimulation
 sim = LPLRATECoverageSimulation(
     config_file="scripts/plm/lplr_ate_config.yml",
     log_level="INFO",
-    log_file="logs/plm/plr_ate_sim.log",
+    log_file="logs/plm/lplr_ate_sim.log",
 )
 print("Calling file")
 sim.run_simulation()
