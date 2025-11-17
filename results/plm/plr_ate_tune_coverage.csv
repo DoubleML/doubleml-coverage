@@ -1,0 +1,5 @@
+Learner g,Learner m,Score,level,Tuned,Coverage,CI Length,Bias,repetition
+LGBM Regr.,LGBM Regr.,partialling out,0.9,False,0.84,0.1476322636407647,0.0419955778328819,100
+LGBM Regr.,LGBM Regr.,partialling out,0.9,True,0.9,0.14472954691929252,0.03509689726085052,100
+LGBM Regr.,LGBM Regr.,partialling out,0.95,False,0.91,0.17591469231721352,0.0419955778328819,100
+LGBM Regr.,LGBM Regr.,partialling out,0.95,True,0.95,0.17245589200927858,0.03509689726085052,100
