@@ -1,5 +1,5 @@
 ---
-title: "Logistic Partial Linear Regression Models"
+title: "Logistic PLR Models"
 
 jupyter: python3
 ---
