@@ -10,8 +10,6 @@ dgp_parameters:
   - 500
   dim_x:
   - 20
-  balanced_r0:
-  - false
 learner_definitions:
   lasso: &id001
     name: LassoCV

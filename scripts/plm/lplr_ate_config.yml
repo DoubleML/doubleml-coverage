@@ -10,7 +10,6 @@ dgp_parameters:
   theta: [0.5] # Treatment effect
   n_obs: [500] # Sample size
   dim_x: [20] # Number of covariates
-  balanced_r0: [False] # Whether to use balanced r0 function
 
 # Define reusable learner configurations
 learner_definitions:
