@@ -4,7 +4,7 @@ import doubleml as dml
 import numpy as np
 import pandas as pd
 import patsy
-from doubleml.datasets import make_heterogeneous_data
+from doubleml.irm.datasets import make_heterogeneous_data
 from sklearn.linear_model import LinearRegression
 
 from montecover.base import BaseSimulation

@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.datasets import make_plr_CCDDHNR2018
+from doubleml.plm.datasets import make_plr_CCDDHNR2018
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config

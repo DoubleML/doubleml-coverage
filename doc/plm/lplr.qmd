@@ -1,0 +1,113 @@
+---
+title: "Logistic PLR Models"
+
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+from itables import init_notebook_mode
+import os
+import sys
+
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
+
+init_notebook_mode(all_interactive=True)
+```
+
+## ATE Coverage
+
+The simulations are based on the  the [make_lplr_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_lplr_LZZ2020.html)-DGP with $500$ observations.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/lplr_ate_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df_coverage = pd.read_csv("../../results/plm/lplr_ate_coverage.csv", index_col=None)
+
+if "repetition" in df_coverage.columns and df_coverage["repetition"].nunique() == 1:
+    n_rep_coverage = df_coverage["repetition"].unique()[0]
+elif "n_rep" in df_coverage.columns and df_coverage["n_rep"].nunique() == 1:
+    n_rep_coverage = df_coverage["n_rep"].unique()[0]
+else:
+    n_rep_coverage = "N/A" # Fallback if n_rep cannot be determined
+
+display_columns_coverage = ["Learner m", "Learner M", "Learner t", "Bias", "CI Length", "Coverage"]
+```
+
+### Nuisance space
+
+```{python}
+# | echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "Score": "nuisance_space"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+#    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "Score": "nuisance_space"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+#    rename_map={"Learner g": "Learner l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+### Instrument
+
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "Score": "instrument"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "Score": "instrument"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```

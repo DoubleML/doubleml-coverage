@@ -1,21 +1,23 @@
+import warnings
 from typing import Any, Dict, Optional
 
 import doubleml as dml
-from doubleml.irm.datasets import make_iivm_data
+from doubleml.plm.datasets import make_lplr_LZZ2020
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class IIVMLATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLIIVM for LATE estimation."""
+class LPLRATECoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
-        self,
-        config_file: str,
-        suppress_warnings: bool = True,
-        log_level: str = "INFO",
-        log_file: Optional[str] = None,
+            self,
+            config_file: str,
+            suppress_warnings: bool = True,
+            log_level: str = "INFO",
+            log_file: Optional[str] = None,
+            use_failed_scores: bool = False,
     ):
         super().__init__(
             config_file=config_file,
@@ -27,12 +29,14 @@ class IIVMLATECoverageSimulation(BaseSimulation):
         # Calculate oracle values
         self._calculate_oracle_values()
 
+        self._use_failed_scores = use_failed_scores
+
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
         assert "learners" in self.dml_parameters, "No learners specified in the config file"
 
-        required_learners = ["ml_g", "ml_m", "ml_r"]
+        required_learners = ["ml_m", "ml_M", "ml_t"]
         for learner in self.dml_parameters["learners"]:
             for ml in required_learners:
                 assert ml in learner, f"No {ml} specified in the config file"
@@ -44,22 +48,29 @@ class IIVMLATECoverageSimulation(BaseSimulation):
         self.oracle_values = dict()
         self.oracle_values["theta"] = self.dgp_parameters["theta"]
 
-    def run_single_rep(self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]) -> Dict[str, Any]:
+    def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
         learner_config = dml_params["learners"]
-        learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
         learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
-        learner_r_name, ml_r = create_learner_from_config(learner_config["ml_r"])
+        learner_M_name, ml_M = create_learner_from_config(learner_config["ml_M"])
+        learner_t_name, ml_t = create_learner_from_config(learner_config["ml_t"])
+        score = dml_params["score"]
 
         # Model
-        dml_model = dml.DoubleMLIIVM(
+        dml_model = dml.DoubleMLLPLR(
             obj_dml_data=dml_data,
-            ml_g=ml_g,
             ml_m=ml_m,
-            ml_r=ml_r,
-        )
-        dml_model.fit()
+            ml_M=ml_M,
+            ml_t=ml_t,
+            score=score,
+            error_on_convergence_failure= not self._use_failed_scores,)
+
+        try:
+            dml_model.fit()
+        except RuntimeError as e:
+            self.logger.info(f"Exception during fit: {e}")
+            return None
 
         result = {
             "coverage": [],
@@ -74,12 +85,13 @@ class IIVMLATECoverageSimulation(BaseSimulation):
             )
 
             # add parameters to the result
-            for res_metric in level_result.values():
-                res_metric.update(
+            for res in level_result.values():
+                res.update(
                     {
-                        "Learner g": learner_g_name,
                         "Learner m": learner_m_name,
-                        "Learner r": learner_r_name,
+                        "Learner M": learner_M_name,
+                        "Learner t": learner_t_name,
+                        "Score": score,
                         "level": level,
                     }
                 )
@@ -93,7 +105,7 @@ class IIVMLATECoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner g", "Learner m", "Learner r", "level"]
+        groupby_cols = ["Learner m", "Learner M", "Learner t", "Score", "level"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
@@ -109,14 +121,6 @@ class IIVMLATECoverageSimulation(BaseSimulation):
 
         return result_summary
 
-    def _generate_dml_data(self, dgp_params: Dict[str, Any]) -> dml.DoubleMLData:
+    def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_iivm_data(
-            theta=dgp_params["theta"],
-            n_obs=dgp_params["n_obs"],
-            dim_x=dgp_params["dim_x"],
-            alpha_x=dgp_params["alpha_x"],
-            return_type="DataFrame",
-        )
-        dml_data = dml.DoubleMLData(data, "y", "d", z_cols="z")
-        return dml_data
+        return make_lplr_LZZ2020(**dgp_params)
