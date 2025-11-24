@@ -22,7 +22,7 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATTE Coverage
+## Coverage
 
 The simulations are based on the  the [make_did_CS2021](https://docs.doubleml.org/stable/api/generated/doubleml.did.datasets.make_did_CS2021.html)-DGP with $2000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
 
