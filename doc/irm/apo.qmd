@@ -24,7 +24,7 @@ init_notebook_mode(all_interactive=True)
 
 ## APO Pointwise Coverage
 
-The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/api.html#datasets-module)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -80,7 +80,7 @@ generate_and_show_styled_table(
 
 ## APOS Coverage
 
-The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/api.html#datasets-module)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 
@@ -136,7 +136,7 @@ generate_and_show_styled_table(
 
 ## Causal Contrast Coverage
 
-The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/api.html#datasets-module)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_irm_data_discrete_treatments](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all quantiles (point-wise confidende intervals).
 

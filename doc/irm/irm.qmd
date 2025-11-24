@@ -22,9 +22,9 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATE Coverage
+## Coverage
 
-The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -36,6 +36,8 @@ print(metadata_df.T.to_string(header=False))
 ```
 
 :::
+
+### ATE 
 
 ```{python}
 #| echo: false
@@ -78,9 +80,9 @@ generate_and_show_styled_table(
 ```
 
 
-## ATTE Coverage
+### ATTE
 
-As for the ATE, the simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html)-DGP with $500$ observations.
+As for the ATE, the simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html)-DGP with $500$ observations.
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 
@@ -135,7 +137,7 @@ generate_and_show_styled_table(
 
 ## Sensitivity
 
-The simulations are based on the  the [make_confounded_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_confounded_irm_data.html#doubleml.datasets.make_confounded_irm_data)-DGP with $5,000$ observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.
+The simulations are based on the  the [make_confounded_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_confounded_irm_data.html#doubleml.datasets.make_confounded_irm_data)-DGP with $5,000$ observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.
 
 The confounding is set such that both sensitivity parameters are approximately $cf_y=cf_d=0.1$, such that the robustness value $RV$ should be approximately $10\%$.
 Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of $\rho$ has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of $|\rho|=1$.
@@ -243,5 +245,63 @@ generate_and_show_styled_table(
     level_col="level",
     rename_map=rename_map_sens,
     coverage_highlight_cols=coverage_highlight_cols_sens
+)
+```
+
+
+## Tuning
+
+The simulations are based on the  the [make_irm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html)-DGP with $1000$ observations. This is only an example as the untuned version just relies on the default configuration.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/irm/irm_ate_tune_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+### ATE 
+
+```{python}
+#| echo: false
+
+# set up data
+df_ate_tune_cov = pd.read_csv("../../results/irm/irm_ate_tune_coverage.csv", index_col=None)
+
+assert df_ate_tune_cov["repetition"].nunique() == 1
+n_rep_ate_tune_cov = df_ate_tune_cov["repetition"].unique()[0]
+
+display_columns_ate_tune_cov = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage",]
+```
+
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_ate_tune_cov,
+    filters={"level": 0.95},
+    display_cols=display_columns_ate_tune_cov,
+    n_rep=n_rep_ate_cov,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_ate_tune_cov,
+    filters={"level": 0.9},
+    display_cols=display_columns_ate_tune_cov,
+    n_rep=n_rep_ate_cov,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
 )
 ```
