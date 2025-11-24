@@ -22,7 +22,7 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATE Coverage
+## Coverage
 
 The simulations are based on the  the [make_lplr_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_lplr_LZZ2020.html)-DGP with $500$ observations.
 
