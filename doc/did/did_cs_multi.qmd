@@ -24,7 +24,7 @@ init_notebook_mode(all_interactive=True)
 
 ## ATTE Coverage
 
-The simulations are based on the [make_did_cs_CS2021](https://docs.doubleml.org/dev/api/generated/doubleml.did.datasets.make_did_cs_CS2021.html)-DGP with $2000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
+The simulations are based on the [make_did_cs_CS2021](https://docs.doubleml.org/stable/api/generated/doubleml.did.datasets.make_did_cs_CS2021.html)-DGP with $2000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
 
  - Type 1: Linear outcome model and treatment assignment
  - Type 4: Nonlinear outcome model and treatment assignment
@@ -112,7 +112,7 @@ generate_and_show_styled_table(
 
 ## Aggregated Effects
 
-These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/dev/guide/models.html#difference-in-differences-models-did).
+These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/stable/guide/models.html#difference-in-differences-models-did).
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidence intervals).
 
