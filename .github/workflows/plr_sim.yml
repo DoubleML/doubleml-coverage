@@ -21,6 +21,7 @@ jobs:
           'scripts/plm/plr_ate_sensitivity.py',
           'scripts/plm/plr_cate.py',
           'scripts/plm/plr_gate.py',
+          'scripts/plm/lplr_ate.py',
         ]
 
     steps:
