@@ -34,7 +34,9 @@ class PLRCATECoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -54,14 +56,18 @@ class PLRCATECoverageSimulation(BaseSimulation):
 
         self.logger.info("Calculating oracle values")
 
-        design_matrix_oracle = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": data_oracle["data"]["X_0"]})
+        design_matrix_oracle = patsy.dmatrix(
+            "bs(x, df=5, degree=2)", {"x": data_oracle["data"]["X_0"]}
+        )
         spline_basis_oracle = pd.DataFrame(design_matrix_oracle)
         oracle_model = LinearRegression()
         oracle_model.fit(spline_basis_oracle, data_oracle["effects"])
 
         # evaluate on grid
         grid = {"x": np.linspace(0.1, 0.9, 100)}
-        spline_grid_oracle = pd.DataFrame(patsy.build_design_matrices([design_matrix_oracle.design_info], grid)[0])
+        spline_grid_oracle = pd.DataFrame(
+            patsy.build_design_matrices([design_matrix_oracle.design_info], grid)[0]
+        )
         oracle_cates = oracle_model.predict(spline_grid_oracle)
 
         self.oracle_values = dict()
@@ -87,12 +93,18 @@ class PLRCATECoverageSimulation(BaseSimulation):
         dml_model.fit()
 
         # cate
-        design_matrix = patsy.dmatrix("bs(x, df=5, degree=2)", {"x": dml_data.data["X_0"]})
+        design_matrix = patsy.dmatrix(
+            "bs(x, df=5, degree=2)", {"x": dml_data.data["X_0"]}
+        )
         spline_basis = pd.DataFrame(design_matrix)
         cate_model = dml_model.cate(basis=spline_basis)
 
         # evaluation spline basis
-        spline_grid = pd.DataFrame(patsy.build_design_matrices([design_matrix.design_info], self.oracle_values["grid"])[0])
+        spline_grid = pd.DataFrame(
+            patsy.build_design_matrices(
+                [design_matrix.design_info], self.oracle_values["grid"]
+            )[0]
+        )
 
         result = {
             "coverage": [],
@@ -101,7 +113,9 @@ class PLRCATECoverageSimulation(BaseSimulation):
             level_result = dict()
             confint = cate_model.confint(basis=spline_grid, level=level)
             effects = confint["effect"]
-            uniform_confint = cate_model.confint(basis=spline_grid, level=0.95, joint=True, n_rep_boot=2000)
+            uniform_confint = cate_model.confint(
+                basis=spline_grid, level=0.95, joint=True, n_rep_boot=2000
+            )
             level_result["coverage"] = self._compute_coverage(
                 thetas=effects,
                 oracle_thetas=self.oracle_values["cates"],
@@ -142,7 +156,9 @@ class PLRCATECoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

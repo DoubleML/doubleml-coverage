@@ -6,8 +6,8 @@ from montecover.irm.apos_tune import APOSTuningCoverageSimulation
 from montecover.irm.cvar import CVARCoverageSimulation
 from montecover.irm.iivm_late import IIVMLATECoverageSimulation
 from montecover.irm.irm_ate import IRMATECoverageSimulation
-from montecover.irm.irm_ate_tune import IRMATETuningCoverageSimulation
 from montecover.irm.irm_ate_sensitivity import IRMATESensitivityCoverageSimulation
+from montecover.irm.irm_ate_tune import IRMATETuningCoverageSimulation
 from montecover.irm.irm_atte import IRMATTECoverageSimulation
 from montecover.irm.irm_atte_sensitivity import IRMATTESensitivityCoverageSimulation
 from montecover.irm.irm_cate import IRMCATECoverageSimulation

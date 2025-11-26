@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
-import optuna
 
 import doubleml as dml
+import optuna
 from doubleml.plm.datasets import make_plr_CCDDHNR2018
 
 from montecover.base import BaseSimulation
@@ -32,40 +32,47 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         # parameter space for the outcome regression tuning
         def ml_l_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
-                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
-                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-3, 0.1, log=True
+                ),
+                "min_child_samples": trial.suggest_int(
+                    "min_child_samples", 20, 100, step=5
+                ),
+                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
             }
 
         # parameter space for the propensity score tuning
         def ml_m_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
-                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
-                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-3, 0.1, log=True
+                ),
+                "min_child_samples": trial.suggest_int(
+                    "min_child_samples", 20, 100, step=5
+                ),
+                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
             }
 
-        self._param_space = {
-            'ml_l': ml_l_params,
-            'ml_m': ml_m_params
-        }
+        self._param_space = {"ml_l": ml_l_params, "ml_m": ml_m_params}
 
         self._optuna_settings = {
-            'n_trials': 500,
-            'show_progress_bar': False,
-            'verbosity': optuna.logging.WARNING,  # Suppress Optuna logs
+            "n_trials": 500,
+            "show_progress_bar": False,
+            "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -155,7 +162,9 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

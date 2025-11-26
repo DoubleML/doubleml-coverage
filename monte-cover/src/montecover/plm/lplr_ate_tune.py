@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
-import optuna
 
 import doubleml as dml
+import optuna
 from doubleml.plm.datasets import make_lplr_LZZ2020
 
 from montecover.base import BaseSimulation
@@ -12,12 +12,12 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
     """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
-            self,
-            config_file: str,
-            suppress_warnings: bool = True,
-            log_level: str = "INFO",
-            log_file: Optional[str] = None,
-            use_failed_scores: bool = False,
+        self,
+        config_file: str,
+        suppress_warnings: bool = True,
+        log_level: str = "INFO",
+        log_file: Optional[str] = None,
+        use_failed_scores: bool = False,
     ):
         super().__init__(
             config_file=config_file,
@@ -33,31 +33,37 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
         # for simplicity, we use the same parameter space for all learners
         def ml_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
-                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
-                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-3, 0.1, log=True
+                ),
+                "min_child_samples": trial.suggest_int(
+                    "min_child_samples", 20, 100, step=5
+                ),
+                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
             }
 
         self._param_space = {
-            'ml_M': ml_params,
-            'ml_t': ml_params,
-            'ml_m': ml_params,
-            'ml_a': ml_params,
+            "ml_M": ml_params,
+            "ml_t": ml_params,
+            "ml_m": ml_params,
+            "ml_a": ml_params,
         }
 
         self._optuna_settings = {
-            'n_trials': 200,
-            'show_progress_bar': False,
-            'verbosity': optuna.logging.WARNING,  # Suppress Optuna logs
+            "n_trials": 200,
+            "show_progress_bar": False,
+            "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_m", "ml_M", "ml_t"]
         for learner in self.dml_parameters["learners"]:
@@ -87,7 +93,6 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
             "ml_t": ml_t,
             "score": score,
             "error_on_convergence_failure": not self._use_failed_scores,
-
         }
         # Model
         dml_model = dml.DoubleMLLPLR(**model_inputs)
@@ -139,7 +144,14 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner m", "Learner M", "Learner t", "Score", "level", "Tuned"]
+        groupby_cols = [
+            "Learner m",
+            "Learner M",
+            "Learner t",
+            "Score",
+            "level",
+            "Tuned",
+        ]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
@@ -150,7 +162,9 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

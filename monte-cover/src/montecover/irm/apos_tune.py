@@ -1,8 +1,8 @@
 from typing import Any, Dict, Optional
-import optuna
 
 import doubleml as dml
 import numpy as np
+import optuna
 import pandas as pd
 from doubleml.irm.datasets import make_irm_data_discrete_treatments
 
@@ -34,40 +34,47 @@ class APOSTuningCoverageSimulation(BaseSimulation):
         # parameter space for the outcome regression tuning
         def ml_g_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 200, step=50),
-                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 50, step=5),
-                'max_depth': 5,
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-3, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-3, 0.1, log=True
+                ),
+                "min_child_samples": trial.suggest_int(
+                    "min_child_samples", 20, 50, step=5
+                ),
+                "max_depth": 5,
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
             }
 
         # parameter space for the propensity score tuning
         def ml_m_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 200, step=50),
-                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 50, step=5),
-                'max_depth': 5,
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-3, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
+                "learning_rate": trial.suggest_float(
+                    "learning_rate", 1e-3, 0.1, log=True
+                ),
+                "min_child_samples": trial.suggest_int(
+                    "min_child_samples", 20, 50, step=5
+                ),
+                "max_depth": 5,
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
             }
 
-        self._param_space = {
-            'ml_g': ml_g_params,
-            'ml_m': ml_m_params
-        }
+        self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
 
         self._optuna_settings = {
-            'n_trials': 200,
-            'show_progress_bar': False,
-            'verbosity': optuna.logging.WARNING,  # Suppress Optuna logs
+            "n_trials": 200,
+            "show_progress_bar": False,
+            "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -97,7 +104,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
         for i in range(n_levels):
             ates[i] = apos[i + 1] - apos[0]
 
-        self.logger.info(f"Levels and their counts:\n{np.unique(d, return_counts=True)}")
+        self.logger.info(
+            f"Levels and their counts:\n{np.unique(d, return_counts=True)}"
+        )
         self.logger.info(f"True APOs: {apos}")
         self.logger.info(f"True ATEs: {ates}")
 
@@ -105,7 +114,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
         self.oracle_values["apos"] = apos
         self.oracle_values["ates"] = ates
 
-    def run_single_rep(self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]) -> Dict[str, Any]:
+    def run_single_rep(
+        self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
         learner_config = dml_params["learners"]
@@ -156,7 +167,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
                     thetas=causal_contrast_model.thetas,
                     oracle_thetas=self.oracle_values["ates"],
                     confint=causal_contrast_model.confint(level=level),
-                    joint_confint=causal_contrast_model.confint(level=level, joint=True),
+                    joint_confint=causal_contrast_model.confint(
+                        level=level, joint=True
+                    ),
                 )
 
                 # add parameters to the result
@@ -192,7 +205,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

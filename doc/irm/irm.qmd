@@ -37,7 +37,7 @@ print(metadata_df.T.to_string(header=False))
 
 :::
 
-### ATE 
+### ATE
 
 ```{python}
 #| echo: false
@@ -264,7 +264,7 @@ print(metadata_df.T.to_string(header=False))
 
 :::
 
-### ATE 
+### ATE
 
 ```{python}
 #| echo: false

@@ -10,7 +10,14 @@ from montecover.utils import create_learner_from_config
 
 # define loc-scale model
 def f_loc(D, X, X_conf):
-    loc = 0.5 * D + 2 * D * X[:, 4] + 2.0 * (X[:, 1] > 0.1) - 1.7 * (X[:, 0] * X[:, 2] > 0) - 3 * X[:, 3] - 2 * X_conf[:, 0]
+    loc = (
+        0.5 * D
+        + 2 * D * X[:, 4]
+        + 2.0 * (X[:, 1] > 0.1)
+        - 1.7 * (X[:, 0] * X[:, 2] > 0)
+        - 3 * X[:, 3]
+        - 2 * X_conf[:, 0]
+    )
     return loc
 
 
@@ -60,7 +67,9 @@ class LPQCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -88,11 +97,19 @@ class LPQCoverageSimulation(BaseSimulation):
         n_compliers = compliers.sum()
         Y1 = (
             f_loc(np.ones(n_compliers), X_true[compliers, :], X_conf_true[compliers, :])
-            + f_scale(np.ones(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]) * epsilon_true[compliers]
+            + f_scale(
+                np.ones(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]
+            )
+            * epsilon_true[compliers]
         )
         Y0 = (
-            f_loc(np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :])
-            + f_scale(np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]) * epsilon_true[compliers]
+            f_loc(
+                np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]
+            )
+            + f_scale(
+                np.zeros(n_compliers), X_true[compliers, :], X_conf_true[compliers, :]
+            )
+            * epsilon_true[compliers]
         )
 
         Y0_quant = np.quantile(Y0, q=tau_vec)
@@ -106,7 +123,9 @@ class LPQCoverageSimulation(BaseSimulation):
 
         self.logger.info(f"Oracle values: {self.oracle_values}")
 
-    def run_single_rep(self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]) -> Dict[str, Any]:
+    def run_single_rep(
+        self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
         # Extract parameters
         learner_config = dml_params["learners"]
@@ -208,7 +227,9 @@ class LPQCoverageSimulation(BaseSimulation):
         # Aggregate results for Y0 and Y1
         for result_name in ["Y0_coverage", "Y1_coverage"]:
             df = self.results[result_name]
-            result_summary[result_name] = df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         uniform_aggregation_dict = {
@@ -220,7 +241,10 @@ class LPQCoverageSimulation(BaseSimulation):
             "repetition": "count",
         }
         result_summary["effect_coverage"] = (
-            self.results["effect_coverage"].groupby(groupby_cols).agg(uniform_aggregation_dict).reset_index()
+            self.results["effect_coverage"]
+            .groupby(groupby_cols)
+            .agg(uniform_aggregation_dict)
+            .reset_index()
         )
         self.logger.debug("Summarized effect_coverage results")
 

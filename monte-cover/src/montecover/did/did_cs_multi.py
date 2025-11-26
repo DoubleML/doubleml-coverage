@@ -35,7 +35,9 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -54,19 +56,23 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
             lambda_t=self.dgp_parameters["lambda_t"][0],
         )  # does not depend on the DGP type or lambda_t
         df_oracle["ite"] = df_oracle["y1"] - df_oracle["y0"]
-        self.oracle_values["detailed"] = df_oracle.groupby(["d", "t"])["ite"].mean().reset_index()
+        self.oracle_values["detailed"] = (
+            df_oracle.groupby(["d", "t"])["ite"].mean().reset_index()
+        )
 
         # Oracle group aggregation
         df_oracle_post_treatment = df_oracle[df_oracle["t"] >= df_oracle["d"]]
-        self.oracle_values["group"] = df_oracle_post_treatment.groupby("d")["ite"].mean()
+        self.oracle_values["group"] = df_oracle_post_treatment.groupby("d")[
+            "ite"
+        ].mean()
 
         # Oracle time aggregation
         self.oracle_values["time"] = df_oracle_post_treatment.groupby("t")["ite"].mean()
 
         # Oracle eventstudy aggregation
-        df_oracle["e"] = pd.to_datetime(df_oracle["t"]).values.astype("datetime64[M]") - pd.to_datetime(
-            df_oracle["d"]
-        ).values.astype("datetime64[M]")
+        df_oracle["e"] = pd.to_datetime(df_oracle["t"]).values.astype(
+            "datetime64[M]"
+        ) - pd.to_datetime(df_oracle["d"]).values.astype("datetime64[M]")
         self.oracle_values["eventstudy"] = df_oracle.groupby("e")["ite"].mean()[1:]
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
@@ -96,7 +102,9 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
         for i, (g, _, t) in enumerate(dml_model.gt_combinations):
             group_index = self.oracle_values["detailed"]["d"] == g
             time_index = self.oracle_values["detailed"]["t"] == t
-            oracle_thetas[i] = self.oracle_values["detailed"][group_index & time_index]["ite"].iloc[0]
+            oracle_thetas[i] = self.oracle_values["detailed"][group_index & time_index][
+                "ite"
+            ].iloc[0]
 
         result = {
             "detailed": [],
@@ -121,7 +129,9 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
                     thetas=agg_obj.aggregated_frameworks.thetas,
                     oracle_thetas=self.oracle_values[aggregation_method].values,
                     confint=agg_obj.aggregated_frameworks.confint(level=level),
-                    joint_confint=agg_obj.aggregated_frameworks.confint(level=level, joint=True),
+                    joint_confint=agg_obj.aggregated_frameworks.confint(
+                        level=level, joint=True
+                    ),
                 )
 
             # add parameters to the result
@@ -163,14 +173,20 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
 
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
 
     def _generate_dml_data(self, dgp_params) -> dml.data.DoubleMLPanelData:
         """Generate data for the simulation."""
-        data = make_did_cs_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"], lambda_t=dgp_params["lambda_t"])
+        data = make_did_cs_CS2021(
+            n_obs=dgp_params["n_obs"],
+            dgp_type=dgp_params["DGP"],
+            lambda_t=dgp_params["lambda_t"],
+        )
         dml_data = dml.data.DoubleMLPanelData(
             data,
             y_col="y",
