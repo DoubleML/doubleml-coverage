@@ -1,4 +1,5 @@
 from typing import Any, Dict, Optional
+import optuna
 
 import doubleml as dml
 from doubleml.plm.datasets import make_lplr_LZZ2020
@@ -7,7 +8,7 @@ from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class LPLRATECoverageSimulation(BaseSimulation):
+class LPLRATETuningCoverageSimulation(BaseSimulation):
     """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
@@ -27,8 +28,31 @@ class LPLRATECoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
-
         self._use_failed_scores = use_failed_scores
+
+        # for simplicity, we use the same parameter space for all learners
+        def ml_params(trial):
+            return {
+                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
+                'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
+                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
+                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
+                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
+                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+            }
+
+        self._param_space = {
+            'ml_M': ml_params,
+            'ml_t': ml_params,
+            'ml_m': ml_params,
+            'ml_a': ml_params,
+        }
+
+        self._optuna_settings = {
+            'n_trials': 200,
+            'show_progress_bar': False,
+            'verbosity': optuna.logging.WARNING,  # Suppress Optuna logs
+        }
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
@@ -56,47 +80,57 @@ class LPLRATECoverageSimulation(BaseSimulation):
         learner_t_name, ml_t = create_learner_from_config(learner_config["ml_t"])
         score = dml_params["score"]
 
-        # Model
-        dml_model = dml.DoubleMLLPLR(
-            obj_dml_data=dml_data,
-            ml_m=ml_m,
-            ml_M=ml_M,
-            ml_t=ml_t,
-            score=score,
-            error_on_convergence_failure=(not self._use_failed_scores),
-        )
+        model_inputs = {
+            "obj_dml_data": dml_data,
+            "ml_m": ml_m,
+            "ml_M": ml_M,
+            "ml_t": ml_t,
+            "score": score,
+            "error_on_convergence_failure": not self._use_failed_scores,
 
-        try:
-            dml_model.fit()
-        except RuntimeError as e:
-            self.logger.info(f"Exception during fit: {e}")
-            return None
+        }
+        # Model
+        dml_model = dml.DoubleMLLPLR(**model_inputs)
+        dml_model_tuned = dml.DoubleMLLPLR(**model_inputs)
+        dml_model_tuned.tune_ml_models(
+            ml_param_space=self._param_space,
+            optuna_settings=self._optuna_settings,
+        )
 
         result = {
             "coverage": [],
         }
-        for level in self.confidence_parameters["level"]:
-            level_result = dict()
-            level_result["coverage"] = self._compute_coverage(
-                thetas=dml_model.coef,
-                oracle_thetas=self.oracle_values["theta"],
-                confint=dml_model.confint(level=level),
-                joint_confint=None,
-            )
 
-            # add parameters to the result
-            for res in level_result.values():
-                res.update(
-                    {
-                        "Learner m": learner_m_name,
-                        "Learner M": learner_M_name,
-                        "Learner t": learner_t_name,
-                        "Score": score,
-                        "level": level,
-                    }
+        for model in [dml_model, dml_model_tuned]:
+            try:
+                model.fit()
+            except RuntimeError as e:
+                self.logger.info(f"Exception during fit: {e}")
+                return None
+
+            for level in self.confidence_parameters["level"]:
+                level_result = dict()
+                level_result["coverage"] = self._compute_coverage(
+                    thetas=model.coef,
+                    oracle_thetas=self.oracle_values["theta"],
+                    confint=model.confint(level=level),
+                    joint_confint=None,
                 )
-            for key, res in level_result.items():
-                result[key].append(res)
+
+                # add parameters to the result
+                for res in level_result.values():
+                    res.update(
+                        {
+                            "Learner m": learner_m_name,
+                            "Learner M": learner_M_name,
+                            "Learner t": learner_t_name,
+                            "Score": score,
+                            "level": level,
+                            "Tuned": model is dml_model_tuned,
+                        }
+                    )
+                for key, res in level_result.items():
+                    result[key].append(res)
 
         return result
 
@@ -105,7 +139,7 @@ class LPLRATECoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner m", "Learner M", "Learner t", "Score", "level"]
+        groupby_cols = ["Learner m", "Learner M", "Learner t", "Score", "level", "Tuned"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",

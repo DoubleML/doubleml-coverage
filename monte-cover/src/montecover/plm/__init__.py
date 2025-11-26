@@ -7,6 +7,7 @@ from montecover.plm.plr_ate_sensitivity import PLRATESensitivityCoverageSimulati
 from montecover.plm.plr_cate import PLRCATECoverageSimulation
 from montecover.plm.plr_gate import PLRGATECoverageSimulation
 from montecover.plm.lplr_ate import LPLRATECoverageSimulation
+from montecover.plm.lplr_ate_tune import LPLRATETuningCoverageSimulation
 
 __all__ = [
     "PLRATECoverageSimulation",
@@ -16,4 +17,5 @@ __all__ = [
     "PLRATESensitivityCoverageSimulation",
     "PLRATETuningCoverageSimulation",
     "LPLRATECoverageSimulation",
+    "LPLRATETuningCoverageSimulation",
 ]
