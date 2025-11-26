@@ -2,14 +2,16 @@ from typing import Any, Dict, Optional
 import optuna
 
 import doubleml as dml
-from doubleml.irm.datasets import make_irm_data
+import numpy as np
+import pandas as pd
+from doubleml.irm.datasets import make_irm_data_discrete_treatments
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 
 
-class IRMATETuningCoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLIRM for ATE estimation with hyperparameter tuning."""
+class APOSTuningCoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLAPOs for APO estimation with tuning."""
 
     def __init__(
         self,
@@ -32,23 +34,23 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
         # parameter space for the outcome regression tuning
         def ml_g_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
+                'n_estimators': trial.suggest_int('n_estimators', 100, 200, step=50),
                 'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
-                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+                'min_child_samples': trial.suggest_int('min_child_samples', 20, 50, step=5),
+                'max_depth': 5,
+                'lambda_l1': trial.suggest_float('lambda_l1', 1e-3, 10.0, log=True),
+                'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
             }
 
         # parameter space for the propensity score tuning
         def ml_m_params(trial):
             return {
-                'n_estimators': trial.suggest_int('n_estimators', 100, 500, step=50),
+                'n_estimators': trial.suggest_int('n_estimators', 100, 200, step=50),
                 'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.1, log=True),
-                'min_child_samples': trial.suggest_int('min_child_samples', 20, 100, step=5),
-                'max_depth': trial.suggest_int('max_depth', 3, 10, step=1),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+                'min_child_samples': trial.suggest_int('min_child_samples', 20, 50, step=5),
+                'max_depth': 5,
+                'lambda_l1': trial.suggest_float('lambda_l1', 1e-3, 10.0, log=True),
+                'lambda_l2': trial.suggest_float('lambda_l2', 1e-3, 10.0, log=True),
             }
 
         self._param_space = {
@@ -57,7 +59,7 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
         }
 
         self._optuna_settings = {
-            'n_trials': 500,
+            'n_trials': 200,
             'show_progress_bar': False,
             'verbosity': optuna.logging.WARNING,  # Suppress Optuna logs
         }
@@ -76,8 +78,32 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
         """Calculate oracle values for the simulation."""
         self.logger.info("Calculating oracle values")
 
+        n_levels = self.dgp_parameters["n_levels"][0]
+        data_apo_oracle = make_irm_data_discrete_treatments(
+            n_obs=int(1e6), n_levels=n_levels, linear=self.dgp_parameters["linear"][0]
+        )
+
+        y0 = data_apo_oracle["oracle_values"]["y0"]
+        ite = data_apo_oracle["oracle_values"]["ite"]
+        d = data_apo_oracle["d"]
+
+        average_ites = np.full(n_levels + 1, np.nan)
+        apos = np.full(n_levels + 1, np.nan)
+        for i in range(n_levels + 1):
+            average_ites[i] = np.mean(ite[d == i]) * (i > 0)
+            apos[i] = np.mean(y0) + average_ites[i]
+
+        ates = np.full(n_levels, np.nan)
+        for i in range(n_levels):
+            ates[i] = apos[i + 1] - apos[0]
+
+        self.logger.info(f"Levels and their counts:\n{np.unique(d, return_counts=True)}")
+        self.logger.info(f"True APOs: {apos}")
+        self.logger.info(f"True ATEs: {ates}")
+
         self.oracle_values = dict()
-        self.oracle_values["theta"] = self.dgp_parameters["theta"]
+        self.oracle_values["apos"] = apos
+        self.oracle_values["ates"] = ates
 
     def run_single_rep(self, dml_data: dml.DoubleMLData, dml_params: Dict[str, Any]) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
@@ -85,37 +111,52 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
         learner_config = dml_params["learners"]
         learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
         learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
+        treatment_levels = dml_params["treatment_levels"]
+        trimming_threshold = dml_params["trimming_threshold"]
 
         # Model
-        dml_model = dml.DoubleMLIRM(
+        dml_model = dml.DoubleMLAPOS(
             obj_dml_data=dml_data,
             ml_g=ml_g,
             ml_m=ml_m,
+            treatment_levels=treatment_levels,
+            trimming_threshold=trimming_threshold,
         )
-        dml_model.fit()
-
-        dml_model_tuned = dml.DoubleMLIRM(
+        # Tuning
+        dml_model_tuned = dml.DoubleMLAPOS(
             obj_dml_data=dml_data,
             ml_g=ml_g,
             ml_m=ml_m,
+            treatment_levels=treatment_levels,
+            trimming_threshold=trimming_threshold,
         )
         dml_model_tuned.tune_ml_models(
             ml_param_space=self._param_space,
             optuna_settings=self._optuna_settings,
         )
-        dml_model_tuned.fit()
 
         result = {
             "coverage": [],
+            "causal_contrast": [],
         }
         for model in [dml_model, dml_model_tuned]:
+            model.fit()
+            model.bootstrap(n_rep_boot=2000)
+            causal_contrast_model = model.causal_contrast(reference_levels=0)
+            causal_contrast_model.bootstrap(n_rep_boot=2000)
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
                     thetas=model.coef,
-                    oracle_thetas=self.oracle_values["theta"],
+                    oracle_thetas=self.oracle_values["apos"],
                     confint=model.confint(level=level),
-                    joint_confint=None,
+                    joint_confint=model.confint(level=level, joint=True),
+                )
+                level_result["causal_contrast"] = self._compute_coverage(
+                    thetas=causal_contrast_model.thetas,
+                    oracle_thetas=self.oracle_values["ates"],
+                    confint=causal_contrast_model.confint(level=level),
+                    joint_confint=causal_contrast_model.confint(level=level, joint=True),
                 )
 
                 # add parameters to the result
@@ -143,6 +184,8 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Uniform Coverage": "mean",
+            "Uniform CI Length": "mean",
             "repetition": "count",
         }
 
@@ -156,11 +199,14 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params: Dict[str, Any]) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_irm_data(
-            theta=dgp_params["theta"],
+        data = make_irm_data_discrete_treatments(
             n_obs=dgp_params["n_obs"],
-            dim_x=dgp_params["dim_x"],
-            return_type="DataFrame",
+            n_levels=dgp_params["n_levels"],
+            linear=dgp_params["linear"],
         )
-        dml_data = dml.DoubleMLData(data, "y", "d")
+        df_apo = pd.DataFrame(
+            np.column_stack((data["y"], data["d"], data["x"])),
+            columns=["y", "d"] + ["x" + str(i) for i in range(data["x"].shape[1])],
+        )
+        dml_data = dml.DoubleMLData(df_apo, "y", "d")
         return dml_data
