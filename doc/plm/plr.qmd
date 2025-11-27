@@ -213,6 +213,17 @@ generate_and_show_styled_table(
 
 The simulations are based on the  the [make_plr_CCDDHNR2018](https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_plr_CCDDHNR2018.html)-DGP with $500$ observations. This is only an example as the untuned version just relies on the default configuration.
 
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/plr_ate_tune_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
 ```{python}
 #| echo: false
 
