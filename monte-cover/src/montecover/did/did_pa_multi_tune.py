@@ -37,27 +37,23 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
         # parameter space for the outcome regression tuning
         def ml_g_params(trial):
             return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 300, step=25),
-                "learning_rate": trial.suggest_float("learning_rate", 0.005, 0.1),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 5, 50, step=5
-                ),
-                "max_depth": 3,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-1, 10.0),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-1, 10.0),
+                'n_estimators': 100,
+                'learning_rate': trial.suggest_float('learning_rate', 0.001, 0.1, log=True),
+                'max_depth': 3,
+                'min_child_samples': trial.suggest_int('min_child_samples', 10, 20, step=5),
+                'lambda_l1': trial.suggest_float('lambda_l1', 1e-2, 10.0, log=True),
+                'lambda_l2': trial.suggest_float('lambda_l2', 1e-2, 10.0, log=True),
             }
 
         # parameter space for the propensity score tuning
         def ml_m_params(trial):
             return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 300, step=25),
-                "learning_rate": trial.suggest_float("learning_rate", 0.005, 0.1),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 5, 50, step=5
-                ),
-                "max_depth": 3,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-1, 10.0),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-1, 10.0),
+                'n_estimators': 100,
+                'learning_rate': trial.suggest_float('learning_rate', 0.001, 0.1, log=True),
+                'max_depth': 3,
+                'min_child_samples': trial.suggest_int('min_child_samples', 10, 20, step=5),
+                'lambda_l1': trial.suggest_float('lambda_l1', 1e-2, 10.0, log=True),
+                'lambda_l2': trial.suggest_float('lambda_l2', 1e-2, 10.0, log=True),
             }
 
         self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
