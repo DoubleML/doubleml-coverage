@@ -37,37 +37,33 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
         # parameter space for the outcome regression tuning
         def ml_g_params(trial):
             return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 300, step=25),
+                "learning_rate": trial.suggest_float("learning_rate", 0.005, 0.1),
                 "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 50, step=5
+                    "min_child_samples", 5, 50, step=5
                 ),
-                "max_depth": 5,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
+                "max_depth": 3,
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-1, 10.0),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-1, 10.0),
             }
 
         # parameter space for the propensity score tuning
         def ml_m_params(trial):
             return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
+                "n_estimators": trial.suggest_int("n_estimators", 100, 300, step=25),
+                "learning_rate": trial.suggest_float("learning_rate", 0.005, 0.1),
                 "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 50, step=5
+                    "min_child_samples", 5, 50, step=5
                 ),
-                "max_depth": 5,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
+                "max_depth": 3,
+                "lambda_l1": trial.suggest_float("lambda_l1", 1e-1, 10.0),
+                "lambda_l2": trial.suggest_float("lambda_l2", 1e-1, 10.0),
             }
 
         self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
 
         self._optuna_settings = {
-            "n_trials": 200,
+            "n_trials": 50,
             "show_progress_bar": False,
             "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
