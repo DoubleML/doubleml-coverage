@@ -233,7 +233,7 @@ df_tune_cov = pd.read_csv("../../results/plm/plr_ate_tune_coverage.csv", index_c
 assert df_tune_cov["repetition"].nunique() == 1
 n_rep_tune_cov = df_tune_cov["repetition"].unique()[0]
 
-display_columns_tune_cov = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage",]
+display_columns_tune_cov = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage", "Loss g", "Loss m"]
 ```
 
 
@@ -248,7 +248,7 @@ generate_and_show_styled_table(
     display_cols=display_columns_tune_cov,
     n_rep=n_rep_tune_cov,
     level_col="level",
-    rename_map={"Learner g": "Learner l"},
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```
@@ -262,7 +262,7 @@ generate_and_show_styled_table(
     display_cols=display_columns_tune_cov,
     n_rep=n_rep_tune_cov,
     level_col="level",
-    rename_map={"Learner g": "Learner l"},
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```

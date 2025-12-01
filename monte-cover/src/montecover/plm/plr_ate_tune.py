@@ -6,6 +6,7 @@ from doubleml.plm.datasets import make_plr_CCDDHNR2018
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params
 
 
 class PLRATETuningCoverageSimulation(BaseSimulation):
@@ -29,40 +30,10 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         self._calculate_oracle_values()
 
         # tuning specific settings
-        # parameter space for the outcome regression tuning
-        def ml_l_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 100, step=5
-                ),
-                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
-            }
-
-        # parameter space for the propensity score tuning
-        def ml_m_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 100, step=5
-                ),
-                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
-            }
-
-        self._param_space = {"ml_l": ml_l_params, "ml_m": ml_m_params}
+        self._param_space = {"ml_l": lgbm_reg_params, "ml_m": lgbm_reg_params}
 
         self._optuna_settings = {
-            "n_trials": 500,
+            "n_trials": 200,
             "show_progress_bar": False,
             "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
@@ -121,6 +92,7 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
             "coverage": [],
         }
         for model in [dml_model, dml_model_tuned]:
+            nuisance_loss = model.nuisance_loss
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
@@ -139,6 +111,8 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
                             "Score": score,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
+                            "Loss g": nuisance_loss["ml_l"].mean() if score == "partialling out" else nuisance_loss["ml_g"].mean(),
+                            "Loss m": nuisance_loss["ml_m"].mean(),
                         }
                     )
                 for key, res in level_result.items():
@@ -156,6 +130,8 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Loss g": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 
