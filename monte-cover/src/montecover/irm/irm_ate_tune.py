@@ -6,6 +6,7 @@ from doubleml.irm.datasets import make_irm_data
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params, lgbm_cls_params
 
 
 class IRMATETuningCoverageSimulation(BaseSimulation):
@@ -29,41 +30,7 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
         self._calculate_oracle_values()
 
         # tuning specific settings
-        # parameter space for the outcome regression tuning
-        def ml_g_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 10, 50, step=5
-                ),
-                "max_depth": 3,
-                "feature_fraction": trial.suggest_float("feature_fraction", 0.6, 1),
-                "bagging_fraction": trial.suggest_float("bagging_fraction", 0.6, 1),
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
-            }
-
-        # parameter space for the propensity score tuning
-        def ml_m_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 10, 50, step=5
-                ),
-                "max_depth": 3,
-                "feature_fraction": trial.suggest_float("feature_fraction", 0.6, 1),
-                "bagging_fraction": trial.suggest_float("bagging_fraction", 0.6, 1),
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
-            }
-
-        self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
+        self._param_space = {"ml_g": lgbm_reg_params, "ml_m": lgbm_cls_params}
 
         self._optuna_settings = {
             "n_trials": 500,
