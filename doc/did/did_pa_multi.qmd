@@ -326,6 +326,9 @@ generate_and_show_styled_table(
 
 The simulations are based on the  the [make_did_CS2021](https://docs.doubleml.org/stable/api/generated/doubleml.did.datasets.make_did_CS2021.html)-DGP with $2000$ observations. Due to time constraints we only consider one learner, use in-sample normalization and the following DGPs:
 
+ - Type 1: Linear outcome model and treatment assignment
+ - Type 2: Nonlinear outcome model and linear treatment assignment
+ - Type 3: Linear outcome model and nonlinear treatment assignment
  - Type 4: Nonlinear outcome model and treatment assignment
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). This is only an example as the untuned version just relies on the default configuration.
@@ -350,7 +353,7 @@ df = pd.read_csv("../../results/did/did_pa_multi_tune_detailed.csv", index_col=N
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns = ["Learner g", "Learner m", "DGP", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_control", "Loss g_treated", "Loss m"]
 ```
 
 ### Observational Score
@@ -385,6 +388,9 @@ These simulations test different types of aggregation, as described in [DiD User
 
 As before, we only consider one learner, use in-sample normalization and the following DGPs:
 
+ - Type 1: Linear outcome model and treatment assignment
+ - Type 2: Nonlinear outcome model and linear treatment assignment
+ - Type 3: Linear outcome model and nonlinear treatment assignment
  - Type 4: Nonlinear outcome model and treatment assignment
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidende intervals). This is only an example as the untuned version just relies on the default configuration.
@@ -395,12 +401,12 @@ The non-uniform results (coverage, ci length and bias) refer to averaged values 
 #| echo: false
 
 # set up data
-df_group = pd.read_csv("../../results/did/did_pa_multi_tune_group.csv", index_col=None)
+df_group_tune = pd.read_csv("../../results/did/did_pa_multi_tune_group.csv", index_col=None)
 
-assert df_group["repetition"].nunique() == 1
-n_rep_group = df_group["repetition"].unique()[0]
+assert df_group_tune["repetition"].nunique() == 1
+n_rep_group_tune = df_group_tune["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_tune = ["Learner g", "Learner m", "DGP", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_control", "Loss g_treated", "Loss m"]
 ```
 
 #### Observational Score
@@ -408,10 +414,10 @@ display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Cove
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_group,
+    main_df=df_group_tune,
     filters={"level": 0.95, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_group,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_group_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
@@ -420,10 +426,10 @@ generate_and_show_styled_table(
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_group,
+    main_df=df_group_tune,
     filters={"level": 0.9, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_group,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_group_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
@@ -436,12 +442,12 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_time = pd.read_csv("../../results/did/did_pa_multi_tune_time.csv", index_col=None)
+df_time_tune = pd.read_csv("../../results/did/did_pa_multi_tune_time.csv", index_col=None)
 
-assert df_time["repetition"].nunique() == 1
-n_rep_time = df_time["repetition"].unique()[0]
+assert df_time_tune["repetition"].nunique() == 1
+n_rep_time_tune = df_time_tune["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_tune = ["Learner g", "Learner m", "DGP", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_control", "Loss g_treated", "Loss m"]
 ```
 
 #### Observational Score
@@ -449,10 +455,10 @@ display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Cove
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_time,
+    main_df=df_time_tune,
     filters={"level": 0.95, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_time,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_time_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
@@ -461,10 +467,10 @@ generate_and_show_styled_table(
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_time,
+    main_df=df_time_tune,
     filters={"level": 0.9, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_time,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_time_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
@@ -476,12 +482,12 @@ generate_and_show_styled_table(
 #| echo: false
 
 # set up data
-df_es = pd.read_csv("../../results/did/did_pa_multi_tune_eventstudy.csv", index_col=None)
+df_es_tune = pd.read_csv("../../results/did/did_pa_multi_tune_eventstudy.csv", index_col=None)
 
-assert df_es["repetition"].nunique() == 1
-n_rep_es = df_es["repetition"].unique()[0]
+assert df_es_tune["repetition"].nunique() == 1
+n_rep_es_tune = df_es_tune["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns_tune = ["Learner g", "Learner m", "DGP", "Tuned", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_control", "Loss g_treated", "Loss m"]
 ```
 
 #### Observational Score
@@ -489,10 +495,10 @@ display_columns = ["Learner g", "Learner m", "Tuned", "Bias", "CI Length", "Cove
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_es,
+    main_df=df_es_tune,
     filters={"level": 0.95, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_es,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_es_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
@@ -501,10 +507,10 @@ generate_and_show_styled_table(
 ```{python}
 #| echo: false
 generate_and_show_styled_table(
-    main_df=df_es,
+    main_df=df_es_tune,
     filters={"level": 0.9, "Score": "observational"},
-    display_cols=display_columns,
-    n_rep=n_rep_es,
+    display_cols=display_columns_tune,
+    n_rep=n_rep_es_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage", "Uniform Coverage"]
 )
