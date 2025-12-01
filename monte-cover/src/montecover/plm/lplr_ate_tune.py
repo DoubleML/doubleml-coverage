@@ -6,6 +6,7 @@ from doubleml.plm.datasets import make_lplr_LZZ2020
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params, lgbm_cls_params
 
 
 class LPLRATETuningCoverageSimulation(BaseSimulation):
@@ -30,26 +31,12 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
         self._calculate_oracle_values()
         self._use_failed_scores = use_failed_scores
 
-        # for simplicity, we use the same parameter space for all learners
-        def ml_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 500, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 100, step=5
-                ),
-                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
-            }
-
+        # tuning specific settings
         self._param_space = {
-            "ml_M": ml_params,
-            "ml_t": ml_params,
-            "ml_m": ml_params,
-            "ml_a": ml_params,
+            "ml_M": lgbm_cls_params,
+            "ml_t": lgbm_reg_params,
+            "ml_m": lgbm_reg_params,
+            "ml_a": lgbm_reg_params,
         }
 
         self._optuna_settings = {
@@ -112,7 +99,7 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
             except RuntimeError as e:
                 self.logger.info(f"Exception during fit: {e}")
                 return None
-
+            nuisance_loss = model.nuisance_loss
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
@@ -132,6 +119,9 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
                             "Score": score,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
+                            "Loss M": nuisance_loss["ml_M"].mean(),
+                            "Loss a": nuisance_loss["ml_a"].mean(),
+                            "Loss m": nuisance_loss["ml_m"].mean(),
                         }
                     )
                 for key, res in level_result.items():
@@ -156,6 +146,9 @@ class LPLRATETuningCoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Loss M": "mean",
+            "Loss a": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 

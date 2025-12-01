@@ -8,6 +8,7 @@ from doubleml.did.datasets import make_did_CS2021
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params, lgbm_cls_params
 
 
 class DIDMultiTuningCoverageSimulation(BaseSimulation):
@@ -34,29 +35,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
         self._calculate_oracle_values()
 
         # tuning specific settings
-        # parameter space for the outcome regression tuning
-        def ml_g_params(trial):
-            return {
-                'n_estimators': 100,
-                'learning_rate': trial.suggest_float('learning_rate', 0.001, 0.1, log=True),
-                'max_depth': 3,
-                'min_child_samples': trial.suggest_int('min_child_samples', 10, 20, step=5),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-2, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-2, 10.0, log=True),
-            }
-
-        # parameter space for the propensity score tuning
-        def ml_m_params(trial):
-            return {
-                'n_estimators': 100,
-                'learning_rate': trial.suggest_float('learning_rate', 0.001, 0.1, log=True),
-                'max_depth': 3,
-                'min_child_samples': trial.suggest_int('min_child_samples', 10, 20, step=5),
-                'lambda_l1': trial.suggest_float('lambda_l1', 1e-2, 10.0, log=True),
-                'lambda_l2': trial.suggest_float('lambda_l2', 1e-2, 10.0, log=True),
-            }
-
-        self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
+        self._param_space = {"ml_g": lgbm_reg_params, "ml_m": lgbm_cls_params}
 
         self._optuna_settings = {
             "n_trials": 50,
@@ -66,7 +45,6 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
-        # Process ML models in parameter grid
         # Process ML models in parameter grid
         assert (
             "learners" in self.dml_parameters
@@ -156,6 +134,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
         for model in [dml_model, dml_model_tuned]:
             model.fit()
             model.bootstrap(n_rep_boot=2000)
+            nuisance_loss = model.nuisance_loss
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["detailed"] = self._compute_coverage(
@@ -188,6 +167,9 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
                             "In-sample-norm.": in_sample_normalization,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
+                            "Loss g_control": nuisance_loss["ml_g0"].mean(),
+                            "Loss g_treated": nuisance_loss["ml_g1"].mean(),
+                            "Loss m": nuisance_loss["ml_m"].mean(),
                         }
                     )
                 for key, res in level_result.items():
@@ -214,6 +196,9 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
             "Bias": "mean",
             "Uniform Coverage": "mean",
             "Uniform CI Length": "mean",
+            "Loss g_control": "mean",
+            "Loss g_treated": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 
