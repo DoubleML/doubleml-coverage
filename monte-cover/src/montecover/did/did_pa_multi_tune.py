@@ -91,6 +91,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
         learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
         learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         score = dml_params["score"]
+        control_group = dml_params["control_group"]
         in_sample_normalization = dml_params["in_sample_normalization"]
 
         # Model
@@ -100,6 +101,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
             ml_m=None if score == "experimental" else ml_m,
             gt_combinations="standard",
             score=score,
+            control_group=control_group,
             in_sample_normalization=in_sample_normalization,
         )
         # Tuning
@@ -109,6 +111,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
             ml_m=None if score == "experimental" else ml_m,
             gt_combinations="standard",
             score=score,
+            control_group=control_group,
             in_sample_normalization=in_sample_normalization,
         )
         dml_model_tuned.tune_ml_models(
@@ -164,6 +167,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
                             "Learner g": learner_g_name,
                             "Learner m": learner_m_name,
                             "Score": score,
+                            "Control Group": control_group,
                             "In-sample-norm.": in_sample_normalization,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
@@ -185,6 +189,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
             "Learner g",
             "Learner m",
             "Score",
+            "Control Group",
             "In-sample-norm.",
             "DGP",
             "level",
