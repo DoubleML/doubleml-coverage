@@ -37,9 +37,11 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
                     "learning_rate", 1e-3, 0.1, log=True
                 ),
                 "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 100, step=5
+                    "min_child_samples", 10, 50, step=5
                 ),
-                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
+                "max_depth": 3,
+                "feature_fraction": trial.suggest_float("feature_fraction", 0.6, 1),
+                "bagging_fraction": trial.suggest_float("bagging_fraction", 0.6, 1),
                 "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
                 "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
             }
@@ -52,9 +54,11 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
                     "learning_rate", 1e-3, 0.1, log=True
                 ),
                 "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 100, step=5
+                    "min_child_samples", 10, 50, step=5
                 ),
-                "max_depth": trial.suggest_int("max_depth", 3, 10, step=1),
+                "max_depth": 3,
+                "feature_fraction": trial.suggest_float("feature_fraction", 0.6, 1),
+                "bagging_fraction": trial.suggest_float("bagging_fraction", 0.6, 1),
                 "lambda_l1": trial.suggest_float("lambda_l1", 1e-8, 10.0, log=True),
                 "lambda_l2": trial.suggest_float("lambda_l2", 1e-8, 10.0, log=True),
             }
@@ -118,6 +122,7 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
             "coverage": [],
         }
         for model in [dml_model, dml_model_tuned]:
+            nuisance_loss = model.nuisance_loss
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
@@ -135,6 +140,9 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
                             "Learner m": learner_m_name,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
+                            "Loss g0": nuisance_loss["ml_g0"].mean(),
+                            "Loss g1": nuisance_loss["ml_g1"].mean(),
+                            "Loss m": nuisance_loss["ml_m"].mean(),
                         }
                     )
                 for key, res in level_result.items():
@@ -152,6 +160,9 @@ class IRMATETuningCoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Loss g0": "mean",
+            "Loss g1": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 

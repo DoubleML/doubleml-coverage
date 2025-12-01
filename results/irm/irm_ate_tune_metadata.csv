@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.12.dev0,IRMATETuningCoverageSimulation,2025-11-24 13:07,97.69014709790548,3.12.9,scripts/irm/irm_ate_tune_config.yml
+0.12.dev0,IRMATETuningCoverageSimulation,2025-12-01 12:02,27.278138709068298,3.12.9,scripts/irm/irm_ate_tune_config.yml
