@@ -8,6 +8,7 @@ from doubleml.irm.datasets import make_irm_data_discrete_treatments
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params, lgbm_cls_params
 
 
 class APOSTuningCoverageSimulation(BaseSimulation):
@@ -31,37 +32,7 @@ class APOSTuningCoverageSimulation(BaseSimulation):
         self._calculate_oracle_values()
 
         # tuning specific settings
-        # parameter space for the outcome regression tuning
-        def ml_g_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 50, step=5
-                ),
-                "max_depth": 5,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
-            }
-
-        # parameter space for the propensity score tuning
-        def ml_m_params(trial):
-            return {
-                "n_estimators": trial.suggest_int("n_estimators", 100, 200, step=50),
-                "learning_rate": trial.suggest_float(
-                    "learning_rate", 1e-3, 0.1, log=True
-                ),
-                "min_child_samples": trial.suggest_int(
-                    "min_child_samples", 20, 50, step=5
-                ),
-                "max_depth": 5,
-                "lambda_l1": trial.suggest_float("lambda_l1", 1e-3, 10.0, log=True),
-                "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 10.0, log=True),
-            }
-
-        self._param_space = {"ml_g": ml_g_params, "ml_m": ml_m_params}
+        self._param_space = {"ml_g": lgbm_reg_params, "ml_m": lgbm_cls_params}
 
         self._optuna_settings = {
             "n_trials": 200,
@@ -155,6 +126,18 @@ class APOSTuningCoverageSimulation(BaseSimulation):
             model.bootstrap(n_rep_boot=2000)
             causal_contrast_model = model.causal_contrast(reference_levels=0)
             causal_contrast_model.bootstrap(n_rep_boot=2000)
+
+            # average all nuisance losses over treatment levels
+            n_lvls = len(model.modellist)
+            loss_dict = {
+                "ml_g_d_lvl0": np.full(n_lvls, np.nan),
+                "ml_g_d_lvl1": np.full(n_lvls, np.nan),
+                "ml_m": np.full(n_lvls, np.nan)
+            }
+            for key in loss_dict.keys():
+                for i_submodel, submodel in enumerate(model.modellist):
+                    loss_dict[key][i_submodel] = submodel.nuisance_loss[key].mean()
+
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
@@ -180,6 +163,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
                             "Learner m": learner_m_name,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
+                            "Loss g_control": loss_dict["ml_g_d_lvl0"].mean(),
+                            "Loss g_treated": loss_dict["ml_g_d_lvl1"].mean(),
+                            "Loss m": loss_dict["ml_m"].mean(),
                         }
                     )
                 for key, res in level_result.items():
@@ -199,6 +185,9 @@ class APOSTuningCoverageSimulation(BaseSimulation):
             "Bias": "mean",
             "Uniform Coverage": "mean",
             "Uniform CI Length": "mean",
+            "Loss g_control": "mean",
+            "Loss g_treated": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 
