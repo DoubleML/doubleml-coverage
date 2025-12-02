@@ -33,7 +33,6 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
-
         # tuning specific settings
         self._param_space = {"ml_g": lgbm_reg_params, "ml_m": lgbm_cls_params}
 
@@ -218,7 +217,7 @@ class DIDMultiTuningCoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.data.DoubleMLPanelData:
         """Generate data for the simulation."""
-        data = make_did_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"])
+        data = make_did_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"], xi=dgp_params.get("xi", 0.0))
         dml_data = dml.data.DoubleMLPanelData(
             data,
             y_col="y",

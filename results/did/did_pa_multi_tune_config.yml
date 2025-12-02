@@ -5,10 +5,13 @@ simulation_parameters:
   n_jobs: -2
 dgp_parameters:
   DGP:
-  - 1
+  - 2
+  - 3
   - 4
   n_obs:
-  - 2000
+  - 500
+  xi:
+  - 0.2
 learner_definitions:
   lgbmr: &id001
     name: LGBM Regr.
@@ -26,5 +29,4 @@ dml_parameters:
   - true
 confidence_parameters:
   level:
-  - 0.95
   - 0.9

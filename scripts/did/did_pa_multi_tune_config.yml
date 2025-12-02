@@ -7,8 +7,9 @@ simulation_parameters:
   n_jobs: -2
 
 dgp_parameters:
-  DGP: [1, 4] # Different DGP specifications
-  n_obs: [2000] # Sample size for each simulation (has to be a list)
+  DGP: [2, 3, 4] # Different DGP specifications
+  n_obs: [500] # Sample size for each simulation (has to be a list)
+  xi: [0.2]
 
 # Define reusable learner configurations
 learner_definitions:
@@ -34,4 +35,4 @@ dml_parameters:
   in_sample_normalization: [true]
 
 confidence_parameters:
-  level: [0.95, 0.90] # Confidence levels
+  level: [0.90] # Confidence levels
