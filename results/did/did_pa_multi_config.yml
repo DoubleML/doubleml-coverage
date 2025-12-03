@@ -9,7 +9,9 @@ dgp_parameters:
   - 4
   - 6
   n_obs:
-  - 2000
+  - 500
+  xi:
+  - 0.5
 learner_definitions:
   linear: &id001
     name: Linear
