@@ -96,6 +96,7 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
         )
         dml_model.fit()
         dml_model.bootstrap(n_rep_boot=2000)
+        nuisance_loss = dml_model.nuisance_loss
 
         # Oracle values for this model
         oracle_thetas = np.full_like(dml_model.coef, np.nan)
@@ -143,6 +144,11 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
                         "Score": score,
                         "In-sample-norm.": in_sample_normalization,
                         "level": level,
+                        "Loss g_d0_t0": nuisance_loss["ml_g_d0_t0"].mean(),
+                        "Loss g_d1_t0": nuisance_loss["ml_g_d1_t0"].mean(),
+                        "Loss g_d0_t1": nuisance_loss["ml_g_d0_t1"].mean(),
+                        "Loss g_d1_t1": nuisance_loss["ml_g_d1_t1"].mean(),
+                        "Loss m": nuisance_loss["ml_m"].mean() if score == "observational" else np.nan,
                     }
                 )
             for key, res in level_result.items():
@@ -168,6 +174,11 @@ class DIDCSMultiCoverageSimulation(BaseSimulation):
             "Bias": "mean",
             "Uniform Coverage": "mean",
             "Uniform CI Length": "mean",
+            "Loss g_d0_t0": "mean",
+            "Loss g_d1_t0": "mean",
+            "Loss g_d0_t1": "mean",
+            "Loss g_d1_t1": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 

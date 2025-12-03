@@ -94,6 +94,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
         )
         dml_model.fit()
         dml_model.bootstrap(n_rep_boot=2000)
+        nuisance_loss = dml_model.nuisance_loss
 
         # Oracle values for this model
         oracle_thetas = np.full_like(dml_model.coef, np.nan)
@@ -141,6 +142,9 @@ class DIDMultiCoverageSimulation(BaseSimulation):
                         "Score": score,
                         "In-sample-norm.": in_sample_normalization,
                         "level": level,
+                        "Loss g_control": nuisance_loss["ml_g0"].mean(),
+                        "Loss g_treated": nuisance_loss["ml_g1"].mean(),
+                        "Loss m": nuisance_loss["ml_m"].mean() if score == "observational" else np.nan,
                     }
                 )
             for key, res in level_result.items():
@@ -166,6 +170,9 @@ class DIDMultiCoverageSimulation(BaseSimulation):
             "Bias": "mean",
             "Uniform Coverage": "mean",
             "Uniform CI Length": "mean",
+            "Loss g_control": "mean",
+            "Loss g_treated": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 
@@ -180,7 +187,7 @@ class DIDMultiCoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.data.DoubleMLPanelData:
         """Generate data for the simulation."""
-        data = make_did_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"], xi=dgp_params["xi"])
+        data = make_did_CS2021(n_obs=dgp_params["n_obs"], dgp_type=dgp_params["DGP"])
         dml_data = dml.data.DoubleMLPanelData(
             data,
             y_col="y",
