@@ -40,7 +40,9 @@ class RDDCoverageSimulation(BaseSimulation):
         """Process simulation-specific parameters from config."""
 
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g"]
         for learner in self.dml_parameters["learners"]:
@@ -51,7 +53,9 @@ class RDDCoverageSimulation(BaseSimulation):
         """Calculate oracle values for the simulation."""
         self.logger.info("Calculating oracle values")
 
-        data_oracle = make_simple_rdd_data(n_obs=int(1e6), fuzzy=self.fuzzy, cutoff=self.cutoff)
+        data_oracle = make_simple_rdd_data(
+            n_obs=int(1e6), fuzzy=self.fuzzy, cutoff=self.cutoff
+        )
         # get oracle value
         score = data_oracle["score"]
         ite = data_oracle["oracle_values"]["Y1"] - data_oracle["oracle_values"]["Y0"]
@@ -59,7 +63,12 @@ class RDDCoverageSimulation(BaseSimulation):
         # subset score and ite for faster computation
         score_subset = (score >= (self.cutoff - 0.02)) & (score <= (self.cutoff + 0.02))
         self.logger.info(f"Oracle score subset size: {np.sum(score_subset)}")
-        kernel_reg = KernelReg(endog=ite[score_subset], exog=score[score_subset], var_type="c", reg_type="ll")
+        kernel_reg = KernelReg(
+            endog=ite[score_subset],
+            exog=score[score_subset],
+            var_type="c",
+            reg_type="ll",
+        )
         effect_at_cutoff, _ = kernel_reg.fit(np.array([self.cutoff]))
         oracle_effect = effect_at_cutoff[0]
 
@@ -83,23 +92,31 @@ class RDDCoverageSimulation(BaseSimulation):
             dml_data = self._generate_dml_data(dgp_params)
 
             # --- Run rdrobust benchmark ---
-            self.logger.debug(f"Rep {i_rep+1}: Running rdrobust benchmark for DGP {dgp_params}")
+            self.logger.debug(
+                f"Rep {i_rep+1}: Running rdrobust benchmark for DGP {dgp_params}"
+            )
             param_start_time_rd_benchmark = time.time()
 
             # Call the dedicated benchmark function
             # Pass dml_data, current dgp_params, and repetition index
-            benchmark_result_list = self._rdrobust_benchmark(dml_data, dgp_params, i_rep)
+            benchmark_result_list = self._rdrobust_benchmark(
+                dml_data, dgp_params, i_rep
+            )
             if benchmark_result_list:
                 rep_results["coverage"].extend(benchmark_result_list)
 
             param_duration_rd_benchmark = time.time() - param_start_time_rd_benchmark
-            self.logger.debug(f"rdrobust benchmark for DGP {dgp_params} completed in {param_duration_rd_benchmark:.2f}s")
+            self.logger.debug(
+                f"rdrobust benchmark for DGP {dgp_params} completed in {param_duration_rd_benchmark:.2f}s"
+            )
 
             for dml_param_values in product(*self.dml_parameters.values()):
                 dml_params = dict(zip(self.dml_parameters.keys(), dml_param_values))
                 i_param_comb += 1
 
-                comb_results = self._process_parameter_combination(i_rep, i_param_comb, dgp_params, dml_params, dml_data)
+                comb_results = self._process_parameter_combination(
+                    i_rep, i_param_comb, dgp_params, dml_params, dml_data
+                )
                 rep_results["coverage"].extend(comb_results["coverage"])
 
         return rep_results
@@ -116,14 +133,20 @@ class RDDCoverageSimulation(BaseSimulation):
         for level in self.confidence_parameters["level"]:
             if self.fuzzy:
                 D = dml_data.data[dml_data.d_cols]
-                rd_model = rdrobust(y=Y, x=score, fuzzy=D, covs=Z, c=self.cutoff, level=level * 100)
+                rd_model = rdrobust(
+                    y=Y, x=score, fuzzy=D, covs=Z, c=self.cutoff, level=level * 100
+                )
             else:
-                rd_model = rdrobust(y=Y, x=score, covs=Z, c=self.cutoff, level=level * 100)
+                rd_model = rdrobust(
+                    y=Y, x=score, covs=Z, c=self.cutoff, level=level * 100
+                )
             coef_rd = rd_model.coef.loc["Robust", "Coeff"]
             ci_lower_rd = rd_model.ci.loc["Robust", "CI Lower"]
             ci_upper_rd = rd_model.ci.loc["Robust", "CI Upper"]
 
-            confint_for_compute = pd.DataFrame({"lower": [ci_lower_rd], "upper": [ci_upper_rd]})
+            confint_for_compute = pd.DataFrame(
+                {"lower": [ci_lower_rd], "upper": [ci_upper_rd]}
+            )
             theta_for_compute = np.array([coef_rd])
 
             coverage_metrics = self._compute_coverage(
@@ -217,7 +240,9 @@ class RDDCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary
@@ -232,7 +257,10 @@ class RDDCoverageSimulation(BaseSimulation):
 
         x_cols = ["x" + str(i) for i in range(data["X"].shape[1])]
         columns = ["y", "d", "score"] + x_cols
-        df = pd.DataFrame(np.column_stack((data["Y"], data["D"], data["score"], data["X"])), columns=columns)
+        df = pd.DataFrame(
+            np.column_stack((data["Y"], data["D"], data["score"], data["X"])),
+            columns=columns,
+        )
 
         dml_data = dml.data.DoubleMLRDDData(
             data=df,

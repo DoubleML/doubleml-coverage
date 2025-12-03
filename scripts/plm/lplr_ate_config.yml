@@ -7,7 +7,7 @@ simulation_parameters:
   n_jobs: -2
 
 dgp_parameters:
-  theta: [0.5] # Treatment effect
+  alpha: [0.5] # Treatment effect
   n_obs: [500] # Sample size
   dim_x: [20] # Number of covariates
 

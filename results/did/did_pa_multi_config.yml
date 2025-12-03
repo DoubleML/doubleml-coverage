@@ -9,7 +9,7 @@ dgp_parameters:
   - 4
   - 6
   n_obs:
-  - 2000
+  - 1000
 learner_definitions:
   linear: &id001
     name: Linear
@@ -17,30 +17,8 @@ learner_definitions:
     name: Logistic
   lgbmr: &id003
     name: LGBM Regr.
-    params:
-      n_estimators: 300
-      learning_rate: 0.03
-      num_leaves: 7
-      max_depth: 3
-      min_child_samples: 20
-      subsample: 0.8
-      colsample_bytree: 0.8
-      reg_alpha: 0.1
-      reg_lambda: 1.0
-      random_state: 42
   lgbmc: &id004
     name: LGBM Clas.
-    params:
-      n_estimators: 300
-      learning_rate: 0.03
-      num_leaves: 7
-      max_depth: 3
-      min_child_samples: 20
-      subsample: 0.8
-      colsample_bytree: 0.8
-      reg_alpha: 0.1
-      reg_lambda: 1.0
-      random_state: 42
 dml_parameters:
   learners:
   - ml_g: *id001

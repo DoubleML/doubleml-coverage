@@ -32,7 +32,9 @@ class IRMATESensitivityCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -101,12 +103,18 @@ class IRMATESensitivityCoverageSimulation(BaseSimulation):
                 null_hypothesis=theta,
             )
             sensitivity_results = {
-                "Coverage (Lower)": theta >= dml_model.sensitivity_params["ci"]["lower"][0],
-                "Coverage (Upper)": theta <= dml_model.sensitivity_params["ci"]["upper"][0],
+                "Coverage (Lower)": theta
+                >= dml_model.sensitivity_params["ci"]["lower"][0],
+                "Coverage (Upper)": theta
+                <= dml_model.sensitivity_params["ci"]["upper"][0],
                 "RV": dml_model.sensitivity_params["rv"][0],
                 "RVa": dml_model.sensitivity_params["rva"][0],
-                "Bias (Lower)": abs(theta - dml_model.sensitivity_params["theta"]["lower"][0]),
-                "Bias (Upper)": abs(theta - dml_model.sensitivity_params["theta"]["upper"][0]),
+                "Bias (Lower)": abs(
+                    theta - dml_model.sensitivity_params["theta"]["lower"][0]
+                ),
+                "Bias (Upper)": abs(
+                    theta - dml_model.sensitivity_params["theta"]["upper"][0]
+                ),
             }
             # add sensitivity results to the level result coverage
             level_result["coverage"].update(sensitivity_results)
@@ -147,7 +155,9 @@ class IRMATESensitivityCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

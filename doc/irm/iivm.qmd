@@ -22,9 +22,9 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## LATE Coverage
+## Coverage
 
-The simulations are based on the  the [make_iivm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_iivm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
+The simulations are based on the  the [make_iivm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_iivm_data.html)-DGP with $500$ observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 

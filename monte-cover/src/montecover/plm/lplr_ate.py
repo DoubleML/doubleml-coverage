@@ -1,4 +1,3 @@
-import warnings
 from typing import Any, Dict, Optional
 
 import doubleml as dml
@@ -12,12 +11,12 @@ class LPLRATECoverageSimulation(BaseSimulation):
     """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
 
     def __init__(
-            self,
-            config_file: str,
-            suppress_warnings: bool = True,
-            log_level: str = "INFO",
-            log_file: Optional[str] = None,
-            use_failed_scores: bool = False,
+        self,
+        config_file: str,
+        suppress_warnings: bool = True,
+        log_level: str = "INFO",
+        log_file: Optional[str] = None,
+        use_failed_scores: bool = False,
     ):
         super().__init__(
             config_file=config_file,
@@ -34,7 +33,9 @@ class LPLRATECoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_m", "ml_M", "ml_t"]
         for learner in self.dml_parameters["learners"]:
@@ -46,7 +47,7 @@ class LPLRATECoverageSimulation(BaseSimulation):
         self.logger.info("Calculating oracle values")
 
         self.oracle_values = dict()
-        self.oracle_values["theta"] = self.dgp_parameters["theta"]
+        self.oracle_values["theta"] = self.dgp_parameters["alpha"]
 
     def run_single_rep(self, dml_data, dml_params) -> Dict[str, Any]:
         """Run a single repetition with the given parameters."""
@@ -64,7 +65,8 @@ class LPLRATECoverageSimulation(BaseSimulation):
             ml_M=ml_M,
             ml_t=ml_t,
             score=score,
-            error_on_convergence_failure= not self._use_failed_scores,)
+            error_on_convergence_failure=(not self._use_failed_scores),
+        )
 
         try:
             dml_model.fit()
@@ -116,7 +118,9 @@ class LPLRATECoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

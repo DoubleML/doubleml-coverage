@@ -22,7 +22,7 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATE Coverage
+## Coverage
 
 The simulations are based on the  the [make_lplr_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_lplr_LZZ2020.html)-DGP with $500$ observations.
 
@@ -64,7 +64,6 @@ generate_and_show_styled_table(
     display_cols=display_columns_coverage,
     n_rep=n_rep_coverage,
     level_col="level",
-#    rename_map={"Learner g": "Learner l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```
@@ -78,7 +77,6 @@ generate_and_show_styled_table(
     display_cols=display_columns_coverage,
     n_rep=n_rep_coverage,
     level_col="level",
-#    rename_map={"Learner g": "Learner l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```
@@ -107,6 +105,95 @@ generate_and_show_styled_table(
     filters={"level": 0.9, "Score": "instrument"},
     display_cols=display_columns_coverage,
     n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+
+## Tuning
+
+The simulations are based on the  the [make_lplr_LZZ2020](https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_lplr_LZZ2020.html)-DGP with $500$ observations. This is only an example as the untuned version just relies on the default configuration.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/lplr_ate_tune_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df_coverage_tune = pd.read_csv("../../results/plm/lplr_ate_tune_coverage.csv", index_col=None)
+
+if "repetition" in df_coverage_tune.columns and df_coverage_tune["repetition"].nunique() == 1:
+    n_rep_coverage_tune = df_coverage_tune["repetition"].unique()[0]
+elif "n_rep" in df_coverage_tune.columns and df_coverage_tune["n_rep"].nunique() == 1:
+    n_rep_coverage_tune = df_coverage_tune["n_rep"].unique()[0]
+else:
+    n_rep_coverage_tune = "N/A" # Fallback if n_rep cannot be determined
+
+display_columns_coverage_tune = ["Learner m", "Learner M", "Learner t", "Tuned", "Bias", "CI Length", "Coverage", "Loss M", "Loss a", "Loss m"]
+```
+
+### Nuisance space
+
+```{python}
+# | echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_tune,
+    filters={"level": 0.95, "Score": "nuisance_space"},
+    display_cols=display_columns_coverage_tune,
+    n_rep=n_rep_coverage_tune,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_tune,
+    filters={"level": 0.9, "Score": "nuisance_space"},
+    display_cols=display_columns_coverage_tune,
+    n_rep=n_rep_coverage_tune,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+### Instrument
+
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_tune,
+    filters={"level": 0.95, "Score": "instrument"},
+    display_cols=display_columns_coverage_tune,
+    n_rep=n_rep_coverage_tune,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage_tune,
+    filters={"level": 0.9, "Score": "instrument"},
+    display_cols=display_columns_coverage_tune,
+    n_rep=n_rep_coverage_tune,
     level_col="level",
     coverage_highlight_cols=["Coverage"]
 )
