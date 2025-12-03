@@ -306,6 +306,11 @@ window.Quarto = {
   <li><a href="#nuisance-space" id="toc-nuisance-space" class="nav-link" data-scroll-target="#nuisance-space">Nuisance space</a></li>
   <li><a href="#instrument" id="toc-instrument" class="nav-link" data-scroll-target="#instrument">Instrument</a></li>
   </ul></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning">Tuning</a>
+  <ul class="collapse">
+  <li><a href="#nuisance-space-1" id="toc-nuisance-space-1" class="nav-link" data-scroll-target="#nuisance-space-1">Nuisance space</a></li>
+  <li><a href="#instrument-1" id="toc-instrument-1" class="nav-link" data-scroll-target="#instrument-1">Instrument</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -331,7 +336,7 @@ window.Quarto = {
 </header>
 
 
-<div id="8a289020" class="cell" data-execution_count="1">
+<div id="086349ef" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <script type="module">
     const { set_or_remove_dark_class } = await import(window._itables_2_5_2);
@@ -445,12 +450,12 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="64dd5445" class="cell" data-execution_count="2">
+<div id="0e23c5eb" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                               0.11.dev0
+<pre><code>DoubleML Version                               0.12.dev0
 Script                         LPLRATECoverageSimulation
-Date                                    2025-11-18 03:13
-Total Runtime (minutes)                        39.794842
+Date                                    2025-11-26 13:24
+Total Runtime (minutes)                        14.800051
 Python Version                                    3.12.9
 Config File              scripts/plm/lplr_ate_config.yml</code></pre>
 </div>
@@ -460,10 +465,10 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
 </div>
 <section id="nuisance-space" class="level3">
 <h3 class="anchored" data-anchor-id="nuisance-space">Nuisance space</h3>
-<div id="6b5c80fe" class="cell" data-execution_count="4">
+<div id="fe6e8f92" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_72ff2"><tbody><tr>
+<table id="T_e8436"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -474,11 +479,11 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_72ff2:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_e8436:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "order": [], "classes": ["display", "nowrap"], "table_style": "\n#T_72ff2 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_72ff2 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_72ff2 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_72ff2 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_72ff2 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_72ff2_row0_col5, #T_72ff2_row1_col5, #T_72ff2_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_72ff2\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_72ff2_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_72ff2_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_72ff2_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_72ff2_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_72ff2_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_72ff2_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_72ff2_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_72ff2_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_72ff2_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_72ff2_row0_col3\" class=\"data row0 col3\" >0.156</td>\n      <td id=\"T_72ff2_row0_col4\" class=\"data row0 col4\" >0.713</td>\n      <td id=\"T_72ff2_row0_col5\" class=\"data row0 col5\" >0.946</td>\n    </tr>\n    <tr>\n      <td id=\"T_72ff2_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_72ff2_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_72ff2_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_72ff2_row1_col3\" class=\"data row1 col3\" >0.151</td>\n      <td id=\"T_72ff2_row1_col4\" class=\"data row1 col4\" >0.694</td>\n      <td id=\"T_72ff2_row1_col5\" class=\"data row1 col5\" >0.930</td>\n    </tr>\n    <tr>\n      <td id=\"T_72ff2_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_72ff2_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_72ff2_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_72ff2_row2_col3\" class=\"data row2 col3\" >0.098</td>\n      <td id=\"T_72ff2_row2_col4\" class=\"data row2 col4\" >0.459</td>\n      <td id=\"T_72ff2_row2_col5\" class=\"data row2 col5\" >0.940</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_e8436 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_e8436 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_e8436 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_e8436 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_e8436 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_e8436_row0_col5, #T_e8436_row1_col5, #T_e8436_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_e8436\">\n  <caption>Coverage for 95%-Confidence Interval over N/A Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_e8436_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_e8436_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_e8436_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_e8436_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_e8436_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_e8436_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_e8436_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_e8436_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_e8436_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_e8436_row0_col3\" class=\"data row0 col3\" >0.153</td>\n      <td id=\"T_e8436_row0_col4\" class=\"data row0 col4\" >0.701</td>\n      <td id=\"T_e8436_row0_col5\" class=\"data row0 col5\" >0.936</td>\n    </tr>\n    <tr>\n      <td id=\"T_e8436_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_e8436_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_e8436_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_e8436_row1_col3\" class=\"data row1 col3\" >0.149</td>\n      <td id=\"T_e8436_row1_col4\" class=\"data row1 col4\" >0.687</td>\n      <td id=\"T_e8436_row1_col5\" class=\"data row1 col5\" >0.928</td>\n    </tr>\n    <tr>\n      <td id=\"T_e8436_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_e8436_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_e8436_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_e8436_row2_col3\" class=\"data row2 col3\" >0.096</td>\n      <td id=\"T_e8436_row2_col4\" class=\"data row2 col4\" >0.458</td>\n      <td id=\"T_e8436_row2_col5\" class=\"data row2 col5\" >0.942</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -494,10 +499,10 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
 </script>
 </div>
 </div>
-<div id="cd80ae54" class="cell" data-execution_count="5">
+<div id="ec64c92b" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_e9592"><tbody><tr>
+<table id="T_83211"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -508,11 +513,11 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_e9592:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_83211:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "order": [], "classes": ["display", "nowrap"], "table_style": "\n#T_e9592 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_e9592 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_e9592 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_e9592 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_e9592 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_e9592_row0_col5, #T_e9592_row1_col5, #T_e9592_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_e9592\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_e9592_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_e9592_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_e9592_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_e9592_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_e9592_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_e9592_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_e9592_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_e9592_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_e9592_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_e9592_row0_col3\" class=\"data row0 col3\" >0.156</td>\n      <td id=\"T_e9592_row0_col4\" class=\"data row0 col4\" >0.598</td>\n      <td id=\"T_e9592_row0_col5\" class=\"data row0 col5\" >0.880</td>\n    </tr>\n    <tr>\n      <td id=\"T_e9592_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_e9592_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_e9592_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_e9592_row1_col3\" class=\"data row1 col3\" >0.151</td>\n      <td id=\"T_e9592_row1_col4\" class=\"data row1 col4\" >0.582</td>\n      <td id=\"T_e9592_row1_col5\" class=\"data row1 col5\" >0.868</td>\n    </tr>\n    <tr>\n      <td id=\"T_e9592_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_e9592_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_e9592_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_e9592_row2_col3\" class=\"data row2 col3\" >0.098</td>\n      <td id=\"T_e9592_row2_col4\" class=\"data row2 col4\" >0.385</td>\n      <td id=\"T_e9592_row2_col5\" class=\"data row2 col5\" >0.886</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_83211 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_83211 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_83211 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_83211 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_83211 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_83211_row0_col5, #T_83211_row1_col5, #T_83211_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_83211\">\n  <caption>Coverage for 90%-Confidence Interval over N/A Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_83211_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_83211_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_83211_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_83211_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_83211_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_83211_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_83211_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_83211_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_83211_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_83211_row0_col3\" class=\"data row0 col3\" >0.153</td>\n      <td id=\"T_83211_row0_col4\" class=\"data row0 col4\" >0.588</td>\n      <td id=\"T_83211_row0_col5\" class=\"data row0 col5\" >0.890</td>\n    </tr>\n    <tr>\n      <td id=\"T_83211_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_83211_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_83211_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_83211_row1_col3\" class=\"data row1 col3\" >0.149</td>\n      <td id=\"T_83211_row1_col4\" class=\"data row1 col4\" >0.577</td>\n      <td id=\"T_83211_row1_col5\" class=\"data row1 col5\" >0.894</td>\n    </tr>\n    <tr>\n      <td id=\"T_83211_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_83211_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_83211_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_83211_row2_col3\" class=\"data row2 col3\" >0.096</td>\n      <td id=\"T_83211_row2_col4\" class=\"data row2 col4\" >0.385</td>\n      <td id=\"T_83211_row2_col5\" class=\"data row2 col5\" >0.892</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -531,10 +536,10 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
 </section>
 <section id="instrument" class="level3">
 <h3 class="anchored" data-anchor-id="instrument">Instrument</h3>
-<div id="c360cb08" class="cell" data-execution_count="6">
+<div id="51142dbf" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_5efb0"><tbody><tr>
+<table id="T_5e5ae"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -545,11 +550,11 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_5efb0:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_5e5ae:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "order": [], "classes": ["display", "nowrap"], "table_style": "\n#T_5efb0 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_5efb0 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_5efb0 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_5efb0 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_5efb0 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_5efb0_row0_col5, #T_5efb0_row1_col5, #T_5efb0_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_5efb0\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_5efb0_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_5efb0_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_5efb0_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_5efb0_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_5efb0_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_5efb0_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_5efb0_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_5efb0_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_5efb0_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_5efb0_row0_col3\" class=\"data row0 col3\" >0.175</td>\n      <td id=\"T_5efb0_row0_col4\" class=\"data row0 col4\" >0.779</td>\n      <td id=\"T_5efb0_row0_col5\" class=\"data row0 col5\" >0.928</td>\n    </tr>\n    <tr>\n      <td id=\"T_5efb0_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_5efb0_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_5efb0_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_5efb0_row1_col3\" class=\"data row1 col3\" >0.165</td>\n      <td id=\"T_5efb0_row1_col4\" class=\"data row1 col4\" >0.702</td>\n      <td id=\"T_5efb0_row1_col5\" class=\"data row1 col5\" >0.924</td>\n    </tr>\n    <tr>\n      <td id=\"T_5efb0_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_5efb0_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_5efb0_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_5efb0_row2_col3\" class=\"data row2 col3\" >0.099</td>\n      <td id=\"T_5efb0_row2_col4\" class=\"data row2 col4\" >0.470</td>\n      <td id=\"T_5efb0_row2_col5\" class=\"data row2 col5\" >0.950</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_5e5ae table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_5e5ae thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_5e5ae tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_5e5ae tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_5e5ae caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_5e5ae_row0_col5, #T_5e5ae_row1_col5, #T_5e5ae_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_5e5ae\">\n  <caption>Coverage for 95%-Confidence Interval over N/A Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_5e5ae_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_5e5ae_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_5e5ae_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_5e5ae_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_5e5ae_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_5e5ae_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_5e5ae_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_5e5ae_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_5e5ae_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_5e5ae_row0_col3\" class=\"data row0 col3\" >0.176</td>\n      <td id=\"T_5e5ae_row0_col4\" class=\"data row0 col4\" >0.783</td>\n      <td id=\"T_5e5ae_row0_col5\" class=\"data row0 col5\" >0.936</td>\n    </tr>\n    <tr>\n      <td id=\"T_5e5ae_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_5e5ae_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_5e5ae_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_5e5ae_row1_col3\" class=\"data row1 col3\" >0.163</td>\n      <td id=\"T_5e5ae_row1_col4\" class=\"data row1 col4\" >0.703</td>\n      <td id=\"T_5e5ae_row1_col5\" class=\"data row1 col5\" >0.916</td>\n    </tr>\n    <tr>\n      <td id=\"T_5e5ae_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_5e5ae_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_5e5ae_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_5e5ae_row2_col3\" class=\"data row2 col3\" >0.099</td>\n      <td id=\"T_5e5ae_row2_col4\" class=\"data row2 col4\" >0.470</td>\n      <td id=\"T_5e5ae_row2_col5\" class=\"data row2 col5\" >0.942</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -565,10 +570,10 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
 </script>
 </div>
 </div>
-<div id="85791fc8" class="cell" data-execution_count="7">
+<div id="2538728c" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_efdd3"><tbody><tr>
+<table id="T_de0f1"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -579,11 +584,182 @@ Config File              scripts/plm/lplr_ate_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_efdd3:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_de0f1:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "order": [], "classes": ["display", "nowrap"], "table_style": "\n#T_efdd3 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_efdd3 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_efdd3 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_efdd3 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_efdd3 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_efdd3_row0_col5, #T_efdd3_row1_col5, #T_efdd3_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_efdd3\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_efdd3_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_efdd3_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_efdd3_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_efdd3_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_efdd3_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_efdd3_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_efdd3_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_efdd3_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_efdd3_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_efdd3_row0_col3\" class=\"data row0 col3\" >0.175</td>\n      <td id=\"T_efdd3_row0_col4\" class=\"data row0 col4\" >0.654</td>\n      <td id=\"T_efdd3_row0_col5\" class=\"data row0 col5\" >0.872</td>\n    </tr>\n    <tr>\n      <td id=\"T_efdd3_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_efdd3_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_efdd3_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_efdd3_row1_col3\" class=\"data row1 col3\" >0.165</td>\n      <td id=\"T_efdd3_row1_col4\" class=\"data row1 col4\" >0.589</td>\n      <td id=\"T_efdd3_row1_col5\" class=\"data row1 col5\" >0.856</td>\n    </tr>\n    <tr>\n      <td id=\"T_efdd3_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_efdd3_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_efdd3_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_efdd3_row2_col3\" class=\"data row2 col3\" >0.099</td>\n      <td id=\"T_efdd3_row2_col4\" class=\"data row2 col4\" >0.395</td>\n      <td id=\"T_efdd3_row2_col5\" class=\"data row2 col5\" >0.884</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_de0f1 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_de0f1 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_de0f1 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_de0f1 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_de0f1 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_de0f1_row0_col5, #T_de0f1_row1_col5, #T_de0f1_row2_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_de0f1\">\n  <caption>Coverage for 90%-Confidence Interval over N/A Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_de0f1_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_de0f1_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_de0f1_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_de0f1_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_de0f1_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_de0f1_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_de0f1_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_de0f1_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_de0f1_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_de0f1_row0_col3\" class=\"data row0 col3\" >0.176</td>\n      <td id=\"T_de0f1_row0_col4\" class=\"data row0 col4\" >0.657</td>\n      <td id=\"T_de0f1_row0_col5\" class=\"data row0 col5\" >0.866</td>\n    </tr>\n    <tr>\n      <td id=\"T_de0f1_row1_col0\" class=\"data row1 col0\" >LassoCV</td>\n      <td id=\"T_de0f1_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_de0f1_row1_col2\" class=\"data row1 col2\" >LassoCV</td>\n      <td id=\"T_de0f1_row1_col3\" class=\"data row1 col3\" >0.163</td>\n      <td id=\"T_de0f1_row1_col4\" class=\"data row1 col4\" >0.590</td>\n      <td id=\"T_de0f1_row1_col5\" class=\"data row1 col5\" >0.858</td>\n    </tr>\n    <tr>\n      <td id=\"T_de0f1_row2_col0\" class=\"data row2 col0\" >RF Regr.</td>\n      <td id=\"T_de0f1_row2_col1\" class=\"data row2 col1\" >RF Clas.</td>\n      <td id=\"T_de0f1_row2_col2\" class=\"data row2 col2\" >RF Regr.</td>\n      <td id=\"T_de0f1_row2_col3\" class=\"data row2 col3\" >0.099</td>\n      <td id=\"T_de0f1_row2_col4\" class=\"data row2 col4\" >0.395</td>\n      <td id=\"T_de0f1_row2_col5\" class=\"data row2 col5\" >0.902</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="tuning" class="level2">
+<h2 class="anchored" data-anchor-id="tuning">Tuning</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.plm.datasets.make_lplr_LZZ2020.html">make_lplr_LZZ2020</a>-DGP with <span class="math inline">\(500\)</span> observations. This is only an example as the untuned version just relies on the default configuration.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="351fa8c7" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleML Version                                    0.12.dev0
+Script                        LPLRATETuningCoverageSimulation
+Date                                         2025-12-01 14:39
+Total Runtime (minutes)                             38.923752
+Python Version                                         3.12.9
+Config File              scripts/plm/lplr_ate_tune_config.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="nuisance-space-1" class="level3">
+<h3 class="anchored" data-anchor-id="nuisance-space-1">Nuisance space</h3>
+<div id="bfa96c89" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_37385"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_37385:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_37385 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_37385 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_37385 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_37385 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_37385 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_37385_row0_col6, #T_37385_row1_col6 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_37385\">\n  <caption>Coverage for 95%-Confidence Interval over 100 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_37385_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_37385_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_37385_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_37385_level0_col3\" class=\"col_heading level0 col3\" >Tuned</th>\n      <th id=\"T_37385_level0_col4\" class=\"col_heading level0 col4\" >Bias</th>\n      <th id=\"T_37385_level0_col5\" class=\"col_heading level0 col5\" >CI Length</th>\n      <th id=\"T_37385_level0_col6\" class=\"col_heading level0 col6\" >Coverage</th>\n      <th id=\"T_37385_level0_col7\" class=\"col_heading level0 col7\" >Loss M</th>\n      <th id=\"T_37385_level0_col8\" class=\"col_heading level0 col8\" >Loss a</th>\n      <th id=\"T_37385_level0_col9\" class=\"col_heading level0 col9\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_37385_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_37385_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_37385_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_37385_row0_col3\" class=\"data row0 col3\" >False</td>\n      <td id=\"T_37385_row0_col4\" class=\"data row0 col4\" >0.198</td>\n      <td id=\"T_37385_row0_col5\" class=\"data row0 col5\" >0.966</td>\n      <td id=\"T_37385_row0_col6\" class=\"data row0 col6\" >0.940</td>\n      <td id=\"T_37385_row0_col7\" class=\"data row0 col7\" >0.727</td>\n      <td id=\"T_37385_row0_col8\" class=\"data row0 col8\" >0.355</td>\n      <td id=\"T_37385_row0_col9\" class=\"data row0 col9\" >0.479</td>\n    </tr>\n    <tr>\n      <td id=\"T_37385_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_37385_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_37385_row1_col2\" class=\"data row1 col2\" >LGBM Regr.</td>\n      <td id=\"T_37385_row1_col3\" class=\"data row1 col3\" >True</td>\n      <td id=\"T_37385_row1_col4\" class=\"data row1 col4\" >0.202</td>\n      <td id=\"T_37385_row1_col5\" class=\"data row1 col5\" >0.812</td>\n      <td id=\"T_37385_row1_col6\" class=\"data row1 col6\" >0.910</td>\n      <td id=\"T_37385_row1_col7\" class=\"data row1 col7\" >0.631</td>\n      <td id=\"T_37385_row1_col8\" class=\"data row1 col8\" >0.331</td>\n      <td id=\"T_37385_row1_col9\" class=\"data row1 col9\" >0.469</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+<div id="bf2ccd4d" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_6db88"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_6db88:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_6db88 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_6db88 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_6db88 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_6db88 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_6db88 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_6db88_row0_col6, #T_6db88_row1_col6 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_6db88\">\n  <caption>Coverage for 90%-Confidence Interval over 100 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_6db88_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_6db88_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_6db88_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_6db88_level0_col3\" class=\"col_heading level0 col3\" >Tuned</th>\n      <th id=\"T_6db88_level0_col4\" class=\"col_heading level0 col4\" >Bias</th>\n      <th id=\"T_6db88_level0_col5\" class=\"col_heading level0 col5\" >CI Length</th>\n      <th id=\"T_6db88_level0_col6\" class=\"col_heading level0 col6\" >Coverage</th>\n      <th id=\"T_6db88_level0_col7\" class=\"col_heading level0 col7\" >Loss M</th>\n      <th id=\"T_6db88_level0_col8\" class=\"col_heading level0 col8\" >Loss a</th>\n      <th id=\"T_6db88_level0_col9\" class=\"col_heading level0 col9\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_6db88_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_6db88_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_6db88_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_6db88_row0_col3\" class=\"data row0 col3\" >False</td>\n      <td id=\"T_6db88_row0_col4\" class=\"data row0 col4\" >0.198</td>\n      <td id=\"T_6db88_row0_col5\" class=\"data row0 col5\" >0.811</td>\n      <td id=\"T_6db88_row0_col6\" class=\"data row0 col6\" >0.890</td>\n      <td id=\"T_6db88_row0_col7\" class=\"data row0 col7\" >0.727</td>\n      <td id=\"T_6db88_row0_col8\" class=\"data row0 col8\" >0.355</td>\n      <td id=\"T_6db88_row0_col9\" class=\"data row0 col9\" >0.479</td>\n    </tr>\n    <tr>\n      <td id=\"T_6db88_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_6db88_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_6db88_row1_col2\" class=\"data row1 col2\" >LGBM Regr.</td>\n      <td id=\"T_6db88_row1_col3\" class=\"data row1 col3\" >True</td>\n      <td id=\"T_6db88_row1_col4\" class=\"data row1 col4\" >0.202</td>\n      <td id=\"T_6db88_row1_col5\" class=\"data row1 col5\" >0.682</td>\n      <td id=\"T_6db88_row1_col6\" class=\"data row1 col6\" >0.870</td>\n      <td id=\"T_6db88_row1_col7\" class=\"data row1 col7\" >0.631</td>\n      <td id=\"T_6db88_row1_col8\" class=\"data row1 col8\" >0.331</td>\n      <td id=\"T_6db88_row1_col9\" class=\"data row1 col9\" >0.469</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+<section id="instrument-1" class="level3">
+<h3 class="anchored" data-anchor-id="instrument-1">Instrument</h3>
+<div id="837a5d57" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_de776"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_de776:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_de776 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_de776 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_de776 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_de776 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_de776 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_de776_row0_col6, #T_de776_row1_col6 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_de776\">\n  <caption>Coverage for 95%-Confidence Interval over 100 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_de776_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_de776_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_de776_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_de776_level0_col3\" class=\"col_heading level0 col3\" >Tuned</th>\n      <th id=\"T_de776_level0_col4\" class=\"col_heading level0 col4\" >Bias</th>\n      <th id=\"T_de776_level0_col5\" class=\"col_heading level0 col5\" >CI Length</th>\n      <th id=\"T_de776_level0_col6\" class=\"col_heading level0 col6\" >Coverage</th>\n      <th id=\"T_de776_level0_col7\" class=\"col_heading level0 col7\" >Loss M</th>\n      <th id=\"T_de776_level0_col8\" class=\"col_heading level0 col8\" >Loss a</th>\n      <th id=\"T_de776_level0_col9\" class=\"col_heading level0 col9\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_de776_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_de776_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_de776_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_de776_row0_col3\" class=\"data row0 col3\" >False</td>\n      <td id=\"T_de776_row0_col4\" class=\"data row0 col4\" >0.280</td>\n      <td id=\"T_de776_row0_col5\" class=\"data row0 col5\" >1.132</td>\n      <td id=\"T_de776_row0_col6\" class=\"data row0 col6\" >0.920</td>\n      <td id=\"T_de776_row0_col7\" class=\"data row0 col7\" >0.731</td>\n      <td id=\"T_de776_row0_col8\" class=\"data row0 col8\" >0.352</td>\n      <td id=\"T_de776_row0_col9\" class=\"data row0 col9\" >0.376</td>\n    </tr>\n    <tr>\n      <td id=\"T_de776_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_de776_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_de776_row1_col2\" class=\"data row1 col2\" >LGBM Regr.</td>\n      <td id=\"T_de776_row1_col3\" class=\"data row1 col3\" >True</td>\n      <td id=\"T_de776_row1_col4\" class=\"data row1 col4\" >0.213</td>\n      <td id=\"T_de776_row1_col5\" class=\"data row1 col5\" >0.940</td>\n      <td id=\"T_de776_row1_col6\" class=\"data row1 col6\" >0.920</td>\n      <td id=\"T_de776_row1_col7\" class=\"data row1 col7\" >0.631</td>\n      <td id=\"T_de776_row1_col8\" class=\"data row1 col8\" >0.331</td>\n      <td id=\"T_de776_row1_col9\" class=\"data row1 col9\" >0.335</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+<div id="c5c27bf0" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_8c58a"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_8c58a:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_8c58a table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_8c58a thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_8c58a tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_8c58a tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_8c58a caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_8c58a_row0_col6, #T_8c58a_row1_col6 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_8c58a\">\n  <caption>Coverage for 90%-Confidence Interval over 100 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_8c58a_level0_col0\" class=\"col_heading level0 col0\" >Learner m</th>\n      <th id=\"T_8c58a_level0_col1\" class=\"col_heading level0 col1\" >Learner M</th>\n      <th id=\"T_8c58a_level0_col2\" class=\"col_heading level0 col2\" >Learner t</th>\n      <th id=\"T_8c58a_level0_col3\" class=\"col_heading level0 col3\" >Tuned</th>\n      <th id=\"T_8c58a_level0_col4\" class=\"col_heading level0 col4\" >Bias</th>\n      <th id=\"T_8c58a_level0_col5\" class=\"col_heading level0 col5\" >CI Length</th>\n      <th id=\"T_8c58a_level0_col6\" class=\"col_heading level0 col6\" >Coverage</th>\n      <th id=\"T_8c58a_level0_col7\" class=\"col_heading level0 col7\" >Loss M</th>\n      <th id=\"T_8c58a_level0_col8\" class=\"col_heading level0 col8\" >Loss a</th>\n      <th id=\"T_8c58a_level0_col9\" class=\"col_heading level0 col9\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_8c58a_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_8c58a_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_8c58a_row0_col2\" class=\"data row0 col2\" >LGBM Regr.</td>\n      <td id=\"T_8c58a_row0_col3\" class=\"data row0 col3\" >False</td>\n      <td id=\"T_8c58a_row0_col4\" class=\"data row0 col4\" >0.280</td>\n      <td id=\"T_8c58a_row0_col5\" class=\"data row0 col5\" >0.950</td>\n      <td id=\"T_8c58a_row0_col6\" class=\"data row0 col6\" >0.890</td>\n      <td id=\"T_8c58a_row0_col7\" class=\"data row0 col7\" >0.731</td>\n      <td id=\"T_8c58a_row0_col8\" class=\"data row0 col8\" >0.352</td>\n      <td id=\"T_8c58a_row0_col9\" class=\"data row0 col9\" >0.376</td>\n    </tr>\n    <tr>\n      <td id=\"T_8c58a_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_8c58a_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_8c58a_row1_col2\" class=\"data row1 col2\" >LGBM Regr.</td>\n      <td id=\"T_8c58a_row1_col3\" class=\"data row1 col3\" >True</td>\n      <td id=\"T_8c58a_row1_col4\" class=\"data row1 col4\" >0.213</td>\n      <td id=\"T_8c58a_row1_col5\" class=\"data row1 col5\" >0.789</td>\n      <td id=\"T_8c58a_row1_col6\" class=\"data row1 col6\" >0.860</td>\n      <td id=\"T_8c58a_row1_col7\" class=\"data row1 col7\" >0.631</td>\n      <td id=\"T_8c58a_row1_col8\" class=\"data row1 col8\" >0.331</td>\n      <td id=\"T_8c58a_row1_col9\" class=\"data row1 col9\" >0.335</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
