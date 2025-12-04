@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.11.dev0,APOSCoverageSimulation,2025-09-08 07:52,73.54105892578761,3.12.3,scripts/irm/apos_config.yml
+0.12.dev0,APOSCoverageSimulation,2025-12-04 18:24,74.42682578563691,3.12.3,scripts/irm/apos_config.yml
