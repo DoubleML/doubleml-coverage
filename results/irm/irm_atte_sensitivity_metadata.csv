@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.11.dev0,IRMATTESensitivityCoverageSimulation,2025-09-08 07:16,37.43084245125453,3.12.3,scripts/irm/irm_atte_sensitivity_config.yml
+0.12.dev0,IRMATTESensitivityCoverageSimulation,2025-12-04 17:47,37.48425861199697,3.12.3,scripts/irm/irm_atte_sensitivity_config.yml
