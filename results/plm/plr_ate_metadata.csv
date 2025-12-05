@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.11.dev0,PLRATECoverageSimulation,2025-11-17 11:56,194.01051502227784,3.12.3,scripts/plm/plr_ate_config.yml
+0.12.dev0,PLRATECoverageSimulation,2025-12-04 20:23,193.46772919098535,3.12.3,scripts/plm/plr_ate_config.yml
