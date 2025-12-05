@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.11.dev0,CVARCoverageSimulation,2025-09-08 08:12,94.27919102907181,3.12.3,scripts/irm/cvar_config.yml
+0.12.dev0,CVARCoverageSimulation,2025-12-04 18:37,87.47529164155324,3.12.3,scripts/irm/cvar_config.yml

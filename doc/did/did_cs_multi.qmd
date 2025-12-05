@@ -22,9 +22,9 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATTE Coverage
+## Coverage
 
-The simulations are based on the [make_did_cs_CS2021](https://docs.doubleml.org/dev/api/generated/doubleml.did.datasets.make_did_cs_CS2021.html)-DGP with $2000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
+The simulations are based on the [make_did_cs_CS2021](https://docs.doubleml.org/stable/api/generated/doubleml.did.datasets.make_did_cs_CS2021.html)-DGP with $1000$ observations. Learners are both set to either boosting or a linear (logistic) model. Due to time constraints we only consider the following DGPs:
 
  - Type 1: Linear outcome model and treatment assignment
  - Type 4: Nonlinear outcome model and treatment assignment
@@ -52,7 +52,7 @@ df = pd.read_csv("../../results/did/did_cs_multi_detailed.csv", index_col=None)
 assert df["repetition"].nunique() == 1
 n_rep = df["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_d0_t0", "Loss g_d0_t1", "Loss g_d1_t0", "Loss g_d1_t1", "Loss m"]
 ```
 
 ### Observational Score
@@ -112,7 +112,7 @@ generate_and_show_styled_table(
 
 ## Aggregated Effects
 
-These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/dev/guide/models.html#difference-in-differences-models-did).
+These simulations test different types of aggregation, as described in [DiD User Guide](https://docs.doubleml.org/stable/guide/models.html#difference-in-differences-models-did).
 
 The non-uniform results (coverage, ci length and bias) refer to averaged values over all $ATTs$ (point-wise confidence intervals).
 
@@ -127,7 +127,7 @@ df_group = pd.read_csv("../../results/did/did_cs_multi_group.csv", index_col=Non
 assert df_group["repetition"].nunique() == 1
 n_rep_group = df_group["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_d0_t0", "Loss g_d0_t1", "Loss g_d1_t0", "Loss g_d1_t1", "Loss m"]
 ```
 
 #### Observational Score
@@ -195,7 +195,7 @@ df_time = pd.read_csv("../../results/did/did_cs_multi_time.csv", index_col=None)
 assert df_time["repetition"].nunique() == 1
 n_rep_time = df_time["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_d0_t0", "Loss g_d0_t1", "Loss g_d1_t0", "Loss g_d1_t1", "Loss m"]
 ```
 
 #### Observational Score
@@ -263,7 +263,7 @@ df_es = pd.read_csv("../../results/did/did_cs_multi_eventstudy.csv", index_col=N
 assert df_es["repetition"].nunique() == 1
 n_rep_es = df_es["repetition"].unique()[0]
 
-display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage"]
+display_columns = ["Learner g", "Learner m", "DGP", "In-sample-norm.", "Bias", "CI Length", "Coverage", "Uniform CI Length", "Uniform Coverage", "Loss g_d0_t0", "Loss g_d0_t1", "Loss g_d1_t0", "Loss g_d1_t1", "Loss m"]
 ```
 
 #### Observational Score

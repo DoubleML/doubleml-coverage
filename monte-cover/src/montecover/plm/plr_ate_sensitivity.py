@@ -32,7 +32,9 @@ class PLRATESensitivityCoverageSimulation(BaseSimulation):
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
         # Process ML models in parameter grid
-        assert "learners" in self.dml_parameters, "No learners specified in the config file"
+        assert (
+            "learners" in self.dml_parameters
+        ), "No learners specified in the config file"
 
         required_learners = ["ml_g", "ml_m"]
         for learner in self.dml_parameters["learners"]:
@@ -48,21 +50,31 @@ class PLRATESensitivityCoverageSimulation(BaseSimulation):
         cf_d = 0.1
 
         np.random.seed(42)
-        dgp_dict = make_confounded_plr_data(n_obs=int(1e6), cf_y=cf_y, cf_d=cf_d, theta=self.dgp_parameters["theta"])
-        oracle_dict = dgp_dict["oracle_values"]
-        cf_y_test = np.mean(np.square(oracle_dict["g_long"] - oracle_dict["g_short"])) / np.mean(
-            np.square(dgp_dict["y"] - oracle_dict["g_short"])
+        dgp_dict = make_confounded_plr_data(
+            n_obs=int(1e6), cf_y=cf_y, cf_d=cf_d, theta=self.dgp_parameters["theta"]
         )
+        oracle_dict = dgp_dict["oracle_values"]
+        cf_y_test = np.mean(
+            np.square(oracle_dict["g_long"] - oracle_dict["g_short"])
+        ) / np.mean(np.square(dgp_dict["y"] - oracle_dict["g_short"]))
         self.logger.info(f"Input cf_y:{cf_y} \nCalculated cf_y: {round(cf_y_test, 5)}")
 
-        rr_long = (dgp_dict["d"] - oracle_dict["m_long"]) / np.mean(np.square(dgp_dict["d"] - oracle_dict["m_long"]))
-        rr_short = (dgp_dict["d"] - oracle_dict["m_short"]) / np.mean(np.square(dgp_dict["d"] - oracle_dict["m_short"]))
-        C2_D = (np.mean(np.square(rr_long)) - np.mean(np.square(rr_short))) / np.mean(np.square(rr_short))
+        rr_long = (dgp_dict["d"] - oracle_dict["m_long"]) / np.mean(
+            np.square(dgp_dict["d"] - oracle_dict["m_long"])
+        )
+        rr_short = (dgp_dict["d"] - oracle_dict["m_short"]) / np.mean(
+            np.square(dgp_dict["d"] - oracle_dict["m_short"])
+        )
+        C2_D = (np.mean(np.square(rr_long)) - np.mean(np.square(rr_short))) / np.mean(
+            np.square(rr_short)
+        )
         cf_d_test = C2_D / (1 + C2_D)
         self.logger.info(f"Input cf_d:{cf_d}\nCalculated cf_d: {round(cf_d_test, 5)}")
 
         # compute the value for rho
-        rho = np.corrcoef((oracle_dict["g_long"] - oracle_dict["g_short"]), (rr_long - rr_short))[0, 1]
+        rho = np.corrcoef(
+            (oracle_dict["g_long"] - oracle_dict["g_short"]), (rr_long - rr_short)
+        )[0, 1]
         self.logger.info(f"Correlation rho: {round(rho, 5)}")
 
         self.oracle_values = {
@@ -112,12 +124,18 @@ class PLRATESensitivityCoverageSimulation(BaseSimulation):
                 null_hypothesis=theta,
             )
             sensitivity_results = {
-                "Coverage (Lower)": theta >= dml_model.sensitivity_params["ci"]["lower"][0],
-                "Coverage (Upper)": theta <= dml_model.sensitivity_params["ci"]["upper"][0],
+                "Coverage (Lower)": theta
+                >= dml_model.sensitivity_params["ci"]["lower"][0],
+                "Coverage (Upper)": theta
+                <= dml_model.sensitivity_params["ci"]["upper"][0],
                 "RV": dml_model.sensitivity_params["rv"][0],
                 "RVa": dml_model.sensitivity_params["rva"][0],
-                "Bias (Lower)": abs(theta - dml_model.sensitivity_params["theta"]["lower"][0]),
-                "Bias (Upper)": abs(theta - dml_model.sensitivity_params["theta"]["upper"][0]),
+                "Bias (Lower)": abs(
+                    theta - dml_model.sensitivity_params["theta"]["lower"][0]
+                ),
+                "Bias (Upper)": abs(
+                    theta - dml_model.sensitivity_params["theta"]["upper"][0]
+                ),
             }
             # add sensitivity results to the level result coverage
             level_result["coverage"].update(sensitivity_results)
@@ -159,7 +177,9 @@ class PLRATESensitivityCoverageSimulation(BaseSimulation):
         # Aggregate results (possibly multiple result dfs)
         result_summary = dict()
         for result_name, result_df in self.results.items():
-            result_summary[result_name] = result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            result_summary[result_name] = (
+                result_df.groupby(groupby_cols).agg(aggregation_dict).reset_index()
+            )
             self.logger.debug(f"Summarized {result_name} results")
 
         return result_summary

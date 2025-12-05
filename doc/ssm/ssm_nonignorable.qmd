@@ -22,9 +22,9 @@ from utils.style_tables import generate_and_show_styled_table
 init_notebook_mode(all_interactive=True)
 ```
 
-## ATE Coverage
+## Coverage
 
-The simulations are based on the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_ssm_data.html)-DGP with $500$ observations. The simulation considers data with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
+The simulations are based on the [make_ssm_data](https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_ssm_data.html)-DGP with $500$ observations. The simulation considers data with [nonignorable nonresponse](https://docs.doubleml.org/stable/guide/models.html#nonignorable-nonresponse).
 
 ::: {.callout-note title="Metadata"  collapse="true"}
 

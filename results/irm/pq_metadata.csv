@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.11.dev0,PQCoverageSimulation,2025-09-08 08:35,117.05562915007273,3.12.3,scripts/irm/pq_config.yml
+0.12.dev0,PQCoverageSimulation,2025-12-04 19:07,117.31327378352483,3.12.3,scripts/irm/pq_config.yml

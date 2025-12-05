@@ -2,7 +2,12 @@ from typing import Any, Callable, Dict, Tuple
 
 from doubleml.utils import GlobalClassifier, GlobalRegressor
 from lightgbm import LGBMClassifier, LGBMRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, StackingClassifier, StackingRegressor
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    RandomForestRegressor,
+    StackingClassifier,
+    StackingRegressor,
+)
 from sklearn.linear_model import LassoCV, LinearRegression, LogisticRegression, Ridge
 
 LearnerInstantiator = Callable[[Dict[str, Any]], Any]
@@ -11,8 +16,12 @@ LEARNER_REGISTRY: Dict[str, LearnerInstantiator] = {
     "LassoCV": lambda params: LassoCV(**params),
     "RF Regr.": lambda params: RandomForestRegressor(**params),
     "RF Clas.": lambda params: RandomForestClassifier(**params),
-    "LGBM Regr.": lambda params: LGBMRegressor(**{**{"verbose": -1, "n_jobs": 1}, **params}),
-    "LGBM Clas.": lambda params: LGBMClassifier(**{**{"verbose": -1, "n_jobs": 1}, **params}),
+    "LGBM Regr.": lambda params: LGBMRegressor(
+        **{**{"verbose": -1, "n_jobs": 1}, **params}
+    ),
+    "LGBM Clas.": lambda params: LGBMClassifier(
+        **{**{"verbose": -1, "n_jobs": 1}, **params}
+    ),
     "Linear": lambda params: LinearRegression(**params),
     "Logistic": lambda params: LogisticRegression(**params),
     "Global Linear": lambda params: GlobalRegressor(LinearRegression(**params)),
