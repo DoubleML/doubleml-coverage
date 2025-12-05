@@ -3,6 +3,7 @@
 from montecover.plm.lplr_ate import LPLRATECoverageSimulation
 from montecover.plm.lplr_ate_tune import LPLRATETuningCoverageSimulation
 from montecover.plm.pliv_late import PLIVLATECoverageSimulation
+from montecover.plm.plpr_ate import PLPRATECoverageSimulation
 from montecover.plm.plr_ate import PLRATECoverageSimulation
 from montecover.plm.plr_ate_sensitivity import PLRATESensitivityCoverageSimulation
 from montecover.plm.plr_ate_tune import PLRATETuningCoverageSimulation
@@ -18,4 +19,5 @@ __all__ = [
     "PLRATETuningCoverageSimulation",
     "LPLRATECoverageSimulation",
     "LPLRATETuningCoverageSimulation",
+    "PLPRATECoverageSimulation",
 ]
