@@ -299,12 +299,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ate-coverage" id="toc-ate-coverage" class="nav-link active" data-scroll-target="#ate-coverage">ATE Coverage</a></li>
-  <li><a href="#atte-coverage" id="toc-atte-coverage" class="nav-link" data-scroll-target="#atte-coverage">ATTE Coverage</a></li>
-  <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity">Sensitivity</a>
+  <li><a href="#coverage" id="toc-coverage" class="nav-link active" data-scroll-target="#coverage">Coverage</a>
   <ul class="collapse">
   <li><a href="#ate" id="toc-ate" class="nav-link" data-scroll-target="#ate">ATE</a></li>
   <li><a href="#atte" id="toc-atte" class="nav-link" data-scroll-target="#atte">ATTE</a></li>
+  </ul></li>
+  <li><a href="#sensitivity" id="toc-sensitivity" class="nav-link" data-scroll-target="#sensitivity">Sensitivity</a>
+  <ul class="collapse">
+  <li><a href="#ate-1" id="toc-ate-1" class="nav-link" data-scroll-target="#ate-1">ATE</a></li>
+  <li><a href="#atte-1" id="toc-atte-1" class="nav-link" data-scroll-target="#atte-1">ATTE</a></li>
+  </ul></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning">Tuning</a>
+  <ul class="collapse">
+  <li><a href="#ate-2" id="toc-ate-2" class="nav-link" data-scroll-target="#ate-2">ATE</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -331,7 +338,7 @@ window.Quarto = {
 </header>
 
 
-<div id="16dbbd11" class="cell" data-execution_count="1">
+<div id="b6b4d6fb" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <script type="module">
     const { set_or_remove_dark_class } = await import(window._itables_2_5_2);
@@ -430,9 +437,9 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 </div>
 </div>
-<section id="ate-coverage" class="level2">
-<h2 class="anchored" data-anchor-id="ate-coverage">ATE Coverage</h2>
-<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html">make_irm_data</a>-DGP with <span class="math inline">\(500\)</span> observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.</p>
+<section id="coverage" class="level2">
+<h2 class="anchored" data-anchor-id="coverage">Coverage</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html">make_irm_data</a>-DGP with <span class="math inline">\(500\)</span> observations. Due to the linearity of the DGP, Lasso and Logit Regression are nearly optimal choices for the nuisance estimation.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Metadata">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -445,12 +452,12 @@ This is the <code>init_notebook_mode</code> cell from ITables v2.5.2<br>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="f7899767" class="cell" data-execution_count="2">
+<div id="6674772c" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                              0.11.dev0
+<pre><code>DoubleML Version                              0.12.dev0
 Script                         IRMATECoverageSimulation
-Date                                   2025-09-08 08:44
-Total Runtime (minutes)                      125.620448
+Date                                   2025-12-04 19:18
+Total Runtime (minutes)                      128.439195
 Python Version                                   3.12.3
 Config File              scripts/irm/irm_ate_config.yml</code></pre>
 </div>
@@ -458,207 +465,12 @@ Config File              scripts/irm/irm_ate_config.yml</code></pre>
 </div>
 </div>
 </div>
-<div id="744b7ec5" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display">
-<!--| quarto-html-table-processing: none -->
-<table id="T_21938"><tbody><tr>
-    <td style="vertical-align:middle; text-align:left">
-    
-    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
-    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
-    </tr></tbody></table>
-<script type="module">
-    (async () => {
-        async function init() {
-            const { ITable, jQuery: $ } = await window._itables_2_5_2;
-
-            document.querySelectorAll("#T_21938:not(.dataTable)").forEach(table => {
-                if (!(table instanceof HTMLTableElement))
-                    return;
-
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_21938 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_21938 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_21938 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_21938 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_21938 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_21938_row0_col4, #T_21938_row1_col4, #T_21938_row2_col4, #T_21938_row3_col4, #T_21938_row4_col4, #T_21938_row5_col4, #T_21938_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_21938\">\n  <caption>Coverage for 95%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_21938_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_21938_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_21938_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_21938_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_21938_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_21938_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_21938_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_21938_row0_col2\" class=\"data row0 col2\" >0.286</td>\n      <td id=\"T_21938_row0_col3\" class=\"data row0 col3\" >1.439</td>\n      <td id=\"T_21938_row0_col4\" class=\"data row0 col4\" >0.978</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_21938_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_21938_row1_col2\" class=\"data row1 col2\" >0.195</td>\n      <td id=\"T_21938_row1_col3\" class=\"data row1 col3\" >0.921</td>\n      <td id=\"T_21938_row1_col4\" class=\"data row1 col4\" >0.970</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_21938_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_21938_row2_col2\" class=\"data row2 col2\" >0.259</td>\n      <td id=\"T_21938_row2_col3\" class=\"data row2 col3\" >1.311</td>\n      <td id=\"T_21938_row2_col4\" class=\"data row2 col4\" >0.972</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_21938_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_21938_row3_col2\" class=\"data row3 col2\" >0.165</td>\n      <td id=\"T_21938_row3_col3\" class=\"data row3 col3\" >0.780</td>\n      <td id=\"T_21938_row3_col4\" class=\"data row3 col4\" >0.950</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_21938_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_21938_row4_col2\" class=\"data row4 col2\" >0.147</td>\n      <td id=\"T_21938_row4_col3\" class=\"data row4 col3\" >0.717</td>\n      <td id=\"T_21938_row4_col4\" class=\"data row4 col4\" >0.949</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_21938_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_21938_row5_col2\" class=\"data row5 col2\" >0.184</td>\n      <td id=\"T_21938_row5_col3\" class=\"data row5 col3\" >0.874</td>\n      <td id=\"T_21938_row5_col4\" class=\"data row5 col4\" >0.955</td>\n    </tr>\n    <tr>\n      <td id=\"T_21938_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_21938_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_21938_row6_col2\" class=\"data row6 col2\" >0.154</td>\n      <td id=\"T_21938_row6_col3\" class=\"data row6 col3\" >0.738</td>\n      <td id=\"T_21938_row6_col4\" class=\"data row6 col4\" >0.944</td>\n    </tr>\n  </tbody>\n</table>\n"};
-                new ITable(table, dt_args);
-            });
-        }
-
-        if (window._itables_2_5_2) {
-            init();
-        } else {
-            window.addEventListener("itables-2.5.2-ready", () => {
-                init();
-            });
-        }
-    })();
-</script>
-</div>
-</div>
-<div id="479f1959" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<!--| quarto-html-table-processing: none -->
-<table id="T_f84d6"><tbody><tr>
-    <td style="vertical-align:middle; text-align:left">
-    
-    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
-    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
-    </tr></tbody></table>
-<script type="module">
-    (async () => {
-        async function init() {
-            const { ITable, jQuery: $ } = await window._itables_2_5_2;
-
-            document.querySelectorAll("#T_f84d6:not(.dataTable)").forEach(table => {
-                if (!(table instanceof HTMLTableElement))
-                    return;
-
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_f84d6 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_f84d6 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_f84d6 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_f84d6 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_f84d6 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_f84d6_row0_col4, #T_f84d6_row1_col4, #T_f84d6_row2_col4, #T_f84d6_row3_col4, #T_f84d6_row4_col4, #T_f84d6_row5_col4, #T_f84d6_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_f84d6\">\n  <caption>Coverage for 90%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_f84d6_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_f84d6_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_f84d6_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_f84d6_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_f84d6_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_f84d6_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_f84d6_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_f84d6_row0_col2\" class=\"data row0 col2\" >0.286</td>\n      <td id=\"T_f84d6_row0_col3\" class=\"data row0 col3\" >1.208</td>\n      <td id=\"T_f84d6_row0_col4\" class=\"data row0 col4\" >0.931</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_f84d6_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_f84d6_row1_col2\" class=\"data row1 col2\" >0.195</td>\n      <td id=\"T_f84d6_row1_col3\" class=\"data row1 col3\" >0.773</td>\n      <td id=\"T_f84d6_row1_col4\" class=\"data row1 col4\" >0.913</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_f84d6_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_f84d6_row2_col2\" class=\"data row2 col2\" >0.259</td>\n      <td id=\"T_f84d6_row2_col3\" class=\"data row2 col3\" >1.100</td>\n      <td id=\"T_f84d6_row2_col4\" class=\"data row2 col4\" >0.920</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_f84d6_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_f84d6_row3_col2\" class=\"data row3 col2\" >0.165</td>\n      <td id=\"T_f84d6_row3_col3\" class=\"data row3 col3\" >0.655</td>\n      <td id=\"T_f84d6_row3_col4\" class=\"data row3 col4\" >0.900</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_f84d6_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_f84d6_row4_col2\" class=\"data row4 col2\" >0.147</td>\n      <td id=\"T_f84d6_row4_col3\" class=\"data row4 col3\" >0.602</td>\n      <td id=\"T_f84d6_row4_col4\" class=\"data row4 col4\" >0.903</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_f84d6_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_f84d6_row5_col2\" class=\"data row5 col2\" >0.184</td>\n      <td id=\"T_f84d6_row5_col3\" class=\"data row5 col3\" >0.733</td>\n      <td id=\"T_f84d6_row5_col4\" class=\"data row5 col4\" >0.911</td>\n    </tr>\n    <tr>\n      <td id=\"T_f84d6_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_f84d6_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_f84d6_row6_col2\" class=\"data row6 col2\" >0.154</td>\n      <td id=\"T_f84d6_row6_col3\" class=\"data row6 col3\" >0.619</td>\n      <td id=\"T_f84d6_row6_col4\" class=\"data row6 col4\" >0.885</td>\n    </tr>\n  </tbody>\n</table>\n"};
-                new ITable(table, dt_args);
-            });
-        }
-
-        if (window._itables_2_5_2) {
-            init();
-        } else {
-            window.addEventListener("itables-2.5.2-ready", () => {
-                init();
-            });
-        }
-    })();
-</script>
-</div>
-</div>
-</section>
-<section id="atte-coverage" class="level2">
-<h2 class="anchored" data-anchor-id="atte-coverage">ATTE Coverage</h2>
-<p>As for the ATE, the simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_irm_data.html">make_irm_data</a>-DGP with <span class="math inline">\(500\)</span> observations.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Metadata
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="3fedcf80" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                               0.11.dev0
-Script                         IRMATTECoverageSimulation
-Date                                    2025-09-08 08:43
-Total Runtime (minutes)                       124.646861
-Python Version                                    3.12.3
-Config File              scripts/irm/irm_atte_config.yml</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="24ddbb6d" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display">
-<!--| quarto-html-table-processing: none -->
-<table id="T_6f148"><tbody><tr>
-    <td style="vertical-align:middle; text-align:left">
-    
-    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
-    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
-    </tr></tbody></table>
-<script type="module">
-    (async () => {
-        async function init() {
-            const { ITable, jQuery: $ } = await window._itables_2_5_2;
-
-            document.querySelectorAll("#T_6f148:not(.dataTable)").forEach(table => {
-                if (!(table instanceof HTMLTableElement))
-                    return;
-
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_6f148 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_6f148 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_6f148 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_6f148 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_6f148 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_6f148_row0_col4, #T_6f148_row1_col4, #T_6f148_row2_col4, #T_6f148_row3_col4, #T_6f148_row4_col4, #T_6f148_row5_col4, #T_6f148_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_6f148\">\n  <caption>Coverage for 95%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_6f148_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_6f148_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_6f148_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_6f148_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_6f148_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_6f148_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_6f148_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_6f148_row0_col2\" class=\"data row0 col2\" >0.337</td>\n      <td id=\"T_6f148_row0_col3\" class=\"data row0 col3\" >1.725</td>\n      <td id=\"T_6f148_row0_col4\" class=\"data row0 col4\" >0.979</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_6f148_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_6f148_row1_col2\" class=\"data row1 col2\" >0.217</td>\n      <td id=\"T_6f148_row1_col3\" class=\"data row1 col3\" >1.000</td>\n      <td id=\"T_6f148_row1_col4\" class=\"data row1 col4\" >0.951</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_6f148_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_6f148_row2_col2\" class=\"data row2 col2\" >0.337</td>\n      <td id=\"T_6f148_row2_col3\" class=\"data row2 col3\" >1.630</td>\n      <td id=\"T_6f148_row2_col4\" class=\"data row2 col4\" >0.961</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_6f148_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_6f148_row3_col2\" class=\"data row3 col2\" >0.206</td>\n      <td id=\"T_6f148_row3_col3\" class=\"data row3 col3\" >0.939</td>\n      <td id=\"T_6f148_row3_col4\" class=\"data row3 col4\" >0.949</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_6f148_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_6f148_row4_col2\" class=\"data row4 col2\" >0.149</td>\n      <td id=\"T_6f148_row4_col3\" class=\"data row4 col3\" >0.688</td>\n      <td id=\"T_6f148_row4_col4\" class=\"data row4 col4\" >0.946</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_6f148_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_6f148_row5_col2\" class=\"data row5 col2\" >0.212</td>\n      <td id=\"T_6f148_row5_col3\" class=\"data row5 col3\" >0.968</td>\n      <td id=\"T_6f148_row5_col4\" class=\"data row5 col4\" >0.951</td>\n    </tr>\n    <tr>\n      <td id=\"T_6f148_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_6f148_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_6f148_row6_col2\" class=\"data row6 col2\" >0.154</td>\n      <td id=\"T_6f148_row6_col3\" class=\"data row6 col3\" >0.707</td>\n      <td id=\"T_6f148_row6_col4\" class=\"data row6 col4\" >0.937</td>\n    </tr>\n  </tbody>\n</table>\n"};
-                new ITable(table, dt_args);
-            });
-        }
-
-        if (window._itables_2_5_2) {
-            init();
-        } else {
-            window.addEventListener("itables-2.5.2-ready", () => {
-                init();
-            });
-        }
-    })();
-</script>
-</div>
-</div>
-<div id="7b8c8281" class="cell" data-execution_count="9">
-<div class="cell-output cell-output-display">
-<!--| quarto-html-table-processing: none -->
-<table id="T_1d8a8"><tbody><tr>
-    <td style="vertical-align:middle; text-align:left">
-    
-    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
-    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
-    </tr></tbody></table>
-<script type="module">
-    (async () => {
-        async function init() {
-            const { ITable, jQuery: $ } = await window._itables_2_5_2;
-
-            document.querySelectorAll("#T_1d8a8:not(.dataTable)").forEach(table => {
-                if (!(table instanceof HTMLTableElement))
-                    return;
-
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_1d8a8 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_1d8a8 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_1d8a8 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_1d8a8 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_1d8a8 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_1d8a8_row0_col4, #T_1d8a8_row1_col4, #T_1d8a8_row2_col4, #T_1d8a8_row3_col4, #T_1d8a8_row4_col4, #T_1d8a8_row5_col4, #T_1d8a8_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_1d8a8\">\n  <caption>Coverage for 90%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_1d8a8_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_1d8a8_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_1d8a8_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_1d8a8_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_1d8a8_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_1d8a8_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_1d8a8_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_1d8a8_row0_col2\" class=\"data row0 col2\" >0.337</td>\n      <td id=\"T_1d8a8_row0_col3\" class=\"data row0 col3\" >1.447</td>\n      <td id=\"T_1d8a8_row0_col4\" class=\"data row0 col4\" >0.929</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_1d8a8_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_1d8a8_row1_col2\" class=\"data row1 col2\" >0.217</td>\n      <td id=\"T_1d8a8_row1_col3\" class=\"data row1 col3\" >0.839</td>\n      <td id=\"T_1d8a8_row1_col4\" class=\"data row1 col4\" >0.889</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_1d8a8_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_1d8a8_row2_col2\" class=\"data row2 col2\" >0.337</td>\n      <td id=\"T_1d8a8_row2_col3\" class=\"data row2 col3\" >1.368</td>\n      <td id=\"T_1d8a8_row2_col4\" class=\"data row2 col4\" >0.915</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_1d8a8_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_1d8a8_row3_col2\" class=\"data row3 col2\" >0.206</td>\n      <td id=\"T_1d8a8_row3_col3\" class=\"data row3 col3\" >0.788</td>\n      <td id=\"T_1d8a8_row3_col4\" class=\"data row3 col4\" >0.889</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_1d8a8_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_1d8a8_row4_col2\" class=\"data row4 col2\" >0.149</td>\n      <td id=\"T_1d8a8_row4_col3\" class=\"data row4 col3\" >0.577</td>\n      <td id=\"T_1d8a8_row4_col4\" class=\"data row4 col4\" >0.898</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_1d8a8_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_1d8a8_row5_col2\" class=\"data row5 col2\" >0.212</td>\n      <td id=\"T_1d8a8_row5_col3\" class=\"data row5 col3\" >0.812</td>\n      <td id=\"T_1d8a8_row5_col4\" class=\"data row5 col4\" >0.886</td>\n    </tr>\n    <tr>\n      <td id=\"T_1d8a8_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_1d8a8_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_1d8a8_row6_col2\" class=\"data row6 col2\" >0.154</td>\n      <td id=\"T_1d8a8_row6_col3\" class=\"data row6 col3\" >0.594</td>\n      <td id=\"T_1d8a8_row6_col4\" class=\"data row6 col4\" >0.882</td>\n    </tr>\n  </tbody>\n</table>\n"};
-                new ITable(table, dt_args);
-            });
-        }
-
-        if (window._itables_2_5_2) {
-            init();
-        } else {
-            window.addEventListener("itables-2.5.2-ready", () => {
-                init();
-            });
-        }
-    })();
-</script>
-</div>
-</div>
-</section>
-<section id="sensitivity" class="level2">
-<h2 class="anchored" data-anchor-id="sensitivity">Sensitivity</h2>
-<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.datasets.make_confounded_irm_data.html#doubleml.datasets.make_confounded_irm_data">make_confounded_irm_data</a>-DGP with <span class="math inline">\(5,000\)</span> observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.</p>
-<p>The confounding is set such that both sensitivity parameters are approximately <span class="math inline">\(cf_y=cf_d=0.1\)</span>, such that the robustness value <span class="math inline">\(RV\)</span> should be approximately <span class="math inline">\(10\%\)</span>. Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of <span class="math inline">\(\rho\)</span> has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of <span class="math inline">\(|\rho|=1\)</span>.</p>
 <section id="ate" class="level3">
 <h3 class="anchored" data-anchor-id="ate">ATE</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Metadata
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="4cccdb4c" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                                          0.11.dev0
-Script                          IRMATESensitivityCoverageSimulation
-Date                                               2025-09-08 07:16
-Total Runtime (minutes)                                   37.672532
-Python Version                                               3.12.3
-Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="054e4fe1" class="cell" data-execution_count="12">
+<div id="5e2256b4" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_c20cb"><tbody><tr>
+<table id="T_f63c6"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -669,11 +481,11 @@ Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_c20cb:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_f63c6:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_c20cb table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_c20cb thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_c20cb tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_c20cb tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_c20cb caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_c20cb_row0_col5, #T_c20cb_row1_col5, #T_c20cb_row2_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_c20cb_row0_col6, #T_c20cb_row2_col6, #T_c20cb_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_c20cb_row1_col6, #T_c20cb_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_c20cb\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_c20cb_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_c20cb_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_c20cb_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_c20cb_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_c20cb_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_c20cb_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_c20cb_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_c20cb_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_c20cb_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_c20cb_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_c20cb_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_c20cb_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_c20cb_row0_col2\" class=\"data row0 col2\" >0.181</td>\n      <td id=\"T_c20cb_row0_col3\" class=\"data row0 col3\" >0.043</td>\n      <td id=\"T_c20cb_row0_col4\" class=\"data row0 col4\" >0.324</td>\n      <td id=\"T_c20cb_row0_col5\" class=\"data row0 col5\" >0.240</td>\n      <td id=\"T_c20cb_row0_col6\" class=\"data row0 col6\" >0.998</td>\n      <td id=\"T_c20cb_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_c20cb_row0_col8\" class=\"data row0 col8\" >0.125</td>\n      <td id=\"T_c20cb_row0_col9\" class=\"data row0 col9\" >0.036</td>\n    </tr>\n    <tr>\n      <td id=\"T_c20cb_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_c20cb_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_c20cb_row1_col2\" class=\"data row1 col2\" >0.150</td>\n      <td id=\"T_c20cb_row1_col3\" class=\"data row1 col3\" >0.027</td>\n      <td id=\"T_c20cb_row1_col4\" class=\"data row1 col4\" >0.299</td>\n      <td id=\"T_c20cb_row1_col5\" class=\"data row1 col5\" >0.526</td>\n      <td id=\"T_c20cb_row1_col6\" class=\"data row1 col6\" >1.000</td>\n      <td id=\"T_c20cb_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_c20cb_row1_col8\" class=\"data row1 col8\" >0.101</td>\n      <td id=\"T_c20cb_row1_col9\" class=\"data row1 col9\" >0.019</td>\n    </tr>\n    <tr>\n      <td id=\"T_c20cb_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_c20cb_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_c20cb_row2_col2\" class=\"data row2 col2\" >0.180</td>\n      <td id=\"T_c20cb_row2_col3\" class=\"data row2 col3\" >0.045</td>\n      <td id=\"T_c20cb_row2_col4\" class=\"data row2 col4\" >0.320</td>\n      <td id=\"T_c20cb_row2_col5\" class=\"data row2 col5\" >0.290</td>\n      <td id=\"T_c20cb_row2_col6\" class=\"data row2 col6\" >0.994</td>\n      <td id=\"T_c20cb_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_c20cb_row2_col8\" class=\"data row2 col8\" >0.127</td>\n      <td id=\"T_c20cb_row2_col9\" class=\"data row2 col9\" >0.036</td>\n    </tr>\n    <tr>\n      <td id=\"T_c20cb_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_c20cb_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_c20cb_row3_col2\" class=\"data row3 col2\" >0.091</td>\n      <td id=\"T_c20cb_row3_col3\" class=\"data row3 col3\" >0.057</td>\n      <td id=\"T_c20cb_row3_col4\" class=\"data row3 col4\" >0.236</td>\n      <td id=\"T_c20cb_row3_col5\" class=\"data row3 col5\" >0.960</td>\n      <td id=\"T_c20cb_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_c20cb_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_c20cb_row3_col8\" class=\"data row3 col8\" >0.064</td>\n      <td id=\"T_c20cb_row3_col9\" class=\"data row3 col9\" >0.002</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_f63c6 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_f63c6 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_f63c6 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_f63c6 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_f63c6 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_f63c6_row0_col4, #T_f63c6_row1_col4, #T_f63c6_row2_col4, #T_f63c6_row3_col4, #T_f63c6_row4_col4, #T_f63c6_row5_col4, #T_f63c6_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_f63c6\">\n  <caption>Coverage for 95%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_f63c6_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_f63c6_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_f63c6_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_f63c6_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_f63c6_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_f63c6_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_f63c6_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_f63c6_row0_col2\" class=\"data row0 col2\" >0.299</td>\n      <td id=\"T_f63c6_row0_col3\" class=\"data row0 col3\" >1.468</td>\n      <td id=\"T_f63c6_row0_col4\" class=\"data row0 col4\" >0.971</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_f63c6_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_f63c6_row1_col2\" class=\"data row1 col2\" >0.191</td>\n      <td id=\"T_f63c6_row1_col3\" class=\"data row1 col3\" >0.916</td>\n      <td id=\"T_f63c6_row1_col4\" class=\"data row1 col4\" >0.964</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_f63c6_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_f63c6_row2_col2\" class=\"data row2 col2\" >0.263</td>\n      <td id=\"T_f63c6_row2_col3\" class=\"data row2 col3\" >1.294</td>\n      <td id=\"T_f63c6_row2_col4\" class=\"data row2 col4\" >0.977</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_f63c6_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_f63c6_row3_col2\" class=\"data row3 col2\" >0.159</td>\n      <td id=\"T_f63c6_row3_col3\" class=\"data row3 col3\" >0.784</td>\n      <td id=\"T_f63c6_row3_col4\" class=\"data row3 col4\" >0.963</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_f63c6_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_f63c6_row4_col2\" class=\"data row4 col2\" >0.142</td>\n      <td id=\"T_f63c6_row4_col3\" class=\"data row4 col3\" >0.701</td>\n      <td id=\"T_f63c6_row4_col4\" class=\"data row4 col4\" >0.968</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_f63c6_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_f63c6_row5_col2\" class=\"data row5 col2\" >0.183</td>\n      <td id=\"T_f63c6_row5_col3\" class=\"data row5 col3\" >0.878</td>\n      <td id=\"T_f63c6_row5_col4\" class=\"data row5 col4\" >0.960</td>\n    </tr>\n    <tr>\n      <td id=\"T_f63c6_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_f63c6_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_f63c6_row6_col2\" class=\"data row6 col2\" >0.153</td>\n      <td id=\"T_f63c6_row6_col3\" class=\"data row6 col3\" >0.735</td>\n      <td id=\"T_f63c6_row6_col4\" class=\"data row6 col4\" >0.952</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -689,10 +501,10 @@ Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
 </script>
 </div>
 </div>
-<div id="b4a9092a" class="cell" data-execution_count="13">
+<div id="ed40140a" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_0ea98"><tbody><tr>
+<table id="T_2ec55"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -703,11 +515,11 @@ Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_0ea98:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_2ec55:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_0ea98 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_0ea98 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_0ea98 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_0ea98 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_0ea98 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_0ea98_row0_col5, #T_0ea98_row1_col5, #T_0ea98_row2_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_0ea98_row0_col6, #T_0ea98_row1_col6, #T_0ea98_row2_col6, #T_0ea98_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_0ea98_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_0ea98\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_0ea98_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_0ea98_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_0ea98_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_0ea98_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_0ea98_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_0ea98_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_0ea98_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_0ea98_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_0ea98_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_0ea98_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_0ea98_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_0ea98_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_0ea98_row0_col2\" class=\"data row0 col2\" >0.181</td>\n      <td id=\"T_0ea98_row0_col3\" class=\"data row0 col3\" >0.043</td>\n      <td id=\"T_0ea98_row0_col4\" class=\"data row0 col4\" >0.324</td>\n      <td id=\"T_0ea98_row0_col5\" class=\"data row0 col5\" >0.098</td>\n      <td id=\"T_0ea98_row0_col6\" class=\"data row0 col6\" >0.978</td>\n      <td id=\"T_0ea98_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_0ea98_row0_col8\" class=\"data row0 col8\" >0.125</td>\n      <td id=\"T_0ea98_row0_col9\" class=\"data row0 col9\" >0.055</td>\n    </tr>\n    <tr>\n      <td id=\"T_0ea98_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_0ea98_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_0ea98_row1_col2\" class=\"data row1 col2\" >0.150</td>\n      <td id=\"T_0ea98_row1_col3\" class=\"data row1 col3\" >0.027</td>\n      <td id=\"T_0ea98_row1_col4\" class=\"data row1 col4\" >0.299</td>\n      <td id=\"T_0ea98_row1_col5\" class=\"data row1 col5\" >0.256</td>\n      <td id=\"T_0ea98_row1_col6\" class=\"data row1 col6\" >0.996</td>\n      <td id=\"T_0ea98_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_0ea98_row1_col8\" class=\"data row1 col8\" >0.101</td>\n      <td id=\"T_0ea98_row1_col9\" class=\"data row1 col9\" >0.036</td>\n    </tr>\n    <tr>\n      <td id=\"T_0ea98_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_0ea98_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_0ea98_row2_col2\" class=\"data row2 col2\" >0.180</td>\n      <td id=\"T_0ea98_row2_col3\" class=\"data row2 col3\" >0.045</td>\n      <td id=\"T_0ea98_row2_col4\" class=\"data row2 col4\" >0.320</td>\n      <td id=\"T_0ea98_row2_col5\" class=\"data row2 col5\" >0.102</td>\n      <td id=\"T_0ea98_row2_col6\" class=\"data row2 col6\" >0.970</td>\n      <td id=\"T_0ea98_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_0ea98_row2_col8\" class=\"data row2 col8\" >0.127</td>\n      <td id=\"T_0ea98_row2_col9\" class=\"data row2 col9\" >0.056</td>\n    </tr>\n    <tr>\n      <td id=\"T_0ea98_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_0ea98_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_0ea98_row3_col2\" class=\"data row3 col2\" >0.091</td>\n      <td id=\"T_0ea98_row3_col3\" class=\"data row3 col3\" >0.057</td>\n      <td id=\"T_0ea98_row3_col4\" class=\"data row3 col4\" >0.236</td>\n      <td id=\"T_0ea98_row3_col5\" class=\"data row3 col5\" >0.860</td>\n      <td id=\"T_0ea98_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_0ea98_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_0ea98_row3_col8\" class=\"data row3 col8\" >0.064</td>\n      <td id=\"T_0ea98_row3_col9\" class=\"data row3 col9\" >0.007</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_2ec55 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_2ec55 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_2ec55 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_2ec55 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_2ec55 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_2ec55_row0_col4, #T_2ec55_row1_col4, #T_2ec55_row2_col4, #T_2ec55_row3_col4, #T_2ec55_row4_col4, #T_2ec55_row5_col4, #T_2ec55_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_2ec55\">\n  <caption>Coverage for 90%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_2ec55_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_2ec55_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_2ec55_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_2ec55_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_2ec55_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_2ec55_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_2ec55_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_2ec55_row0_col2\" class=\"data row0 col2\" >0.299</td>\n      <td id=\"T_2ec55_row0_col3\" class=\"data row0 col3\" >1.232</td>\n      <td id=\"T_2ec55_row0_col4\" class=\"data row0 col4\" >0.931</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_2ec55_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_2ec55_row1_col2\" class=\"data row1 col2\" >0.191</td>\n      <td id=\"T_2ec55_row1_col3\" class=\"data row1 col3\" >0.769</td>\n      <td id=\"T_2ec55_row1_col4\" class=\"data row1 col4\" >0.918</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_2ec55_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_2ec55_row2_col2\" class=\"data row2 col2\" >0.263</td>\n      <td id=\"T_2ec55_row2_col3\" class=\"data row2 col3\" >1.086</td>\n      <td id=\"T_2ec55_row2_col4\" class=\"data row2 col4\" >0.919</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_2ec55_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_2ec55_row3_col2\" class=\"data row3 col2\" >0.159</td>\n      <td id=\"T_2ec55_row3_col3\" class=\"data row3 col3\" >0.658</td>\n      <td id=\"T_2ec55_row3_col4\" class=\"data row3 col4\" >0.914</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_2ec55_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_2ec55_row4_col2\" class=\"data row4 col2\" >0.142</td>\n      <td id=\"T_2ec55_row4_col3\" class=\"data row4 col3\" >0.588</td>\n      <td id=\"T_2ec55_row4_col4\" class=\"data row4 col4\" >0.923</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_2ec55_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_2ec55_row5_col2\" class=\"data row5 col2\" >0.183</td>\n      <td id=\"T_2ec55_row5_col3\" class=\"data row5 col3\" >0.737</td>\n      <td id=\"T_2ec55_row5_col4\" class=\"data row5 col4\" >0.912</td>\n    </tr>\n    <tr>\n      <td id=\"T_2ec55_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_2ec55_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_2ec55_row6_col2\" class=\"data row6 col2\" >0.153</td>\n      <td id=\"T_2ec55_row6_col3\" class=\"data row6 col3\" >0.617</td>\n      <td id=\"T_2ec55_row6_col4\" class=\"data row6 col4\" >0.901</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -726,8 +538,9 @@ Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
 </section>
 <section id="atte" class="level3">
 <h3 class="anchored" data-anchor-id="atte">ATTE</h3>
+<p>As for the ATE, the simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html">make_irm_data</a>-DGP with <span class="math inline">\(500\)</span> observations.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Metadata">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -736,25 +549,25 @@ Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="28792c3f" class="cell" data-execution_count="14">
+<div id="dfcc57c5" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
-<pre><code>DoubleML Version                                           0.11.dev0
-Script                          IRMATTESensitivityCoverageSimulation
-Date                                                2025-09-08 07:16
-Total Runtime (minutes)                                    37.430842
-Python Version                                                3.12.3
-Config File              scripts/irm/irm_atte_sensitivity_config.yml</code></pre>
+<pre><code>DoubleML Version                               0.12.dev0
+Script                         IRMATTECoverageSimulation
+Date                                    2025-12-04 19:17
+Total Runtime (minutes)                       127.506412
+Python Version                                    3.12.3
+Config File              scripts/irm/irm_atte_config.yml</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="a6057789" class="cell" data-execution_count="16">
+<div id="bf2c78b3" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_50606"><tbody><tr>
+<table id="T_65bdb"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -765,11 +578,11 @@ Config File              scripts/irm/irm_atte_sensitivity_config.yml</code></pre
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_50606:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_65bdb:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_50606 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_50606 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_50606 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_50606 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_50606 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_50606_row0_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_50606_row0_col6, #T_50606_row1_col6, #T_50606_row2_col6, #T_50606_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_50606_row1_col5, #T_50606_row2_col5, #T_50606_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_50606\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_50606_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_50606_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_50606_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_50606_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_50606_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_50606_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_50606_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_50606_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_50606_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_50606_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_50606_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_50606_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_50606_row0_col2\" class=\"data row0 col2\" >0.133</td>\n      <td id=\"T_50606_row0_col3\" class=\"data row0 col3\" >0.062</td>\n      <td id=\"T_50606_row0_col4\" class=\"data row0 col4\" >0.257</td>\n      <td id=\"T_50606_row0_col5\" class=\"data row0 col5\" >0.834</td>\n      <td id=\"T_50606_row0_col6\" class=\"data row0 col6\" >0.984</td>\n      <td id=\"T_50606_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_50606_row0_col8\" class=\"data row0 col8\" >0.103</td>\n      <td id=\"T_50606_row0_col9\" class=\"data row0 col9\" >0.011</td>\n    </tr>\n    <tr>\n      <td id=\"T_50606_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_50606_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_50606_row1_col2\" class=\"data row1 col2\" >0.129</td>\n      <td id=\"T_50606_row1_col3\" class=\"data row1 col3\" >0.061</td>\n      <td id=\"T_50606_row1_col4\" class=\"data row1 col4\" >0.258</td>\n      <td id=\"T_50606_row1_col5\" class=\"data row1 col5\" >0.852</td>\n      <td id=\"T_50606_row1_col6\" class=\"data row1 col6\" >0.988</td>\n      <td id=\"T_50606_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_50606_row1_col8\" class=\"data row1 col8\" >0.097</td>\n      <td id=\"T_50606_row1_col9\" class=\"data row1 col9\" >0.010</td>\n    </tr>\n    <tr>\n      <td id=\"T_50606_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_50606_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_50606_row2_col2\" class=\"data row2 col2\" >0.122</td>\n      <td id=\"T_50606_row2_col3\" class=\"data row2 col3\" >0.061</td>\n      <td id=\"T_50606_row2_col4\" class=\"data row2 col4\" >0.243</td>\n      <td id=\"T_50606_row2_col5\" class=\"data row2 col5\" >0.878</td>\n      <td id=\"T_50606_row2_col6\" class=\"data row2 col6\" >0.988</td>\n      <td id=\"T_50606_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_50606_row2_col8\" class=\"data row2 col8\" >0.097</td>\n      <td id=\"T_50606_row2_col9\" class=\"data row2 col9\" >0.009</td>\n    </tr>\n    <tr>\n      <td id=\"T_50606_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_50606_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_50606_row3_col2\" class=\"data row3 col2\" >0.071</td>\n      <td id=\"T_50606_row3_col3\" class=\"data row3 col3\" >0.099</td>\n      <td id=\"T_50606_row3_col4\" class=\"data row3 col4\" >0.174</td>\n      <td id=\"T_50606_row3_col5\" class=\"data row3 col5\" >0.970</td>\n      <td id=\"T_50606_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_50606_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_50606_row3_col8\" class=\"data row3 col8\" >0.056</td>\n      <td id=\"T_50606_row3_col9\" class=\"data row3 col9\" >0.002</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_65bdb table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_65bdb thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_65bdb tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_65bdb tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_65bdb caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_65bdb_row0_col4, #T_65bdb_row1_col4, #T_65bdb_row2_col4, #T_65bdb_row3_col4, #T_65bdb_row4_col4, #T_65bdb_row5_col4, #T_65bdb_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_65bdb\">\n  <caption>Coverage for 95%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_65bdb_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_65bdb_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_65bdb_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_65bdb_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_65bdb_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_65bdb_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_65bdb_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_65bdb_row0_col2\" class=\"data row0 col2\" >0.349</td>\n      <td id=\"T_65bdb_row0_col3\" class=\"data row0 col3\" >1.803</td>\n      <td id=\"T_65bdb_row0_col4\" class=\"data row0 col4\" >0.975</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_65bdb_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_65bdb_row1_col2\" class=\"data row1 col2\" >0.218</td>\n      <td id=\"T_65bdb_row1_col3\" class=\"data row1 col3\" >1.033</td>\n      <td id=\"T_65bdb_row1_col4\" class=\"data row1 col4\" >0.946</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_65bdb_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_65bdb_row2_col2\" class=\"data row2 col2\" >0.339</td>\n      <td id=\"T_65bdb_row2_col3\" class=\"data row2 col3\" >1.637</td>\n      <td id=\"T_65bdb_row2_col4\" class=\"data row2 col4\" >0.974</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_65bdb_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_65bdb_row3_col2\" class=\"data row3 col2\" >0.214</td>\n      <td id=\"T_65bdb_row3_col3\" class=\"data row3 col3\" >0.975</td>\n      <td id=\"T_65bdb_row3_col4\" class=\"data row3 col4\" >0.960</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_65bdb_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_65bdb_row4_col2\" class=\"data row4 col2\" >0.151</td>\n      <td id=\"T_65bdb_row4_col3\" class=\"data row4 col3\" >0.687</td>\n      <td id=\"T_65bdb_row4_col4\" class=\"data row4 col4\" >0.944</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_65bdb_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_65bdb_row5_col2\" class=\"data row5 col2\" >0.214</td>\n      <td id=\"T_65bdb_row5_col3\" class=\"data row5 col3\" >1.004</td>\n      <td id=\"T_65bdb_row5_col4\" class=\"data row5 col4\" >0.940</td>\n    </tr>\n    <tr>\n      <td id=\"T_65bdb_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_65bdb_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_65bdb_row6_col2\" class=\"data row6 col2\" >0.157</td>\n      <td id=\"T_65bdb_row6_col3\" class=\"data row6 col3\" >0.712</td>\n      <td id=\"T_65bdb_row6_col4\" class=\"data row6 col4\" >0.935</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
@@ -785,10 +598,10 @@ Config File              scripts/irm/irm_atte_sensitivity_config.yml</code></pre
 </script>
 </div>
 </div>
-<div id="298b7edf" class="cell" data-execution_count="17">
+<div id="c8426ec5" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="T_002ae"><tbody><tr>
+<table id="T_07444"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     
     Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
@@ -799,11 +612,308 @@ Config File              scripts/irm/irm_atte_sensitivity_config.yml</code></pre
         async function init() {
             const { ITable, jQuery: $ } = await window._itables_2_5_2;
 
-            document.querySelectorAll("#T_002ae:not(.dataTable)").forEach(table => {
+            document.querySelectorAll("#T_07444:not(.dataTable)").forEach(table => {
                 if (!(table instanceof HTMLTableElement))
                     return;
 
-                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "text_in_header_can_be_selected": true, "classes": ["display", "nowrap"], "order": [], "table_style": "\n#T_002ae table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_002ae thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_002ae tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_002ae tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_002ae caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_002ae_row0_col5, #T_002ae_row1_col5, #T_002ae_row2_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_002ae_row0_col6, #T_002ae_row1_col6, #T_002ae_row2_col6, #T_002ae_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_002ae_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_002ae\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_002ae_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_002ae_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_002ae_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_002ae_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_002ae_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_002ae_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_002ae_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_002ae_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_002ae_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_002ae_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_002ae_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_002ae_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_002ae_row0_col2\" class=\"data row0 col2\" >0.133</td>\n      <td id=\"T_002ae_row0_col3\" class=\"data row0 col3\" >0.062</td>\n      <td id=\"T_002ae_row0_col4\" class=\"data row0 col4\" >0.257</td>\n      <td id=\"T_002ae_row0_col5\" class=\"data row0 col5\" >0.724</td>\n      <td id=\"T_002ae_row0_col6\" class=\"data row0 col6\" >0.956</td>\n      <td id=\"T_002ae_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_002ae_row0_col8\" class=\"data row0 col8\" >0.103</td>\n      <td id=\"T_002ae_row0_col9\" class=\"data row0 col9\" >0.022</td>\n    </tr>\n    <tr>\n      <td id=\"T_002ae_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_002ae_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_002ae_row1_col2\" class=\"data row1 col2\" >0.129</td>\n      <td id=\"T_002ae_row1_col3\" class=\"data row1 col3\" >0.061</td>\n      <td id=\"T_002ae_row1_col4\" class=\"data row1 col4\" >0.258</td>\n      <td id=\"T_002ae_row1_col5\" class=\"data row1 col5\" >0.748</td>\n      <td id=\"T_002ae_row1_col6\" class=\"data row1 col6\" >0.968</td>\n      <td id=\"T_002ae_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_002ae_row1_col8\" class=\"data row1 col8\" >0.097</td>\n      <td id=\"T_002ae_row1_col9\" class=\"data row1 col9\" >0.020</td>\n    </tr>\n    <tr>\n      <td id=\"T_002ae_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_002ae_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_002ae_row2_col2\" class=\"data row2 col2\" >0.122</td>\n      <td id=\"T_002ae_row2_col3\" class=\"data row2 col3\" >0.061</td>\n      <td id=\"T_002ae_row2_col4\" class=\"data row2 col4\" >0.243</td>\n      <td id=\"T_002ae_row2_col5\" class=\"data row2 col5\" >0.784</td>\n      <td id=\"T_002ae_row2_col6\" class=\"data row2 col6\" >0.966</td>\n      <td id=\"T_002ae_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_002ae_row2_col8\" class=\"data row2 col8\" >0.097</td>\n      <td id=\"T_002ae_row2_col9\" class=\"data row2 col9\" >0.018</td>\n    </tr>\n    <tr>\n      <td id=\"T_002ae_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_002ae_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_002ae_row3_col2\" class=\"data row3 col2\" >0.071</td>\n      <td id=\"T_002ae_row3_col3\" class=\"data row3 col3\" >0.099</td>\n      <td id=\"T_002ae_row3_col4\" class=\"data row3 col4\" >0.174</td>\n      <td id=\"T_002ae_row3_col5\" class=\"data row3 col5\" >0.940</td>\n      <td id=\"T_002ae_row3_col6\" class=\"data row3 col6\" >0.998</td>\n      <td id=\"T_002ae_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_002ae_row3_col8\" class=\"data row3 col8\" >0.056</td>\n      <td id=\"T_002ae_row3_col9\" class=\"data row3 col9\" >0.005</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_07444 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_07444 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_07444 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_07444 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_07444 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_07444_row0_col4, #T_07444_row1_col4, #T_07444_row2_col4, #T_07444_row3_col4, #T_07444_row4_col4, #T_07444_row5_col4, #T_07444_row6_col4 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_07444\">\n  <caption>Coverage for 90%-Confidence Interval over 1000 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_07444_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_07444_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_07444_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_07444_level0_col3\" class=\"col_heading level0 col3\" >CI Length</th>\n      <th id=\"T_07444_level0_col4\" class=\"col_heading level0 col4\" >Coverage</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_07444_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_07444_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_07444_row0_col2\" class=\"data row0 col2\" >0.349</td>\n      <td id=\"T_07444_row0_col3\" class=\"data row0 col3\" >1.513</td>\n      <td id=\"T_07444_row0_col4\" class=\"data row0 col4\" >0.929</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_07444_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_07444_row1_col2\" class=\"data row1 col2\" >0.218</td>\n      <td id=\"T_07444_row1_col3\" class=\"data row1 col3\" >0.867</td>\n      <td id=\"T_07444_row1_col4\" class=\"data row1 col4\" >0.897</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row2_col0\" class=\"data row2 col0\" >LassoCV</td>\n      <td id=\"T_07444_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_07444_row2_col2\" class=\"data row2 col2\" >0.339</td>\n      <td id=\"T_07444_row2_col3\" class=\"data row2 col3\" >1.373</td>\n      <td id=\"T_07444_row2_col4\" class=\"data row2 col4\" >0.916</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row3_col0\" class=\"data row3 col0\" >LassoCV</td>\n      <td id=\"T_07444_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_07444_row3_col2\" class=\"data row3 col2\" >0.214</td>\n      <td id=\"T_07444_row3_col3\" class=\"data row3 col3\" >0.819</td>\n      <td id=\"T_07444_row3_col4\" class=\"data row3 col4\" >0.903</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row4_col0\" class=\"data row4 col0\" >LassoCV</td>\n      <td id=\"T_07444_row4_col1\" class=\"data row4 col1\" >RF Clas.</td>\n      <td id=\"T_07444_row4_col2\" class=\"data row4 col2\" >0.151</td>\n      <td id=\"T_07444_row4_col3\" class=\"data row4 col3\" >0.577</td>\n      <td id=\"T_07444_row4_col4\" class=\"data row4 col4\" >0.884</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row5_col0\" class=\"data row5 col0\" >RF Regr.</td>\n      <td id=\"T_07444_row5_col1\" class=\"data row5 col1\" >Logistic</td>\n      <td id=\"T_07444_row5_col2\" class=\"data row5 col2\" >0.214</td>\n      <td id=\"T_07444_row5_col3\" class=\"data row5 col3\" >0.843</td>\n      <td id=\"T_07444_row5_col4\" class=\"data row5 col4\" >0.896</td>\n    </tr>\n    <tr>\n      <td id=\"T_07444_row6_col0\" class=\"data row6 col0\" >RF Regr.</td>\n      <td id=\"T_07444_row6_col1\" class=\"data row6 col1\" >RF Clas.</td>\n      <td id=\"T_07444_row6_col2\" class=\"data row6 col2\" >0.157</td>\n      <td id=\"T_07444_row6_col3\" class=\"data row6 col3\" >0.597</td>\n      <td id=\"T_07444_row6_col4\" class=\"data row6 col4\" >0.873</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="sensitivity" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity">Sensitivity</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_confounded_irm_data.html#doubleml.datasets.make_confounded_irm_data">make_confounded_irm_data</a>-DGP with <span class="math inline">\(5,000\)</span> observations. Since the DGP includes an unobserved confounder, we would expect a bias in the ATE estimates, leading to low coverage of the true parameter.</p>
+<p>The confounding is set such that both sensitivity parameters are approximately <span class="math inline">\(cf_y=cf_d=0.1\)</span>, such that the robustness value <span class="math inline">\(RV\)</span> should be approximately <span class="math inline">\(10\%\)</span>. Further, the corresponding confidence intervals are one-sided (since the direction of the bias is unkown), such that only one side should approximate the corresponding coverage level (here only the lower coverage is relevant since the bias is positive). Remark that for the coverage level the value of <span class="math inline">\(\rho\)</span> has to be correctly specified, such that the coverage level will be generally (significantly) larger than the nominal level under the conservative choice of <span class="math inline">\(|\rho|=1\)</span>.</p>
+<section id="ate-1" class="level3">
+<h3 class="anchored" data-anchor-id="ate-1">ATE</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="7206fa2c" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleML Version                                          0.12.dev0
+Script                          IRMATESensitivityCoverageSimulation
+Date                                               2025-12-04 17:47
+Total Runtime (minutes)                                   37.598332
+Python Version                                               3.12.3
+Config File              scripts/irm/irm_ate_sensitivity_config.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="aa503c4d" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_09d94"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_09d94:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_09d94 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_09d94 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_09d94 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_09d94 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_09d94 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_09d94_row0_col5, #T_09d94_row1_col5, #T_09d94_row2_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_09d94_row0_col6, #T_09d94_row2_col6, #T_09d94_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_09d94_row1_col6, #T_09d94_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_09d94\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_09d94_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_09d94_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_09d94_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_09d94_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_09d94_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_09d94_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_09d94_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_09d94_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_09d94_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_09d94_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_09d94_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_09d94_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_09d94_row0_col2\" class=\"data row0 col2\" >0.182</td>\n      <td id=\"T_09d94_row0_col3\" class=\"data row0 col3\" >0.045</td>\n      <td id=\"T_09d94_row0_col4\" class=\"data row0 col4\" >0.325</td>\n      <td id=\"T_09d94_row0_col5\" class=\"data row0 col5\" >0.232</td>\n      <td id=\"T_09d94_row0_col6\" class=\"data row0 col6\" >0.996</td>\n      <td id=\"T_09d94_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_09d94_row0_col8\" class=\"data row0 col8\" >0.125</td>\n      <td id=\"T_09d94_row0_col9\" class=\"data row0 col9\" >0.036</td>\n    </tr>\n    <tr>\n      <td id=\"T_09d94_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_09d94_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_09d94_row1_col2\" class=\"data row1 col2\" >0.151</td>\n      <td id=\"T_09d94_row1_col3\" class=\"data row1 col3\" >0.026</td>\n      <td id=\"T_09d94_row1_col4\" class=\"data row1 col4\" >0.300</td>\n      <td id=\"T_09d94_row1_col5\" class=\"data row1 col5\" >0.522</td>\n      <td id=\"T_09d94_row1_col6\" class=\"data row1 col6\" >1.000</td>\n      <td id=\"T_09d94_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_09d94_row1_col8\" class=\"data row1 col8\" >0.102</td>\n      <td id=\"T_09d94_row1_col9\" class=\"data row1 col9\" >0.019</td>\n    </tr>\n    <tr>\n      <td id=\"T_09d94_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_09d94_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_09d94_row2_col2\" class=\"data row2 col2\" >0.179</td>\n      <td id=\"T_09d94_row2_col3\" class=\"data row2 col3\" >0.044</td>\n      <td id=\"T_09d94_row2_col4\" class=\"data row2 col4\" >0.319</td>\n      <td id=\"T_09d94_row2_col5\" class=\"data row2 col5\" >0.270</td>\n      <td id=\"T_09d94_row2_col6\" class=\"data row2 col6\" >0.996</td>\n      <td id=\"T_09d94_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_09d94_row2_col8\" class=\"data row2 col8\" >0.127</td>\n      <td id=\"T_09d94_row2_col9\" class=\"data row2 col9\" >0.035</td>\n    </tr>\n    <tr>\n      <td id=\"T_09d94_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_09d94_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_09d94_row3_col2\" class=\"data row3 col2\" >0.091</td>\n      <td id=\"T_09d94_row3_col3\" class=\"data row3 col3\" >0.056</td>\n      <td id=\"T_09d94_row3_col4\" class=\"data row3 col4\" >0.237</td>\n      <td id=\"T_09d94_row3_col5\" class=\"data row3 col5\" >0.968</td>\n      <td id=\"T_09d94_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_09d94_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_09d94_row3_col8\" class=\"data row3 col8\" >0.064</td>\n      <td id=\"T_09d94_row3_col9\" class=\"data row3 col9\" >0.002</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+<div id="12bacc41" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_aab48"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_aab48:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_aab48 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_aab48 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_aab48 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_aab48 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_aab48 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_aab48_row0_col5, #T_aab48_row1_col5, #T_aab48_row2_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_aab48_row0_col6, #T_aab48_row1_col6, #T_aab48_row2_col6, #T_aab48_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_aab48_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_aab48\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_aab48_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_aab48_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_aab48_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_aab48_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_aab48_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_aab48_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_aab48_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_aab48_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_aab48_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_aab48_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_aab48_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_aab48_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_aab48_row0_col2\" class=\"data row0 col2\" >0.182</td>\n      <td id=\"T_aab48_row0_col3\" class=\"data row0 col3\" >0.045</td>\n      <td id=\"T_aab48_row0_col4\" class=\"data row0 col4\" >0.325</td>\n      <td id=\"T_aab48_row0_col5\" class=\"data row0 col5\" >0.104</td>\n      <td id=\"T_aab48_row0_col6\" class=\"data row0 col6\" >0.962</td>\n      <td id=\"T_aab48_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_aab48_row0_col8\" class=\"data row0 col8\" >0.125</td>\n      <td id=\"T_aab48_row0_col9\" class=\"data row0 col9\" >0.056</td>\n    </tr>\n    <tr>\n      <td id=\"T_aab48_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_aab48_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_aab48_row1_col2\" class=\"data row1 col2\" >0.151</td>\n      <td id=\"T_aab48_row1_col3\" class=\"data row1 col3\" >0.026</td>\n      <td id=\"T_aab48_row1_col4\" class=\"data row1 col4\" >0.300</td>\n      <td id=\"T_aab48_row1_col5\" class=\"data row1 col5\" >0.230</td>\n      <td id=\"T_aab48_row1_col6\" class=\"data row1 col6\" >1.000</td>\n      <td id=\"T_aab48_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_aab48_row1_col8\" class=\"data row1 col8\" >0.102</td>\n      <td id=\"T_aab48_row1_col9\" class=\"data row1 col9\" >0.036</td>\n    </tr>\n    <tr>\n      <td id=\"T_aab48_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_aab48_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_aab48_row2_col2\" class=\"data row2 col2\" >0.179</td>\n      <td id=\"T_aab48_row2_col3\" class=\"data row2 col3\" >0.044</td>\n      <td id=\"T_aab48_row2_col4\" class=\"data row2 col4\" >0.319</td>\n      <td id=\"T_aab48_row2_col5\" class=\"data row2 col5\" >0.108</td>\n      <td id=\"T_aab48_row2_col6\" class=\"data row2 col6\" >0.974</td>\n      <td id=\"T_aab48_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_aab48_row2_col8\" class=\"data row2 col8\" >0.127</td>\n      <td id=\"T_aab48_row2_col9\" class=\"data row2 col9\" >0.055</td>\n    </tr>\n    <tr>\n      <td id=\"T_aab48_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_aab48_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_aab48_row3_col2\" class=\"data row3 col2\" >0.091</td>\n      <td id=\"T_aab48_row3_col3\" class=\"data row3 col3\" >0.056</td>\n      <td id=\"T_aab48_row3_col4\" class=\"data row3 col4\" >0.237</td>\n      <td id=\"T_aab48_row3_col5\" class=\"data row3 col5\" >0.874</td>\n      <td id=\"T_aab48_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_aab48_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_aab48_row3_col8\" class=\"data row3 col8\" >0.064</td>\n      <td id=\"T_aab48_row3_col9\" class=\"data row3 col9\" >0.006</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+<section id="atte-1" class="level3">
+<h3 class="anchored" data-anchor-id="atte-1">ATTE</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="45b0a1a9" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleML Version                                           0.12.dev0
+Script                          IRMATTESensitivityCoverageSimulation
+Date                                                2025-12-04 17:47
+Total Runtime (minutes)                                    37.484259
+Python Version                                                3.12.3
+Config File              scripts/irm/irm_atte_sensitivity_config.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="c058abef" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_1ffa4"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_1ffa4:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_1ffa4 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_1ffa4 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_1ffa4 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_1ffa4 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_1ffa4 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_1ffa4_row0_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_1ffa4_row0_col6, #T_1ffa4_row1_col6, #T_1ffa4_row2_col6, #T_1ffa4_row3_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_1ffa4_row1_col5, #T_1ffa4_row2_col5, #T_1ffa4_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_1ffa4\">\n  <caption>Coverage for 95%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_1ffa4_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_1ffa4_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_1ffa4_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_1ffa4_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_1ffa4_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_1ffa4_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_1ffa4_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_1ffa4_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_1ffa4_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_1ffa4_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_1ffa4_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_1ffa4_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_1ffa4_row0_col2\" class=\"data row0 col2\" >0.131</td>\n      <td id=\"T_1ffa4_row0_col3\" class=\"data row0 col3\" >0.062</td>\n      <td id=\"T_1ffa4_row0_col4\" class=\"data row0 col4\" >0.255</td>\n      <td id=\"T_1ffa4_row0_col5\" class=\"data row0 col5\" >0.848</td>\n      <td id=\"T_1ffa4_row0_col6\" class=\"data row0 col6\" >0.988</td>\n      <td id=\"T_1ffa4_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_1ffa4_row0_col8\" class=\"data row0 col8\" >0.102</td>\n      <td id=\"T_1ffa4_row0_col9\" class=\"data row0 col9\" >0.010</td>\n    </tr>\n    <tr>\n      <td id=\"T_1ffa4_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_1ffa4_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_1ffa4_row1_col2\" class=\"data row1 col2\" >0.126</td>\n      <td id=\"T_1ffa4_row1_col3\" class=\"data row1 col3\" >0.062</td>\n      <td id=\"T_1ffa4_row1_col4\" class=\"data row1 col4\" >0.255</td>\n      <td id=\"T_1ffa4_row1_col5\" class=\"data row1 col5\" >0.870</td>\n      <td id=\"T_1ffa4_row1_col6\" class=\"data row1 col6\" >0.990</td>\n      <td id=\"T_1ffa4_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_1ffa4_row1_col8\" class=\"data row1 col8\" >0.095</td>\n      <td id=\"T_1ffa4_row1_col9\" class=\"data row1 col9\" >0.009</td>\n    </tr>\n    <tr>\n      <td id=\"T_1ffa4_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_1ffa4_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_1ffa4_row2_col2\" class=\"data row2 col2\" >0.119</td>\n      <td id=\"T_1ffa4_row2_col3\" class=\"data row2 col3\" >0.063</td>\n      <td id=\"T_1ffa4_row2_col4\" class=\"data row2 col4\" >0.239</td>\n      <td id=\"T_1ffa4_row2_col5\" class=\"data row2 col5\" >0.888</td>\n      <td id=\"T_1ffa4_row2_col6\" class=\"data row2 col6\" >0.990</td>\n      <td id=\"T_1ffa4_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_1ffa4_row2_col8\" class=\"data row2 col8\" >0.095</td>\n      <td id=\"T_1ffa4_row2_col9\" class=\"data row2 col9\" >0.008</td>\n    </tr>\n    <tr>\n      <td id=\"T_1ffa4_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_1ffa4_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_1ffa4_row3_col2\" class=\"data row3 col2\" >0.068</td>\n      <td id=\"T_1ffa4_row3_col3\" class=\"data row3 col3\" >0.100</td>\n      <td id=\"T_1ffa4_row3_col4\" class=\"data row3 col4\" >0.170</td>\n      <td id=\"T_1ffa4_row3_col5\" class=\"data row3 col5\" >0.972</td>\n      <td id=\"T_1ffa4_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_1ffa4_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_1ffa4_row3_col8\" class=\"data row3 col8\" >0.054</td>\n      <td id=\"T_1ffa4_row3_col9\" class=\"data row3 col9\" >0.002</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+<div id="cbe1895b" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_71637"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_71637:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_71637 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_71637 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_71637 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_71637 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_71637 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_71637_row0_col5, #T_71637_row1_col5 {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-left: 4px solid #dc3545;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n#T_71637_row0_col6, #T_71637_row1_col6, #T_71637_row2_col5, #T_71637_row2_col6, #T_71637_row3_col5, #T_71637_row3_col6 {\n  color: #856404;\n  background-color: #fff3cd;\n  border-left: 4px solid #ffc107;\n  font-weight: 500;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_71637\">\n  <caption>Coverage for 90%-Confidence Interval over 500 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_71637_level0_col0\" class=\"col_heading level0 col0\" >Learner l</th>\n      <th id=\"T_71637_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_71637_level0_col2\" class=\"col_heading level0 col2\" >Bias</th>\n      <th id=\"T_71637_level0_col3\" class=\"col_heading level0 col3\" >Bias (Lower)</th>\n      <th id=\"T_71637_level0_col4\" class=\"col_heading level0 col4\" >Bias (Upper)</th>\n      <th id=\"T_71637_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_71637_level0_col6\" class=\"col_heading level0 col6\" >Coverage (Lower)</th>\n      <th id=\"T_71637_level0_col7\" class=\"col_heading level0 col7\" >Coverage (Upper)</th>\n      <th id=\"T_71637_level0_col8\" class=\"col_heading level0 col8\" >RV</th>\n      <th id=\"T_71637_level0_col9\" class=\"col_heading level0 col9\" >RVa</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_71637_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_71637_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_71637_row0_col2\" class=\"data row0 col2\" >0.131</td>\n      <td id=\"T_71637_row0_col3\" class=\"data row0 col3\" >0.062</td>\n      <td id=\"T_71637_row0_col4\" class=\"data row0 col4\" >0.255</td>\n      <td id=\"T_71637_row0_col5\" class=\"data row0 col5\" >0.742</td>\n      <td id=\"T_71637_row0_col6\" class=\"data row0 col6\" >0.958</td>\n      <td id=\"T_71637_row0_col7\" class=\"data row0 col7\" >1.000</td>\n      <td id=\"T_71637_row0_col8\" class=\"data row0 col8\" >0.102</td>\n      <td id=\"T_71637_row0_col9\" class=\"data row0 col9\" >0.021</td>\n    </tr>\n    <tr>\n      <td id=\"T_71637_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_71637_row1_col1\" class=\"data row1 col1\" >Logistic</td>\n      <td id=\"T_71637_row1_col2\" class=\"data row1 col2\" >0.126</td>\n      <td id=\"T_71637_row1_col3\" class=\"data row1 col3\" >0.062</td>\n      <td id=\"T_71637_row1_col4\" class=\"data row1 col4\" >0.255</td>\n      <td id=\"T_71637_row1_col5\" class=\"data row1 col5\" >0.760</td>\n      <td id=\"T_71637_row1_col6\" class=\"data row1 col6\" >0.962</td>\n      <td id=\"T_71637_row1_col7\" class=\"data row1 col7\" >1.000</td>\n      <td id=\"T_71637_row1_col8\" class=\"data row1 col8\" >0.095</td>\n      <td id=\"T_71637_row1_col9\" class=\"data row1 col9\" >0.019</td>\n    </tr>\n    <tr>\n      <td id=\"T_71637_row2_col0\" class=\"data row2 col0\" >Linear</td>\n      <td id=\"T_71637_row2_col1\" class=\"data row2 col1\" >LGBM Clas.</td>\n      <td id=\"T_71637_row2_col2\" class=\"data row2 col2\" >0.119</td>\n      <td id=\"T_71637_row2_col3\" class=\"data row2 col3\" >0.063</td>\n      <td id=\"T_71637_row2_col4\" class=\"data row2 col4\" >0.239</td>\n      <td id=\"T_71637_row2_col5\" class=\"data row2 col5\" >0.800</td>\n      <td id=\"T_71637_row2_col6\" class=\"data row2 col6\" >0.962</td>\n      <td id=\"T_71637_row2_col7\" class=\"data row2 col7\" >1.000</td>\n      <td id=\"T_71637_row2_col8\" class=\"data row2 col8\" >0.095</td>\n      <td id=\"T_71637_row2_col9\" class=\"data row2 col9\" >0.017</td>\n    </tr>\n    <tr>\n      <td id=\"T_71637_row3_col0\" class=\"data row3 col0\" >Linear</td>\n      <td id=\"T_71637_row3_col1\" class=\"data row3 col1\" >Logistic</td>\n      <td id=\"T_71637_row3_col2\" class=\"data row3 col2\" >0.068</td>\n      <td id=\"T_71637_row3_col3\" class=\"data row3 col3\" >0.100</td>\n      <td id=\"T_71637_row3_col4\" class=\"data row3 col4\" >0.170</td>\n      <td id=\"T_71637_row3_col5\" class=\"data row3 col5\" >0.954</td>\n      <td id=\"T_71637_row3_col6\" class=\"data row3 col6\" >1.000</td>\n      <td id=\"T_71637_row3_col7\" class=\"data row3 col7\" >1.000</td>\n      <td id=\"T_71637_row3_col8\" class=\"data row3 col8\" >0.054</td>\n      <td id=\"T_71637_row3_col9\" class=\"data row3 col9\" >0.004</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="tuning" class="level2">
+<h2 class="anchored" data-anchor-id="tuning">Tuning</h2>
+<p>The simulations are based on the the <a href="https://docs.doubleml.org/stable/api/generated/doubleml.irm.datasets.make_irm_data.html">make_irm_data</a>-DGP with <span class="math inline">\(500\)</span> observations. This is only an example as the untuned version just relies on the default configuration.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Metadata">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Metadata
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="277bb3c6" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-stdout">
+<pre><code>DoubleML Version                                   0.12.dev0
+Script                        IRMATETuningCoverageSimulation
+Date                                        2025-12-01 12:02
+Total Runtime (minutes)                            27.278139
+Python Version                                        3.12.9
+Config File              scripts/irm/irm_ate_tune_config.yml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="ate-2" class="level3">
+<h3 class="anchored" data-anchor-id="ate-2">ATE</h3>
+<div id="0f2ce7b7" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_1484d"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_1484d:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_1484d table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_1484d thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_1484d tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_1484d tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_1484d caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_1484d_row0_col5, #T_1484d_row1_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_1484d\">\n  <caption>Coverage for 95%-Confidence Interval over 200 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_1484d_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_1484d_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_1484d_level0_col2\" class=\"col_heading level0 col2\" >Tuned</th>\n      <th id=\"T_1484d_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_1484d_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_1484d_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_1484d_level0_col6\" class=\"col_heading level0 col6\" >Loss g0</th>\n      <th id=\"T_1484d_level0_col7\" class=\"col_heading level0 col7\" >Loss g1</th>\n      <th id=\"T_1484d_level0_col8\" class=\"col_heading level0 col8\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_1484d_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_1484d_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_1484d_row0_col2\" class=\"data row0 col2\" >False</td>\n      <td id=\"T_1484d_row0_col3\" class=\"data row0 col3\" >0.645</td>\n      <td id=\"T_1484d_row0_col4\" class=\"data row0 col4\" >3.150</td>\n      <td id=\"T_1484d_row0_col5\" class=\"data row0 col5\" >0.985</td>\n      <td id=\"T_1484d_row0_col6\" class=\"data row0 col6\" >1.113</td>\n      <td id=\"T_1484d_row0_col7\" class=\"data row0 col7\" >1.136</td>\n      <td id=\"T_1484d_row0_col8\" class=\"data row0 col8\" >0.667</td>\n    </tr>\n    <tr>\n      <td id=\"T_1484d_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_1484d_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_1484d_row1_col2\" class=\"data row1 col2\" >True</td>\n      <td id=\"T_1484d_row1_col3\" class=\"data row1 col3\" >0.129</td>\n      <td id=\"T_1484d_row1_col4\" class=\"data row1 col4\" >0.613</td>\n      <td id=\"T_1484d_row1_col5\" class=\"data row1 col5\" >0.935</td>\n      <td id=\"T_1484d_row1_col6\" class=\"data row1 col6\" >0.999</td>\n      <td id=\"T_1484d_row1_col7\" class=\"data row1 col7\" >1.061</td>\n      <td id=\"T_1484d_row1_col8\" class=\"data row1 col8\" >0.519</td>\n    </tr>\n  </tbody>\n</table>\n"};
+                new ITable(table, dt_args);
+            });
+        }
+
+        if (window._itables_2_5_2) {
+            init();
+        } else {
+            window.addEventListener("itables-2.5.2-ready", () => {
+                init();
+            });
+        }
+    })();
+</script>
+</div>
+</div>
+<div id="c60bfe49" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<!--| quarto-html-table-processing: none -->
+<table id="T_18323"><tbody><tr>
+    <td style="vertical-align:middle; text-align:left">
+    
+    Loading ITables v2.5.2 from the <code>init_notebook_mode</code> cell...
+    (need <a href="https://mwouts.github.io/itables/troubleshooting.html">help</a>?)</td>
+    </tr></tbody></table>
+<script type="module">
+    (async () => {
+        async function init() {
+            const { ITable, jQuery: $ } = await window._itables_2_5_2;
+
+            document.querySelectorAll("#T_18323:not(.dataTable)").forEach(table => {
+                if (!(table instanceof HTMLTableElement))
+                    return;
+
+                let dt_args = {"layout": {"topStart": null, "topEnd": null, "bottomStart": null, "bottomEnd": null}, "classes": ["display", "nowrap"], "text_in_header_can_be_selected": true, "order": [], "style": {"table-layout": "auto", "width": "auto", "margin": "auto", "caption-side": "bottom"}, "table_style": "\n#T_18323 table {\n  border-collapse: separate;\n  border-spacing: 0;\n  width: 100%;\n  font-family: \"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Roboto\", sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.1);\n  border-radius: 8px;\n  overflow: hidden;\n}\n#T_18323 thead th {\n  background-color: #f8f9fa;\n  color: #495057;\n  font-weight: 600;\n  text-align: center;\n  padding: 12px 16px;\n  border-bottom: 2px solid #dee2e6;\n  position: sticky;\n  top: 0;\n  z-index: 10;\n}\n#T_18323 tbody td {\n  padding: 10px 16px;\n  text-align: center;\n  border-bottom: 1px solid #dee2e6;\n  transition: background-color 0.2s ease;\n}\n#T_18323 tbody tr:hover td {\n  background-color: #f5f5f5;\n}\n#T_18323 caption {\n  color: #6c757d;\n  font-size: 16px;\n  font-weight: 600;\n  margin-bottom: 16px;\n  text-align: left;\n  caption-side: top;\n}\n#T_18323_row0_col5, #T_18323_row1_col5 {\n  color: #0f5132;\n  background-color: #d1e7dd;\n  border-left: 4px solid #198754;\n  font-weight: 600;\n  text-align: center;\n  font-family: monospace;\n  font-size: 13px;\n}\n", "table_html": "\n<table id=\"T_18323\">\n  <caption>Coverage for 90%-Confidence Interval over 200 Repetitions</caption>\n  <thead>\n    <tr>\n      <th id=\"T_18323_level0_col0\" class=\"col_heading level0 col0\" >Learner g</th>\n      <th id=\"T_18323_level0_col1\" class=\"col_heading level0 col1\" >Learner m</th>\n      <th id=\"T_18323_level0_col2\" class=\"col_heading level0 col2\" >Tuned</th>\n      <th id=\"T_18323_level0_col3\" class=\"col_heading level0 col3\" >Bias</th>\n      <th id=\"T_18323_level0_col4\" class=\"col_heading level0 col4\" >CI Length</th>\n      <th id=\"T_18323_level0_col5\" class=\"col_heading level0 col5\" >Coverage</th>\n      <th id=\"T_18323_level0_col6\" class=\"col_heading level0 col6\" >Loss g0</th>\n      <th id=\"T_18323_level0_col7\" class=\"col_heading level0 col7\" >Loss g1</th>\n      <th id=\"T_18323_level0_col8\" class=\"col_heading level0 col8\" >Loss m</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td id=\"T_18323_row0_col0\" class=\"data row0 col0\" >LGBM Regr.</td>\n      <td id=\"T_18323_row0_col1\" class=\"data row0 col1\" >LGBM Clas.</td>\n      <td id=\"T_18323_row0_col2\" class=\"data row0 col2\" >False</td>\n      <td id=\"T_18323_row0_col3\" class=\"data row0 col3\" >0.645</td>\n      <td id=\"T_18323_row0_col4\" class=\"data row0 col4\" >2.643</td>\n      <td id=\"T_18323_row0_col5\" class=\"data row0 col5\" >0.920</td>\n      <td id=\"T_18323_row0_col6\" class=\"data row0 col6\" >1.113</td>\n      <td id=\"T_18323_row0_col7\" class=\"data row0 col7\" >1.136</td>\n      <td id=\"T_18323_row0_col8\" class=\"data row0 col8\" >0.667</td>\n    </tr>\n    <tr>\n      <td id=\"T_18323_row1_col0\" class=\"data row1 col0\" >LGBM Regr.</td>\n      <td id=\"T_18323_row1_col1\" class=\"data row1 col1\" >LGBM Clas.</td>\n      <td id=\"T_18323_row1_col2\" class=\"data row1 col2\" >True</td>\n      <td id=\"T_18323_row1_col3\" class=\"data row1 col3\" >0.129</td>\n      <td id=\"T_18323_row1_col4\" class=\"data row1 col4\" >0.515</td>\n      <td id=\"T_18323_row1_col5\" class=\"data row1 col5\" >0.890</td>\n      <td id=\"T_18323_row1_col6\" class=\"data row1 col6\" >0.999</td>\n      <td id=\"T_18323_row1_col7\" class=\"data row1 col7\" >1.061</td>\n      <td id=\"T_18323_row1_col8\" class=\"data row1 col8\" >0.519</td>\n    </tr>\n  </tbody>\n</table>\n"};
                 new ITable(table, dt_args);
             });
         }
