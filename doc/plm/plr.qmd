@@ -50,7 +50,7 @@ elif "n_rep" in df_coverage.columns and df_coverage["n_rep"].nunique() == 1:
 else:
     n_rep_coverage = "N/A" # Fallback if n_rep cannot be determined
 
-display_columns_coverage = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage"]
+display_columns_coverage = ["Learner g", "Learner m", "Bias", "CI Length", "Coverage", "Loss g", "Loss m"]
 ```
 
 ### Partialling out
@@ -64,7 +64,7 @@ generate_and_show_styled_table(
     display_cols=display_columns_coverage,
     n_rep=n_rep_coverage,
     level_col="level",
-    rename_map={"Learner g": "Learner l"},
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```
@@ -78,7 +78,7 @@ generate_and_show_styled_table(
     display_cols=display_columns_coverage,
     n_rep=n_rep_coverage,
     level_col="level",
-    rename_map={"Learner g": "Learner l"},
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
     coverage_highlight_cols=["Coverage"]
 )
 ```
