@@ -63,6 +63,7 @@ class PLRATECoverageSimulation(BaseSimulation):
             score=score,
         )
         dml_model.fit()
+        nuisance_loss = dml_model.nuisance_loss
 
         result = {
             "coverage": [],
@@ -84,6 +85,8 @@ class PLRATECoverageSimulation(BaseSimulation):
                         "Learner m": learner_m_name,
                         "Score": score,
                         "level": level,
+                        "Loss g": nuisance_loss["ml_l"].mean() if score == "partialling out" else nuisance_loss["ml_g"].mean(),
+                        "Loss m": nuisance_loss["ml_m"].mean(),
                     }
                 )
             for key, res in level_result.items():
@@ -101,6 +104,8 @@ class PLRATECoverageSimulation(BaseSimulation):
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Loss g": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 

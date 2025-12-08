@@ -2,15 +2,15 @@ from typing import Any, Dict, Optional
 
 import doubleml as dml
 import optuna
-from doubleml.plm.datasets import make_plr_CCDDHNR2018
+from doubleml.plm.datasets import make_plpr_CP2025
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
 from montecover.utils_tuning import lgbm_reg_params
 
 
-class PLRATETuningCoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
+class PLPRATETuningCoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLPLPR for ATE estimation with tuning."""
 
     def __init__(
         self,
@@ -28,12 +28,11 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
-
         # tuning specific settings
         self._param_space = {"ml_l": lgbm_reg_params, "ml_m": lgbm_reg_params}
 
         self._optuna_settings = {
-            "n_trials": 200,
+            "n_trials": 50,
             "show_progress_bar": False,
             "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
         }
@@ -64,22 +63,25 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         learner_g_name, ml_g = create_learner_from_config(learner_config["ml_g"])
         learner_m_name, ml_m = create_learner_from_config(learner_config["ml_m"])
         score = dml_params["score"]
+        approach = dml_params["approach"]
 
         # Model
-        dml_model = dml.DoubleMLPLR(
+        dml_model = dml.DoubleMLPLPR(
             obj_dml_data=dml_data,
             ml_l=ml_g,
             ml_m=ml_m,
             ml_g=ml_g if score == "IV-type" else None,
             score=score,
+            approach=approach,
         )
 
-        dml_model_tuned = dml.DoubleMLPLR(
+        dml_model_tuned = dml.DoubleMLPLPR(
             obj_dml_data=dml_data,
             ml_l=ml_g,
             ml_m=ml_m,
             ml_g=ml_g if score == "IV-type" else None,
             score=score,
+            approach=approach,
         )
         dml_model_tuned.tune_ml_models(
             ml_param_space=self._param_space,
@@ -92,12 +94,13 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         for model in [dml_model, dml_model_tuned]:
             model.fit()
             nuisance_loss = model.nuisance_loss
+
             for level in self.confidence_parameters["level"]:
                 level_result = dict()
                 level_result["coverage"] = self._compute_coverage(
-                    thetas=model.coef,
+                    thetas=dml_model.coef,
                     oracle_thetas=self.oracle_values["theta"],
-                    confint=model.confint(level=level),
+                    confint=dml_model.confint(level=level),
                     joint_confint=None,
                 )
 
@@ -108,6 +111,7 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
                             "Learner g": learner_g_name,
                             "Learner m": learner_m_name,
                             "Score": score,
+                            "Approach": approach,
                             "level": level,
                             "Tuned": model is dml_model_tuned,
                             "Loss g": nuisance_loss["ml_l"].mean() if score == "partialling out" else nuisance_loss["ml_g"].mean(),
@@ -124,7 +128,7 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner g", "Learner m", "Score", "level", "Tuned"]
+        groupby_cols = ["Learner g", "Learner m", "Score", "Approach", "DGP", "level", "Tuned"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
@@ -146,11 +150,19 @@ class PLRATETuningCoverageSimulation(BaseSimulation):
 
     def _generate_dml_data(self, dgp_params) -> dml.DoubleMLData:
         """Generate data for the simulation."""
-        data = make_plr_CCDDHNR2018(
-            alpha=dgp_params["theta"],
-            n_obs=dgp_params["n_obs"],
+        data = make_plpr_CP2025(
+            num_id=dgp_params["num_id"],
+            num_t=dgp_params["num_t"],
             dim_x=dgp_params["dim_x"],
-            return_type="DataFrame",
+            theta=dgp_params["theta"],
+            dgp_type=dgp_params["DGP"],
         )
-        dml_data = dml.DoubleMLData(data, "y", "d")
+        dml_data = dml.DoubleMLPanelData(
+            data,
+            y_col="y",
+            d_cols="d",
+            t_col="time",
+            id_col="id",
+            static_panel=True,
+        )
         return dml_data

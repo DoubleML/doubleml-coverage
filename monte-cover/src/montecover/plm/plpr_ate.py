@@ -8,7 +8,7 @@ from montecover.utils import create_learner_from_config
 
 
 class PLPRATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLPLR for ATE estimation."""
+    """Simulation class for coverage properties of DoubleMLPLPR for ATE estimation."""
 
     def __init__(
         self,
@@ -65,6 +65,7 @@ class PLPRATECoverageSimulation(BaseSimulation):
             approach=approach,
         )
         dml_model.fit()
+        nuisance_loss = dml_model.nuisance_loss
 
         result = {
             "coverage": [],
@@ -87,6 +88,8 @@ class PLPRATECoverageSimulation(BaseSimulation):
                         "Score": score,
                         "Approach": approach,
                         "level": level,
+                        "Loss g": nuisance_loss["ml_l"].mean() if score == "partialling out" else nuisance_loss["ml_g"].mean(),
+                        "Loss m": nuisance_loss["ml_m"].mean(),
                     }
                 )
             for key, res in level_result.items():
@@ -99,11 +102,13 @@ class PLPRATECoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner g", "Learner m", "Score", "Approach", "level"]
+        groupby_cols = ["Learner g", "Learner m", "Score", "Approach", "DGP", "level"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",
             "Bias": "mean",
+            "Loss g": "mean",
+            "Loss m": "mean",
             "repetition": "count",
         }
 
@@ -124,7 +129,7 @@ class PLPRATECoverageSimulation(BaseSimulation):
             num_t=dgp_params["num_t"],
             dim_x=dgp_params["dim_x"],
             theta=dgp_params["theta"],
-            dgp_type=dgp_params["dgp_type"],
+            dgp_type=dgp_params["DGP"],
         )
         dml_data = dml.DoubleMLPanelData(
             data,

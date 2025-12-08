@@ -1,0 +1,185 @@
+---
+title: "PLPR Models"
+
+jupyter: python3
+---
+
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+from itables import init_notebook_mode
+import os
+import sys
+
+doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
+if doc_dir not in sys.path:
+    sys.path.append(doc_dir)
+
+from utils.style_tables import generate_and_show_styled_table
+
+init_notebook_mode(all_interactive=True)
+```
+
+## Coverage
+
+The simulations are based on the  the [make_plpr_CP2025](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $250$ units and $10$ time periods. The following DGPs are considered:
+
+ - DGP 1: Linear in the nuisance parameters
+ - DGP 2: Non-linear and smooth in the nuisance parameters
+ - DGP 3: Non-linear and discontinuous in the nuisance parameters
+
+    
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/plpr_ate_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data and rename columns
+df_coverage = pd.read_csv("../../results/plm/plpr_ate_coverage.csv", index_col=None)
+
+if "repetition" in df_coverage.columns and df_coverage["repetition"].nunique() == 1:
+    n_rep_coverage = df_coverage["repetition"].unique()[0]
+elif "n_rep" in df_coverage.columns and df_coverage["n_rep"].nunique() == 1:
+    n_rep_coverage = df_coverage["n_rep"].unique()[0]
+else:
+    n_rep_coverage = "N/A" # Fallback if n_rep cannot be determined
+
+display_columns_coverage = ["Learner g", "Learner m", "DGP", "Approach", "Bias", "CI Length", "Coverage", "Loss g", "Loss m"]
+```
+
+### Partialling out
+
+```{python}
+# | echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "Score": "partialling out"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "Score": "partialling out"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+### IV-type
+
+For the IV-type score, the learners `ml_l` and `ml_g` are both set to the same type of learner (here **Learner g**).
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.95, "Score": "IV-type"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_coverage,
+    filters={"level": 0.9, "Score": "IV-type"},
+    display_cols=display_columns_coverage,
+    n_rep=n_rep_coverage,
+    level_col="level",
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+
+## Tuning
+
+The simulations are based on the  the [make_plpr_CP2025](https://docs.doubleml.org/stable/api/datasets.html#dataset-generators)-DGP with $250$ units and $10$ time periods. The following DGPs are considered:
+
+ - DGP 1: Linear in the nuisance parameters
+ - DGP 2: Non-linear and smooth in the nuisance parameters
+ - DGP 3: Non-linear and discontinuous in the nuisance parameters
+
+This is only an example as the untuned version just relies on the default configuration.
+
+::: {.callout-note title="Metadata"  collapse="true"}
+
+```{python}
+#| echo: false
+metadata_file = '../../results/plm/plpr_ate_tune_metadata.csv'
+metadata_df = pd.read_csv(metadata_file)
+print(metadata_df.T.to_string(header=False))
+```
+
+:::
+
+```{python}
+#| echo: false
+
+# set up data
+df_tune_cov = pd.read_csv("../../results/plm/plpr_ate_tune_coverage.csv", index_col=None)
+
+assert df_tune_cov["repetition"].nunique() == 1
+n_rep_tune_cov = df_tune_cov["repetition"].unique()[0]
+
+display_columns_tune_cov = ["Learner g", "Learner m", "Tuned", "DGP", "Approach", "Bias", "CI Length", "Coverage", "Loss g", "Loss m"]
+```
+
+
+### Partialling out
+
+```{python}
+# | echo: false
+
+generate_and_show_styled_table(
+    main_df=df_tune_cov,
+    filters={"level": 0.95, "Score": "partialling out"},
+    display_cols=display_columns_tune_cov,
+    n_rep=n_rep_tune_cov,
+    level_col="level",
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
+
+```{python}
+#| echo: false
+
+generate_and_show_styled_table(
+    main_df=df_tune_cov,
+    filters={"level": 0.9, "Score": "partialling out"},
+    display_cols=display_columns_tune_cov,
+    n_rep=n_rep_tune_cov,
+    level_col="level",
+    rename_map={"Learner g": "Learner l", "Loss g": "Loss l"},
+    coverage_highlight_cols=["Coverage"]
+)
+```
