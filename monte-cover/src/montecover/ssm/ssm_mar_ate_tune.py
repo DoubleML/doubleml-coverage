@@ -1,14 +1,16 @@
 from typing import Any, Dict, Optional
 
 import doubleml as dml
+import optuna
 from doubleml.irm.datasets import make_ssm_data
 
 from montecover.base import BaseSimulation
 from montecover.utils import create_learner_from_config
+from montecover.utils_tuning import lgbm_reg_params, lgbm_cls_params
 
 
-class SSMMarATECoverageSimulation(BaseSimulation):
-    """Simulation class for coverage properties of DoubleMLSSM with missing at random for ATE estimation."""
+class SSMMarATETuningCoverageSimulation(BaseSimulation):
+    """Simulation class for coverage properties of DoubleMLSSM with missing at random for ATE estimation with tuning."""
 
     def __init__(
         self,
@@ -26,6 +28,14 @@ class SSMMarATECoverageSimulation(BaseSimulation):
 
         # Calculate oracle values
         self._calculate_oracle_values()
+        # tuning specific settings
+        self._param_space = {"ml_g": lgbm_reg_params, "ml_m": lgbm_cls_params, "ml_pi": lgbm_cls_params}
+
+        self._optuna_settings = {
+            "n_trials": 50,
+            "show_progress_bar": False,
+            "verbosity": optuna.logging.WARNING,  # Suppress Optuna logs
+        }
 
     def _process_config_parameters(self):
         """Process simulation-specific parameters from config"""
@@ -64,37 +74,51 @@ class SSMMarATECoverageSimulation(BaseSimulation):
             ml_pi=ml_pi,
             score="missing-at-random",
         )
-        dml_model.fit()
-        nuisance_loss = dml_model.nuisance_loss
+
+        dml_model_tuned = dml.DoubleMLSSM(
+            obj_dml_data=dml_data,
+            ml_g=ml_g,
+            ml_m=ml_m,
+            ml_pi=ml_pi,
+            score="missing-at-random",
+        )
+        dml_model_tuned.tune_ml_models(
+            ml_param_space=self._param_space,
+            optuna_settings=self._optuna_settings,
+        )
 
         result = {
             "coverage": [],
         }
-        for level in self.confidence_parameters["level"]:
-            level_result = dict()
-            level_result["coverage"] = self._compute_coverage(
-                thetas=dml_model.coef,
-                oracle_thetas=self.oracle_values["theta"],
-                confint=dml_model.confint(level=level),
-                joint_confint=None,
-            )
-
-            # add parameters to the result
-            for res_metric in level_result.values():
-                res_metric.update(
-                    {
-                        "Learner g": learner_g_name,
-                        "Learner m": learner_m_name,
-                        "Learner pi": learner_pi_name,
-                        "level": level,
-                        "Loss g_d0": nuisance_loss["ml_g_d0"].mean(),
-                        "Loss g_d1": nuisance_loss["ml_g_d1"].mean(),
-                        "Loss m": nuisance_loss["ml_m"].mean(),
-                        "Loss pi": nuisance_loss["ml_pi"].mean(),
-                    }
+        for model in [dml_model, dml_model_tuned]:
+            model.fit()
+            nuisance_loss = model.nuisance_loss
+            for level in self.confidence_parameters["level"]:
+                level_result = dict()
+                level_result["coverage"] = self._compute_coverage(
+                    thetas=model.coef,
+                    oracle_thetas=self.oracle_values["theta"],
+                    confint=model.confint(level=level),
+                    joint_confint=None,
                 )
-            for key, res in level_result.items():
-                result[key].append(res)
+
+                # add parameters to the result
+                for res_metric in level_result.values():
+                    res_metric.update(
+                        {
+                            "Learner g": learner_g_name,
+                            "Learner m": learner_m_name,
+                            "Learner pi": learner_pi_name,
+                            "level": level,
+                            "Tuned": model is dml_model_tuned,
+                            "Loss g_d0": nuisance_loss["ml_g_d0"].mean(),
+                            "Loss g_d1": nuisance_loss["ml_g_d1"].mean(),
+                            "Loss m": nuisance_loss["ml_m"].mean(),
+                            "Loss pi": nuisance_loss["ml_pi"].mean(),
+                        }
+                    )
+                for key, res in level_result.items():
+                    result[key].append(res)
 
         return result
 
@@ -103,7 +127,7 @@ class SSMMarATECoverageSimulation(BaseSimulation):
         self.logger.info("Summarizing simulation results")
 
         # Group by parameter combinations
-        groupby_cols = ["Learner g", "Learner m", "Learner pi", "level"]
+        groupby_cols = ["Learner g", "Learner m", "Learner pi", "level", "Tuned"]
         aggregation_dict = {
             "Coverage": "mean",
             "CI Length": "mean",

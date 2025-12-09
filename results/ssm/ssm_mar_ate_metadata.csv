@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.12.dev0,SSMMarATECoverageSimulation,2025-12-04 21:25,255.4998017311096,3.12.3,scripts/ssm/ssm_mar_ate_config.yml
+0.12.dev0,SSMMarATECoverageSimulation,2025-12-09 15:29,13.831887169679005,3.12.9,scripts/ssm/ssm_mar_ate_config.yml
