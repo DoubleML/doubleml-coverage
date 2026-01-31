@@ -4,23 +4,7 @@ title: "DiD for Panel Data"
 jupyter: python3
 ---
 
-```{python}
-#| echo: false
-
-import numpy as np
-import pandas as pd
-from itables import init_notebook_mode
-import os
-import sys
-
-doc_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
-if doc_dir not in sys.path:
-    sys.path.append(doc_dir)
-
-from utils.style_tables import generate_and_show_styled_table
-
-init_notebook_mode(all_interactive=True)
-```
+{{< include ../_setup.qmd >}}
 
 ## Coverage
 

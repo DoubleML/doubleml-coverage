@@ -4,6 +4,15 @@ project:
 
 execute:
   freeze: auto  # Re-execute only when source changes
+  echo: false   # Don't show code by default
+  warning: false  # Suppress warnings
+  message: false  # Suppress messages
+  ipynb-shell-interactivity: all
+
+jupyter:
+  kernel: python3
+  execute:
+    allow-errors: false
 
 metadata-files:
   - _website.yml
