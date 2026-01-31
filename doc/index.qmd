@@ -4,10 +4,51 @@ title: "DoubleML Coverage"
 jupyter: python3
 ---
 
-The website contains coverage simulations for the [DoubleML](https://docs.doubleml.org/stable/index.html)-package.
+## Summary
 
-Most simulations are based on the [dataset generators](https://docs.doubleml.org/stable/api/api.html#dataset-generators) provided by the package, but sometimes contain slight deviations.
-You can find the code for the simulations in the [GitHub repository](https://github.com/DoubleML/doubleml-coverage/tree/main).
+This repository provides comprehensive **coverage simulations** for confidence intervals constructed by the [DoubleML](https://docs.doubleml.org/stable/index.html) package.
+
+**Purpose:** Verify the statistical properties of inference methods across different causal models. All simulations use the [DoubleML framework](https://docs.doubleml.org/stable/intro/intro.html) for debiased machine learning.
+
+**Model Families Covered:**
+
+- Interactive Regression Models (IRM)
+- Partially Linear Models (PLM)
+- Difference-in-Differences (DID)
+- Sample Selection Models (SSM)
+- Regression Discontinuity Designs (RDD)
+
+Implementations are based on the corresponding [DoubleML model classes](https://docs.doubleml.org/stable/api/api.html).
+
+**Evaluation Metrics:** Coverage rates, bias, and confidence interval length across various learner combinations and model specifications. Confidence intervals are constructed using the [`confint()` method](https://docs.doubleml.org/stable/guide/basics.html#confidence-intervals).
+
+**Data Generation:** Based on DoubleML's [dataset generators](https://docs.doubleml.org/stable/api/api.html#dataset-generators) with standardized simulation protocols.
+
+## Available Simulations
+
+The following table provides an overview of all available coverage simulations organized by model type:
+
+| Model Type | Simulation | Description |
+|:-----------|:-----------|:------------|
+| **IRM** <br> *Interactive Regression Models* | [Basic IRM Models](irm/irm.qmd) | Coverage for ATE and ATTE with sensitivity and tuning analysis |
+| | [IRM GATE](irm/irm_gate.qmd) | Group Average Treatment Effects |
+| | [IRM CATE](irm/irm_cate.qmd) | Conditional Average Treatment Effects |
+| | [APO](irm/apo.qmd) | Average Potential Outcomes |
+| | [QTE](irm/qte.qmd) | Quantile Treatment Effects |
+| | [IIVM](irm/iivm.qmd) | Interactive Instrumental Variable Models |
+| **PLM** <br> *Partially Linear Models* | [Basic PLR Models](plm/plr.qmd) | Partially Linear Regression with partialling out and IV-type scores |
+| | [PLR GATE](plm/plr_gate.qmd) | Group Average Treatment Effects for PLR |
+| | [PLR CATE](plm/plr_cate.qmd) | Conditional Average Treatment Effects for PLR |
+| | [Local PLR](plm/lplr.qmd) | Locally Robust Partially Linear Regression |
+| | [PLPR](plm/plpr.qmd) | Partially Linear Probit Regression |
+| | [PLIV](plm/pliv.qmd) | Partially Linear Instrumental Variable Regression |
+| **DID** <br> *Difference-in-Differences* | [DiD Panel Data (Multi)](did/did_pa_multi.qmd) | Multiple treatment periods with panel data |
+| | [DiD Cross-Section (Multi)](did/did_cs_multi.qmd) | Multiple treatment periods with cross-sectional data |
+| | [DiD Panel Data](did/did_pa.qmd) | Single treatment period with panel data |
+| | [DiD Cross-Section](did/did_cs.qmd) | Single treatment period with cross-sectional data |
+| **SSM** <br> *Sample Selection Models* | [SSM MAR](ssm/ssm_mar.qmd) | Sample Selection under Missing at Random |
+| | [SSM Non-ignorable](ssm/ssm_nonignorable.qmd) | Sample Selection with Non-ignorable Missingness |
+| **RDD** <br> *Regression Discontinuity* | [RDD](rdd/rdd.qmd) | Regression Discontinuity Design |
 
 ## Coverage Simulations
 

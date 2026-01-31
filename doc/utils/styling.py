@@ -47,8 +47,10 @@ def get_coverage_tier_css_props(tier: str, font_weight: str = "600") -> str:
     return (
         f"color:{colors['text']};"
         f"background-color:{colors['background']};"
-        f"border-left:4px solid {colors['border']};"
+        f"border-left:5px solid {colors['border']};"
         f"font-weight:{font_weight};"
+        f"border-radius:4px;"
+        f"padding:8px 12px;"
     )
 
 

@@ -144,3 +144,192 @@ blockquote {
     margin-left: 0;
     color: #6c757d;
 }
+
+/* Enhanced Table Styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(135deg, #003d5c 0%, #0088cc 100%);
+    color: white;
+}
+
+thead th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.025em;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 136, 204, 0.06);
+}
+
+tbody td {
+    padding: 0.875rem 1rem;
+    vertical-align: top;
+}
+
+/* First column styling for model type headers */
+tbody td:first-child {
+    font-weight: 600;
+    color: #495057;
+    white-space: nowrap;
+}
+
+/* Links in tables */
+tbody td a {
+    color: #0088cc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+tbody td a:hover {
+    color: #003d5c;
+    text-decoration: underline;
+}
+
+/* Description column */
+tbody td:last-child {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Section headers */
+h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Index page specific enhancements */
+.quarto-title {
+    margin-bottom: 1.5rem;
+}
+
+/* Improve spacing for the coverage tier legend */
+.cell-output-display ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.cell-output-display ul li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+/* Card-like styling for sections */
+.grid {
+    gap: 1.5rem;
+}
+
+/* Responsive table on mobile */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.875rem;
+    }
+
+    thead th,
+    tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Interactive tables (itables) enhancements */
+.itables table.dataframe {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.itables table.dataframe thead th {
+    background: linear-gradient(135deg, #003d5c 0%, #0088cc 100%);
+    color: white;
+    font-weight: 600;
+    padding: 14px 18px;
+    border: none;
+    letter-spacing: 0.025em;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.itables table.dataframe tbody tr:hover {
+    background-color: rgba(0, 136, 204, 0.06);
+}
+
+.itables table.dataframe tbody td {
+    padding: 12px 18px;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.itables table.dataframe tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.itables table.dataframe tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+/* Caption styling for all tables */
+.table-caption,
+caption {
+    font-family: var(--font-family-sans);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #24292e;
+    margin-bottom: 1rem;
+    letter-spacing: -0.015em;
+}
+
+/* Coverage tier badge styling */
+.coverage-good,
+.coverage-medium,
+.coverage-poor {
+    border-radius: 4px;
+    font-weight: 600;
+    font-family: var(--font-family-mono);
+}
+
+/* Plotly figure improvements */
+.plotly {
+    margin: 2rem 0;
+}
+
+.plotly .plot-container {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Code output improvements */
+.cell-output-display {
+    margin: 1.5rem 0;
+}
+
+/* Callout boxes enhancement */
+.callout {
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.callout-note {
+    border-left: 5px solid #0088cc;
+}
+
+.callout-note .callout-header {
+    background-color: rgba(0, 136, 204, 0.08);
+}

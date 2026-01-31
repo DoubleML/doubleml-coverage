@@ -74,55 +74,79 @@ def _apply_base_table_styling(styler: Styler) -> Styler:
                 ("width", "100%"),
                 (
                     "font-family",
-                    '"Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif',
+                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif',
                 ),
                 ("font-size", "14px"),
-                ("line-height", "1.5"),
-                ("box-shadow", "0 2px 8px rgba(0,0,0,0.1)"),
-                ("border-radius", "8px"),
+                ("line-height", "1.6"),
+                ("box-shadow", "0 4px 12px rgba(0, 0, 0, 0.08)"),
+                ("border-radius", "10px"),
                 ("overflow", "hidden"),
+                ("margin", "1.5rem 0"),
             ],
         },
-        # Header styling
+        # Header styling with gradient
         {
             "selector": "thead th",
             "props": [
-                ("background-color", TABLE_STYLING["header_bg"]),
+                ("background", TABLE_STYLING["header_bg"]),
                 ("color", TABLE_STYLING["header_text"]),
                 ("font-weight", "600"),
                 ("text-align", "center"),
-                ("padding", "12px 16px"),
-                ("border-bottom", f'2px solid {TABLE_STYLING["border"]}'),
+                ("padding", "14px 18px"),
+                ("border", "none"),
                 ("position", "sticky"),
                 ("top", "0"),
                 ("z-index", "10"),
+                ("letter-spacing", "0.025em"),
+                ("font-size", "13px"),
+                ("text-transform", "uppercase"),
             ],
         },
         # Cell styling
         {
             "selector": "tbody td",
             "props": [
-                ("padding", "10px 16px"),
+                ("padding", "12px 18px"),
                 ("text-align", "center"),
                 ("border-bottom", f'1px solid {TABLE_STYLING["border"]}'),
-                ("transition", "background-color 0.2s ease"),
+                ("transition", "all 0.2s ease"),
+                ("font-size", "13.5px"),
             ],
         },
-        # Row hover effect
+        # Alternating row colors
+        {
+            "selector": "tbody tr:nth-child(even)",
+            "props": [("background-color", TABLE_STYLING["row_bg_even"])],
+        },
+        {
+            "selector": "tbody tr:nth-child(odd)",
+            "props": [("background-color", TABLE_STYLING["row_bg_odd"])],
+        },
+        # Row hover effect with smooth transition
         {
             "selector": "tbody tr:hover td",
-            "props": [("background-color", TABLE_STYLING["hover_bg"])],
+            "props": [
+                ("background-color", TABLE_STYLING["hover_bg"]),
+                ("transform", "scale(1.002)"),
+                ("box-shadow", "0 2px 4px rgba(0, 136, 204, 0.1)"),
+            ],
         },
-        # Caption styling
+        # Remove border from last row
+        {
+            "selector": "tbody tr:last-child td",
+            "props": [("border-bottom", "none")],
+        },
+        # Caption styling with better typography
         {
             "selector": "caption",
             "props": [
                 ("color", TABLE_STYLING["caption_color"]),
                 ("font-size", "16px"),
                 ("font-weight", "600"),
-                ("margin-bottom", "16px"),
+                ("margin-bottom", "18px"),
                 ("text-align", "left"),
                 ("caption-side", "top"),
+                ("letter-spacing", "-0.015em"),
             ],
         },
     ]
@@ -166,8 +190,9 @@ def color_coverage_columns(
     current_styler = current_styler.set_properties(
         **{
             "text-align": "center",
-            "font-family": "monospace",
-            "font-size": "13px",
+            "font-family": "'JetBrains Mono', 'SF Mono', monospace",
+            "font-size": "13.5px",
+            "font-weight": "600",
         },
         subset=valid_coverage_cols,
     )
