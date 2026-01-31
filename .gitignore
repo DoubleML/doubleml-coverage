@@ -6,7 +6,11 @@ monte-cover/logs/
 *.log
 
 # Quarto
-doc/_site/          # Rendered HTML output (regenerated each build)
-doc/_freeze/        # Frozen computational results (not committed - CI rebuilds everything)
-/.quarto/           # Quarto cache directory
-*.html              # Generated HTML files (except in specific directories)
+# Rendered HTML output (regenerated each build)
+doc/_site/
+# Frozen computational results (not committed - CI rebuilds everything)
+doc/_freeze/
+# Quarto cache directory
+/.quarto/
+# Generated HTML files (except in specific directories)
+*.html
