@@ -4,3 +4,9 @@ __pycache__/
 # Logs
 monte-cover/logs/
 *.log
+
+# Quarto
+doc/_site/          # Rendered HTML output (regenerated each build)
+doc/_freeze/        # Frozen computational results (not committed - CI rebuilds everything)
+/.quarto/           # Quarto cache directory
+*.html              # Generated HTML files (except in specific directories)
