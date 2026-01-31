@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: _site/dev
 
+execute:
+  freeze: auto  # Re-execute only when source changes
+
 metadata-files:
   - _website.yml
 
