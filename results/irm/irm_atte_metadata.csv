@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.12.dev0,IRMATTECoverageSimulation,2025-12-04 19:17,127.50641198952992,3.12.3,scripts/irm/irm_atte_config.yml
+0.11.4.dev54,IRMATTECoverageSimulation,2026-08-06 08:52,129.79125188589097,3.12.3,scripts/irm/irm_atte_config.yml
