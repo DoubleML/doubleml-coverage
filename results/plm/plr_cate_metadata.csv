@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.12.dev0,PLRCATECoverageSimulation,2025-12-04 20:18,189.09370460510254,3.12.3,scripts/plm/plr_cate_config.yml
+0.11.4.dev54,PLRCATECoverageSimulation,2026-08-06 09:52,188.53884502251944,3.12.3,scripts/plm/plr_cate_config.yml
