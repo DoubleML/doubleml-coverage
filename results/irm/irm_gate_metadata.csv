@@ -1,2 +1,2 @@
 DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
-0.12.dev0,IRMGATECoverageSimulation,2025-12-04 18:30,81.06913734674454,3.12.3,scripts/irm/irm_gate_config.yml
+0.11.4.dev54,IRMGATECoverageSimulation,2026-08-06 08:03,80.12076250712077,3.12.3,scripts/irm/irm_gate_config.yml
