@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/ssm/ssm_mar.html</loc>
-    <lastmod>2026-01-19T10:22:05.985Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/rdd/rdd.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_cs.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_pa_multi.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr_gate.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plpr.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/irm/irm.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/irm/qte.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/irm/iivm.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/index.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/irm/irm_gate.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/irm/apo.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.273Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/irm/irm_cate.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
   </url>
   <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr_cate.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <loc>https://docs.doubleml.org/doubleml-coverage/index.html</loc>
+    <lastmod>2026-08-10T15:29:17.273Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/plm/lplr.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/plm/pliv.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plpr.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_pa_multi.html</loc>
+    <lastmod>2026-08-10T15:29:17.273Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/did/did_cs_multi.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_pa.html</loc>
-    <lastmod>2026-01-19T10:22:05.984Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.273Z</lastmod>
   </url>
   <url>
     <loc>https://docs.doubleml.org/doubleml-coverage/ssm/ssm_nonignorable.html</loc>
-    <lastmod>2026-01-19T10:22:05.985Z</lastmod>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/ssm/ssm_mar.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_pa.html</loc>
+    <lastmod>2026-08-10T15:29:17.273Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/did/did_cs.html</loc>
+    <lastmod>2026-08-10T15:29:17.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/rdd/rdd.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr_cate.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/plm/plr_gate.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/irm/iivm.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/irm/irm_gate.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.doubleml.org/doubleml-coverage/irm/qte.html</loc>
+    <lastmod>2026-08-10T15:29:17.274Z</lastmod>
   </url>
 </urlset>
