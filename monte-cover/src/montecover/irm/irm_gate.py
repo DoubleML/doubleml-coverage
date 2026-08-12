@@ -106,7 +106,7 @@ class IRMGATECoverageSimulation(BaseSimulation):
             confint = gate_model.confint(level=level)
             effects = confint["effect"]
             uniform_confint = gate_model.confint(
-                level=0.95, joint=True, n_rep_boot=2000
+                level=level, joint=True, n_rep_boot=2000
             )
             level_result["coverage"] = self._compute_coverage(
                 thetas=effects,
