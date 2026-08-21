@@ -1,0 +1,2 @@
+DoubleML Version,Script,Date,Total Runtime (minutes),Python Version,Config File
+0.12.dev0,SSMMarATETuningCoverageSimulation,2025-12-09 15:59,15.788600877920787,3.12.9,scripts/ssm/ssm_mar_ate_tune_config.yml
